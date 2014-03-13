@@ -35,5 +35,5 @@ cleanly on these versions.
 
 ## [Demos](id:demos)
 
-Feedback: [eduteam@docker.io](mailto:eduteam@docker.io)
+Feedback: [eduteam@docker.io](mailto:education@docker.com)
 
