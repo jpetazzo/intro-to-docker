@@ -20,20 +20,19 @@ Showoff](https://github.com/puppetlabs/showoff/).
 Showoff is tested with Ruby 1.8.7, 1.9.3, and 2.0. It should install
 cleanly on these versions.
 
-[Classroom Setup](#classroom-setup)  
+## Running the training
 
-+ [Configure networking for the master VM](#configure-networking-for-the-master-vm)
-+ [Setup the Classroom Environment](#setup-the-classroom-environment)
+    $ showoff serve
 
-[Demos](#demos)
+You should be able to see the slides at:
 
-## [Classroom Setup](id:classroom-setup)
+    http://localhost:9090
 
-### [Configure networking for the master VM](id:configure-networking-for-the-master-vm)
+You should be able to see the exercises at:
 
-### [Setup the classroom environment](id:setup-the-classroom-environment)
+    http://localhost:9090/supplemental/exercises
 
-## [Demos](id:demos)
+The user name is ``docker`` and the password is ``maersk``.
 
-Feedback: [eduteam@docker.io](mailto:education@docker.com)
+Feedback: [education@docker.com](mailto:education@docker.com)
 
