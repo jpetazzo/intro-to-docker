@@ -34,5 +34,19 @@ You should be able to see the exercises at:
 
 The user name is ``docker`` and the password is ``maersk``.
 
+## Training images
+
+The training is based on using Amazon EC2 instances.
+
+There are AMI instances in US East and US West 1.
+
+| Region     | AMI          |
+|------------|--------------|
+| us-east-1  | ami-59beac30 |
+| us-west-1  | ami-d20d3497 |
+
+## Feedback
+
 Feedback: [education@docker.com](mailto:education@docker.com)
+
 
