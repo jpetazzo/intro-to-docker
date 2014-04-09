@@ -42,8 +42,21 @@ There are AMI instances in US East and US West 1.
 
 | Region     | AMI          |
 |------------|--------------|
-| us-east-1  | ami-5364783a |
-| us-west-1  | ami-bcd1e8f9 |
+| us-east-1  | ami-5d160a34 |
+| us-west-1  | nil          |
+
+## Launching images
+
+We can launch EC2 instances with ``knife``.
+
+Install ``knife-ec2``
+
+    $ sudo gem install knife-ec2 --no-ri --no-rdoc
+
+Then use the ``knife`` binary to launch:
+
+    $ knife ec2 server create -I ami-5d160a34 --flavor t1.micro \
+    -S james -x docker -P training --template-file scripts/ec2.erb
 
 ## Feedback
 
