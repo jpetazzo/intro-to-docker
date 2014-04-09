@@ -42,8 +42,8 @@ There are AMI instances in US East and US West 1.
 
 | Region     | AMI          |
 |------------|--------------|
-| us-east-1  | ami-59beac30 |
-| us-west-1  | ami-d20d3497 |
+| us-east-1  | ami-5364783a |
+| us-west-1  | ami-bcd1e8f9 |
 
 ## Feedback
 
