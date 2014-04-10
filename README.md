@@ -58,6 +58,16 @@ Then use the ``knife`` binary to launch:
     $ knife ec2 server create -I ami-5d160a34 --flavor t1.micro \
     -S james -x docker -P training --template-file scripts/ec2.erb
 
+### AWS Command line tools
+
+Or use AWS Command line tools.
+
+    $ aws ec2 run-instances --image-id ami-5d160a34 --instance-type t1.micro --count #ofinstancesneeded
+
+#### Getting list of IP addresses
+
+    $ aws ec2 describe-instances | grep -E -o "\d+\.\d+\.\d+\.\d+" | grep -v '^10\.'
+
 ## Feedback
 
 Feedback: [education@docker.com](mailto:education@docker.com)
