@@ -7,4 +7,4 @@ RUN apt-get update && apt-get install -y curl wget git ruby rubygems ruby-dev li
 RUN git clone https://github.com/puppetlabs/showoff.git
 RUN cd showoff && gem build showoff.gemspec && gem install --no-rdoc --no-ri ./showoff-*.gem 
 
-CMD ["/usr/bin/bash"]
+CMD ["/bin/bash"]
