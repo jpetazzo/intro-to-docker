@@ -47,26 +47,35 @@ There are AMI instances in US East and US West 1.
 
 ## Launching images
 
-We can launch EC2 instances with ``knife``.
+Use AWS Command line tools.
 
-Install ``knife-ec2``
+Install them via `pip`.
 
-    $ sudo gem install knife-ec2 --no-ri --no-rdoc
+    $ pip install awscli
 
-Then use the ``knife`` binary to launch:
-
-    $ knife ec2 server create -I ami-5d160a34 --flavor t1.micro \
-    -S james -x docker -P training --template-file scripts/ec2.erb
-
-### AWS Command line tools
-
-Or use AWS Command line tools.
+Then use the `aws` command.
 
     $ aws ec2 run-instances --image-id ami-5d160a34 --instance-type t1.micro --count #ofinstancesneeded
 
 #### Getting list of IP addresses
 
     $ aws ec2 describe-instances | grep -E -o "\d+\.\d+\.\d+\.\d+" | grep -v '^10\.'
+
+## Generating PDFs
+
+1. Install PrinceXML - http://www.princexml.com/download/
+
+2. Launch Showoff - `showoff server`
+
+3. Browse to the /print URLs.
+
+        http://localhost:9090/print
+        http://localhost:9090/supplemental/exercises/print
+
+4. Use Prince to product the PDFs.
+
+        $ prince http://localhost:9090/print -o DockerSlides.pdf
+        $ prince http://localhost:9090/supplemental/exercises/print -o DockerExercises.pdf
 
 ## Feedback
 
