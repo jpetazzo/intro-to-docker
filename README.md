@@ -42,7 +42,7 @@ There are AMI instances in US East and US West 1.
 
 | Region     | AMI          |
 |------------|--------------|
-| us-east-1  | ami-5d160a34 |
+| us-east-1  | ami-e859af80 |
 | us-west-1  | nil          |
 
 ## Launching images
