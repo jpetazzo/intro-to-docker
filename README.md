@@ -38,12 +38,11 @@ The user name is ``docker`` and the password is ``maersk``.
 
 The training is based on using Amazon EC2 instances.
 
-There are AMI instances in US East and US West 1.
+There are AMI instances in US West 2.
 
 | Region     | AMI          |
 |------------|--------------|
-| us-east-1  | ami-e859af80 |
-| us-west-2  | ami-dd7b09ed |
+| us-west-2  | ami-39621009 |
 
 ## Launching images
 
