@@ -42,7 +42,7 @@ There are AMI instances in US West 2.
 
 | Region     | AMI          |
 |------------|--------------|
-| us-west-2  | ami-39621009 |
+| us-west-2  | ami-a180f291 |
 
 ## Launching images
 
