@@ -10,7 +10,7 @@ WORKDIR /showoff
 RUN gem build showoff.gemspec
 RUN gem install --no-rdoc --no-ri ./showoff-*.gem
 
-ADD . /slides
+ADD /slides/ /slides/
 WORKDIR /slides
 
 CMD [ "showoff", "serve" ]

@@ -1,0 +1,35 @@
+{
+  "name": "Docker Fundamentals 0.0.1",
+  "description": "Docker Fundamentals Course Materials, revision 0.0.1",
+  "protected": ["presenter", "onepage"],
+  "user": "docker",
+  "password": "maersk",
+  "sections": [
+
+    "Course_Overview/Course_Intro.md",
+	  "Course_Overview/Table_of_contents.md",
+    "Course_Overview/Course_Objectives.md",
+    "Course_Overview/Course_Overview.md",
+    "Course_Overview/Course_Agenda_1.md",
+
+    "About_Docker/Section.md",
+    "About_Docker/Objectives.md",
+    "About_Docker/About_Docker.md",
+    "About_Docker/Current_State.md",
+    "About_Docker/Introducing_Docker.md",
+    "About_Docker/Resources.md",
+    "About_Docker/How_Docker_Works.md",
+
+    "Concepts/Section.md",
+    "Concepts/Objectives.md",
+
+    "Classroom_Setup/Section.md",
+    "Classroom_Setup/Objectives.md",
+
+    "Course_Conclusion/Conclusion_Section.md",
+    "Course_Conclusion/Course_Summary.md",
+    "Course_Conclusion/next_steps.md",
+
+	"Appendix/Section.md"
+  ]
+}

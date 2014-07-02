@@ -1,0 +1,8 @@
+Place any images you'd like in this folder and they will be displayed any time
+you take a break, or before class, etc. If you'd like to put titles on the
+images, you can use the below text to create a `preshow.json` file.
+
+{
+  "DockerLogo.png":"Docker Fundamentals",
+}
+
