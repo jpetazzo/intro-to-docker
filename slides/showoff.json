@@ -1,0 +1,80 @@
+{
+  "name": "Introduction to Docker",
+  "description": "Introduction to Docker Course Materials",
+  "training_version": "0.0.3",
+  "protected": ["presenter", "onepage"],
+  "user": "docker",
+  "password": "maersk",
+  "issues": "https://github.com/dotcloud/docker-fundamentals",
+  "favicon": "https://www.docker.io/static/favicon.png",
+  "sections": [
+
+    "Course_Overview/Course_Intro.md",
+    "Course_Overview/Table_of_contents.md",
+    "Course_Overview/Course_Objectives.md",
+    "Course_Overview/Course_Overview.md",
+    "Course_Overview/Course_Agenda_1.md",
+
+    "About_Docker/Section.md",
+    "About_Docker/Objectives.md",
+    "About_Docker/About_Docker.md",
+    "About_Docker/Introducing_Docker.md",
+
+    "Instant_Gratification/Section.md",
+    "Instant_Gratification/Objectives.md",
+    "Instant_Gratification/Instant_Gratification.md",
+
+    "Install_Docker/Section.md",
+    "Install_Docker/Objectives.md",
+    "Install_Docker/Installation.md",
+
+    "Docker_Hub/Section.md",
+    "Docker_Hub/Objectives.md",
+    "Docker_Hub/Docker_Hub.md",
+
+    "Initial_Images/Section.md",
+    "Initial_Images/Objectives.md",
+    "Initial_Images/Images.md",
+
+    "Building_Images_With_Dockerfiles/Section.md",
+    "Building_Images_With_Dockerfiles/Objectives.md",
+    "Building_Images_With_Dockerfiles/Introductory_Dockerfiles.md",
+
+    "Working_With_Images/Section.md",
+    "Working_With_Images/Objectives.md",
+    "Working_With_Images/Image_Management.md",
+
+    "Local_Development_Workflow/Section.md",
+    "Local_Development_Workflow/Objectives.md",
+    "Local_Development_Workflow/Web_App.md",
+
+    "Own_Container/Section.md",
+    "Own_Container/Objectives.md",
+    "Own_Container/Own_Container.md",
+
+    "Container_Networking_Basics/Section.md",
+    "Container_Networking_Basics/Objectives.md",
+    "Container_Networking_Basics/More_Daemons.md",
+
+    "Working_With_Volumes/Section.md",
+    "Working_With_Volumes/Objectives.md",
+    "Working_With_Volumes/Volumes.md",
+
+    "Connecting_Containers/Section.md",
+    "Connecting_Containers/Objectives.md",
+    "Connecting_Containers/Connecting_Containers.md",
+
+    "Testing_Workflow/Section.md",
+    "Testing_Workflow/Objectives.md",
+    "Testing_Workflow/Testing.md",
+
+    "Docker_API/Section.md",
+    "Docker_API/Objectives.md",
+    "Docker_API/The_Docker_API.md",
+
+    "Course_Conclusion/Conclusion_Section.md",
+    "Course_Conclusion/Course_Summary.md",
+    "Course_Conclusion/next_steps.md",
+    "Course_Conclusion/Outro.md"
+  ]
+}
