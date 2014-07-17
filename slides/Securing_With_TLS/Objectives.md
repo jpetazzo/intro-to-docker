@@ -4,8 +4,8 @@
 
 At the end of this lesson, you will be able to:
 
-* Understand how Docker uses TLS to secure and authorize users
-* Create a TLS CA
+* Understand how Docker uses TLS to secure and authorize remote clients
+* Create a TLS Certificate Authority
 * Create TLS Keys
 * Sign TLS Keys
 * Use these keys with Docker
