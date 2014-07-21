@@ -36,6 +36,10 @@
         "Initial_Images/Objectives.md",
         "Initial_Images/Images.md",
 
+        "Own_Container/Section.md",
+        "Own_Container/Objectives.md",
+        "Own_Container/Own_Container.md",
+
         "Building_Images_With_Dockerfiles/Section.md",
         "Building_Images_With_Dockerfiles/Objectives.md",
         "Building_Images_With_Dockerfiles/Introductory_Dockerfiles.md",
@@ -47,10 +51,6 @@
         "Local_Development_Workflow/Section.md",
         "Local_Development_Workflow/Objectives.md",
         "Local_Development_Workflow/Web_App.md",
-
-        "Own_Container/Section.md",
-        "Own_Container/Objectives.md",
-        "Own_Container/Own_Container.md",
 
         "Container_Networking_Basics/Section.md",
         "Container_Networking_Basics/Objectives.md",
