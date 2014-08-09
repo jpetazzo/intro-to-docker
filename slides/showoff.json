@@ -64,6 +64,10 @@
         "Connecting_Containers/Objectives.md",
         "Connecting_Containers/Connecting_Containers.md",
 
+        "Orchestration/Section.md",
+        "Orchestration/Objectives.md",
+        "Orchestration/Orchestration.md",
+
         "Testing_Workflow/Section.md",
         "Testing_Workflow/Objectives.md",
         "Testing_Workflow/Testing.md",
