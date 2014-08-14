@@ -488,6 +488,6 @@ div.content.subsection > h1 {
   string-set: doctitle content();
 }
 
-div.content.supplemental.exercises code {
+div.content.supplemental.exercises pre code {
   font-size: 12px;
 }
