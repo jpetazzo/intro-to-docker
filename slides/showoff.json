@@ -72,6 +72,11 @@
         "Testing_Workflow/Objectives.md",
         "Testing_Workflow/Testing.md",
 
+        "Security/Section.md",
+        "Security/Objectives.md",
+        "Security/Content.md",
+        "Security/Summary.md",
+
         "Securing_With_TLS/Section.md",
         "Securing_With_TLS/Objectives.md",
         "Securing_With_TLS/tls.md",
