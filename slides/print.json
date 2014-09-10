@@ -1,6 +1,6 @@
 {
-  "name": "Docker Fundamentals 0.0.1",
-  "description": "Docker Fundamentals Course Materials, revision 0.0.1",
+  "name": "Docker Fundamentals 1.0.0",
+  "description": "Docker Fundamentals Course Materials, revision 1.0.0",
   "protected": ["presenter", "onepage"],
   "user": "docker",
   "password": "maersk",
