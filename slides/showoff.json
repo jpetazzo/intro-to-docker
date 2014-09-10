@@ -1,7 +1,7 @@
 {
     "name": "Introduction to Docker",
     "description": "Introduction to Docker Course Materials",
-    "training_version": "0.0.3",
+    "training_version": "1.0.0",
     "protected": ["presenter", "onepage"],
     "user": "docker",
     "password": "maersk",
