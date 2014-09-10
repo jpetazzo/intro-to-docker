@@ -4,5 +4,5 @@
 
 At the end of this lesson, you will be able to:
 
-* TODO
+* Understand the ambassador pattern and what it is used for (service portability).
  
