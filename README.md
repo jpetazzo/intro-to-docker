@@ -62,6 +62,8 @@ Then use the `aws` command.
 
 ## Generating PDFs
 
+You can either `make pdf`, or follow those instructions.
+
 1. Install PrinceXML - http://www.princexml.com/download/
 
 2. Launch Showoff - `showoff server`
