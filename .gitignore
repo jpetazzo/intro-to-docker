@@ -5,3 +5,5 @@ viewstats.json
 */_preshow/*
 !*/_preshow/README
 .ruby-version
+DockerSlides.pdf
+DockerExercises.pdf
