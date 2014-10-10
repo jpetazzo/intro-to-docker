@@ -15,80 +15,80 @@
         "Course_Overview/Course_Overview.md",
         "Course_Overview/Course_Agenda_1.md",
 
-        "About_Docker/Section.md",
+        "About_Docker/Cover.md",
         "About_Docker/Objectives.md",
         "About_Docker/Body.md",
 
-        "Instant_Gratification/Section.md",
+        "Instant_Gratification/Cover.md",
         "Instant_Gratification/Objectives.md",
         "Instant_Gratification/Body.md",
 
-        "Install_Docker/Section.md",
+        "Install_Docker/Cover.md",
         "Install_Docker/Objectives.md",
         "Install_Docker/Body.md",
 
-        "Docker_Hub/Section.md",
+        "Docker_Hub/Cover.md",
         "Docker_Hub/Objectives.md",
         "Docker_Hub/Body.md",
 
-        "Initial_Images/Section.md",
+        "Initial_Images/Cover.md",
         "Initial_Images/Objectives.md",
         "Initial_Images/Body.md",
 
-        "Own_Container/Section.md",
+        "Own_Container/Cover.md",
         "Own_Container/Objectives.md",
         "Own_Container/Body.md",
 
-        "Building_Images_With_Dockerfiles/Section.md",
+        "Building_Images_With_Dockerfiles/Cover.md",
         "Building_Images_With_Dockerfiles/Objectives.md",
         "Building_Images_With_Dockerfiles/Body.md",
 
-        "Working_With_Images/Section.md",
+        "Working_With_Images/Cover.md",
         "Working_With_Images/Objectives.md",
         "Working_With_Images/Body.md",
 
-        "Local_Development_Workflow/Section.md",
+        "Local_Development_Workflow/Cover.md",
         "Local_Development_Workflow/Objectives.md",
         "Local_Development_Workflow/Body.md",
 
-        "Container_Networking_Basics/Section.md",
+        "Container_Networking_Basics/Cover.md",
         "Container_Networking_Basics/Objectives.md",
         "Container_Networking_Basics/Body.md",
 
-        "Working_With_Volumes/Section.md",
+        "Working_With_Volumes/Cover.md",
         "Working_With_Volumes/Objectives.md",
         "Working_With_Volumes/Body.md",
 
-        "Connecting_Containers/Section.md",
+        "Connecting_Containers/Cover.md",
         "Connecting_Containers/Objectives.md",
         "Connecting_Containers/Body.md",
 
-        "Orchestration/Section.md",
+        "Orchestration/Cover.md",
         "Orchestration/Objectives.md",
         "Orchestration/Body.md",
 
-        "Ambassadors/Section.md",
+        "Ambassadors/Cover.md",
         "Ambassadors/Objectives.md",
         "Ambassadors/Body.md",
 
-        "Testing_Workflow/Section.md",
+        "Testing_Workflow/Cover.md",
         "Testing_Workflow/Objectives.md",
         "Testing_Workflow/Body.md",
 
-        "Security/Section.md",
+        "Security/Cover.md",
         "Security/Objectives.md",
         "Security/Body.md",
         "Security/Summary.md",
 
-        "Securing_With_TLS/Section.md",
+        "Securing_With_TLS/Cover.md",
         "Securing_With_TLS/Objectives.md",
         "Securing_With_TLS/Body.md",
 
-        "Docker_API/Section.md",
+        "Docker_API/Cover.md",
         "Docker_API/Objectives.md",
         "Docker_API/Body.md",
 
-        "Course_Conclusion/Conclusion_Section.md",
+        "Course_Conclusion/Cover.md",
         "Course_Conclusion/Course_Summary.md",
         "Course_Conclusion/next_steps.md",
         "Course_Conclusion/Outro.md"
