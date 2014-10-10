@@ -497,7 +497,7 @@ Make a note of the port number port ``5000`` is being redirected to.
 
 * Each line in a ``Dockerfile`` creates a new layer.
 * Build your ``Dockerfile`` to take advantage of Docker's caching system.
-* Combine multiple similar commands into one by using ``&&`` to continue commands and ``\`` to wrap lines.
+* Combine multiple similar commands into one by using ``&&`` to continue commands and ``\\`` to wrap lines.
 * ``ADD`` dependency lists (``package.json``,``requirements.txt``, etc.) by themselves to avoid reinstalling unchanged dependencies every time.
 
 <!SLIDE>
