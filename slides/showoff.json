@@ -9,11 +9,9 @@
     "favicon": "https://www.docker.io/static/favicon.png",
     "sections": [
 
-        "Course_Overview/Course_Intro.md",
-        "Course_Overview/Table_of_contents.md",
-        "Course_Overview/Course_Objectives.md",
-        "Course_Overview/Course_Overview.md",
-        "Course_Overview/Course_Agenda_1.md",
+        "Course_Overview/Cover.md",
+        "Course_Overview/Objectives.md",
+        "Course_Overview/Body.md",
 
         "About_Docker/Cover.md",
         "About_Docker/Objectives.md",
@@ -89,8 +87,6 @@
         "Docker_API/Body.md",
 
         "Course_Conclusion/Cover.md",
-        "Course_Conclusion/Course_Summary.md",
-        "Course_Conclusion/next_steps.md",
-        "Course_Conclusion/Outro.md"
+        "Course_Conclusion/Body.md"
     ]
 }
