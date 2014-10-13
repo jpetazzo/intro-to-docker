@@ -37,6 +37,10 @@
         "Own_Container/Objectives.md",
         "Own_Container/Body.md",
 
+        "Building_Images_Interactively/Cover.md",
+        "Building_Images_Interactively/Objectives.md",
+        "Building_Images_Interactively/Body.md",
+
         "Building_Images_With_Dockerfiles/Cover.md",
         "Building_Images_With_Dockerfiles/Objectives.md",
         "Building_Images_With_Dockerfiles/Body.md",
