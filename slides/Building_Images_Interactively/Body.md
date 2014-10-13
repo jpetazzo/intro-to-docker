@@ -105,7 +105,7 @@ If you are curious, you can view all of the layers composing an image (and their
 
 We've learned how to:
 
-* Understand ``docker diff``, ``docker tag``, and ``docker commit`` are used.
+* Understand how ``docker diff``, ``docker tag``, and ``docker commit`` are used.
 * Understand how a layer is constructed in an image.
 
 <!SLIDE supplemental exercises>
