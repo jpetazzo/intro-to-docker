@@ -47,7 +47,7 @@ On Debian and derivatives.
 You can use the ``curl`` command to install on several platforms.
 
     @@@ Sh
-    $ curl -s https://get.docker.io/ubuntu/ | sudo sh
+    $ curl -s https://get.docker.com/ | sudo sh
 
 This currently works on:
 
