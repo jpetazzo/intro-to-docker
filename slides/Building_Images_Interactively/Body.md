@@ -10,7 +10,7 @@
 
 We will use the ``ubuntu`` image that we pulled from Docker Hub as a basis for our customized image.
 
-We are going to install the program ``cmatrix`` and commit the change as an image so we can create conatiners from that image again and again.
+We are going to install the program ``cmatrix`` and commit the change as an image so we can create containers from that image again and again.
 
 <!SLIDE>
 # Create a new container and make some changes
