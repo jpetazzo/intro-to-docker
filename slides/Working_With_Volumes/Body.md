@@ -227,7 +227,7 @@ Let's see how to put both pieces together.
 4. Tidy up your containers.
 
          @@@ Sh
-         $ docker rm appdata appserver1 appserver2
+         $ docker rm -v appdata appserver1 appserver2
 
 <!SLIDE>
 # What happens when you remove containers with volumes?
@@ -426,7 +426,7 @@ Try out making a data container with a no-op command such as `true`.
 4. Tidy up your containers.
 
          @@@ Sh
-         $ docker rm appdata appserver1 appserver2
+         $ docker rm -v appdata appserver1 appserver2
 
 <!SLIDE supplemental exercises>
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Sharing a single file between the host and a container
