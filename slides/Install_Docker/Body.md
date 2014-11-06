@@ -92,7 +92,7 @@ using a tool called [Boot2Docker](http://boot2docker.io).
 Using the ``docker`` client:
 
     @@@ Sh
-    $ sudo docker version
+    $ docker version
     Client version: 1.1.1
     Client API version: 1.13
     Go version (client): go1.2.1
@@ -139,7 +139,7 @@ You should restrict access to it like you would protect ``root``.
     $ exit
 
 <!SLIDE>
-# Hello World again without sudo
+# Hello World again with a new image
 
     @@@ Sh
     $ docker run ubuntu echo hello world
