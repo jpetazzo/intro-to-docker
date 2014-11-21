@@ -382,7 +382,7 @@ The second executes directly, without shell processing:
 The ``CMD`` can be overridden when you run a container.
 
     @@@ Sh
-    $ docker run -t -i <dockerhubUsername>/web_image /bin/bash
+    $ docker run -it <dockerhubUsername>/web_image /bin/bash
 
 Will run ``/bin/bash`` instead of ``nginx -g "daemon off;"``.
 
@@ -411,7 +411,7 @@ Instead of trying to run ``-l``, the container will run ``/bin/ls -l``.
 The entry point can be overriden as well.
 
     @@@ Sh
-    $ docker run -t -i training/ls
+    $ docker run -it training/ls
     bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
     boot  etc  lib   media  opt  root  sbin  sys  usr
     $ docker run --entrypoint /bin/bash -t -i training/ls
@@ -638,7 +638,7 @@ the container is started.
     Without ``--entrypoint``:
 
         @@@ Sh
-        $ docker run -t -i training/ls
+        $ docker run -it training/ls
         bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
         boot  etc  lib   media  opt  root  sbin  sys  usr
 

@@ -133,7 +133,7 @@ Nice.
     $ cd
     $ mkdir bindthis
     $ ls bindthis
-    $ docker run -t -i -v $(pwd)/bindthis:/var/www/html/webapp ubuntu bash
+    $ docker run -it -v $(pwd)/bindthis:/var/www/html/webapp ubuntu bash
     root@<yourContainerID>:/# touch /var/www/html/webapp/index.html 
     root@<yourContainerID>:/# exit
     $ ls bindthis
@@ -147,7 +147,7 @@ Note that the paths must be absolute.
 It defaults to mounting read-write but we can also mount read-only.
 
     @@@ Sh
-    $ docker run -t -i -v $(pwd)/bindthis:/var/www/html/webapp:ro ubuntu bash
+    $ docker run -it -v $(pwd)/bindthis:/var/www/html/webapp:ro ubuntu bash
 
 Those volumes can also be shared with ``--volumes-from``.
 
@@ -159,7 +159,7 @@ Let's see how to put both pieces together.
 1. Create an initial container.
 
          @@@ Sh
-         $ docker run -t -i -v /var/appvolume \
+         $ docker run -it -v /var/appvolume \
            --name appdata ubuntu bash
          root@<yourContainerID># 
 
@@ -180,7 +180,7 @@ Let's see how to put both pieces together.
 1. Create a new container.
 
          @@@ Sh
-         $ docker run -t -i --volumes-from appdata \
+         $ docker run -it --volumes-from appdata \
            --name appserver1 ubuntu bash
          root@<yourContainerID>#
 
@@ -209,7 +209,7 @@ Let's see how to put both pieces together.
 1. Create a third container.
 
          @@@ Sh
-         docker run -t -i --volumes-from appserver1 --name appserver2 ubuntu bash
+         docker run -it --volumes-from appserver1 --name appserver2 ubuntu bash
          root@179c063af97a#
 
 2. Let's view our data.
@@ -290,7 +290,7 @@ The same ``-v`` flag can be used to share a single file.
 
     @@@ Sh
     $ echo 4815162342 > /tmp/numbers
-    $ docker run -t -i -v /tmp/numbers:/numbers ubuntu bash
+    $ docker run -it -v /tmp/numbers:/numbers ubuntu bash
     root@<yourContainerId>:/# cat /numbers 
     4815162342
 
@@ -300,7 +300,7 @@ The same ``-v`` flag can be used to share a single file.
 It can also be used to share a *socket*.
 
     @@@ Sh
-    $ docker run -t -i -v /var/run/docker.sock:/docker.sock ubuntu bash
+    $ docker run -it -v /var/run/docker.sock:/docker.sock ubuntu bash
 
 * This pattern is frequently used to give access to the Docker socket to a
   given container.
@@ -347,7 +347,7 @@ Try out making a data container with a no-op command such as `true`.
     $ cd
     $ mkdir bindthis
     $ ls bindthis
-    $ docker run -t -i -v $(pwd)/bindthis:/var/www/html/webapp ubuntu bash
+    $ docker run -it -v $(pwd)/bindthis:/var/www/html/webapp ubuntu bash
     root@<yourContainerID>:/# touch /var/www/html/webapp/index.html 
     root@<yourContainerID>:/# exit
     $ ls boundmount_demo
@@ -360,7 +360,7 @@ Try out making a data container with a no-op command such as `true`.
 1. Create an initial container.
 
          @@@ Sh
-         $ docker run -t -i -v /var/appvolume --name appdata ubuntu bash
+         $ docker run -it -v /var/appvolume --name appdata ubuntu bash
          root@<yourContainerID># 
 
 2. Create some data in our data volume.
@@ -380,7 +380,7 @@ Try out making a data container with a no-op command such as `true`.
 1. Create a new container.
 
          @@@ Sh
-         $ docker run -t -i --volumes-from appdata --name appserver1 ubuntu bash
+         $ docker run -it --volumes-from appdata --name appserver1 ubuntu bash
          root@<yourContainerID>#
 
 2. Let's view our data.
@@ -407,7 +407,7 @@ Try out making a data container with a no-op command such as `true`.
 1. Create a third container.
 
          @@@ Sh
-         $ docker run -t -i --volumes-from appserver1 \
+         $ docker run -it --volumes-from appserver1 \
            --name appserver2 ubuntu bash
          root@179c063af97a#
 
@@ -434,7 +434,7 @@ Try out making a data container with a no-op command such as `true`.
 
     @@@ Sh
     $ echo 4815162342 > /tmp/numbers
-    $ docker run -t -i -v /tmp/numbers:/numbers ubuntu bash
+    $ docker run -it -v /tmp/numbers:/numbers ubuntu bash
     root@274514a6e2eb:/# cat /numbers 
     4815162342
 
@@ -444,7 +444,7 @@ Try out making a data container with a no-op command such as `true`.
 
 
     @@@ Sh
-    $ docker run -t -i -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/docker ubuntu ./docker
+    $ docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/docker ubuntu ./docker
     Usage: docker [OPTIONS] COMMAND [arg...]
 
      -H=[unix:///var/run/docker.sock]: tcp://host:port to bind/connect to or unix://path/to/socket to use
