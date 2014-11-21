@@ -37,15 +37,17 @@ We've got an image, some source code and now we can add a container to
 run that code.
 
     @@@ Sh
-    $ docker run -d -v $(pwd):/opt/namer -w /opt/namer \
-    -p 80:9292 training/namer rackup
+    $ docker run -d \
+          -v $(pwd):/opt/namer \
+          -p 80:9292 \
+          training/namer \
+          rackup
 
-We are passing some *flags* as arguments to the ``docker run`` command to control its behavior:
-
-* The ``-d`` flag indicates that the container should run in daemon mode (in the background).
+* The ``-d`` flag indicates that the container should run in detached mode (in the background).
 * The ``-v`` flag provides volume mounting inside containers.
-* The ``-w`` flag sets the working directory inside the container.
 * The ``-p`` flag maps port ``9292`` inside the container to port ``80`` on the host.
+* ``training/namer`` is the name of the image we will run.
+* ``rackup`` is the name of the command we run (it is a ruby server).
 
 More on these later.
 
@@ -204,8 +206,11 @@ We've learned how to:
 1. Create a new container (make sure that you are in ``namer`` directory first).
 
         @@@ Sh
-        $ docker run -d -v $(pwd):/opt/namer -w /opt/namer \
-        -p 80:9292 training/namer rackup
+        $ docker run -d \
+              -v $(pwd):/opt/namer \
+              -p 80:9292 \
+              training/namer \
+              rackup
 
 2. Check the container is running.
 
