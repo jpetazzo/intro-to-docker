@@ -414,7 +414,7 @@ The entry point can be overriden as well.
     $ docker run -it training/ls
     bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
     boot  etc  lib   media  opt  root  sbin  sys  usr
-    $ docker run --entrypoint bash -t -i training/ls
+    $ docker run -it --entrypoint bash training/ls
     root@d902fb7b1fc7:/#
 
 <!SLIDE>
@@ -625,7 +625,7 @@ the container is started.
    run``:
 
         @@@Sh
-        docker run -t -t <dockerhubUsername>/web_image bash
+        docker run -it <dockerhubUsername>/web_image bash
 
    This overrides the default ``CMD``.
 
@@ -645,7 +645,7 @@ the container is started.
     With ``--entrypoint``:
 
         @@@ Sh
-        $ docker run --entrypoint bash -t -i training/ls
+        $ docker run -it --entrypoint bash training/ls
         root@d902fb7b1fc7:/#
 
 <!SLIDE supplemental exercises>

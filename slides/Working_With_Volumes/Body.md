@@ -53,7 +53,7 @@ Under the hood, they are actually the same directories on the host anyway.
 This is done using the ``--volumes-from`` flag for ``docker run``.
 
     @@@ Sh
-    $ docker run --name alpha -t -i -v /var/log ubuntu bash
+    $ docker run -it --name alpha -v /var/log ubuntu bash
     root@99020f87e695:/# date >/var/log/now
 
 In another terminal, let's start another container with the same volume.
@@ -323,7 +323,7 @@ We've learned how to:
 1.  Create a container with a volume.
 
          @@@ Sh
-         $ docker run --name alpha -t -i -v /var/log ubuntu bash
+         $ docker run -it --name alpha -v /var/log ubuntu bash
          root@<yourContainerID>:/# date >/var/log/now
 
 2.  Start another container with the same volume.  Note the ``--volumes-from`` flag.
