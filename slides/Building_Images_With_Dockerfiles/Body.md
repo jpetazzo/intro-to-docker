@@ -76,7 +76,7 @@ Let's see how to build our own images using:
 We use the ``docker build`` command to build images.
 
     @@@ Sh
-    $ docker build -t <dockerhubUsername>/web .
+    $ docker build -t <dockerhubUsername>/web_image .
 
 * The ``-t`` flag tags an image.
 * The ``.`` indicates the location of the ``Dockerfile`` being built.
@@ -84,12 +84,12 @@ We use the ``docker build`` command to build images.
 You can now see the image in ``docker images`` output:
 
     @@@ Sh
-    $ docker images <dockerhubUsername>/web
+    $ docker images <dockerhubUsername>/web_image
 
 We can also build from other sources, such as a remote git repository.
 
     @@@ Sh
-    $ docker build -t <dockerhubUsername>/web https://github.com/docker-training/staticweb.git
+    $ docker build -t <dockerhubUsername>/web_image https://github.com/docker-training/staticweb.git
 
 <!SLIDE>
 # What happens when we build the image?
@@ -98,7 +98,7 @@ When we run the ``docker build`` command we'll see a series of steps
 executed.
 
     @@@ Sh
-    $ docker build -t <dockerhubUsername>/web .
+    $ docker build -t <dockerhubUsername>/web_image .
     Sending build context to Docker daemon  2.56 kB
     Sending build context to Docker daemon
     Step 0 : FROM ubuntu:14.04
@@ -118,7 +118,7 @@ executed.
 # The build context
 
     @@@ Sh
-    $ docker build -t <dockerhubUsername>/web .
+    $ docker build -t <dockerhubUsername>/web_image .
     Sending build context to Docker daemon  2.56 kB
     Sending build context to Docker daemon
 
@@ -355,12 +355,12 @@ container.
 Instead of:
 
     @@@ Sh
-    $ docker run <dockerhubUsername>/web nginx -g "daemon off;"
+    $ docker run <dockerhubUsername>/web_image nginx -g "daemon off;"
 
 We can just do:
 
     @@@ Sh
-    $ docker run <dockerhubUsername>/web
+    $ docker run <dockerhubUsername>/web_image
 
 <!SLIDE>
 # More about the ``CMD`` instruction
@@ -382,7 +382,7 @@ The second executes directly, without shell processing:
 The ``CMD`` can be overridden when you run a container.
 
     @@@ Sh
-    $ docker run -t -i <dockerhubUsername>/web /bin/bash
+    $ docker run -t -i <dockerhubUsername>/web_image /bin/bash
 
 Will run ``/bin/bash`` instead of ``nginx -g "daemon off;"``.
 
@@ -432,7 +432,7 @@ specifies its options. On the command line we can then potentially
 override the options when needed.
 
     @@@ Sh
-    $ docker run -d <dockerhubUsername>/web -t
+    $ docker run -d <dockerhubUsername>/web_image -t
 
 This will override the options ``CMD`` provided with new flags.
 
@@ -460,7 +460,7 @@ to build other images.
    random ports on the host.
 
         @@@ Sh
-        $ docker run -d -P <dockerhubUsername>/webapp
+        $ docker run -d -P <dockerhubUsername>/web_image
 
 
 2. Now checkout our running container using the ``docker ps`` command. The 
@@ -474,9 +474,10 @@ to build other images.
 
 In the output of ``docker ps`` you should see something like:
 
+
         @@@ Sh
-        CONTAINER ID IMAGE         COMMAND       CREATED       STATUS       PORTS                   NAMES
-        25af0d10060f webapp:latest python app.py 2 minutes ago Up 2 minutes 0.0.0.0:49162->5000/tcp tender_newton
+        CONTAINER ID IMAGE                                COMMAND              CREATED       STATUS       PORTS                 NAMES
+        25af0d10060f <dockerhubUsername>/web_image:latest nginx -g daemon off; 2 minutes ago Up 2 minutes 0.0.0.0:49162->80/tcp tender_newton
 
 Make a note of the port number port ``5000`` is being redirected to.
 
@@ -608,14 +609,14 @@ the container is started.
 1. Use ``docker build`` to build our image.
 
         @@@ Sh
-        $ docker build -t <dockerhubUsername>/webapp .
+        $ docker build -t <dockerhubUsername>/web_image .
 
 2. Review the build image with ``docker image``.
 
         @@@ Sh
-        $ docker image <dockerhubUsername>/webapp
-        REPOSITORY                 TAG     IMAGE ID      CREATED        VIRTUAL SIZE
-        <dockerhubUsername>/webapp latest  e2a9fac29d86  12 seconds ago 246.8 MB
+        $ docker image <dockerhubUsername>/web_image
+        REPOSITORY                    TAG     IMAGE ID      CREATED        VIRTUAL SIZE
+        <dockerhubUsername>/web_image latest  e2a9fac29d86  12 seconds ago 246.8 MB
 
 <!SLIDE supplemental exercises>
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Overriding the ``CMD`` instruction
@@ -624,7 +625,7 @@ the container is started.
    run``:
 
         @@@Sh
-        docker run -t -t <dockerhubUsername>/web /bin/bash
+        docker run -t -t <dockerhubUsername>/web_image /bin/bash
 
    This overrides the default ``CMD``.
 
@@ -655,7 +656,7 @@ the container is started.
    random ports on the host.
 
         @@@ Sh
-        $ docker run -d -P <dockerhubUsername>/webapp
+        $ docker run -d -P <dockerhubUsername>/web_image
 
 
 2. Now checkout our running container using the ``docker ps`` command. The 
@@ -667,8 +668,8 @@ the container is started.
 3. You should see something like:
 
          @@@ Sh
-         CONTAINER ID IMAGE                      COMMAND       CREATED       STATUS       PORTS                   NAMES
-         25af0d10060f <dockerhubUsername>/webapp:latest python app.py 2 minutes ago Up 2 minutes 0.0.0.0:49162->5000/tcp tender_newton
+         CONTAINER ID IMAGE                                COMMAND              CREATED       STATUS       PORTS                 NAMES
+         25af0d10060f <dockerhubUsername>/web_image:latest nginx -g daemon off; 2 minutes ago Up 2 minutes 0.0.0.0:49162->80/tcp tender_newton
 
    Make a note of the port number port ``5000`` is being redirected to.
 
