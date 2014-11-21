@@ -26,7 +26,7 @@ inside a container:
 If you want to explore freely the host filesystem:
 
     @@@ Sh
-    $ docker run -ti -v /:/hostfs -w /hostfs ubuntu bash
+    $ docker run -it -v /:/hostfs -w /hostfs ubuntu bash
 
 <!SLIDE>
 # Modifying the host filesystem
@@ -35,7 +35,7 @@ Volumes are read-write by default, so let's create a dummy file
 on the host filesystem:
 
     @@@ Sh
-    $ docker run -ti -v /:/hostfs ubuntu touch /hostfs/hi-there
+    $ docker run -it -v /:/hostfs ubuntu touch /hostfs/hi-there
     $ ls -l /
     ...You will see the hi-there file, created on the host...
 
