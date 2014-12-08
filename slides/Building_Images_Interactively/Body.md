@@ -91,7 +91,7 @@ If you are curious, you can view all of the layers composing an image (and their
     @@@ Sh
     $ docker history ubuntu
     IMAGE               CREATED             CREATED BY
-    c3d5614fecc4        8 days ago          /bin/sh -c #(nop) CMD [/bin/bash]
+    c3d5614fecc4        8 days ago          /bin/sh -c #(nop) CMD [bash]
     96e1c132acb3        8 days ago          /bin/sh -c apt-get update && apt-get dist-upg
     311ec46308da        8 days ago          /bin/sh -c sed -i 's/^#\s*\(deb.*universe\)$/
     1b2af7d5307a        8 days ago          /bin/sh -c rm -rf /var/lib/apt/lists/*
@@ -181,7 +181,7 @@ If you are curious, you can view all of the layers composing an image (and their
     @@@ Sh
     $ docker history ubuntu
     IMAGE               CREATED             CREATED BY
-    c3d5614fecc4        8 days ago          /bin/sh -c #(nop) CMD [/bin/bash]
+    c3d5614fecc4        8 days ago          /bin/sh -c #(nop) CMD [bash]
     96e1c132acb3        8 days ago          /bin/sh -c apt-get update && apt-get dist-upg
     311ec46308da        8 days ago          /bin/sh -c sed -i 's/^#\s*\(deb.*universe\)$/
     1b2af7d5307a        8 days ago          /bin/sh -c rm -rf /var/lib/apt/lists/*
