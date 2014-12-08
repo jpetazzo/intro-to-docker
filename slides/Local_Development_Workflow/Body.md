@@ -37,15 +37,17 @@ We've got an image, some source code and now we can add a container to
 run that code.
 
     @@@ Sh
-    $ docker run -d -v $(pwd):/opt/namer -w /opt/namer \
-    -p 80:9292 training/namer rackup
+    $ docker run -d \
+          -v $(pwd):/opt/namer \
+          -p 80:9292 \
+          training/namer \
+          rackup
 
-We are passing some *flags* as arguments to the ``docker run`` command to control its behavior:
-
-* The ``-d`` flag indicates that the container should run in daemon mode (in the background).
+* The ``-d`` flag indicates that the container should run in detached mode (in the background).
 * The ``-v`` flag provides volume mounting inside containers.
-* The ``-w`` flag sets the working directory inside the container.
 * The ``-p`` flag maps port ``9292`` inside the container to port ``80`` on the host.
+* ``training/namer`` is the name of the image we will run.
+* ``rackup`` is the name of the command we run (it is a ruby server).
 
 More on these later.
 
@@ -149,9 +151,31 @@ We can see a simple workflow:
     (You *are* using version control, right?)
 
 <!SLIDE>
+# Debugging inside the container
+
+In 1.3, Docker introduced a feature called ``docker exec``.
+
+It allows users to run a new process in a container which is already running.
+
+It is not meant to be used for production (except in emergencies, as a sort of pseudo-SSH), but it is handy for development.
+
+You can get a shell prompt inside an existing container this way. 
+
+<!SLIDE>
+# ``docker exec`` example
+
+    @@@ Sh
+    $ # You can run ruby commands in the area the app is running and more!
+    $ docker exec -it <yourContainerId> bash
+    root@5ca27cf74c2e:/opt/namer# irb
+    irb(main):001:0> [0, 1, 2, 3, 4].map {|x| x ** 2}.compact
+    => [0, 1, 4, 9, 16]
+    irb(main):002:0> exit
+
+<!SLIDE>
 # Stopping the container
 
-Now we're done let's stop our container.
+Now that we're done let's stop our container.
 
     @@@ Sh
     $ docker stop <yourContainerID>
@@ -204,8 +228,11 @@ We've learned how to:
 1. Create a new container (make sure that you are in ``namer`` directory first).
 
         @@@ Sh
-        $ docker run -d -v $(pwd):/opt/namer -w /opt/namer \
-        -p 80:9292 training/namer rackup
+        $ docker run -d \
+              -v $(pwd):/opt/namer \
+              -p 80:9292 \
+              training/namer \
+              rackup
 
 2. Check the container is running.
 
@@ -242,6 +269,18 @@ We've learned how to:
 
         @@@ Sh
         http://<yourHostIP>
+
+<!SLIDE supplemental exercises>
+# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: ``docker exec``
+
+    @@@ Sh
+    $ # You can run ruby commands in the area the app is running and more!
+    $ docker exec -it <yourContainerId> bash
+    root@5ca27cf74c2e:/opt/namer# irb
+    irb(main):001:0> [0, 1, 2, 3, 4].map {|x| x ** 2}.compact
+    => [0, 1, 4, 9, 16]
+    irb(main):002:0> exit
+
 
 <!SLIDE supplemental exercises>
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Stop and remove the container
