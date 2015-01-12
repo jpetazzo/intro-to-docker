@@ -54,11 +54,11 @@ Install them via `pip`.
 
 Then use the `aws` command.
 
-    $ aws ec2 run-instances --image-id ami-5d160a34 --instance-type t1.micro --count #ofinstancesneeded
+    $ aws ec2 run-instances --image-id ami-a180f291 --instance-type t1.micro --count #ofinstancesneeded
 
 #### Getting list of IP addresses
 
-    $ aws ec2 describe-instances | grep -E -o "\d+\.\d+\.\d+\.\d+" | grep -v '^10\.'
+    $ aws ec2 describe-instances | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | egrep -v '(^10\.)|(^172\.)' | sort -u
 
 ## Generating PDFs
 
