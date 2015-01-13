@@ -16,8 +16,13 @@ showoff:
 	$(URLOPENER) http://$(URL):9090/
 
 pdf:
+	git stash
+	find . -name *.css -exec sed -i "s/{{DOCKER_TRAINING_VERSION}}/$(TAG)/" {} \;
+	find . -name *.json -exec sed -i "s/{{DOCKER_TRAINING_VERSION}}/$(TAG)/" {} \;
 	docker run --net container:$(CONTAINER) $(IMAGE) \
 		prince http://localhost:9090/print -o - > DockerSlides.pdf
 	docker run --net container:$(CONTAINER) $(IMAGE) \
 		prince http://localhost:9090/supplemental/exercises/print -o - > DockerExercises.pdf
+	git reset --hard HEAD
+	git stash pop
 
