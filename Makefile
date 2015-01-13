@@ -1,4 +1,5 @@
 URL=$(shell echo $(shell boot2docker ip 2>/dev/null) || echo "localhost")
+TAG=$(shell git rev-parse --short HEAD)
 
 IMAGE=training/docker-fundamentals-image
 CONTAINER=showoff
