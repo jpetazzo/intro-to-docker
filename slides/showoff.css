@@ -467,7 +467,7 @@
   }
 
   @bottom-left {
-    content: "Docker Fundamentals 1.0.1";
+    content: "Docker Fundamentals {{DOCKER_TRAINING_VERSION}}";
     padding-left: 0.5in;
   	font-family: 'Cabin' !important;
   }

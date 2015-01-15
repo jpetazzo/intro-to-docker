@@ -244,7 +244,6 @@ Let's see how to put both pieces together.
 Ultimately, _you_ are the one responsible for logging,
 monitoring, and backup of your volumes.
 
-![warning](warning.png)
 
 <!SLIDE>
 # Checking volumes defined by an image
