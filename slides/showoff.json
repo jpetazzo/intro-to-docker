@@ -5,7 +5,7 @@
     "protected": ["presenter", "onepage"],
     "user": "docker",
     "password": "maersk",
-    "issues": "https://github.com/dotcloud/docker-fundamentals",
+    "issues": "https://github.com/docker-training/docker-fundamentals",
     "favicon": "https://www.docker.io/static/favicon.png",
     "sections": [
 
