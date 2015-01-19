@@ -5,13 +5,13 @@ CONTAINER=showoff
 
 showoff:
 	# Add git commit id to training slides before building 
-	git stash
+	git stash || true
 	find . -name *.css -exec sed -i "s/{{DOCKER_TRAINING_VERSION}}/$(TAG)/" {} \;
 	find . -name *.json -exec sed -i "s/{{DOCKER_TRAINING_VERSION}}/$(TAG)/" {} \;
 	# Build updated docker image
 	docker build -t $(IMAGE) .
 	git reset --hard HEAD
-	git stash pop
+	git stash pop || true
 
 	# Remove the old container (if there is one)
 	docker inspect $(CONTAINER) >/dev/null 2>&1 && docker rm -f $(CONTAINER) || true
