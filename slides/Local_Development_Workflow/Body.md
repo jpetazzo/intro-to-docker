@@ -40,19 +40,17 @@ run that code.
     $ docker run -d \
           -v $(pwd):/opt/namer \
           -p 80:9292 \
-          training/namer \
-          rackup
+          training/namer
 
 * The ``-d`` flag indicates that the container should run in detached mode (in the background).
 * The ``-v`` flag provides volume mounting inside containers.
 * The ``-p`` flag maps port ``9292`` inside the container to port ``80`` on the host.
 * ``training/namer`` is the name of the image we will run.
-* ``rackup`` is the name of the command we run (it is a ruby server).
 
 More on these later.
 
-We've launched the application with the ``training/namer`` image and the ``rackup`` command.
-
+We've launched the application with the ``training/namer`` image and the
+``rackup`` command.  ``rackup`` has been set as the `CMD` in the ``Dockerfile``.
 
 
 <!SLIDE>
@@ -231,8 +229,7 @@ We've learned how to:
         $ docker run -d \
               -v $(pwd):/opt/namer \
               -p 80:9292 \
-              training/namer \
-              rackup
+              training/namer
 
 2. Check the container is running.
 
