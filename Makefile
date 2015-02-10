@@ -3,8 +3,14 @@ TAG=$(shell git rev-parse --short HEAD)
 IMAGE=training/docker-fundamentals-image
 CONTAINER=showoff
 
-showoff:
-	# Is working directory clean?
+default:
+	# Available targets:
+	# - release (tag slides and run showoff)
+	# - dev (don't tag slides; run showoff with a volume)
+	# - pdf (generate PDF files; requires showoff container)
+
+release:
+	# Is working directory clean? If you get an error here, run "make dev" instead.
 	git diff-index --quiet HEAD
 
 	# Add git commit id to training slides before building 
@@ -26,11 +32,13 @@ dev:
 	# Build updated docker image
 	docker build -t $(IMAGE) .
 	# Remove the old container (if there is one)
-	docker rm -f $(CONTAINER) 2&>/dev/null || true
+	docker rm -f $(CONTAINER) 2>/dev/null || true
 	# Run container with volume to slides to make changes on the fly
 	docker run -d --name $(CONTAINER) -v $(shell pwd)/slides:/slides -p 9090:9090 $(IMAGE)
 
-pdf: showoff
+pdf:
+	# The showoff container has to be running (through "make release" or "make dev")
+	docker inspect --format='{{""}}' showoff
 	docker run --rm --net container:$(CONTAINER) $(IMAGE) \
 		prince http://localhost:9090/print -o - > DockerSlides.pdf
 	docker run --rm --net container:$(CONTAINER) $(IMAGE) \
