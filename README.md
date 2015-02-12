@@ -42,7 +42,7 @@ with the git hash corresponding to their source revision.
 
 ## Training VMs
 
-When performing a class, each attendee receives a cloud intance,
+When performing a class, each attendee receives a cloud instance,
 pre-installed to have the latest version of Docker and a few other
 helpful things installed.
 
