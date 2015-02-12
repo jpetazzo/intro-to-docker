@@ -2,8 +2,7 @@ FROM ubuntu:14.04
 MAINTAINER Education Team at Docker <education@docker.com>
 
 RUN apt-get update
-RUN apt-get install -y curl wget git ruby ruby-dev libxml2-dev libxslt-dev build-essential
-RUN apt-get install -y zlib1g-dev
+RUN apt-get install -y curl wget git ruby ruby-dev libxml2-dev libxslt-dev build-essential zlib1g-dev
 
 RUN git clone https://github.com/puppetlabs/showoff.git
 WORKDIR /showoff
