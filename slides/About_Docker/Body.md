@@ -17,10 +17,12 @@ Focused on Docker and growing the Docker ecosystem:
   you get the best out of Docker.
 
 <!SLIDE>
-# Introducing Docker
+# Why Docker?
 
-* The Matrix from Hell and the Need for Containers
-* Docker & Containers:  how they work
+* The software industry has changed.
+* Applications used to be monolithic, with long lifecycles, scaled up.
+* Today, applications are decoupled, built iteratively, scaled out.
+* As a result, deployment is though!
 
 <!SLIDE>
 # The problem in 2015
@@ -58,27 +60,46 @@ Focused on Docker and growing the Docker ecosystem:
 ![elimatrix](elimatrix.png)
 
 <!SLIDE>
-# Step 1: Create a lightweight container
+# Docker high-level roadmap
+
+* Step 1: containers as lightweight VMs
+* Step 2: commoditization of containers
+* Step 3: shipping containers efficiently
+* Step 4: containers in a modern software factory
+
+<!SLIDE>
+# Step 1: containers as lightweight VMs
 
 ![lightcont](lightcont.png)
 
+* This drew attention from hosting and PAAS industry.
+* Highly technical audience with strong ops culture.
+
 <!SLIDE>
-# Step 2: Make containers easy to use
+# Step 2: commoditization of containers
 
-* Container technology has been around for a while
+Container technology has been around for a while.
+<br/>(c.f. LXC, Solaris Zones, BSD Jails, LPAR...)
 
-    (c.f. LXC, Solaris Zones, BSD Jails)
+So what's new?
 
-* But, their use was largely limited to specialized organizations, with special tools & training. Containers were not portable
-* Analogy: Shipping containers are not just steel boxes. They are steel boxes that are a standard size, and have hooks and holes in all the same places
-* With Docker, Containers get the following:
-  * Ease of  use, tooling
-  * Re-usable components
-  * Ability to run on any Linux server today: physical, virtual, VM, cloud, OpenStack, +++
-  * Ability to move between any of the above in a matter of seconds-no modification or delay
-  * Ability to share containerized components
-  * Self contained environment - no dependency hell
-  * Tools for how containers work together: linking, nesting, discovery, orchestration, ++
+* Standardize the container format, because containers were not portable.
+* Analogy: 
+  - shipping containers are not just steel boxes
+  - they are steel boxes that are a standard size, with the same hooks and holes
+* Make containers easy to use for developers.
+* Emphasis on re-usable components, APIs, ecosystem of standard tools.
+* Improvement over ad-hoc, in-house, specific tools.
+
+<!SLIDE>
+# Running containers everywhere
+
+* Maturity of underlying technology (cgroups, namespaces, copy-on-write systems).
+* Ability to run on any Linux server today: physical, virtual, VM, cloud, OpenStack...
+* Ability to move between any of the above in a matter of seconds-no modification or delay.
+* Ability to share containerized components.
+* Self contained environment - no dependency hell.
+* Tools for how containers work together: linking, discovery, orchestration...
 
 <!SLIDE>
 # Technical & cultural revolution: separation of concerns
@@ -86,12 +107,37 @@ Focused on Docker and growing the Docker ecosystem:
 ![sepcon](sepcon.png)
 
 <!SLIDE>
-# Step 3: Make containers super lightweight
+# Step 3: shipping containers efficiently
+
+Ship container images, made of reusable shared layers.
+
+Optimizes disk usage, memory usage, network usage.
 
 ![superlight](superlight.png)
 
 <!SLIDE>
-# Step 4: Build a System for creating, managing, deploying code
+# Step 4: containers in a modern software factory
+
+The container becomes the new build artefact.
+
+The same container can go from dev, to test, to QA, to prod.
 
 ![deploysys](deploysys.png)
+
+
+<!SLIDE>
+# Docker architecture
+
+Docker is a client-server application.
+
+* **The Docker daemon**
+  <br/>Receives and processes incoming Docker API requests.
+
+* **The Docker client**
+  <br/>Command line tool - the ``docker`` binary.
+  <br/>Talks to the Docker daemon via the Docker API.
+
+* **Docker Hub Registry**
+  <br/>Public image registry.
+  <br/>The Docker daemon talks to it via the registry API.
 

@@ -14,7 +14,7 @@ It runs on:
 
 It can be installed via:
 
-* Distribution supplied packages on virtually all distros.
+* Distribution-supplied packages on virtually all distros.
 
     (Includes at least: Arch Linux, CentOS, Debian, Fedora, Gentoo,
     openSUSE, RHEL, Ubuntu.)
@@ -26,17 +26,17 @@ It can be installed via:
 <!SLIDE>
 # Installing Docker on your Linux distribution
 
-On Fedora.
+On Fedora:
 
     @@@ Sh
     $ sudo yum install docker-io
 
-On CentOS 7.
+On CentOS 7:
 
     @@@ Sh
     $ sudo yum install docker
 
-On Debian and derivatives.
+On Debian and derivatives:
 
     @@@ Sh
     $ sudo apt-get install docker.io
@@ -44,22 +44,22 @@ On Debian and derivatives.
 <!SLIDE>
 # Installation script from Docker
 
-You can use the ``curl`` command to install on several platforms.
+You can use the ``curl`` command to install on several platforms:
 
     @@@ Sh
     $ curl -s https://get.docker.com/ | sudo sh
 
 This currently works on:
 
-* Ubuntu;
-* Debian;
-* Fedora;
-* Gentoo.
+* Ubuntu
+* Debian
+* Fedora
+* Gentoo
 
 <!SLIDE>
 # Installing on OS X and Microsoft Windows
 
-Docker doesn't run natively on OS X and Microsoft Windows.
+Docker doesn't run natively on OS X or Microsoft Windows.
 
 To install Docker on these platforms we run a small virtual machine
 using a tool called [Boot2Docker](http://boot2docker.io).
@@ -67,40 +67,21 @@ using a tool called [Boot2Docker](http://boot2docker.io).
 ![Boot2Docker](logo.png)
 
 <!SLIDE>
-# Docker architecture
-
-* Docker is a client-server application.
-
-**The Docker daemon**
-
-* The Docker server.
-* Receives and processes incoming Docker API requests.
-
-**The Docker client**
-
-* Command line tool - the ``docker`` binary.
-* Talks to the Docker daemon via the Docker API.
-
-**Docker Hub Registry**
-
-* Public image registry.
-* The Docker daemon talks to it via the registry API.
-
-<!SLIDE>
-# Test Docker is working
+# Check that Docker is working
 
 Using the ``docker`` client:
 
     @@@ Sh
     $ docker version
-    Client version: 1.1.1
-    Client API version: 1.13
-    Go version (client): go1.2.1
-    Git commit (client): bd609d2
-    Server version: 1.1.1
-    Server API version: 1.13
-    Go version (server): go1.2.1
-    Git commit (server): bd609d2
+    Client version: 1.5.0
+    Client API version: 1.17
+    Go version (client): go1.4.1
+    Git commit (client): a8a31ef
+    OS/Arch (client): linux/amd64
+    Server version: 1.5.0
+    Server API version: 1.17
+    Go version (server): go1.4.1
+    Git commit (server): a8a31ef
 
 <!SLIDE center>
 # Su-su-sudo
@@ -114,7 +95,7 @@ Using the ``docker`` client:
 
 The ``docker`` user is ``root`` equivalent.
 
-It provides ``root`` level access to the host.
+It provides ``root``-level access to the host.
 
 You should restrict access to it like you would protect ``root``.
 
@@ -139,10 +120,19 @@ You should restrict access to it like you would protect ``root``.
     $ exit
 
 <!SLIDE>
-# Hello World again with a new image
+# Check that Docker works without sudo
 
     @@@ Sh
-    $ docker run ubuntu echo hello world
+    $ docker version
+    Client version: 1.5.0
+    Client API version: 1.17
+    Go version (client): go1.4.1
+    Git commit (client): a8a31ef
+    OS/Arch (client): linux/amd64
+    Server version: 1.5.0
+    Server API version: 1.17
+    Go version (server): go1.4.1
+    Git commit (server): a8a31ef
 
 <!SLIDE>
 # Section summary
@@ -255,4 +245,4 @@ the Docker daemon.
 6. Test that Docker works without ``sudo``
 
         @@@ Sh
-        $ docker run ubuntu echo hello world
+        $ docker version
