@@ -1,10 +1,10 @@
 <!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Getting started with Images
+# Lesson ~~~SECTION:MAJOR~~~: Understanding Docker Images
 ## Objectives
 
-At the end of this lesson, you will be able to:
+In this lesson, we will explain:
 
-* Understand images and image tags.
-* Search for images.
-* Download an image.
-* Understand Docker image namespacing.
+* What is an image.
+* What is a layer.
+* The various image namespaces.
+* How to search and download images.

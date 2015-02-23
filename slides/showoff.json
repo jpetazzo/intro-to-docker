@@ -17,29 +17,25 @@
         "About_Docker/Objectives.md",
         "About_Docker/Body.md",
 
-        "Instant_Gratification/Cover.md",
-        "Instant_Gratification/Objectives.md",
-        "Instant_Gratification/Body.md",
+        "Use_Training_VM/Cover.md",
+        "Use_Training_VM/Objectives.md",
+        "Use_Training_VM/Body.md",
 
         "Install_Docker/Cover.md",
         "Install_Docker/Objectives.md",
         "Install_Docker/Body.md",
 
-        "Docker_Hub/Cover.md",
-        "Docker_Hub/Objectives.md",
-        "Docker_Hub/Body.md",
+        "First_Containers/Cover.md",
+        "First_Containers/Objectives.md",
+        "First_Containers/Body.md",
+
+        "Background_Containers/Cover.md",
+        "Background_Containers/Objectives.md",
+        "Background_Containers/Body.md",
 
         "Initial_Images/Cover.md",
         "Initial_Images/Objectives.md",
         "Initial_Images/Body.md",
-
-        "Own_Container/Cover.md",
-        "Own_Container/Objectives.md",
-        "Own_Container/Body.md",
-
-        "Container_Manipulation/Cover.md",
-        "Container_Manipulation/Objectives.md",
-        "Container_Manipulation/Body.md",
 
         "Building_Images_Interactively/Cover.md",
         "Building_Images_Interactively/Objectives.md",
@@ -49,17 +45,26 @@
         "Building_Images_With_Dockerfiles/Objectives.md",
         "Building_Images_With_Dockerfiles/Body.md",
 
-        "Working_With_Images/Cover.md",
-        "Working_With_Images/Objectives.md",
-        "Working_With_Images/Body.md",
-
-        "Local_Development_Workflow/Cover.md",
-        "Local_Development_Workflow/Objectives.md",
-        "Local_Development_Workflow/Body.md",
+        "Cmd_And_Entrypoint/Cover.md",
+        "Cmd_And_Entrypoint/Objectives.md",
+        "Cmd_And_Entrypoint/Body.md",
 
         "Container_Networking_Basics/Cover.md",
         "Container_Networking_Basics/Objectives.md",
         "Container_Networking_Basics/Body.md",
+
+
+
+
+
+
+
+
+
+
+        "Local_Development_Workflow/Cover.md",
+        "Local_Development_Workflow/Objectives.md",
+        "Local_Development_Workflow/Body.md",
 
         "Working_With_Volumes/Cover.md",
         "Working_With_Volumes/Objectives.md",
@@ -69,6 +74,10 @@
         "Connecting_Containers/Objectives.md",
         "Connecting_Containers/Body.md",
 
+        "Dockerfile_Reference/Cover.md",
+        "Dockerfile_Reference/Objectives.md",
+        "Dockerfile_Reference/Body.md",
+
         "Orchestration/Cover.md",
         "Orchestration/Objectives.md",
         "Orchestration/Body.md",
@@ -76,6 +85,14 @@
         "Ambassadors/Cover.md",
         "Ambassadors/Objectives.md",
         "Ambassadors/Body.md",
+
+        "Docker_Hub/Cover.md",
+        "Docker_Hub/Objectives.md",
+        "Docker_Hub/Body.md",
+
+        "Working_With_Images/Cover.md",
+        "Working_With_Images/Objectives.md",
+        "Working_With_Images/Body.md",
 
         "Testing_Workflow/Cover.md",
         "Testing_Workflow/Objectives.md",

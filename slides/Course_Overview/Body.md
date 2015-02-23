@@ -3,23 +3,28 @@
 ## Part 1
 
 * About Docker
-* Instant Gratification
-* Install Docker
-* Initial Images
-* Our First Container
-* Building on a Container
-* Running Containers in the background
+* Using the training virtual machines
+* Installing Docker
+* Our first containers
+* Running containers in the background
+* Images and containers
+* Building images manually
+* Building images automatically
+* Basic networking
+* Local development workflow
 
 <!SLIDE>
 # Course Agenda
 ## Part 2
 
-* Local Development Workflow with Docker
-* Building Images with Dockerfiles
-* Working with Images and the Docker Hub website
-* Connecting Containers
-* Working with Volumes
-* Continuous Integration Workflow with Docker
+* Working with volumes
+* Connecting containers
+* Advanced Dockerfiles
+* Orchestration
+* Ambassadors
+* The Docker Hub
+* Automated builds
+* Security
 * The Docker API
 
 <!SLIDE toc>

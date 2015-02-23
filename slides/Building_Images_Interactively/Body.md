@@ -1,112 +1,123 @@
 <!SLIDE>
 # Building Images Interactively
 
-* We've learned a bit about Docker images and containers.
-* We could use base images that Docker Hub or its users provide, but what if we want to construct our own custom images?
-* This can be done manually using ``docker commit`` or automatically using a ``Dockerfile``.  We will learn the manual way first and then look at ``Dockerfile``s in the next section.
+As we have seen, the images on the Docker Hub are sometimes very basic.
+
+How do we want to construct our own images?
+
+As an example, we will build an image that has `wget`.
+
+First, we will do it manually with `docker commit`.
+
+Then, in an upcoming chapter, we will use a `Dockerfile` and `docker build`.
+
 
 <!SLIDE>
 # Building from a base
 
-We will use the ``ubuntu`` image that we pulled from Docker Hub as a basis for our customized image.
+Our base will be the `ubuntu` image.
 
-We are going to install the program ``cmatrix`` and commit the change as an image so we can create containers from that image again and again.
+If you prefer `debian`, `centos`, or `fedora`, feel free to use them instead.
+
+(You will have to adapt `apt` to `yum`, of course.)
 
 <!SLIDE>
 # Create a new container and make some changes
 
-To start, launch a terminal inside of a ``ubuntu`` container in interactive mode:
+Start an Ubuntu container:
 
     @@@ Sh
     $ docker run -it ubuntu bash
     root@<yourContainerId>:#/
 
-Run the command ``apt-get update`` to refresh the list of packages available to install, then run the command ``apt-get install -y cmatrix`` to install the program we are interested in.
+Run the command `apt-get update` to refresh the list of packages available to install.
+
+Then run the command `apt-get install -y wget` to install the program we are interested in.
 
     @@@ Sh
-    root@<yourContainerId>:#/ apt-get update && apt-get install -y cmatrix
+    root@<yourContainerId>:#/ apt-get update && apt-get install -y wget
     .... OUTPUT OF APT-GET COMMANDS ....
 
 <!SLIDE>
-# Exit out of the container and inspect the changes
+# Inspect the changes
 
-Type ``exit`` at the container prompt to leave the interactive session, then examine the details of the container you were just running with ``docker ps -l``.  Grab the container's ID and pass it to ``docker diff`` command as an argument:
+Type ``exit`` at the container prompt to leave the interactive session.
+
+Now let's run `docker diff` to see the difference between the base image
+and our container.
 
     @@@ Sh
-    $ docker ps -lq
-    <yourContainerId>
     $ docker diff <yourContainerId>
     C /root
     A /root/.bash_history
     C /tmp
     C /usr
     C /usr/bin
-    A /usr/bin/cmatrix
+    A /usr/bin/wget
     ...
 
 <!SLIDE>
-# Note that Docker has tracked the changes
+# Docker tracks filesystem changes
 
-Docker keeps track of every file which has changed (C), been added (A), or deleted (D) from the base image used to create the container.  For instance, in this container ``.bash_history`` has been created (since we executed commands at the bash prompt) and many files related to packaging have either been created or modified.
+As explained before:
 
-We can formalize these changes into an entirely new image using ``docker commit``.  The changes will appear as a new layer on top of the existing ones from the base image.
+* An image is read-only.
+* When we make changes, they happen in a copy of the image.
+* Docker can show the difference between the image, and its copy.
+* For performance, Docker uses copy-on-write systems.
+  <br/>(i.e. starting a container based on a big image
+  doesn't incur a huge copy.)
 
 <!SLIDE>
-# Commit your image
+# Commit and run your image
 
-To create an image with a new layer reflecting what appeared in the diff, use ``docker commit <containerId>``.
+The `docker commit` command will create a new layer with those changes,
+and a new image using this new layer.
 
     @@@ Sh
     $ docker commit <yourContainerId>
     <newImageId>
 
-The output of the ``docker commit`` command will be the ID for your newly created image.  You can run:
+The output of the ``docker commit`` command will be the ID for your newly created image.
+
+We can run this image:
 
     @@@ Sh
-    $ docker run -it <newImageId> cmatrix
+    $ docker run -it <newImageId> bash
+    root@fcfb62f0bfde:/# wget 
+    wget: missing URL
+    ...
+
 
 <!SLIDE>
 # Tagging images
 
-Any image can be _tagged_ for easy reference (or to prepare it to be pushed to a registry such as Docker Hub).  To tag an image, use the ``docker tag`` command.
+Referring to an image by its ID is not convenient. Let's tag it instead.
+
+We can use the `tag` command:
 
     @@@ Sh
-    $ docker tag <newImageId> <dockerhubUsername>/cmatrix
+    $ docker tag <newImageId> mydistro
 
-Note that ``docker commit`` also accepts an additional argument if you want to include a tag with your ``docker commit`` command:
+But we can also specify the tag as an extra argument to `commit`:
 
     @@@ Sh
-    $ docker commit <containerId> <tagName>
+    $ docker commit <containerId> mydistro
+
+And then run it using its tag:
+
+    @@@ Sh
+    $ docker run -it mydistro bash
 
 <!SLIDE>
-# Using image and viewing history
+# What's next?
 
-As mentioned, you can use a tagged image like so:
+Manual process = bad.
 
-    @@@ Sh
-    $ docker run -it <dockerhubUsername>/cmatrix
+Automated process = good.
 
-If you are curious, you can view all of the layers composing an image (and their size, when they were created, etc.) with the ``docker history`` command:
-
-    @@@ Sh
-    $ docker history ubuntu
-    IMAGE               CREATED             CREATED BY
-    c3d5614fecc4        8 days ago          /bin/sh -c #(nop) CMD [bash]
-    96e1c132acb3        8 days ago          /bin/sh -c apt-get update && apt-get dist-upg
-    311ec46308da        8 days ago          /bin/sh -c sed -i 's/^#\s*\(deb.*universe\)$/
-    1b2af7d5307a        8 days ago          /bin/sh -c rm -rf /var/lib/apt/lists/*
-    c31865d83ea1        8 days ago          /bin/sh -c echo '#!/bin/sh' > /usr/sbin/polic
-    8cbdf71a8e7f        8 days ago          /bin/sh -c #(nop) ADD file:c0f316fa0dcbdd4635
-    511136ea3c5a        16 months ago
-
-
-<!SLIDE>
-# Section summary
-
-We've learned how to:
-
-* Understand how ``docker diff``, ``docker tag``, and ``docker commit`` are used.
-* Understand how a layer is constructed in an image.
+In the next chapter, we will learn how to automate the build
+process by writing a `Dockerfile`.
 
 <!SLIDE supplemental exercises>
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Create a new container and make some changes

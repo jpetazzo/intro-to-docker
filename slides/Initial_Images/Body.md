@@ -1,63 +1,67 @@
 <!SLIDE>
-# Images
+# What is an image?
 
-What are they?
-
-* An image is a collection of files.
-* *Base images* (ubuntu, busybox, fedora etc.) are what you build your own custom images on top of.
-* Images are *layered*, and each layer represents a diff (what changed) from the previous layer.  For instance, 
-  you could add Python 3 on top of a base image.
+* An image is a collection of files + some meta data.
+  <br/>(Technically: those files form the root filesystem of a container.)
+* Images are made of *layers*, conceptually stacked on top of each other.
+* Each layer can add, change, and remove files.
+* Images can share layers to optimize disk usage, transfer times, and memory use.
 
 ![docker layers](docker-filesystems-multilayer.png)
 
 <!SLIDE>
-# So what's the difference between Containers and Images?
+# Differences between containers and images
 
-- Containers represent an encapsulated set of processes based on an image.
-- You spawn them with the ``docker run`` command.
-- In our "Instant Gratification" example, you created a shiny new container by executing ``docker run``. 
-  It was based on the `busybox` image, and we ran the `echo` command.
-- Images are like templates or stencils that you can create containers from.
+* An image is a read-only filesystem.
+* A container is an encapsulated set of processes running in a
+  read-write copy of that filesystem.
+* To optimize container boot time, *copy-on-write* is used 
+  instead of regular copy.
+* `docker run` starts a container from a given image.
+
+Let's give a couple of metaphors to illustrate those concepts.
+
+<!SLIDE>
+# Image as stencils
+
+Images are like templates or stencils that you can create containers from.
 
 ![stencil](stenciling-wall.jpg)
 
 <!SLIDE>
-# How do you create images?
+# Object-oriented programming
 
-Images can be created by:
-
-* Manually starting a container, entering it, making changes to it and committing those changes.
-* Dockerfiles (more on this later)
-
-<!SLIDE>
-# How do you store and manage images?
-
-Images can be stored:
-
-* On your Docker host.
-* In a Docker registry.
-
-You can use the Docker client to manage images.
+* Images are conceptually similar to *classes*.
+* Layers are conceptually similar to *inheritance*.
+* Containers are conceptually similar to *instances*.
 
 <!SLIDE>
-# Searching for images
+# Wait a minute...
 
-Searches your registry for images:
+If an image is read-only, how do we change it?
 
-    @@@ Sh
-    $ docker search training
-    NAME                                    DESCRIPTION   STARS     OFFICIAL   AUTOMATED
-    training/jenkins                                      0                    [OK]
-    training/webapp                                       0                    [OK]
-    training/ls                                           0                    [OK]
-    training/namer                                        0                    [OK]
-    training/postgres                                     0                    [OK]
-    training/notes                                        0                    [OK]
-    training/docker-fundamentals-image                    0                    [OK]
-    training/showoff                                      0                    
+* We don't.
+* We create a new container from that image.
+* Then we make changes to that container.
+* When we are satisfied with those changes, we transform them into a new layer.
+* A new image is created by stacking the new layer on top of the old image.
 
 <!SLIDE>
-# Images belong to a namespace
+# In practice
+
+There are multiple ways to create new images.
+
+* `docker commit`: creates a new layer (and a new image) from a container.
+* `docker build`: performs a repeatable build sequence.
+* `docker import`: loads a tarball into Docker, as a standalone base layer.
+
+We will explain `commit` and `build` in later chapters.
+
+`import` can be used for various hacks, but its main purpose is to bootstrap
+the creation of base images.
+
+<!SLIDE>
+# Images namespaces
 
 There are three namespaces:
 
@@ -66,15 +70,17 @@ There are three namespaces:
         @@@ Sh
         ubuntu
 
-* User
+* User (and organizations)
 
         @@@ Sh
-        training/docker-fundamentals-image
+        jpetazzo/clock
 
 * Self-Hosted
 
         @@@ Sh
         registry.example.com:5000/my-private-image
+
+Let's explain each of them.
 
 <!SLIDE>
 # Root namespace
@@ -82,13 +88,12 @@ There are three namespaces:
 The root namespace is for official images. They are put there by Docker Inc.,
 but they are generally authored and maintained by third parties.
 
-Those images include some barebones distro images, for instance:
+Those images include:
 
-* ubuntu
-* fedora
-* centos
+* Small, "swiss-army-knife" images like busybox.
+* Distro images to be used as bases for your builds, like ubuntu, fedora...
+* Ready-to-use components and services, like redis, postgresql...
 
-Those are ready to be used as bases for your own images.
 
 <!SLIDE>
 # User namespace
@@ -98,17 +103,17 @@ The user namespace holds images for Docker Hub users and organizations.
 For example:
 
     @@@ Sh
-    training/docker-fundamentals-image
+    jpetazzo/clock
 
 The Docker Hub user is:
 
     @@@ Sh
-    training
+    jpetazzo
 
 The image name is:
 
     @@@ Sh
-    docker-fundamentals-image
+    clock
 
 <!SLIDE>
 # Self-Hosted namespace
@@ -134,32 +139,28 @@ The image name is:
     @@@ Sh
     wordpress
 
-Note: self-hosted registries used to be called *private* registries,
-but this is misleading!
+<!SLIDE>
+# Historical detail
+
+Self-hosted registries used to be called *private* registries,
+but this was misleading!
 
 * A self-hosted registry can be public or private.
 * A registry in the User namespace on Docker Hub can be public or private.
 
 
 <!SLIDE>
-# Downloading images
+# How do you store and manage images?
 
-We already downloaded two root images earlier:
+Images can be stored:
 
-* The busybox image, implicitly, when we did ``docker run busybox``.
-* The ubuntu image, explicitly, when we did ``docker pull ubuntu``.
+* On your Docker host.
+* In a Docker registry.
 
-Download a user image.
+You can use the Docker client to download (pull) or upload (push) images.
 
-    @@@ Sh
-    $ docker pull training/docker-fundamentals-image
-    Pulling repository training/docker-fundamentals-image
-    8144a5b2bc0c: Download complete
-    511136ea3c5a: Download complete
-    8abc22fbb042: Download complete
-    58394af37342: Download complete
-    6ea7713376aa: Download complete
-    71ef82f6ed3c: Download complete
+To be more accurate: you can use the Docker client to tell a Docker server
+to push and pull images to and from a registry.
 
 <!SLIDE>
 # Showing current images
@@ -168,29 +169,50 @@ Let's look at what images are on our host now.
 
     @@@ Sh
     $ docker images
-    REPOSITORY                         TAG     IMAGE ID     CREATED     VIRTUAL SIZE
-    training/docker-fundamentals-image latest  8144a5b2bc0c 5 days ago  835 MB
-    ubuntu                             13.10   9f676bd305a4 7 weeks ago 178 MB
-    ubuntu                             saucy   9f676bd305a4 7 weeks ago 178 MB
-    ubuntu                             raring  eb601b8965b8 7 weeks ago 166.5 MB
-    ubuntu                             13.04   eb601b8965b8 7 weeks ago 166.5 MB
-    ubuntu                             12.10   5ac751e8d623 7 weeks ago 161 MB
-    ubuntu                             quantal 5ac751e8d623 7 weeks ago 161 MB
-    ubuntu                             10.04   9cc9ea5ea540 7 weeks ago 180.8 MB
-    ubuntu                             lucid   9cc9ea5ea540 7 weeks ago 180.8 MB
-    ubuntu                             12.04   9cd978db300e 7 weeks ago 204.4 MB
-    ubuntu                             latest  9cd978db300e 7 weeks ago 204.4 MB
-    ubuntu                             precise 9cd978db300e 7 weeks ago 204.4 MB
+    REPOSITORY         TAG     IMAGE ID     CREATED     VIRTUAL SIZE
+    ubuntu             13.10   9f676bd305a4 7 weeks ago 178 MB
+    ubuntu             saucy   9f676bd305a4 7 weeks ago 178 MB
+    ubuntu             raring  eb601b8965b8 7 weeks ago 166.5 MB
+    ubuntu             13.04   eb601b8965b8 7 weeks ago 166.5 MB
+    ubuntu             12.10   5ac751e8d623 7 weeks ago 161 MB
+    ubuntu             quantal 5ac751e8d623 7 weeks ago 161 MB
+    ubuntu             10.04   9cc9ea5ea540 7 weeks ago 180.8 MB
+    ubuntu             lucid   9cc9ea5ea540 7 weeks ago 180.8 MB
+    ubuntu             12.04   9cd978db300e 7 weeks ago 204.4 MB
+    ubuntu             latest  9cd978db300e 7 weeks ago 204.4 MB
+    ubuntu             precise 9cd978db300e 7 weeks ago 204.4 MB
 
 <!SLIDE>
-# Image and tags
+# Searching for images
 
-* Images can have tags.
-* Tags define image variants.
-* When using images it is always best to be specific.
+Searches your registry for images:
+
+    @@@ Sh
+    $ docker search zookeeper
+    NAME                             DESCRIPTION                     STARS  ...
+    jplock/zookeeper                 Builds a docker image for ...   27
+    thefactory/zookeeper-exhibitor   Exhibitor-managed ZooKeepe...   2 
+    misakai/zookeeper                ZooKeeper is a service for...   1 
+    digitalwonderland/zookeeper      Latest Zookeeper - cluster...   1 
+    garland/zookeeper                                                1 
+    raycoding/piggybank-zookeeper    Zookeeper 3.4.6 running on...   1 
+    gregory90/zookeeper                                              0 
+
+* "Stars" indicate the popularity of the image.
+* "Official" images are those in the root namespace.
+* "Automated" images are built automatically by the Docker Hub.
+  <br/>(This means that their build recipe is always available.)
 
 <!SLIDE>
-# Downloading an image tag
+# Downloading images
+
+There are two ways to download images.
+
+* Explicitly, with `docker pull`.
+* Implicitly, when executing `docker run` and the image is not found locally.
+
+<!SLIDE>
+# Pulling an image
 
     @@@ Sh
     $ docker pull debian:jessie
@@ -201,16 +223,26 @@ Let's look at what images are on our host now.
 
 * As seen previously, images are made up of layers.
 * Docker has downloaded all the necessary layers.
+* In this example, `:jessie` indicates which exact version of Debian
+  we would like. It is a *version tag*.
+
+<!SLIDE>
+# Image and tags
+
+* Images can have tags.
+* Tags define image variants.
+* `docker pull ubuntu` will refer to `ubuntu:latest`.
+* The `:latest` tag can be updated frequently.
+* When using images it is always best to be specific.
 
 <!SLIDE>
 # Section summary
 
 We've learned how to:
 
-* Understand images and image tags.
-* Search for images.
-* Download an image.
+* Understand images and layers.
 * Understand Docker image namespacing.
+* Search and download images.
 
 <!SLIDE supplemental exercises>
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Find an image

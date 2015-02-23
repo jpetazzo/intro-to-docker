@@ -1,4 +1,4 @@
 <!SLIDE center  subsection>
-# Getting started with Images
+# Understanding Docker Images
 
 ![image](image.png)

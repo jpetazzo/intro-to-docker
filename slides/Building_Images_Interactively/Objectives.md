@@ -1,7 +1,9 @@
 <!SLIDE>
 # Lesson ~~~SECTION:MAJOR~~~: Building Images Interactively
 
-At the end of this lesson, you will be able to:
+In this lesson, we will create our first container image.
 
-* Understand how ``docker diff``, ``docker tag``, and ``docker commit`` are used.
-* Understand how a layer is constructed in an image.
+We will install software manually in a container, and turn it
+into a new image.
+
+We will introduce commands `docker commit`, `docker tag`, and `docker diff`.

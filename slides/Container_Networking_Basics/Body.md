@@ -1,105 +1,114 @@
 <!SLIDE>
-# Container Networking Basics
+# A simple, static web server
 
-Now we've seen the basics of running containers in the background
-let's look at a more complex (and useful!) example.
-
-To do this we're going to build a web server in a container running
-detached in the background.
-
-<!SLIDE>
-# Running our web server container
-
-Let's start by creating our new container.
+Run the Docker Hub image `jpetazzo/web`, which contains a basic web server:
 
     @@@ Sh
-    $ docker run -d -p 80 training/webapp python -m SimpleHTTPServer 80
-    72bbff4d768c52d6ce56fae5d45681c62d38bc46300fc6cc28a7642385b99eb5
+    $ docker run -d -P jpetazzo/web
+    66b1ce719198711292c8f34f84a7b68c3876cf9f67015e752b94e189d35a204e
 
-* We've used the ``-d`` flag to detach the container.
-* The ``-p`` flag exposes port ``80`` in the container.
-* We've used the ``training/webapp`` image, which happens to have Python.
-* We've used Python to create a web server.
+* Docker will download the image from the Docker Hub.
+* `-d` tells Docker to run the image in the background.
+* `-P` tells Docker to make this service reachable from other computers.
+  <br/>(`-P` is the short version of `--publish-all`.)
+
+But, how do we connect to our web server now?
 
 <!SLIDE>
-# Checking the container is running
+# Finding our web server port
 
-Let's look at our running container.
+We will use `docker ps`:
 
     @@@ Sh
     $ docker ps
-    CONTAINER ID  IMAGE  COMMAND  CREATED  STATUS  PORTS                  NAMES
-    72bbff4d768c  ...    ...      ...      ...     0.0.0.0:49153->80/tcp  ...
+    CONTAINER ID  IMAGE                ...     PORTS                    ...
+    66b1ce719198  jpetazzo/web:latest  ...     0.0.0.0:49153->8000/tcp  ...
 
-* The ``-p`` flag maps a random high port, here ``49153`` to port ``80``
-  inside the container. We can see it in the ``PORTS`` column.
+* The web server is running on port 8000 inside the container.
+* That port is exposed on port 49153 on our Docker host.
 
-* The other columns have been scrubbed out for legibility here.
+We will explain the whys and hows of this port mapping.
+
+But first, let's make sure that everything works properly.
 
 <!SLIDE>
-# The ``docker port`` shortcut
+# Connecting to our web server (GUI)
 
-We can also use the ``docker port`` command to find our mapped port.
+Point your browser to the IP address of your Docker host, on the port
+shown by `docker ps`.
+
+![Screenshot](web.png)
+
+<!SLIDE>
+# Connecting to our web server (CLI)
+
+You can also use `curl` directly from the Docker host.
+
+Make sure to use the right port number if it is different
+from the example below:
 
     @@@ Sh
-    $ docker port <yourContainerID> 80
-    0.0.0.0:49153
+    $ curl localhost:49153
+    Hello, world!
 
-We specify the container ID and the port number for which we wish to
-return a mapped port.
 
-We can also find the mapped network port using the ``docker inspect``
-command.
+<!SLIDE>
+# Docker network model
+
+* We are out of IPv4 addresses.
+* Containers cannot have public IPv4 addresses.
+* They have private addresses.
+* Services have to be exposed port by port.
+* Ports have to be mapped to avoid conflicts.
+
+<!SLIDE>
+# Finding the web server port in a script
+
+Parsing the output of `docker ps` would be painful.
+
+There is a command to help us:
 
     @@@ Sh
-    $ docker inspect -f "{{ json .NetworkSettings.Ports }}" <yourContainerID>
-    {"5000/tcp":null,"80/tcp":[{"HostIp":"0.0.0.0","HostPort":"49153"}]}
+    $ docker port <containerID> 8000
+    49153
 
 <!SLIDE>
-# Viewing our web server
+# Manual allocation of port numbers
 
-We open a web browser and view our web server on ``<yourHostIP>:<portNumber>``.
+If you want to set port numbers yourself, no problem:
 
-![browser](browser.png)
+    @@@ Sh
+    $ docker run -t -p 80:8000 jpetazzo/web
+
+* This time, we are running our container in the foreground.
+  <br/>(That way, we can kill it easily with `^C`.)
+* We mapped port 80 on the host, to port 8000 in the container.
 
 <!SLIDE>
-# Container networking basics
+# Plumbing containers into your infrastructure
 
-* You can map ports automatically.
-* You can also manually map ports.
+There are (at least) three ways to integrate containers in your network.
 
-        @@@ Sh
-        $ docker run -d -p 8080:80 training/webapp \
-        python -m SimpleHTTPServer 80
-
-  The ``-p`` flag takes the form:
-
-        @@@ Sh
-        host_port:container_port
-
-  This maps port ``8080`` on the host to port ``80`` inside the container.
-
-* Note that this style prevents you from spinning up multiple instances of 
-the same image (the ports will conflict).
-
-* Containers also have their own private IP address.
+* Start the container, letting Docker allocate a public port for it.
+  <br/>Then retrieve that port number and feed it to your configuration.
+* Pick a fixed port number in advance, when you generate your configuration.
+  <br/>Then start your container by setting the port numbers manually.
+* Use an overlay network, connecting your containers with e.g. VLANs, tunnels...
 
 <!SLIDE>
 # Finding the container's IP address
 
-We can use the ``docker inspect`` command to find the IP address of the
+We can use the `docker inspect` command to find the IP address of the
 container.
 
     @@@ Sh
     $ docker inspect --format '{{ .NetworkSettings.IPAddress }}' <yourContainerID>
     172.17.0.3
 
-* We've again used the  ``--format`` flag which selects a portion of the
-  output returned by the ``docker inspect`` command.
-
-* The default network used for Docker containers is 172.17.0.0/16.
-
-    If it is already in use on your system, Docker will pick another one.
+* `docker inspect` is an advanced command, that can retrieve a ton
+  of information about our containers.
+* Here, we provide it with a format string to extract exactly the
+  private IP address of the container.
 
 <!SLIDE>
 # Pinging our container
@@ -109,25 +118,9 @@ just discovered. Let's see this now by using the ``ping`` tool.
 
     @@@ Sh
     $ ping <ipAddress>
+    64 bytes from <ipAddress>: icmp_req=1 ttl=64 time=0.085 ms
     64 bytes from <ipAddress>: icmp_req=2 ttl=64 time=0.085 ms
-    64 bytes from <ipAddress>: icmp_req=2 ttl=64 time=0.085 ms
-    64 bytes from <ipAddress>: icmp_req=2 ttl=64 time=0.085 ms
-
-<!SLIDE>
-# Stopping the container
-
-Now let's stop the running container.
-
-    @@@ Sh
-    $ docker stop <yourContainerID>
-
-<!SLIDE>
-# Removing the container
-
-Let's be neat and remove our container too.
-
-    @@@ Sh
-    $ docker rm <yourContainerID>
+    64 bytes from <ipAddress>: icmp_req=3 ttl=64 time=0.085 ms
 
 <!SLIDE>
 # Section summary
@@ -137,7 +130,6 @@ We've learned how to:
 * Expose a network port.
 * Manipulate container networking basics.
 * Find a container's IP address.
-* Stop and remove a container.
 
 **NOTE: Later on we'll see how to network containers without exposing ports
 using the ``link`` primitive.**
