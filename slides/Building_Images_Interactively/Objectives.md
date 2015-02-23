@@ -3,9 +3,14 @@
 
 ## Objectives
 
-In this lesson, we will:
+In this lesson, we will create our first container image.
 
-* Create our first container image.
-* Install software manually in a container, and turn it
+It will be a basic distribution image, but we will pre-install
+the package `curl`.
+
+We will: 
+
+* Create a container from a base image.
+* Install software manually in the container, and turn it
   into a new image.
-* Introduce commands `docker commit`, `docker tag`, and `docker diff`.
+* Learn about new commands: `docker commit`, `docker tag`, and `docker diff`.

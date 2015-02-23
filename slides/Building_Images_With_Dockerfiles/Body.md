@@ -1,4 +1,21 @@
 <!SLIDE>
+# From `curl` to `wget`
+
+In this chapter, the package that we will install will be `wget`.
+
+Why are we using `wget` instead of `curl`?
+
+The reasons are purely pedagogic:
+
+* You will be able to do this section using a different distro (if you
+  are so inclined). While `curl` is pre-installed on `centos` and
+  `fedora`, `wget` is not.
+* To achieve the nice, clean output of `curl`, we need to pass extra
+  arguments to `wget`. While this would be annoying in a real life
+  situation, it will be an excellent opportunity to show how
+  to pass command-line options in Dockerfiles.
+
+<!SLIDE>
 # `Dockerfile` overview
 
 * A `Dockerfile` is a build recipe for a Docker image.
