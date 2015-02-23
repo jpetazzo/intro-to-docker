@@ -1,7 +1,7 @@
 <!SLIDE>
-# Course Overview #
+# Course Overview
 
-## You will: ##
+## You will:
 
 * Learn what Docker is and what it is for.
 * Learn the terminology, and define images, containers, etc.

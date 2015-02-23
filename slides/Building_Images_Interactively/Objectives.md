@@ -1,9 +1,11 @@
 <!SLIDE>
 # Lesson ~~~SECTION:MAJOR~~~: Building Images Interactively
 
-In this lesson, we will create our first container image.
+## Objectives
 
-We will install software manually in a container, and turn it
-into a new image.
+In this lesson, we will:
 
-We will introduce commands `docker commit`, `docker tag`, and `docker diff`.
+* Create our first container image.
+* Install software manually in a container, and turn it
+  into a new image.
+* Introduce commands `docker commit`, `docker tag`, and `docker diff`.

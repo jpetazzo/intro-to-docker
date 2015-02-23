@@ -1,5 +1,7 @@
 <!SLIDE>
-# Background Containers
+# Lesson ~~~SECTION:MAJOR~~~: Background Containers
+
+## Objectives
 
 Our first containers were *interactive*.
 
