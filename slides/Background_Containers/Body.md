@@ -71,7 +71,7 @@ To see only the ID of containers:
 Combine those flags to see only the ID of the last container started!
 
     @@@ Sh
-    $ docker ps -q
+    $ docker ps -lq
     47d677dcfba4
 
 <!SLIDE>
