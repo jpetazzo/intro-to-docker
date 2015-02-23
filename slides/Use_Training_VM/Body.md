@@ -1,9 +1,9 @@
 <!SLIDE>
 # Your training Virtual Machine
 
-If you are following this course as part of an official Docker training
-or workshop, you have been given credentials to connect to your own
-private Docker VM.
+This section assumes that you are following this course as part of
+an official Docker training or workshop, and have been given credentials
+to connect to your own private Docker VM.
 
 This VM has been created specifically for you, just before the training.
 
