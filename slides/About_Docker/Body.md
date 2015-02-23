@@ -118,7 +118,7 @@ Optimizes disk usage, memory usage, network usage.
 <!SLIDE>
 # Step 4: containers in a modern software factory
 
-The container becomes the new build artefact.
+The container becomes the new build artifact.
 
 The same container can go from dev, to test, to QA, to prod.
 
