@@ -35,7 +35,7 @@ are using in your images, you should upgrade those images.
 Assuming that updated packages are available, you should:
 
 * Force a `docker pull` of all your base images.
-* Re-execute a `docker build` of all your built images.
+* Re-execute a `docker build --no-cache` of all your built images.
 * Re-start all containers using the updated images.
 
 <!SLIDE>

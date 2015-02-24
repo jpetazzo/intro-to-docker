@@ -119,6 +119,24 @@ The output of `docker build` looks like this:
 * The output of this step will be the base image for the next one.
 
 <!SLIDE>
+# The caching system
+
+If you run the same build again, it will be instantaneous.
+
+Why?
+
+* After each build step, Docker takes a snapshot of the resulting image.
+* Before executing a step, Docker checks if it has already built the
+  same sequence.
+* Docker uses the exact strings defined in your Dockerfile, so:
+
+  * `RUN apt-get install -y wget curl` is different from
+    <br/> `RUN apt-get install -y curl wget`
+  * `RUN apt-get update` is not re-executed when the mirrors are updated
+
+You can force a rebuild with `docker build --no-cache ...`.
+
+<!SLIDE>
 # Running the image
 
 The resulting image is not different from the one produced manually.
@@ -151,4 +169,3 @@ a line of the Dockerfile.
     2f4b4d6a4a06  8 months ago       /bin/sh -c echo  #!/bin/sh  >  194.5 kB
     d7ac5e4f1812  8 months ago       /bin/sh -c #(nop) ADD file:ad  192.5 MB
     511136ea3c5a  20 months ago                                     0 B
-
