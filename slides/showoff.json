@@ -53,6 +53,10 @@
         "Cmd_And_Entrypoint/Objectives.md",
         "Cmd_And_Entrypoint/Body.md",
 
+        "Copying_Files_During_Build/Cover.md",
+        "Copying_Files_During_Build/Objectives.md",
+        "Copying_Files_During_Build/Body.md",
+
         "Docker_Hub_Tease/Cover.md",
         "Docker_Hub_Tease/Objectives.md",
         "Docker_Hub_Tease/Body.md",
