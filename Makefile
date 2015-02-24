@@ -2,6 +2,7 @@ TAG=$(shell git rev-parse --short HEAD)
 
 IMAGE=training/docker-fundamentals-image
 CONTAINER=showoff
+PAPER=US-Letter
 
 default:
 	# Available targets:
@@ -16,6 +17,9 @@ release:
 	# Add git commit id to training slides before building 
 	find . -name *.css -exec sed -i "s/{{DOCKER_TRAINING_VERSION}}/$(TAG)/" {} \;
 	find . -name *.json -exec sed -i "s/{{DOCKER_TRAINING_VERSION}}/$(TAG)/" {} \;
+
+	# Optionally set paper size
+	find . -name *.css -exec sed -i "s/US-Letter/$(PAPER)/" {} \;
 
 	# Build updated docker image
 	docker build -t $(IMAGE) .
