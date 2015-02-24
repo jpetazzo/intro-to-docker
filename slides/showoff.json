@@ -33,6 +33,10 @@
         "Background_Containers/Objectives.md",
         "Background_Containers/Body.md",
 
+        "Start_And_Attach/Cover.md",
+        "Start_And_Attach/Objectives.md",
+        "Start_And_Attach/Body.md",
+
         "Initial_Images/Cover.md",
         "Initial_Images/Objectives.md",
         "Initial_Images/Body.md",
@@ -48,6 +52,10 @@
         "Cmd_And_Entrypoint/Cover.md",
         "Cmd_And_Entrypoint/Objectives.md",
         "Cmd_And_Entrypoint/Body.md",
+
+        "Docker_Hub_Tease/Cover.md",
+        "Docker_Hub_Tease/Objectives.md",
+        "Docker_Hub_Tease/Body.md",
 
         "Naming_Containers/Cover.md",
         "Naming_Containers/Objectives.md",
