@@ -81,13 +81,13 @@
         "Orchestration/Objectives.md",
         "Orchestration/Body.md",
 
-        "Docker_Hub/Cover.md",
-        "Docker_Hub/Objectives.md",
-        "Docker_Hub/Body.md",
+        "Docker_Hub_Intro/Cover.md",
+        "Docker_Hub_Intro/Objectives.md",
+        "Docker_Hub_Intro/Body.md",
 
-        "Working_With_Images/Cover.md",
-        "Working_With_Images/Objectives.md",
-        "Working_With_Images/Body.md",
+        "Docker_Hub_Advanced/Cover.md",
+        "Docker_Hub_Advanced/Objectives.md",
+        "Docker_Hub_Advanced/Body.md",
 
         "Testing_Workflow/Cover.md",
         "Testing_Workflow/Objectives.md",
