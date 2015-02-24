@@ -53,15 +53,6 @@
         "Container_Networking_Basics/Objectives.md",
         "Container_Networking_Basics/Body.md",
 
-
-
-
-
-
-
-
-
-
         "Local_Development_Workflow/Cover.md",
         "Local_Development_Workflow/Objectives.md",
         "Local_Development_Workflow/Body.md",
@@ -74,6 +65,14 @@
         "Connecting_Containers/Objectives.md",
         "Connecting_Containers/Body.md",
 
+        "Ambassadors/Cover.md",
+        "Ambassadors/Objectives.md",
+        "Ambassadors/Body.md",
+
+        "Fig_For_Dev_Stacks/Cover.md",
+        "Fig_For_Dev_Stacks/Objectives.md",
+        "Fig_For_Dev_Stacks/Body.md",
+
         "Dockerfile_Reference/Cover.md",
         "Dockerfile_Reference/Objectives.md",
         "Dockerfile_Reference/Body.md",
@@ -81,10 +80,6 @@
         "Orchestration/Cover.md",
         "Orchestration/Objectives.md",
         "Orchestration/Body.md",
-
-        "Ambassadors/Cover.md",
-        "Ambassadors/Objectives.md",
-        "Ambassadors/Body.md",
 
         "Docker_Hub/Cover.md",
         "Docker_Hub/Objectives.md",
