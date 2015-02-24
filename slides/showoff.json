@@ -49,6 +49,10 @@
         "Cmd_And_Entrypoint/Objectives.md",
         "Cmd_And_Entrypoint/Body.md",
 
+        "Naming_Containers/Cover.md",
+        "Naming_Containers/Objectives.md",
+        "Naming_Containers/Body.md",
+
         "Container_Networking_Basics/Cover.md",
         "Container_Networking_Basics/Objectives.md",
         "Container_Networking_Basics/Body.md",
