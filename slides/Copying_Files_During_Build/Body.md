@@ -50,7 +50,7 @@ Success!
 * Those steps will not be executed again if the files haven't been changed.
 
 <!SLIDE>
-# A few words...
+# Details
 
 * You can `COPY` whole directories recursively.
 * Older Dockerfiles also have the `ADD` instruction.
