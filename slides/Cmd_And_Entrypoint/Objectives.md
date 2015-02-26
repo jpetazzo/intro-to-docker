@@ -1,5 +1,6 @@
 <!SLIDE>
 # Lesson ~~~SECTION:MAJOR~~~: CMD and ENTRYPOINT
+
 ## Objectives
 
 In this lesson, we will learn about two important

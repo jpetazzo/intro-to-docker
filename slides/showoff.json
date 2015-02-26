@@ -33,6 +33,10 @@
         "Background_Containers/Objectives.md",
         "Background_Containers/Body.md",
 
+        "Start_And_Attach/Cover.md",
+        "Start_And_Attach/Objectives.md",
+        "Start_And_Attach/Body.md",
+
         "Initial_Images/Cover.md",
         "Initial_Images/Objectives.md",
         "Initial_Images/Body.md",
@@ -49,18 +53,21 @@
         "Cmd_And_Entrypoint/Objectives.md",
         "Cmd_And_Entrypoint/Body.md",
 
+        "Copying_Files_During_Build/Cover.md",
+        "Copying_Files_During_Build/Objectives.md",
+        "Copying_Files_During_Build/Body.md",
+
+        "Docker_Hub_Tease/Cover.md",
+        "Docker_Hub_Tease/Objectives.md",
+        "Docker_Hub_Tease/Body.md",
+
+        "Naming_And_Inspecting/Cover.md",
+        "Naming_And_Inspecting/Objectives.md",
+        "Naming_And_Inspecting/Body.md",
+
         "Container_Networking_Basics/Cover.md",
         "Container_Networking_Basics/Objectives.md",
         "Container_Networking_Basics/Body.md",
-
-
-
-
-
-
-
-
-
 
         "Local_Development_Workflow/Cover.md",
         "Local_Development_Workflow/Objectives.md",
@@ -74,6 +81,14 @@
         "Connecting_Containers/Objectives.md",
         "Connecting_Containers/Body.md",
 
+        "Ambassadors/Cover.md",
+        "Ambassadors/Objectives.md",
+        "Ambassadors/Body.md",
+
+        "Fig_For_Dev_Stacks/Cover.md",
+        "Fig_For_Dev_Stacks/Objectives.md",
+        "Fig_For_Dev_Stacks/Body.md",
+
         "Dockerfile_Reference/Cover.md",
         "Dockerfile_Reference/Objectives.md",
         "Dockerfile_Reference/Body.md",
@@ -82,17 +97,13 @@
         "Orchestration/Objectives.md",
         "Orchestration/Body.md",
 
-        "Ambassadors/Cover.md",
-        "Ambassadors/Objectives.md",
-        "Ambassadors/Body.md",
+        "Docker_Hub_Intro/Cover.md",
+        "Docker_Hub_Intro/Objectives.md",
+        "Docker_Hub_Intro/Body.md",
 
-        "Docker_Hub/Cover.md",
-        "Docker_Hub/Objectives.md",
-        "Docker_Hub/Body.md",
-
-        "Working_With_Images/Cover.md",
-        "Working_With_Images/Objectives.md",
-        "Working_With_Images/Body.md",
+        "Docker_Hub_Advanced/Cover.md",
+        "Docker_Hub_Advanced/Objectives.md",
+        "Docker_Hub_Advanced/Body.md",
 
         "Testing_Workflow/Cover.md",
         "Testing_Workflow/Objectives.md",
@@ -102,6 +113,10 @@
         "Security/Objectives.md",
         "Security/Body.md",
         "Security/Summary.md",
+
+        "Vulnerabilities/Cover.md",
+        "Vulnerabilities/Objectives.md",
+        "Vulnerabilities/Body.md",
 
         "Securing_With_TLS/Cover.md",
         "Securing_With_TLS/Objectives.md",

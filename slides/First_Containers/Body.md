@@ -27,6 +27,11 @@ Let's run a more exciting container:
 
 * This is a brand new container.
 * It runs a bare-bones, no-frills `ubuntu` system.
+* `-it` is shorthand for `-i -t`.
+
+  * `-i` tells Docker to connect us to the container's stdin.
+  * `-t` tells Docker that we want a pseudo-terminal.
+
 
 
 <!SLIDE>

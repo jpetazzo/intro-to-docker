@@ -1,4 +1,21 @@
 <!SLIDE>
+# From `curl` to `wget`
+
+In this chapter, the package that we will install will be `wget`.
+
+Why are we using `wget` instead of `curl`?
+
+The reasons are purely pedagogic:
+
+* You will be able to do this section using a different distro (if you
+  are so inclined). While `curl` is pre-installed on `centos` and
+  `fedora`, `wget` is not.
+* To achieve the nice, clean output of `curl`, we need to pass extra
+  arguments to `wget`. While this would be annoying in a real life
+  situation, it will be an excellent opportunity to show how
+  to pass command-line options in Dockerfiles.
+
+<!SLIDE>
 # `Dockerfile` overview
 
 * A `Dockerfile` is a build recipe for a Docker image.
@@ -102,6 +119,24 @@ The output of `docker build` looks like this:
 * The output of this step will be the base image for the next one.
 
 <!SLIDE>
+# The caching system
+
+If you run the same build again, it will be instantaneous.
+
+Why?
+
+* After each build step, Docker takes a snapshot of the resulting image.
+* Before executing a step, Docker checks if it has already built the
+  same sequence.
+* Docker uses the exact strings defined in your Dockerfile, so:
+
+  * `RUN apt-get install -y wget curl` is different from
+    <br/> `RUN apt-get install -y curl wget`
+  * `RUN apt-get update` is not re-executed when the mirrors are updated
+
+You can force a rebuild with `docker build --no-cache ...`.
+
+<!SLIDE>
 # Running the image
 
 The resulting image is not different from the one produced manually.
@@ -134,4 +169,3 @@ a line of the Dockerfile.
     2f4b4d6a4a06  8 months ago       /bin/sh -c echo  #!/bin/sh  >  194.5 kB
     d7ac5e4f1812  8 months ago       /bin/sh -c #(nop) ADD file:ad  192.5 MB
     511136ea3c5a  20 months ago                                     0 B
-

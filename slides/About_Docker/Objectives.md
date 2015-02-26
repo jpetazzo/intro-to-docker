@@ -1,5 +1,5 @@
 <!SLIDE>
-# Overview: About Docker
+# Lesson ~~~SECTION:MAJOR~~~: Docker 30,000ft overview
 
 ## Objectives
 
