@@ -104,6 +104,23 @@ If you want to start something automatically when the container runs,
 you should use ``CMD`` and/or ``ENTRYPOINT``.
 
 <!SLIDE>
+# Collapsing layers
+
+It is possible to execute multiple commands in a single step:
+
+    @@@ docker
+    RUN apt-get update && apt-get install -y wget && apt-get clean
+
+It is also possible to break a command on multiple lines:
+
+It is possible to execute multiple commands in a single step:
+
+    @@@ docker
+    RUN apt-get update \
+     && apt-get install -y wget \
+     && apt-get clean
+
+<!SLIDE>
 # The ``EXPOSE`` instruction
 
 The ``EXPOSE`` instruction tells Docker what ports are to be published
