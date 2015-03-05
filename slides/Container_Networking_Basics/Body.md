@@ -123,6 +123,14 @@ just discovered. Let's see this now by using the ``ping`` tool.
     64 bytes from <ipAddress>: icmp_req=3 ttl=64 time=0.085 ms
 
 <!SLIDE>
+# The different network models
+
+* `bridge` (default)
+* `none`
+* `host`
+* `container`
+
+<!SLIDE>
 # Section summary
 
 We've learned how to:
