@@ -182,15 +182,15 @@ the Docker daemon.
 2. You should see:
 
          @@@ Sh
-         Client version: 0.11.1
-         Client API version: 1.11
-         Go version (client): go1.2.1
-         Git commit (client): fb99f99
-         Server version: 0.11.1
-         Server API version: 1.11
-         Git commit (server): fb99f99
-         Go version (server): go1.2.1
-         Last stable version: 0.11.1
+         Client version: 1.5.0
+         Client API version: 1.17
+         Go version (client): go1.4.1
+         Git commit (client): a8a31ef
+         OS/Arch (client): linux/amd64
+         Server version: 1.5.0
+         Server API version: 1.17
+         Go version (server): go1.4.1
+         Git commit (server): a8a31ef
 
 <!SLIDE supplemental exercises>
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: See the Docker client help
