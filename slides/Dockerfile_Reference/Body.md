@@ -176,7 +176,7 @@ directory.
 * Any files created by the ``ADD`` instruction are owned by ``root``
   with permissions of ``0755``.
 
-More on ``ADD`` [here](http://docs.docker.io/reference/builder/#add).
+More on ``ADD`` [here](https://docs.docker.com/reference/builder/#add).
 
 <!SLIDE>
 # The ``VOLUME`` instruction
