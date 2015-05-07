@@ -174,7 +174,7 @@ directory.
 * If the local source is a zip file or a tarball it'll be unpacked to the destination.
 * Sources that are URLs and zipped will not be unpacked.
 * Any files created by the ``ADD`` instruction are owned by ``root``
-  with permissions of ``0755``.
+  with permissions of ``0600``.
 
 More on ``ADD`` [here](https://docs.docker.com/reference/builder/#add).
 
