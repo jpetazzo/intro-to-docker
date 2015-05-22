@@ -347,7 +347,7 @@ This is useful for building images which will be used as a base
 to build other images.
 
     @@@ docker
-    ONBUILD ADD . /app/src
+    ONBUILD COPY . /app/src
 
 * You can't chain ``ONBUILD`` instructions with ``ONBUILD``.
 * ``ONBUILD`` can't be used to trigger ``FROM`` and ``MAINTAINER``
@@ -359,7 +359,7 @@ to build other images.
 * Each line in a ``Dockerfile`` creates a new layer.
 * Build your ``Dockerfile`` to take advantage of Docker's caching system.
 * Combine multiple similar commands into one by using ``&&`` to continue commands and ``\\`` to wrap lines.
-* ``ADD`` dependency lists (``package.json``,``requirements.txt``, etc.) by themselves to avoid reinstalling unchanged dependencies every time.
+* ``COPY`` dependency lists (``package.json``,``requirements.txt``, etc.) by themselves to avoid reinstalling unchanged dependencies every time.
 
 <!SLIDE>
 # Example "bad" ``Dockerfile``
@@ -372,7 +372,7 @@ The dependencies are reinstalled every time, because the build system does not k
         RUN apt-get update
         RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
             python-all python-pip 
-        ADD ./webapp /opt/webapp/
+        COPY ./webapp /opt/webapp/
         WORKDIR /opt/webapp
         RUN pip install -qr requirements.txt
         EXPOSE 5000
@@ -389,9 +389,9 @@ Adding the dependencies as a separate step means that Docker can cache more effi
         RUN apt-get update
         RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
             python-all python-pip 
-        ADD ./webapp/requirements.txt /tmp/requirements.txt
+        COPY ./webapp/requirements.txt /tmp/requirements.txt
         RUN pip install -qr /tmp/requirements.txt
-        ADD ./webapp /opt/webapp/
+        COPY ./webapp /opt/webapp/
         WORKDIR /opt/webapp
         EXPOSE 5000
         CMD ["python", "app.py"]
