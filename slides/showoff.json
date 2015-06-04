@@ -10,8 +10,6 @@
     "sections": [
 
         "Course_Overview/Cover.md",
-        "Course_Overview/Objectives.md",
-        "Course_Overview/Body.md",
 
         "About_Docker/Cover.md",
         "About_Docker/Objectives.md",
@@ -92,22 +90,6 @@
         "Dockerfile_Reference/Cover.md",
         "Dockerfile_Reference/Objectives.md",
         "Dockerfile_Reference/Body.md",
-
-        "Orchestration/Cover.md",
-        "Orchestration/Objectives.md",
-        "Orchestration/Body.md",
-
-        "Docker_Hub_Intro/Cover.md",
-        "Docker_Hub_Intro/Objectives.md",
-        "Docker_Hub_Intro/Body.md",
-
-        "Docker_Hub_Advanced/Cover.md",
-        "Docker_Hub_Advanced/Objectives.md",
-        "Docker_Hub_Advanced/Body.md",
-
-        "Deployment_With_Docker/Cover.md",
-        "Deployment_With_Docker/Objectives.md",
-        "Deployment_With_Docker/Body.md",
 
         "Security/Cover.md",
         "Security/Objectives.md",
