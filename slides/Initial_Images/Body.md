@@ -47,18 +47,40 @@ If an image is read-only, how do we change it?
 * A new image is created by stacking the new layer on top of the old image.
 
 <!SLIDE>
-# In practice
+# A chicken-and-egg problem
 
-There are multiple ways to create new images.
+* The only way to create an image is by "freezing" a container.
+* The only way to create a container is by instanciating an image.
+* Help!
 
-* `docker commit`: creates a new layer (and a new image) from a container.
-* `docker build`: performs a repeatable build sequence.
-* `docker import`: loads a tarball into Docker, as a standalone base layer.
+<!SLIDE>
+# Creating the first images
 
-We will explain `commit` and `build` in later chapters.
+There is a special empty image called `scratch`. 
 
-`import` can be used for various hacks, but its main purpose is to bootstrap
-the creation of base images.
+* It allows to *build from scratch*.
+
+The `docker import` command loads a tarball into Docker.
+
+* The imported tarball becomes a standalone image.
+* That new image has a single layer.
+
+Note: you will probably never have to do this yourself.
+
+<!SLIDE>
+# Creating other images
+
+`docker commit`
+
+* Saves all the changes made to a container into a new layer.
+* Creates a new image (effectively a copy of the container).
+
+`docker build`
+
+* Performs a repeatable build sequence.
+* This is the preferred method!
+
+We will explain both methods in a moment.
 
 <!SLIDE>
 # Images namespaces
@@ -230,10 +252,25 @@ There are two ways to download images.
 # Image and tags
 
 * Images can have tags.
-* Tags define image variants.
+* Tags define image versions or variants.
 * `docker pull ubuntu` will refer to `ubuntu:latest`.
-* The `:latest` tag can be updated frequently.
-* When using images it is always best to be specific.
+* The `:latest` tag is generally updated often.
+
+<!SLIDE>
+# When to (not) use tags
+
+Don't specify tags:
+
+* When doing rapid testing and prototyping.
+* When experimenting.
+* When you want the latest version.
+
+Do specify tags:
+
+* When recording a procedure into a script.
+* When going to production.
+* To ensure that the same version will be used everywhere.
+* To ensure repeatability later.
 
 <!SLIDE>
 # Section summary

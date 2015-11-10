@@ -12,13 +12,17 @@ It is always possible to detach from a container, and to reattach to a container
 <!SLIDE>
 # Detaching from a container
 
-* You can detach from a container by typing `^P^Q`.
-* Two conditions must be met:
+* If you have started an *interactive* container (with option `-it`),
+  <br/>you can detach from it.
+* The "detach" sequence is `^P^Q`.
+* Otherwise you can detach by killing the Docker client.
+  <br/>(But not by hitting `^C`, as this would deliver `SIGINT`
+  to the container.)
 
-  * The container must have been started *with a terminal* (`-t` option).
-  * The container standard input must be connected (`-i` option).
+What does `-it` stand for?
 
-* Another universal way to detach from a container is to kill the Docker client!
+* `-t` means "allocate a terminal."
+* `-i` means "connect stdin to the terminal."
 
 <!SLIDE>
 # Attaching to a container

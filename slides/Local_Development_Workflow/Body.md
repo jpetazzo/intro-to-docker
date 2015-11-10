@@ -1,57 +1,75 @@
 <!SLIDE>
 # Using a Docker container for local development
 
-Docker containers are perfect for local development.
+Never again:
 
-Let's grab an image with a web application and see how this works.
+- "Works on my machine"
+- "Not the same version"
+- "Missing dependency"
 
-     @@@ Sh
-     $ docker pull training/namer
-
-<!SLIDE>
-# Our namer image
-
-Our ``training/namer`` image is based on the Ubuntu image.
-
-It contains:
-
-* Ruby.
-* Sinatra.
-* Required dependencies.
+By using Docker containers, we will get a consistent development environment.
 
 <!SLIDE>
-# Adding our source code
+# Our "namer" application
+
+* The code is available on https://github.com/jpetazzo/namer.
+* The image jpetazzo/namer is automatically built by the Docker Hub.
+
+Let's run it with:
+
+    @@@ Sh
+    $ docker run -dP jpetazzo/namer:master
+
+Check the port number with `docker ps` and open the application.
+
+
+<!SLIDE>
+# Let's look at the code
 
 Let's download our application's source code.
 
     @@@ Sh
-    $ git clone https://github.com/docker-training/namer.git
+    $ git clone https://github.com/jpetazzo/namer
     $ cd namer
-    $ ls
-    company_name_generator.rb  config.ru  Dockerfile  Gemfile  README.md
+    $ ls -1
+    company_name_generator.rb
+    config.ru
+    docker-compose.yml
+    Dockerfile
+    Gemfile
 
 <!SLIDE>
-# Creating a container from our image
+# Where's my code?
 
-We've got an image, some source code and now we can add a container to
-run that code.
+According to the Dockerfile, the code is copied into `/src` :
+
+    FROM ruby
+    MAINTAINER Education Team at Docker <education@docker.com>
+
+    COPY . /src
+    WORKDIR /src
+    RUN bundler install
+
+    CMD ["rackup", "--host", "0.0.0.0"]
+    EXPOSE 9292
+
+We want to make changes *inside the container* without rebuilding it each time. 
+
+For that, we will use a *volume*.
+
+<!SLIDE>
+# Our first volume
+
+We will tell Docker to map the current directory to `/src` in the container.
 
     @@@ Sh
-    $ docker run -d \
-          -v $(pwd):/opt/namer \
-          -p 80:9292 \
-          training/namer
+    $ docker run -d -v $(pwd):/src -p 80:9292 jpetazzo/namer:master
 
 * The ``-d`` flag indicates that the container should run in detached mode (in the background).
 * The ``-v`` flag provides volume mounting inside containers.
 * The ``-p`` flag maps port ``9292`` inside the container to port ``80`` on the host.
-* ``training/namer`` is the name of the image we will run.
-
-More on these later.
-
-We've launched the application with the ``training/namer`` image and the
-``rackup`` command.  ``rackup`` has been set as the `CMD` in the ``Dockerfile``.
-
+* ``jpetazzo/namer`` is the name of the image we will run.
+* We don't need to give a command to run because the Dockerfile already specifies `rackup`.
 
 <!SLIDE>
 # Mounting volumes inside containers
@@ -67,8 +85,10 @@ container. The flag structure is:
   ``rw`` options.
 * If you don't specify ``rw`` or ``ro``, it will be ``rw`` by default.
 
+There will be a full chapter about volumes!
+
 <!SLIDE>
-# Checking our new container
+# Testing the development container
 
 Now let us see if our new container is running.
 
@@ -118,6 +138,34 @@ Now let's refresh our browser:
 We can see the updated color of our company naming application.
 
 ![web application 2](webapp2.png)
+
+<!SLIDE>
+# Improving the workflow with Compose
+
+* You can also start the container with the following command:
+
+        @@@ Sh
+        $ docker-compose up -d
+
+* This works thanks to the Compose file, `docker-compose.yml`:
+
+        @@@ YAML
+        www:
+          build: .
+          volumes:
+            - .:/src
+          ports:
+            - 9292:9292
+
+<!SLIDE>
+# Why Compose?
+
+* Specifying all those "docker run" parameters is tedious.
+* And error-prone.
+* We can "encode" those parameters in a "Compose file."
+* When you see a `docker-compose.yml` file, you know that you can use `docker-compose up`.
+* Compose can also deal with complex, multi-container apps.
+  <br/>(More on this later.)
 
 <!SLIDE>
 # Workflow explained

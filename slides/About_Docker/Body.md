@@ -1,31 +1,77 @@
 <!SLIDE>
-# About Docker Inc.
+# The origins of the Docker Project
 
-Focused on Docker and growing the Docker ecosystem:
+* dotCloud was operating a PaaS, using a custom container engine.
+* This engine was based on OpenVZ (and later, LXC) and AUFS.
+* It started (circa 2008) as a single Python script.
+* By 2012, the engine had multiple (~10) Python components.
+  <br/>(and ~100 other micro-services!)
+* End of 2012, dotCloud refactors this container engine.
+* The codename for this project is "Docker."
+
+<!SLIDE>
+# First public release
+
+* March 2013, PyCon, Santa Clara:
+  <br/>"Docker" is shown to a public audience for the first time.
+* It is released with an open source license.
+* Very positive reactions and feedback!
+* The dotCloud team progressively shifts to Docker development.
+* The same year, dotCloud changes name to Docker.
+* In 2014, the PaaS activity is sold.
+
+<!SLIDE>
+# The Docker Project
+
+* The initial container engine is now known as "Docker Engine."
+* Other tools have been added:
+  * Docker Compose (formerly "Fig")
+  * Docker Machine
+  * Docker Swarm
+  * Kitematic (acquisition)
+  * Tutum (recent acquisition)
+
+<!SLIDE>
+# About Docker Inc.
 
 * Founded in 2009.
 * Formerly dotCloud Inc.
-* Released Docker in 2013.
+* Primary sponsor of the Docker Project.
+  * Hires maintainers and contributors.
+  * Provides infrastructure for the project.
+  * Runs the Docker Hub.
+* HQ in San Francisco.
+* Backed by more than 100M in venture capital.
 
 <!SLIDE>
-# What does Docker Inc. do?
+# How does Docker Inc. make money?
 
-* Docker Engine - open source container management.
-* Docker Hub - online home and hub for managing your Docker containers.
-* Docker Enterprise Support - commercial support for Docker.
-* Docker Services & Training - professional services and training to help
-  you get the best out of Docker.
+* Docker Hub has free and paid services.
+* DTR (Docker Trusted Registry).
+* Enterprise support for Engine and other products.
+* Training and professional services.
 
 <!SLIDE>
-# Why Docker?
+# OK... Why the buzz around containers?
 
 * The software industry has changed.
-* Applications used to be monolithic, with long lifecycles, scaled up.
-* Today, applications are decoupled, built iteratively, scaled out.
-* As a result, deployment is though!
+* Before:
+  * monolithic applications
+  * long development cycles
+  * slowly scaling up
+* Now:
+  * decoupled services
+  * fast, iterative improvements
+  * quickly scaling out
 
 <!SLIDE>
-# The problem in 2015
+# Deployment becomes very complex
+
+* Many different stacks.
+* Many different targets.
+
+<!SLIDE>
+# The deployment problem
 
 ![problem](problem.png)
 
@@ -60,84 +106,104 @@ Focused on Docker and growing the Docker ecosystem:
 ![elimatrix](elimatrix.png)
 
 <!SLIDE>
-# Docker high-level roadmap
+# From lightweight VMs to application containers
 
-* Step 1: containers as lightweight VMs
-* Step 2: commoditization of containers
-* Step 3: shipping containers efficiently
-* Step 4: containers in a modern software factory
+* Containers have been around for a *very long time*.
+  <br/>(c.f. LXC, Solaris Zones, BSD Jails, LPAR...)
+* Why are they trending now?
+* What does Docker bring to the table?
 
 <!SLIDE>
 # Step 1: containers as lightweight VMs
 
+<!SLIDE>
+# Less overhead!
+
 ![lightcont](lightcont.png)
 
-* This drew attention from hosting and PAAS industry.
-* Highly technical audience with strong ops culture.
+* Users: hosting providers. PaaS industry.
+* Highly specialized audience with strong ops culture.
 
 <!SLIDE>
 # Step 2: commoditization of containers
 
-Container technology has been around for a while.
-<br/>(c.f. LXC, Solaris Zones, BSD Jails, LPAR...)
+<!SLIDE>
+# Containers before Docker
 
-So what's new?
+* No standardized exchange format.
+  <br/>(No, a rootfs tarball is *not* a format!)
+* Containers are hard to use for developers.
+  <br/>(Where's the equivalent of `docker run debian`?)
+* No re-usable components, APIs, tools.
+  <br/>(At best: VM abstractions, e.g. libvirt.)
+
+Analogy: 
+
+* Shipping containers are not just steel boxes.
+* They are steel boxes that are a standard size,
+  <br/>with the same hooks and holes.
+
+<!SLIDE>
+# Containers after Docker
 
 * Standardize the container format, because containers were not portable.
-* Analogy: 
-  - shipping containers are not just steel boxes
-  - they are steel boxes that are a standard size, with the same hooks and holes
 * Make containers easy to use for developers.
 * Emphasis on re-usable components, APIs, ecosystem of standard tools.
 * Improvement over ad-hoc, in-house, specific tools.
 
 <!SLIDE>
-# Running containers everywhere
+# Positive feedback loop
 
-* Maturity of underlying technology (cgroups, namespaces, copy-on-write systems).
-* Ability to run on any Linux server today: physical, virtual, VM, cloud, OpenStack...
-* Ability to move between any of the above in a matter of seconds-no modification or delay.
-* Ability to share containerized components.
-* Self contained environment - no dependency hell.
-* Tools for how containers work together: linking, discovery, orchestration...
-
-<!SLIDE>
-# Technical & cultural revolution: separation of concerns
-
-![sepcon](sepcon.png)
+* In 2013, the technology under containers (cgroups, namespaces, copy-on-write storage...)
+  had many blind spots.
+* The growing popularity of Docker and containers exposed many bugs.
+* As a result, those bugs were fixed, resulting in better stability for containers.
+* Any decent hosting/cloud provider can run containers today.
+* Containers become a great tool to deploy/move workloads to/from on-prem/cloud.
 
 <!SLIDE>
 # Step 3: shipping containers efficiently
 
-Ship container images, made of reusable shared layers.
+<!SLIDE>
+# Before Docker
 
-Optimizes disk usage, memory usage, network usage.
+* Ship packages: deb, rpm, gem, jar...
+* Dependency hell.
+* "Works on my machine."
+* Base deployment often done from scratch (debootstrap...) and unreliable.
 
-![superlight](superlight.png)
+<!SLIDE>
+# After Docker
+
+* Ship container images with all their dependencies.
+* Break image into layers.
+* Only ship layers that have changed.
+* Save disk, network, memory usage.
+
+<!SLIDE>
+# Example
+
+Layers:
+
+* CentOS
+* JRE
+* Tomcat
+* Dependencies
+* Application JAR
+* Configuration
 
 <!SLIDE>
 # Step 4: containers in a modern software factory
 
-The container becomes the new build artifact.
+<!SLIDE>
+# Container image as build artifact
 
 The same container can go from dev, to test, to QA, to prod.
 
 ![deploysys](deploysys.png)
 
-
 <!SLIDE>
-# Docker architecture
+# Technical & cultural revolution: separation of concerns
 
-Docker is a client-server application.
-
-* **The Docker daemon**
-  <br/>Receives and processes incoming Docker API requests.
-
-* **The Docker client**
-  <br/>Command line tool - the ``docker`` binary.
-  <br/>Talks to the Docker daemon via the Docker API.
-
-* **Docker Hub Registry**
-  <br/>Public image registry.
-  <br/>The Docker daemon talks to it via the registry API.
+![sepcon](sepcon.png)
 

@@ -20,7 +20,9 @@ Then we will write the Dockerfile.
 
 On Debian and Ubuntu, the package `build-essential` will get us a compiler.
 
-Then we will use `COPY`.
+When installing it, don't forget to specify the `-y` flag, otherwise the build will fail (since the build cannot be interactive).
+
+Then we will use `COPY` to place the source file into the container.
 
     @@@ Sh
     FROM ubuntu

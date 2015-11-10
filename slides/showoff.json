@@ -10,6 +10,7 @@
     "sections": [
 
         "Course_Overview/Cover.md",
+        "Course_Overview/Intro.md",
         "Course_Overview/Toc.md",
 
         "About_Docker/Cover.md",

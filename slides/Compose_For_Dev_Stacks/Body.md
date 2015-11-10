@@ -69,9 +69,9 @@ First step: clone the source code for the app we will be working on.
 
     @@@ Sh
     $ cd
-    $ git clone git://github.com/jpetazzo/figdemo
+    $ git clone git://github.com/jpetazzo/trainingwheels
     ...
-    $ cd figdemo
+    $ cd trainingwheels
 
 
 Second step: start your app.
@@ -178,7 +178,7 @@ containers of the current stack:
          Name            Command      State    Ports 
     ------------------------------------------------
     figdemo_redis_1   redis-server    Exit 0         
-    figdemo_web_1     python app.py   Exit 0        
+    figdemo_www_1     gunicorn --bi   Exit 0        
 
 <!SLIDE>
 # Cleaning up
@@ -193,10 +193,10 @@ Likewise, `docker-compose rm` will let you remove containers (after confirmation
 
     @@@ Sh
     $ docker-compose rm
-    Going to remove figdemo_redis_1, figdemo_web_1
+    Going to remove trainingwheels_redis_1, trainingwheels_www_1
     Are you sure? [yN] y
-    Removing figdemo_redis_1...
-    Removing figdemo_web_1...
+    Removing trainingwheels_redis_1...
+    Removing trainingwheels_www_1...
 
 <!SLIDE>
 # Special handling of volumes

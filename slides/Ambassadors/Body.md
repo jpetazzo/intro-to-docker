@@ -52,6 +52,9 @@ Different deployments will use different underlying technologies.
   networks can add TLS encryption.
 * Ad-hoc deployments can use a master-less discovery protocol
   like avahi to register and discover services.
+* It is also possible to do one-shot reconfiguration of the
+  ambassadors. It is slightly less dynamic but has much less
+  requirements.
 
 <!SLIDE>
 # Section summary
@@ -59,3 +62,5 @@ Different deployments will use different underlying technologies.
 We've learned how to:
 
 * Understand the ambassador pattern and what it is used for (service portability).
+
+For more information about the ambassador pattern, including demos on Swarm and ECS: look for [DVO317](https://www.youtube.com/watch?v=7CZFpHUPqXw) (AWS re:invent talk).

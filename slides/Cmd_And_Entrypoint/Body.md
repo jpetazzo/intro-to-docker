@@ -1,17 +1,15 @@
 <!SLIDE>
 # Defining a default command
 
-When people run our container, we want to automatically execute
-`wget` to retrieve our public IP address, using ifconfig.me.
+When people run our container, we want to greet them with a nice hello message, and using a custom font.
 
 For that, we will execute:
 
     @@@ Sh
-    wget -O- -q http://ifconfig.me/ip
+    figlet -f script hello
 
-* `-O-` tells wget to output to standard output instead of a file.
-* `-q` tells wget to skip verbose output and give us only the data.
-* `http://ifconfig.me/ip` is the URL we want to retrieve.
+* `-f script` tells figlet to use a fancy font.
+* `hello` is the message that we want it to display.
 
 <!SLIDE>
 # Adding `CMD` to our Dockerfile
@@ -21,8 +19,8 @@ Our new Dockerfile will look like this:
     @@@ docker
     FROM ubuntu
     RUN apt-get update
-    RUN apt-get install -y wget
-    CMD wget -O- -q http://ifconfig.me/ip
+    RUN apt-get install figlet
+    CMD figlet -f script hello
 
 * `CMD` defines a default command to run when none is given.
 * It can appear at any point in the file.
@@ -35,24 +33,29 @@ Our new Dockerfile will look like this:
 Let's build it:
 
     @@@ Sh
-    $ docker build -t ifconfigme .
+    $ docker build -t figlet .
     ...
     Successfully built 042dff3b4a8d
 
 And run it:
 
     @@@ Sh
-    $ docker run ifconfigme
-    64.134.229.24
+    $ docker run figlet
+     _          _   _       
+    | |        | | | |      
+    | |     _  | | | |  __  
+    |/ \   |/  |/  |/  /  \_
+    |   |_/|__/|__/|__/\__/ 
+
 
 <!SLIDE>
 # Overriding `CMD`
 
 If we want to get a shell into our container (instead of running
-`wget`), we just have to specify a different program to run:
+`figlet`), we just have to specify a different program to run:
 
     @@@ Sh
-    $ docker run -it ifconfigme bash
+    $ docker run -it figlet bash
     root@7ac86a641116:/# 
 
 * We specified `bash`.
@@ -61,16 +64,22 @@ If we want to get a shell into our container (instead of running
 <!SLIDE>
 # Using `ENTRYPOINT`
 
-We want to be able to specify a different URL on the command line,
-while retaining `wget` and some default parameters.
+We want to be able to specify a different message on the command line,
+while retaining `figlet` and some default parameters.
 
 In other words, we would like to be able to do this:
 
     @@@ Sh
-    $ docker run ifconfigme http://ifconfig.me/ua
-    Wget/1.12 (linux-gnu)
+    $ docker run figlet salut
+               _            
+              | |           
+     ,   __,  | |       _|_ 
+    / \_/  |  |/  |   |  |  
+     \/ \_/|_/|__/ \_/|_/|_/
+
 
 We will use the `ENTRYPOINT` verb in Dockerfile.
+
 
 <!SLIDE>
 # Adding `ENTRYPOINT` to our Dockerfile
@@ -80,8 +89,8 @@ Our new Dockerfile will look like this:
     @@@ docker
     FROM ubuntu
     RUN apt-get update
-    RUN apt-get install -y wget
-    ENTRYPOINT ["wget", "-O-", "-q"]
+    RUN apt-get install figlet
+    ENTRYPOINT ["figlet", "-f", "script"]
 
 * `ENTRYPOINT` defines a base command (and its parameters) for the container.
 * The command line arguments are appended to those parameters.
@@ -93,15 +102,19 @@ Our new Dockerfile will look like this:
 Let's build it:
 
     @@@ Sh
-    $ docker build -t ifconfigme .
+    $ docker build -t figlet .
     ...
     Successfully built 36f588918d73
 
 And run it:
 
     @@@ Sh
-    $ docker run ifconfigme http://ifconfig.me/ua
-    Wget/1.12 (linux-gnu)
+    $ docker run figlet salut
+               _            
+              | |           
+     ,   __,  | |       _|_ 
+    / \_/  |  |/  |   |  |  
+     \/ \_/|_/|__/ \_/|_/|_/
 
 Great success!
 
@@ -123,9 +136,9 @@ Our new Dockerfile will look like this:
     @@@ docker
     FROM ubuntu
     RUN apt-get update
-    RUN apt-get install -y wget
-    ENTRYPOINT ["wget", "-O-", "-q"]
-    CMD http://ifconfig.me/ip
+    RUN apt-get install figlet
+    ENTRYPOINT ["figlet", "-f", "script"]
+    CMD hello world
 
 * `ENTRYPOINT` defines a base command (and its parameters) for the container.
 * If we don't specify extra command-line arguments when starting the container,
@@ -138,30 +151,39 @@ Our new Dockerfile will look like this:
 Let's build it:
 
     @@@ Sh
-    $ docker build -t ifconfigme .
+    $ docker build -t figlet .
     ...
     Successfully built 6e0b6a048a07
 
 And run it:
 
     @@@ Sh
-    $ docker run ifconfigme
-    64.134.229.24
-    $ docker run ifconfigme http://ifconfig.me/ua
-    Wget/1.12 (linux-gnu)
+    $ docker run figlet
+     _          _   _                             _        
+    | |        | | | |                           | |    |  
+    | |     _  | | | |  __             __   ,_   | |  __|  
+    |/ \   |/  |/  |/  /  \_  |  |  |_/  \_/  |  |/  /  |  
+    |   |_/|__/|__/|__/\__/    \/ \/  \__/    |_/|__/\_/|_/
+
+    $ docker run figlet hola mundo
+     _           _                                               
+    | |         | |                                      |       
+    | |     __  | |  __,     _  _  _           _  _    __|   __  
+    |/ \   /  \_|/  /  |    / |/ |/ |  |   |  / |/ |  /  |  /  \_
+    |   |_/\__/ |__/\_/|_/    |  |  |_/ \_/|_/  |  |_/\_/|_/\__/ 
+
 
 <!SLIDE>
 # Overriding `ENTRYPOINT`
 
 What if we want to run a shell in our container?
 
-We cannot just do `docker run ifconfigme bash` because
-that would try to fetch the URL `bash` (which is not
-a valid URL, obviously).
+We cannot just do `docker run figlet bash` because
+that would just tell figlet to display the word "bash."
 
 We use the `--entrypoint` parameter:
 
     @@@ Sh
-    $ docker run -it --entrypoint bash ifconfigme
+    $ docker run -it --entrypoint bash figlet
     root@6027e44e2955:/# 
 

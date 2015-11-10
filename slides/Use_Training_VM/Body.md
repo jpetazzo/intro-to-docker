@@ -34,14 +34,14 @@ Once logged in, make sure that you can run a basic Docker command:
 
     @@@ Sh
     $ docker version
-    Client version: 1.5.0
-    Client API version: 1.17
-    Go version (client): go1.4.1
-    Git commit (client): a8a31ef
+    Client version: 1.9.0
+    Client API version: 1.21
+    Go version (client): go1.4.2
+    Git commit (client): 76d6bc9
     OS/Arch (client): linux/amd64
-    Server version: 1.5.0
-    Server API version: 1.17
-    Go version (server): go1.4.1
-    Git commit (server): a8a31ef
+    Server version: 1.9.0
+    Server API version: 1.21
+    Go version (server): go1.4.2
+    Git commit (server): 76d6bc9
 
 * If this doesn't work, raise your hand so that an instructor can assist you!

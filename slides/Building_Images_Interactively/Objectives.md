@@ -6,7 +6,7 @@
 In this lesson, we will create our first container image.
 
 It will be a basic distribution image, but we will pre-install
-the package `curl`.
+the package `figlet`.
 
 We will: 
 

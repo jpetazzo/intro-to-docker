@@ -5,37 +5,16 @@ As we have seen, the images on the Docker Hub are sometimes very basic.
 
 How do we want to construct our own images?
 
-As an example, we will build an image that has `wget`.
+As an example, we will build an image that has `figlet`.
 
 First, we will do it manually with `docker commit`.
 
 Then, in an upcoming chapter, we will use a `Dockerfile` and `docker build`.
 
 <!SLIDE>
-# From `curl` to `wget`
-
-In this chapter, the package that we will install will be `wget`.
-
-Why are we using `wget` instead of `curl`?
-
-The reasons are purely pedagogic:
-
-* You will be able to do this section using a different distro (if you
-  are so inclined). While `curl` is pre-installed on `centos` and
-  `fedora`, `wget` is not.
-* To achieve the nice, clean output of `curl`, we need to pass extra
-  arguments to `wget`. While this would be annoying in a real life
-  situation, it will be an excellent opportunity to show how
-  to pass command-line options in Dockerfiles.
-
-<!SLIDE>
 # Building from a base
 
 Our base will be the `ubuntu` image.
-
-If you prefer `debian`, `centos`, or `fedora`, feel free to use them instead.
-
-(You will have to adapt `apt` to `yum`, of course.)
 
 <!SLIDE>
 # Create a new container and make some changes
@@ -48,10 +27,10 @@ Start an Ubuntu container:
 
 Run the command `apt-get update` to refresh the list of packages available to install.
 
-Then run the command `apt-get install -y wget` to install the program we are interested in.
+Then run the command `apt-get install figlet` to install the program we are interested in.
 
     @@@ Sh
-    root@<yourContainerId>:#/ apt-get update && apt-get install -y wget
+    root@<yourContainerId>:#/ apt-get update && apt-get install figlet
     .... OUTPUT OF APT-GET COMMANDS ....
 
 <!SLIDE>
@@ -69,7 +48,7 @@ and our container.
     C /tmp
     C /usr
     C /usr/bin
-    A /usr/bin/wget
+    A /usr/bin/figlet
     ...
 
 <!SLIDE>
@@ -99,10 +78,13 @@ The output of the ``docker commit`` command will be the ID for your newly create
 We can run this image:
 
     @@@ Sh
-    $ docker run -it <newImageId> bash
-    root@fcfb62f0bfde:/# wget 
-    wget: missing URL
-    ...
+    $ docker run -it <newImageId>
+    root@fcfb62f0bfde:/# figlet hello
+     _          _ _       
+    | |__   ___| | | ___  
+    | '_ \ / _ \ | |/ _ \ 
+    | | | |  __/ | | (_) |
+    |_| |_|\___|_|_|\___/ 
 
 
 <!SLIDE>
@@ -113,17 +95,17 @@ Referring to an image by its ID is not convenient. Let's tag it instead.
 We can use the `tag` command:
 
     @@@ Sh
-    $ docker tag <newImageId> mydistro
+    $ docker tag <newImageId> figlet
 
 But we can also specify the tag as an extra argument to `commit`:
 
     @@@ Sh
-    $ docker commit <containerId> mydistro
+    $ docker commit <containerId> figlet
 
 And then run it using its tag:
 
     @@@ Sh
-    $ docker run -it mydistro bash
+    $ docker run -it figlet
 
 <!SLIDE>
 # What's next?
