@@ -103,18 +103,19 @@ them.
 Here is the file used in the demo:
 
     @@@ YAML
-    web:
-      build: .
-      command: python app.py
+    www:
+      build: www
       ports:
-       - "5000:5000"
-      volumes:
-       - .:/code
+        - 8000:5000
       links:
-       - redis:redis
+        - redis
+      user: nobody
+      command: python counter.py
+      volumes:
+        - ./www:/src
 
-    redis:
-      image: redis
+redis:
+  image: redis
 
 Each section of the YAML file (`web`, `redis`) corresponds to a container.
 
