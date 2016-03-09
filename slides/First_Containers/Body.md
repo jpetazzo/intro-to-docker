@@ -3,7 +3,7 @@
 
 Docker is a client-server application.
 
-* **The Docker daemon (or "Engine")**
+* **The Docker Engine (or "daemon")**
   <br/>Receives and processes incoming Docker API requests.
 
 * **The Docker client**
@@ -38,7 +38,7 @@ In your Docker environment, just run the following command:
 Let's run a more exciting container:
 
     @@@ Sh
-    $ docker run -it ubuntu bash
+    $ docker run -it ubuntu
     root@04c0bb0a6c07:/#
 
 * This is a brand new container.
@@ -121,7 +121,7 @@ Just exit the shell, like you would usually do.
 What if we start a new container, and try to run `figlet` again?
  
     @@@ Sh
-    $ docker run -it ubuntu bash
+    $ docker run -it ubuntu
     root@b13c164401fb:/# figlet
     bash: figlet: command not found
 
@@ -145,7 +145,7 @@ What if we start a new container, and try to run `figlet` again?
 1. Start an Ubuntu container.
 
         @@@ Sh
-        $ docker run -it ubuntu bash
+        $ docker run -it ubuntu
         root@04c0bb0a6c07:/#
 
 2. Update the package list.
@@ -184,7 +184,7 @@ What if we start a new container, and try to run `figlet` again?
 1. Start a new container.
 
     @@@ Sh
-    $ docker run -it ubuntu bash
+    $ docker run -it ubuntu
     root@b13c164401fb:/#
 
 2. See that `curl` is not in this new container.

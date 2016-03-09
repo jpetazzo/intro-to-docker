@@ -114,7 +114,8 @@ Why?
   same sequence.
 * Docker uses the exact strings defined in your Dockerfile, so:
 
-  * `RUN apt-get install figlet cowsay ` is different from
+  * `RUN apt-get install figlet cowsay ` 
+    <br/> is different from
     <br/> `RUN apt-get install cowsay figlet`
   * `RUN apt-get update` is not re-executed when the mirrors are updated
 
@@ -150,11 +151,51 @@ a line of the Dockerfile.
     @@@ Sh
     $ docker history figlet
     IMAGE         CREATED            CREATED BY                     SIZE
-    f9e8f1642759  About an hour ago  /bin/sh -c apt-get install fi  6.062 MB
-    7257c37726a1  About an hour ago  /bin/sh -c apt-get update      8.549 MB
-    e54ca5efa2e9  8 months ago       /bin/sh -c apt-get update &&   8 B
-    6c37f792ddac  8 months ago       /bin/sh -c apt-get update &&   83.43 MB
-    83ff768040a0  8 months ago       /bin/sh -c sed -i  s/^#\s*\(d  1.903 kB
-    2f4b4d6a4a06  8 months ago       /bin/sh -c echo  #!/bin/sh  >  194.5 kB
-    d7ac5e4f1812  8 months ago       /bin/sh -c #(nop) ADD file:ad  192.5 MB
-    511136ea3c5a  20 months ago                                     0 B
+    f9e8f1642759  About an hour ago  /bin/sh -c apt-get install fi  1.627 MB
+    7257c37726a1  About an hour ago  /bin/sh -c apt-get update      21.58 MB
+    07c86167cdc4  4 days ago         /bin/sh -c #(nop) CMD ["/bin   0 B
+    <missing>     4 days ago         /bin/sh -c sed -i 's/^#\s*\(   1.895 kB
+    <missing>     4 days ago         /bin/sh -c echo '#!/bin/sh'    194.5 kB
+    <missing>     4 days ago         /bin/sh -c #(nop) ADD file:b   187.8 MB
+
+
+<!SLIDE>
+# Introducing JSON syntax
+
+Most Dockerfile arguments can be passed in two forms:
+
+* plain string:
+  <br/>`RUN apt-get install figlet`
+* JSON list:
+  <br/>`RUN ["apt-get", "install", "figlet"]`
+
+Let's change our Dockerfile as follows!
+
+    @@@ Dockerfile
+    FROM ubuntu
+    RUN apt-get update
+    RUN ["apt-get", "install", "figlet"]
+
+Then build the new Dockerfile.
+
+    @@@ Sh
+    $ docker build -t figlet .
+
+<!SLIDE>
+# JSON syntax vs string syntax
+
+Compare the new history:
+
+    @@@ Sh
+    $ docker history figlet
+    IMAGE         CREATED            CREATED BY                     SIZE
+    27954bb5faaf  10 seconds ago     apt-get install figlet         1.627 MB
+    7257c37726a1  About an hour ago  /bin/sh -c apt-get update      21.58 MB
+    07c86167cdc4  4 days ago         /bin/sh -c #(nop) CMD ["/bin   0 B
+    <missing>     4 days ago         /bin/sh -c sed -i 's/^#\s*\(   1.895 kB
+    <missing>     4 days ago         /bin/sh -c echo '#!/bin/sh'    194.5 kB
+    <missing>     4 days ago         /bin/sh -c #(nop) ADD file:b   187.8 MB
+
+* JSON syntax specifies an *exact* command to execute.
+* String syntax specifies a command to be wrapped within `/bin/sh -c "..."`.
+

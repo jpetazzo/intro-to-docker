@@ -24,8 +24,10 @@ You need an SSH client.
         @@@ Sh
         $ ssh <login>@<ip-address>
 
-* On Windows, if you don't have an SSH client, you can download Putty
-  from www.putty.org.
+* On Windows, if you don't have an SSH client, you can download:
+  * Putty (www.putty.org)
+  * Git BASH (https://git-for-windows.github.io/)
+
 
 <!SLIDE>
 # Checking your Virtual Machine

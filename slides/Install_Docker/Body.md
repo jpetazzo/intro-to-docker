@@ -24,14 +24,18 @@ It can be installed via:
 * Binary download from Docker (it's a single file).
 
 <!SLIDE>
-# Installing Docker on your Linux distribution
+# Installing Docker with upstream packages
 
-On Fedora:
+* Preferred method.
+* Upstream's packages are more up-to-date than distros'.
+* Instructions per distro:
+  <br/>https://docs.docker.com/engine/installation/linux/
+* Package will be named `docker-engine`.
 
-    @@@ Sh
-    $ sudo yum install docker-io
+<!SLIDE>
+# Installing Docker with distros packages
 
-On CentOS 7:
+On Red Hat derivatives (Fedora, CentOS):
 
     @@@ Sh
     $ sudo yum install docker
@@ -135,6 +139,14 @@ You should restrict access to it like you would protect ``root``.
 If you give somebody the ability to access the Docker API, you are giving them full access on the machine.
 
 Therefore, the Docker control socket is (by default) owned by the `docker` group, to avoid unauthorized access on multi-user machines.
+
+<!SLIDE>
+# Reminder ...
+
+*Note:* if you were provided with a training VM for a hands-on
+tutorial, you can skip this chapter, since that VM already
+has Docker installed, and Docker has already been setup to run
+without ``sudo``.
 
 <!SLIDE>
 # The ``docker`` group

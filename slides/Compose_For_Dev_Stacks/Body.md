@@ -85,7 +85,7 @@ including linking the relevant containers together.
 <!SLIDE>
 # Launching Our First Stack with Compose
 
-Verify that the app is running at `http://<yourHostIP>:5000`.
+Verify that the app is running at `http://<yourHostIP>:8000`.
 
 ![composeapp](composeapp.png)
 
@@ -110,12 +110,14 @@ Here is the file used in the demo:
       links:
         - redis
       user: nobody
+      environment:
+        DEBUG: 1
       command: python counter.py
       volumes:
         - ./www:/src
 
-redis:
-  image: redis
+    redis:
+      image: redis
 
 Each section of the YAML file (`web`, `redis`) corresponds to a container.
 
@@ -198,6 +200,16 @@ Likewise, `docker-compose rm` will let you remove containers (after confirmation
     Are you sure? [yN] y
     Removing trainingwheels_redis_1...
     Removing trainingwheels_www_1...
+
+Alternatively, `docker-compose down` will stop and remove containers.
+
+    @@@ Sh
+    $ docker-compose down
+    Stopping trainingwheels_www_1 ... done
+    Stopping trainingwheels_redis_1 ... done
+    Removing trainingwheels_www_1 ... done
+    Removing trainingwheels_redis_1 ... done
+
 
 <!SLIDE>
 # Special handling of volumes

@@ -19,7 +19,7 @@ Our new Dockerfile will look like this:
     @@@ docker
     FROM ubuntu
     RUN apt-get update
-    RUN apt-get install figlet
+    RUN ["apt-get", "install", "figlet"]
     CMD figlet -f script hello
 
 * `CMD` defines a default command to run when none is given.
@@ -89,12 +89,30 @@ Our new Dockerfile will look like this:
     @@@ docker
     FROM ubuntu
     RUN apt-get update
-    RUN apt-get install figlet
+    RUN ["apt-get", "install", "figlet"]
     ENTRYPOINT ["figlet", "-f", "script"]
 
 * `ENTRYPOINT` defines a base command (and its parameters) for the container.
 * The command line arguments are appended to those parameters.
 * Like `CMD`, `ENTRYPOINT` can appear anywhere, and replaces the previous value.
+
+Why did we use JSON syntax for our `ENTRYPOINT`?
+
+<!SLIDE>
+# Implications of JSON vs string syntax
+
+* When CMD or ENTRYPOINT use string syntax, they get wrapped in `sh -c`.
+* To avoid this wrapping, you must use JSON syntax.
+
+What if we used `ENTRYPOINT` with string syntax?
+
+    @@@ Sh
+    $ docker run figlet salut
+
+This would run the following command in the `figlet` image:
+
+    @@@ Sh
+    sh -c "figlet -f script" salut
 
 <!SLIDE>
 # Build and test our image
@@ -136,7 +154,7 @@ Our new Dockerfile will look like this:
     @@@ docker
     FROM ubuntu
     RUN apt-get update
-    RUN apt-get install figlet
+    RUN ["apt-get", "install", "figlet"]
     ENTRYPOINT ["figlet", "-f", "script"]
     CMD hello world
 

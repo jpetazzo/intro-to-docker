@@ -31,6 +31,10 @@
 - Securing Docker with TLS
 - The Docker API
 
+Note: the extra material will *not* be covered today.
+
+It's here for reference only!
+
 <!SLIDE toc>
 # Table of Contents
 

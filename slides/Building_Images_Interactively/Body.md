@@ -22,7 +22,7 @@ Our base will be the `ubuntu` image.
 Start an Ubuntu container:
 
     @@@ Sh
-    $ docker run -it ubuntu bash
+    $ docker run -it ubuntu
     root@<yourContainerId>:#/
 
 Run the command `apt-get update` to refresh the list of packages available to install.
@@ -122,7 +122,7 @@ process by writing a `Dockerfile`.
 To start, launch a terminal inside of a ``ubuntu`` container in interactive mode:
 
     @@@ Sh
-    $ docker run -it ubuntu bash
+    $ docker run -it ubuntu
     root@<yourContainerId>:#/
 
 Run the command ``apt-get update`` to refresh the list of packages available to install, then run the command ``apt-get install -y cmatrix`` to install the program we are interested in.

@@ -69,6 +69,18 @@
         "Container_Networking_Basics/Objectives.md",
         "Container_Networking_Basics/Body.md",
 
+        "Container_Network_Model/Cover.md",
+        "Container_Network_Model/Objectives.md",
+        "Container_Network_Model/Body.md",
+
+        "Connecting_Containers_With_Links/Cover.md",
+        "Connecting_Containers_With_Links/Objectives.md",
+        "Connecting_Containers_With_Links/Body.md",
+
+        "Ambassadors/Cover.md",
+        "Ambassadors/Objectives.md",
+        "Ambassadors/Body.md",
+
         "Local_Development_Workflow/Cover.md",
         "Local_Development_Workflow/Objectives.md",
         "Local_Development_Workflow/Body.md",
@@ -76,14 +88,6 @@
         "Working_With_Volumes/Cover.md",
         "Working_With_Volumes/Objectives.md",
         "Working_With_Volumes/Body.md",
-
-        "Connecting_Containers/Cover.md",
-        "Connecting_Containers/Objectives.md",
-        "Connecting_Containers/Body.md",
-
-        "Ambassadors/Cover.md",
-        "Ambassadors/Objectives.md",
-        "Ambassadors/Body.md",
 
         "Compose_For_Dev_Stacks/Cover.md",
         "Compose_For_Dev_Stacks/Objectives.md",

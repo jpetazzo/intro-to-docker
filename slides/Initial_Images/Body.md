@@ -162,16 +162,6 @@ The image name is:
     wordpress
 
 <!SLIDE>
-# Historical detail
-
-Self-hosted registries used to be called *private* registries,
-but this was misleading!
-
-* A self-hosted registry can be public or private.
-* A registry in the User namespace on Docker Hub can be public or private.
-
-
-<!SLIDE>
 # How do you store and manage images?
 
 Images can be stored:
@@ -191,18 +181,18 @@ Let's look at what images are on our host now.
 
     @@@ Sh
     $ docker images
-    REPOSITORY         TAG     IMAGE ID     CREATED     VIRTUAL SIZE
-    ubuntu             13.10   9f676bd305a4 7 weeks ago 178 MB
-    ubuntu             saucy   9f676bd305a4 7 weeks ago 178 MB
-    ubuntu             raring  eb601b8965b8 7 weeks ago 166.5 MB
-    ubuntu             13.04   eb601b8965b8 7 weeks ago 166.5 MB
-    ubuntu             12.10   5ac751e8d623 7 weeks ago 161 MB
-    ubuntu             quantal 5ac751e8d623 7 weeks ago 161 MB
-    ubuntu             10.04   9cc9ea5ea540 7 weeks ago 180.8 MB
-    ubuntu             lucid   9cc9ea5ea540 7 weeks ago 180.8 MB
-    ubuntu             12.04   9cd978db300e 7 weeks ago 204.4 MB
-    ubuntu             latest  9cd978db300e 7 weeks ago 204.4 MB
-    ubuntu             precise 9cd978db300e 7 weeks ago 204.4 MB
+    REPOSITORY       TAG       IMAGE ID       CREATED         SIZE
+    fedora           latest    ddd5c9c1d0f2   3 days ago      204.7 MB
+    centos           latest    d0e7f81ca65c   3 days ago      196.6 MB
+    ubuntu           latest    07c86167cdc4   4 days ago      188 MB
+    redis            latest    4f5f397d4b7c   5 days ago      177.6 MB
+    postgres         latest    afe2b5e1859b   5 days ago      264.5 MB
+    alpine           latest    70c557e50ed6   5 days ago      4.798 MB
+    debian           latest    f50f9524513f   6 days ago      125.1 MB
+    busybox          latest    3240943c9ea3   2 weeks ago     1.114 MB
+    training/namer   latest    902673acc741   9 months ago    289.3 MB
+    jpetazzo/clock   latest    12068b93616f   12 months ago   2.433 MB
+
 
 <!SLIDE>
 # Searching for images
@@ -210,15 +200,12 @@ Let's look at what images are on our host now.
 Searches your registry for images:
 
     @@@ Sh
-    $ docker search zookeeper
-    NAME                             DESCRIPTION                     STARS  ...
-    jplock/zookeeper                 Builds a docker image for ...   27
-    thefactory/zookeeper-exhibitor   Exhibitor-managed ZooKeepe...   2 
-    misakai/zookeeper                ZooKeeper is a service for...   1 
-    digitalwonderland/zookeeper      Latest Zookeeper - cluster...   1 
-    garland/zookeeper                                                1 
-    raycoding/piggybank-zookeeper    Zookeeper 3.4.6 running on...   1 
-    gregory90/zookeeper                                              0 
+    NAME                  DESCRIPTION                 STARS  OFFICIAL  AUTOMATED
+    jplock/zookeeper      Builds a docker image ...   103              [OK]
+    mesoscloud/zookeeper  ZooKeeper                   42               [OK]
+    springxd/zookeeper    A Docker image that ca...   5                [OK]
+    elevy/zookeeper       ZooKeeper configured t...   3                [OK]
+
 
 * "Stars" indicate the popularity of the image.
 * "Official" images are those in the root namespace.

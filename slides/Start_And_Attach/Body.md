@@ -9,6 +9,8 @@ All containers run the same way, whether there is a client attached to them or n
 
 It is always possible to detach from a container, and to reattach to a container.
 
+Analogy: attaching to a container is like plugging a keyboard and screen to a physical server.
+
 <!SLIDE>
 # Detaching from a container
 
@@ -25,6 +27,25 @@ What does `-it` stand for?
 * `-i` means "connect stdin to the terminal."
 
 <!SLIDE>
+# Specifying a custom detach sequence
+
+* You don't like `^P^Q`? No problem!
+* You can change the sequence with `docker run --datach-keys`.
+* This can also be passed as a global option to the engine.
+
+Start a container with a custom detach command:
+
+    @@@ Sh
+    $ docker run -ti --detach-keys ctrl-x,x jpetazzo/clock
+
+Detach by hitting `^X x`. (This is ctrl-x then x, not ctrl-x twice!)
+
+Check that our container is still running:
+
+    @@@ Sh
+    $ docker ps -l
+
+<!SLIDE>
 # Attaching to a container
 
 You can attach to a container:
@@ -34,6 +55,18 @@ You can attach to a container:
 
 * The container must be running.
 * There *can* be multiple clients attached to the same container.
+* If you don't specify `--detach-keys` when attaching, it defaults back to `^P^Q`.
+
+Try it on our previous container:
+
+    @@@ Sh
+    $ docker attach $(docker ps -lq)
+
+Check that `^X x` doesn't work, but `^P ^Q` does.
+
+<!SLIDE>
+# Detaching from non-interactive containers
+
 * **Warning:** if the container was started without `-it`...
 
   * You won't be able to detach with `^P^Q`.
@@ -64,3 +97,9 @@ The container will be restarted using the same options you launched it
 with.
 
 You can re-attach to it if you want to interact with it.
+
+You can start and attach in a single command, too:
+
+    @@@ Sh
+    $ docker start -a <yourContainerID>
+

@@ -5,9 +5,9 @@
 
 In this lesson, we will learn about:
 
+* Containers (how and why they are useful)
 * Docker (the Open Source project)
 * Docker Inc. (the company)
-* Containers (how and why they are useful)
 
 We won't actually run Docker or containers in this chapter (yet!).
 
