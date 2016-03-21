@@ -9,12 +9,13 @@
 - Restarting and Attaching to Containers
 - Understanding Docker Images
 - Building Docker images
+- Advanced Dockerfiles
 - A quick word about the Docker Hub
-- Naming and inspecting containers
 
 <!SLIDE>
 # Part 2
 
+- Naming and inspecting containers
 - Introduction to Container Networking
 - Container Network Model
 - Connecting Containers with Links
@@ -22,7 +23,6 @@
 - Local Development Work flow with Docker
 - Working with Volumes
 - Compose For Development Stacks
-- Advanced Dockerfiles
 
 <!SLIDE>
 # Extra material

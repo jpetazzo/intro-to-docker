@@ -57,6 +57,10 @@
         "Copying_Files_During_Build/Objectives.md",
         "Copying_Files_During_Build/Body.md",
 
+        "Dockerfile_Reference/Cover.md",
+        "Dockerfile_Reference/Objectives.md",
+        "Dockerfile_Reference/Body.md",
+
         "Docker_Hub_Tease/Cover.md",
         "Docker_Hub_Tease/Objectives.md",
         "Docker_Hub_Tease/Body.md",
@@ -92,10 +96,6 @@
         "Compose_For_Dev_Stacks/Cover.md",
         "Compose_For_Dev_Stacks/Objectives.md",
         "Compose_For_Dev_Stacks/Body.md",
-
-        "Dockerfile_Reference/Cover.md",
-        "Dockerfile_Reference/Objectives.md",
-        "Dockerfile_Reference/Body.md",
 
         "Security/Cover.md",
         "Security/Objectives.md",
