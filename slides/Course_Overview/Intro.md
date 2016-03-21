@@ -8,6 +8,6 @@
 - Can't find the paper?
   <br/>Raise your hand and ask for one!
 - Backchannel:
-  <br/>[gitter.im/jpetazzo/workshop-20160310-london](https://gitter.im/jpetazzo/workshop-20160310-london)
+  <br/>[gitter.im/jpetazzo/workshop-20160321-munchen](https://gitter.im/jpetazzo/workshop-20160321-munchen)
   <br/>(feel free to ask questions there!)
 
