@@ -145,6 +145,7 @@ Then we will use `ENTRYPOINT` and `CMD` together.
 
 * `ENTRYPOINT` will define the base command for our container.
 * `CMD` will define the default parameter(s) for this command.
+* They *both* have to use JSON syntax.
 
 <!SLIDE>
 # `CMD` and `ENTRYPOINT` together
@@ -156,7 +157,7 @@ Our new Dockerfile will look like this:
     RUN apt-get update
     RUN ["apt-get", "install", "figlet"]
     ENTRYPOINT ["figlet", "-f", "script"]
-    CMD hello world
+    CMD ["hello world"]
 
 * `ENTRYPOINT` defines a base command (and its parameters) for the container.
 * If we don't specify extra command-line arguments when starting the container,
