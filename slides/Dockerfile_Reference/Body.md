@@ -128,6 +128,8 @@ in this image.
 
     @@@ docker
     EXPOSE 8080
+    EXPOSE 80 443
+    EXPOSE 53/tcp 53/udp
 
 * All ports are private by default.
 * The ``Dockerfile`` doesn't control if a port is publicly available.
@@ -143,60 +145,79 @@ A *public port* is reachable from other containers and from outside the host.
 A *private port* is not reachable from outside.
 
 <!SLIDE>
-# The ``ADD`` instruction
+# The ``COPY`` instruction
 
-The ``ADD`` instruction adds files and content from your host into the
+The ``COPY`` instruction adds files and content from your host into the
 image.
 
     @@@ docker
-    ADD /src/webapp /opt/webapp
+    COPY . /src
 
-This will add the contents of the ``/src/webapp/`` directory to the
-``/opt/webapp`` directory in the image.
+This will add the contents of the *build context* (the directory
+passed as an argument to `docker build`) to the directory `/src`
+in the container.
 
-Note: ``/src/webapp/`` is not relative to the host filesystem, but to
-the directory containing the ``Dockerfile``.
+Note: you can only reference files and directories *inside* the
+build context. Absolute paths are taken as being anchored to
+the build context, so the two following lines are equivalent:
+
+    @@@ docker
+    COPY . /src
+    COPY / /src
+
+Attempts to use `..` to get out of the build context will be
+detected and blocked with Docker, and the build will fail.
 
 Otherwise, a ``Dockerfile`` could succeed on host A, but fail on host B.
 
-The ``ADD`` instruction can also be used to get remote files.
+<!SLIDE>
+# `ADD`
+
+`ADD` works almost like `COPY`, but has a few extra features.
+
+`ADD` can get remote files:
 
     @@@ docker
-    ADD http://www.example.com/webapp /opt/
+    ADD http://www.example.com/webapp.jar /opt/
 
-This would download the ``webapp`` file and place it in the ``/opt``
+This would download the ``webapp.jar`` file and place it in the ``/opt``
 directory.
 
-<!SLIDE>
-# More about the ``ADD`` instruction
-
-* ``ADD`` is cached. If you recreate the image and no files have changed then a cache is used.
-* If the local source is a zip file or a tarball it'll be unpacked to the destination.
-* Sources that are URLs and zipped will not be unpacked.
-* Any files created by the ``ADD`` instruction are owned by ``root``
-  with permissions of ``0600``.
-
-More on ``ADD`` [here](https://docs.docker.com/reference/builder/#add).
-
-<!SLIDE>
-# The ``VOLUME`` instruction
-
-The ``VOLUME`` instruction will create a data volume mount point at the
-specified path.
+`ADD` will automatically unpack zip files and tar archives:
 
     @@@ docker
-    VOLUME [ "/opt/webapp/data" ] 
+    ADD ./assets.zip /var/www/htdocs/assets/
 
-* Data volumes bypass the union file system.
+This would unpack `assets.zip` into `/var/www/htdocs/assets`.
 
-    In other words, they are not captured by ``docker commit``.
+*However,* `ADD` will not automatically unpack remote archives.
 
-* Data volumes can be shared and reused between containers.
+<!SLIDE>
+# `ADD`, `COPY`, and the build cache
 
-    We'll see how this works in a subsequent lesson.
+* For most Dockerfiles instructions, Docker only checks
+  if the line in the Dockerfile has changed.
+* For `ADD` and `COPY`, Docker also checks if the files
+  to be added to the container have been changed.
+* `ADD` always need to download the remote file before
+  it can check if it has been changed. (It cannot use,
+  e.g., ETags or If-Modified-Since headers.)
 
-* It is possible to share a volume with a stopped container.
-* Data volumes persist until all containers referencing them are destroyed.
+<!SLIDE>
+# `VOLUME`
+
+The `VOLUME` instruction tells Docker that a specific directory
+should be a *volume*.
+
+    @@@ docker
+    VOLUME /var/lib/mysql
+
+Filesystem access in volumes bypasses the copy-on-write layer,
+offering native performance to I/O done in those directories.
+
+Volumes can be attached to multiple containers, allowing to
+"port" data over from a container to another, e.g. to
+upgrade a database to a newer version.
 
 <!SLIDE>
 # The ``WORKDIR`` instruction
@@ -208,7 +229,7 @@ It also affects ``CMD`` and ``ENTRYPOINT``, since it sets the working
 directory used when starting the container.
    
     @@@ docker
-    WORKDIR /opt/webapp
+    WORKDIR /src
 
 You can specify ``WORKDIR`` again to change the working directory for
 further operations.
@@ -347,7 +368,7 @@ This is useful for building images which will be used as a base
 to build other images.
 
     @@@ docker
-    ONBUILD COPY . /app/src
+    ONBUILD COPY . /src
 
 * You can't chain ``ONBUILD`` instructions with ``ONBUILD``.
 * ``ONBUILD`` can't be used to trigger ``FROM`` and ``MAINTAINER``
@@ -372,8 +393,8 @@ The dependencies are reinstalled every time, because the build system does not k
         RUN apt-get update
         RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
             python-all python-pip 
-        COPY ./webapp /opt/webapp/
-        WORKDIR /opt/webapp
+        COPY . /src/
+        WORKDIR /src
         RUN pip install -qr requirements.txt
         EXPOSE 5000
         CMD ["python", "app.py"]
@@ -389,10 +410,10 @@ Adding the dependencies as a separate step means that Docker can cache more effi
         RUN apt-get update
         RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
             python-all python-pip 
-        COPY ./webapp/requirements.txt /tmp/requirements.txt
+        COPY ./requirements.txt /tmp/requirements.txt
         RUN pip install -qr /tmp/requirements.txt
-        COPY ./webapp /opt/webapp/
-        WORKDIR /opt/webapp
+        COPY . /src/
+        WORKDIR /src
         EXPOSE 5000
         CMD ["python", "app.py"]
 
