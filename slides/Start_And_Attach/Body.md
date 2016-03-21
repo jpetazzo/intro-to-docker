@@ -30,7 +30,7 @@ What does `-it` stand for?
 # Specifying a custom detach sequence
 
 * You don't like `^P^Q`? No problem!
-* You can change the sequence with `docker run --datach-keys`.
+* You can change the sequence with `docker run --detach-keys`.
 * This can also be passed as a global option to the engine.
 
 Start a container with a custom detach command:
