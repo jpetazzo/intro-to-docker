@@ -197,9 +197,11 @@ Let's look at what images are on our host now.
 <!SLIDE>
 # Searching for images
 
-Searches your registry for images:
+We cannot list *all* images on a remote registry, but
+we can search for a specific keyword:
 
     @@@ Sh
+    $ docker search zookeeper
     NAME                  DESCRIPTION                 STARS  OFFICIAL  AUTOMATED
     jplock/zookeeper      Builds a docker image ...   103              [OK]
     mesoscloud/zookeeper  ZooKeeper                   42               [OK]
