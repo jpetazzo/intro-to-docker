@@ -139,7 +139,7 @@ Great success!
 <!SLIDE>
 # Using `CMD` and `ENTRYPOINT` together
 
-What if we want to define a default URL for our container?
+What if we want to define a default message for our container?
 
 Then we will use `ENTRYPOINT` and `CMD` together.
 

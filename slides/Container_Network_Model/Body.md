@@ -290,7 +290,7 @@ Out of the scope for this intro-level workshop!
 
 Very short instructions:
 
-- deploy a key/value store (Consul, Etc, or Zookeeper)
+- deploy a key/value store (Consul, Etcd, or Zookeeper)
 - add two extra flags to your Docker Engine
 - you can now create networks using the overlay driver!
 
