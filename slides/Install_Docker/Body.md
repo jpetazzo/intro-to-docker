@@ -85,7 +85,9 @@ When you execute `docker version` from the terminal:
 * the request goes to the Boot2Docker VM in VirtualBox,
 * the Docker Engine in the VM processes the request.
 
-Reminder: all communication happens over the API!
+All communication with the Docker Engine happens over the API.
+
+This will also allow to use remote Engines exactly as if they were local.
 
 <!SLIDE>
 # Aboout boot2docker

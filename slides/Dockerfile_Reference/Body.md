@@ -60,6 +60,29 @@ Or self-hosted image:
     E.g.: ``ubuntu:14.04``.
 
 <!SLIDE>
+# A use case for multiple ``FROM`` lines
+
+* Integrate CI and unit tests in the build system
+
+        @@@ docker
+        FROM <baseimage>
+        RUN <install dependencies>
+        COPY <code>
+        RUN <build code>
+        RUN <install test dependencies>
+        COPY <test data sets and fixtures>
+        RUN <unit tests>
+        FROM <baseimage>
+        RUN <install dependencies>
+        COPY <vcode>
+        RUN <build code>
+        CMD, EXPOSE ...
+
+* The build fails as soon as an instructions fails
+* If `RUN <unit tests>` fails, the build doesn't produce an image
+* If it succeeds, it produces a clean image (without test libraries and data)
+
+<!SLIDE>
 # The ``MAINTAINER`` instruction
 
 The ``MAINTAINER`` instruction tells you who wrote the ``Dockerfile``.

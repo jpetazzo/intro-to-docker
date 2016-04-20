@@ -7,7 +7,13 @@
 * Each layer can add, change, and remove files.
 * Images can share layers to optimize disk usage, transfer times, and memory use.
 
-![docker layers](docker-filesystems-multilayer.png)
+* Example:
+  * CentOS
+  * JRE
+  * Tomcat
+  * Dependencies
+  * Application JAR
+  * Configuration
 
 <!SLIDE>
 # Differences between containers and images

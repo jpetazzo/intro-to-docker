@@ -27,6 +27,7 @@ You need an SSH client.
 * On Windows, if you don't have an SSH client, you can download:
   * Putty (www.putty.org)
   * Git BASH (https://git-for-windows.github.io/)
+  * MobaXterm (http://moabaxterm.mobatek.net)
 
 
 <!SLIDE>

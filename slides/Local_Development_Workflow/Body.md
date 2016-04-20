@@ -94,8 +94,8 @@ Now let us see if our new container is running.
 
     @@@ Sh
     $ docker ps
-    CONTAINER ID  IMAGE                 COMMAND CREATED       STATUS       PORTS                NAMES
-    045885b68bc5  training/namer:latest rackup  3 seconds ago Up 3 seconds 0.0.0.0:80->9292/tcp condescending_shockley
+    CONTAINER ID  IMAGE   COMMAND CREATED       STATUS PORTS                NAMES
+    045885b68bc5  trai... rackup  3 seconds ago Up ... 0.0.0.0:80->9292/tcp ...
 
 <!SLIDE>
 # Viewing our application

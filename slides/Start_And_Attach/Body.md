@@ -96,10 +96,17 @@ It can then be restarted with the `start` command.
 The container will be restarted using the same options you launched it
 with.
 
-You can re-attach to it if you want to interact with it.
-
-You can start and attach in a single command, too:
+You can re-attach to it if you want to interact with it:
 
     @@@ Sh
-    $ docker start -a <yourContainerID>
+    $ docker attach <yourContainerID>
+
+<!SLIDE>
+# Attaching to a REPL
+
+* REPL = Read Eval Print Loop
+* Shells, interpreters, TUI ...
+* Symptom: you `docker attach`, and see nothing
+* The REPL doesn't know that you just attached, and doesn't print anything
+* Try hitting `^L` or `Enter`
 

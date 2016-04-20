@@ -178,10 +178,11 @@ containers of the current stack:
 
     @@@ Sh
     $ docker-compose ps
-         Name            Command      State    Ports 
-    ------------------------------------------------
-    figdemo_redis_1   redis-server    Exit 0         
-    figdemo_www_1     gunicorn --bi   Exit 0        
+    Name                      Command             State           Ports          
+    ----------------------------------------------------------------------------
+    trainingwheels_redis_1   /entrypoint.sh red   Up      6379/tcp               
+    trainingwheels_www_1     python counter.py    Up      0.0.0.0:8000->5000/tcp 
+
 
 <!SLIDE>
 # Cleaning up

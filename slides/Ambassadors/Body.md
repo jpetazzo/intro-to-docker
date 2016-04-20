@@ -136,6 +136,6 @@ We've learned how to:
 For more information about the ambassador pattern, including demos on Swarm and ECS: 
 
 * AWS re:invent 2015 [DVO317](https://www.youtube.com/watch?v=7CZFpHUPqXw)
-* SwarmWeek video about Swarm+Compose (to be released the very day of this workshop!)
+* [SwarmWeek video about Swarm+Compose](https://youtube.com/watch?v=qbIvUvwa6As)
 
-Ambassadors will be covered in depth in the advanced/orchestration workshop.
+Ambassadors are also covered in depth in the advanced/orchestration workshop.

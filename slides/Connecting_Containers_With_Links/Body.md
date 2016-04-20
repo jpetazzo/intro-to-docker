@@ -120,11 +120,9 @@ Finally, let's browse to our application and confirm it's working.
     http://<yourHostIP>:<port>
 
 <!SLIDE>
-# More about our link - Environment variables
+# Links and environment variables
 
-In addition to the DNS information, Docker will automatically set environment variables in our container, giving extra details about the link.
-
-Let's see that information:
+In addition to the DNS information, Docker will automatically set environment variables in our container, giving extra details about the linked container.
 
     @@@ Sh
     $ docker run --link datastore:redis alpine env

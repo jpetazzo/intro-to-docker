@@ -84,10 +84,12 @@ If you want to set port numbers yourself, no problem:
     @@@ Sh
     $ docker run -d -p 80:80 nginx
     $ docker run -d -p 8000:80 nginx
+    $ docker run -d -p 8080:80 -p 8888:80 nginx
 
 * We are running two NGINX web servers.
 * The first one is exposed on port 80.
 * The second one is exposed on port 8000.
+* The third one is exposed on ports 8080 and 8888.
 
 Note: the convention is `port-on-host:port-on-container`.
 

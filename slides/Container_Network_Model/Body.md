@@ -270,9 +270,10 @@ since we wiped out the old Redis container).
 * Docker will not create network names and aliases on the default `bridge` network.
 * Therefore, if you want to use those features, you have to create a custom network first.
 * Network aliases are *not* unique: you can give multiple containers the same alias *on the same network.*
-* In that case, as of Engine 1.10, one container will be selected and only its IP address will be returned when resolving the network alias.
+  * In Engine 1.10: one container will be selected and only its IP address will be returned when resolving the network alias.
+  * In Engine 1.11: when resolving the network alias, the DNS reply includes the IP addresses of all containers with this network alias.
 
-Note: future versions of the Engine might implement DNS round robin instead, or even load balancing.
+Engine 1.11 allows DNS round-robin, providing a cheap way of load balancing traffic across multiple containers.
 
 <!SLIDE>
 # Overlay networks
