@@ -97,23 +97,6 @@
         "Compose_For_Dev_Stacks/Objectives.md",
         "Compose_For_Dev_Stacks/Body.md",
 
-        "Security/Cover.md",
-        "Security/Objectives.md",
-        "Security/Body.md",
-        "Security/Summary.md",
-
-        "Vulnerabilities/Cover.md",
-        "Vulnerabilities/Objectives.md",
-        "Vulnerabilities/Body.md",
-
-        "Securing_With_TLS/Cover.md",
-        "Securing_With_TLS/Objectives.md",
-        "Securing_With_TLS/Body.md",
-
-        "Docker_API/Cover.md",
-        "Docker_API/Objectives.md",
-        "Docker_API/Body.md",
-
         "Course_Conclusion/Cover.md",
         "Course_Conclusion/Body.md"
     ]

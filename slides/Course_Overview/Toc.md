@@ -24,18 +24,6 @@
 - Working with Volumes
 - Compose For Development Stacks
 
-<!SLIDE>
-# Extra material
-
-- Security
-- Dealing with Vulnerabilities
-- Securing Docker with TLS
-- The Docker API
-
-Note: the extra material will *not* be covered today.
-
-It's here for reference only!
-
 <!SLIDE toc>
 # Table of Contents
 
