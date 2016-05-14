@@ -3,10 +3,10 @@
 
 ## Objectives
 
-At the end of this lesson, you will be able to:
+At the end of this lesson, you will know:
 
-* Install Docker.
-* Run Docker without ``sudo``.
+* How to install Docker.
+* When to use `sudo` when running Docker commands.
 
 *Note:* if you were provided with a training VM for a hands-on
 tutorial, you can skip this chapter, since that VM already

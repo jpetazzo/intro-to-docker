@@ -196,7 +196,7 @@ We can see a simple workflow:
 
     (You *are* using version control, right?)
 
-<!SLIDE>
+<!SLIDE printonly>
 # Debugging inside the container
 
 In 1.3, Docker introduced a feature called ``docker exec``.
@@ -207,7 +207,7 @@ It is not meant to be used for production (except in emergencies, as a sort of p
 
 You can get a shell prompt inside an existing container this way. 
 
-<!SLIDE>
+<!SLIDE printonly>
 # ``docker exec`` example
 
     @@@ Sh
@@ -218,7 +218,7 @@ You can get a shell prompt inside an existing container this way.
     => [0, 1, 4, 9, 16]
     irb(main):002:0> exit
 
-<!SLIDE>
+<!SLIDE printonly>
 # Stopping the container
 
 Now that we're done let's stop our container.
@@ -239,106 +239,4 @@ We've learned how to:
 * Share code between container and host.
 * Set our working directory.
 * Use a simple local development workflow.
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Pull down our application image
-
-
-
-1. Pull down our application image.
-
-         @@@ Sh
-         $ docker pull training/namer
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Download the application's source code
-
-
-
-1. Download the application source code.
-
-        @@@ Sh
-        $ git clone https://github.com/docker-training/namer.git
-
-2. Review the contents of the ``namer`` directory.
-
-        @@@ Sh
-        $ cd namer
-        $ ls
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Create a container from our application image.
-
-
-
-1. Create a new container (make sure that you are in ``namer`` directory first).
-
-        @@@ Sh
-        $ docker run -d \
-              -v $(pwd):/opt/namer \
-              -p 80:9292 \
-              training/namer
-
-2. Check the container is running.
-
-        @@@ Sh 
-        $ docker ps
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Update the running application
-
-
-
-1. Use your local browser to check the running application.
-
-        @@@ Sh
-        http://<yourHostIP>
-
-2. Edit the ``namer/company_name_generator.rb`` file.
-
-        @@@ Sh
-        $ vim namer/company_name_generator.rb
-
-3. Change the ``color`` CSS property in the ``<style>`` block from ``royalblue`` to ``red``.
-
-        @@@ Sh
-        <style>
-        h1, h2 {
-            font-family: Georgia, Times New Roman, Times, serif;
-            color: red;
-            margin: 0;
-        }
-        </style>
-
-4. Refresh the browser to see the color change.
-
-        @@@ Sh
-        http://<yourHostIP>
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: ``docker exec``
-
-    @@@ Sh
-    $ # You can run ruby commands in the area the app is running and more!
-    $ docker exec -it <yourContainerId> bash
-    root@5ca27cf74c2e:/opt/namer# irb
-    irb(main):001:0> [0, 1, 2, 3, 4].map {|x| x ** 2}.compact
-    => [0, 1, 4, 9, 16]
-    irb(main):002:0> exit
-
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Stop and remove the container
-
-
-
-1. Stop the running container.
-
-         @@@ Sh
-         $ docker stop <yourContainerId>
-
-2. Remove the container.
-
-          @@@ Sh
-          $ docker rm <yourContainerId>
 

@@ -1,4 +1,4 @@
-<!SLIDE>
+<!SLIDE printonly>
 # Installing Docker
 
 Docker is easy to install.
@@ -9,7 +9,7 @@ It runs on:
 * OS X via a virtual machine.
 * Microsoft Windows via a virtual machine.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Installing Docker on Linux
 
 It can be installed via:
@@ -26,13 +26,13 @@ It can be installed via:
 <!SLIDE>
 # Installing Docker with upstream packages
 
-* Preferred method.
+* Preferred method to install Docker on Linux.
 * Upstream's packages are more up-to-date than distros'.
 * Instructions per distro:
   <br/>https://docs.docker.com/engine/installation/linux/
 * Package will be named `docker-engine`.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Installing Docker with distros packages
 
 On Red Hat derivatives (Fedora, CentOS):
@@ -45,7 +45,7 @@ On Debian and derivatives:
     @@@ Sh
     $ sudo apt-get install docker.io
 
-<!SLIDE>
+<!SLIDE printonly>
 # Installation script from Docker
 
 You can use the ``curl`` command to install on several platforms:
@@ -89,8 +89,8 @@ All communication with the Docker Engine happens over the API.
 
 This will also allow to use remote Engines exactly as if they were local.
 
-<!SLIDE>
-# Aboout boot2docker
+<!SLIDE printonly>
+# About boot2docker
 
 It is a very small VM image (~30 MB).
 
@@ -100,7 +100,7 @@ Boot2Docker is not a "lite" version of Docker.
 
 ![Boot2Docker](logo.png)
 
-<!SLIDE>
+<!SLIDE printonly>
 # Check that Docker is working
 
 Using the ``docker`` client:
@@ -142,7 +142,9 @@ If you give somebody the ability to access the Docker API, you are giving them f
 
 Therefore, the Docker control socket is (by default) owned by the `docker` group, to avoid unauthorized access on multi-user machines.
 
-<!SLIDE>
+If your user is not in the `docker` group, you will need to prefix every command with `sudo`; e.g. `sudo docker version`.
+
+<!SLIDE printonly>
 # Reminder ...
 
 *Note:* if you were provided with a training VM for a hands-on
@@ -150,7 +152,7 @@ tutorial, you can skip this chapter, since that VM already
 has Docker installed, and Docker has already been setup to run
 without ``sudo``.
 
-<!SLIDE>
+<!SLIDE printonly>
 # The ``docker`` group
 
 ## Add the Docker group
@@ -173,7 +175,7 @@ without ``sudo``.
     @@@ Sh
     $ exit
 
-<!SLIDE>
+<!SLIDE printonly>
 # Check that Docker works without sudo
 
     @@@ Sh

@@ -27,7 +27,7 @@ Volumes can be declared in two different ways.
 
 In both cases, ``/var/lib/postgresql`` (inside the container) will be a volume.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Volumes bypass the copy-on-write system
 
 Volumes act as passthroughs to the host filesystem.
@@ -39,7 +39,7 @@ Volumes act as passthroughs to the host filesystem.
 * If a ``RUN`` instruction in a ``Dockerfile`` changes the content of a
   volume, those changes are not recorded neither.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Volumes can be shared across containers
 
 You can start a container with *exactly the same volumes* as another one.
@@ -84,7 +84,7 @@ Some of those volume names were explicit (vol02, vol04).
 The others (the hex IDs) were generated automatically by Docker.
 
 
-<!SLIDE>
+<!SLIDE printonly>
 # Data containers (before Engine 1.9)
 
 A *data container* is a container created for the sole purpose of referencing
@@ -101,7 +101,7 @@ It is typically created with a no-op command:
 * We used the command ``true``, possibly the simplest command in the world!
 * We named each container to reference them easily later.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Using data containers
 
 Data containers are used by other containers thanks to ``--volumes-from``.
@@ -142,16 +142,14 @@ Volumes are not anchored to a specific path.
 * Volumes are used with the `-v` option.
 * When a host path does not contain a /, it is considered to be a volume name.
 
-Let's start the same containers as before:
+If we had images `webserver`, `ftpserver`, and `lumberjack`, we could run the following example:
 
     @@@ Sh
     $ docker run -d -v files:/var/www -v logs:/var/log webserver
     $ docker run -d -v files:/home/ftp ftpserver
     $ docker run -d -v logs:/var/log lumberjack
 
-Again: volumes are not anchored to a specific path.
-
-(This can be a good or a bad thing.)
+See how volumes can be mounted to any path in the container.
 
 <!SLIDE>
 # Managing volumes explicitly
@@ -172,7 +170,10 @@ inside the container:
 Wait, we already met the last use-case in our example development workflow!
 Nice.
 
-<!SLIDE>
+    @@@ Sh
+    $ docker run -d -v /path/on/the/host:/path/in/container image ...
+
+<!SLIDE printonly>
 # Sharing a directory between the host and a container
 
 The previous example would become something like this:
@@ -189,6 +190,9 @@ Those volumes can also be shared with ``--volumes-from``.
 
 <!SLIDE>
 # Migrating data with `--volumes-from`
+
+The `--volumes-from` option tells Docker to re-use all the volumes
+of an existing container.
 
 * Scenario: migrating from Redis 2.8 to Redis 3.0.
 * We have a container (`myredis`) running Redis 2.8.
@@ -259,7 +263,7 @@ Issue a few commands.
 Ultimately, _you_ are the one responsible for logging,
 monitoring, and backup of your volumes.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Checking volumes defined by an image
 
 Wondering if an image has volumes? Just use ``docker inspect``:
@@ -275,7 +279,7 @@ Wondering if an image has volumes? Just use ``docker inspect``:
         . . .
     }]
 
-<!SLIDE>
+<!SLIDE printonly>
 # Checking volumes used by a container
 
 To look which paths are actually volumes, and to what they are bound,
@@ -317,143 +321,4 @@ We've learned how to:
 * Create and manage volumes.
 * Share volumes across containers.
 * Share a host directory with one or many containers.
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Sharing volumes across containers.
-
-1.  Create a container with a volume.
-
-         @@@ Sh
-         $ docker run -it --name alpha -v /var/log ubuntu bash
-         root@<yourContainerID>:/# date >/var/log/now
-
-2.  Start another container with the same volume.  Note the ``--volumes-from`` flag.
-
-         @@@ Sh
-         $ docker run --volumes-from alpha ubuntu cat /var/log/now
-         Fri May 30 05:06:27 UTC 2014 
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: No-op data containers.
-Try out making a data container with a no-op command such as `true`.
-
-         @@@ Sh
-         $ docker run --name wwwdata -v /var/lib/www busybox true
-         $ docker run --name wwwlogs -v /var/log/www busybox true
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Sharing a directory between the host and a container
-
-    @@@ Sh
-    $ cd
-    $ mkdir bindthis
-    $ ls bindthis
-    $ docker run -it -v $(pwd)/bindthis:/var/www/html/webapp ubuntu bash
-    root@<yourContainerID>:/# touch /var/www/html/webapp/index.html 
-    root@<yourContainerID>:/# exit
-    $ ls boundmount_demo
-    index.html 
-
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Chaining container volumes together.
-
-1. Create an initial container.
-
-         @@@ Sh
-         $ docker run -it -v /var/appvolume --name appdata ubuntu bash
-         root@<yourContainerID># 
-
-2. Create some data in our data volume.
-
-         @@@ Sh
-         root@<yourContainerID># cd /var/appvolume
-         root@<yourContainerID># echo "Hello" > data
-
-3. Exit the container.
-
-         @@@ Sh
-         root@<yourContainerID># exit
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Chaining container volumes together.
-
-1. Create a new container.
-
-         @@@ Sh
-         $ docker run -it --volumes-from appdata --name appserver1 ubuntu bash
-         root@<yourContainerID>#
-
-2. Let's view our data.
-
-         @@@ Sh
-         root@<yourContainerID># cat /var/appvolume/data
-         Hello
-
-3. Let's make a change to our data.
-
-         @@@ Sh
-         root@<yourContainerID># echo "Good bye" \
-                                 >> /var/appvolume/data
-
-4. Exit the container.
-
-         @@@ Sh
-         root@<yourContainerID># exit
-
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Chain containers with data volumes
-
-1. Create a third container.
-
-         @@@ Sh
-         $ docker run -it --volumes-from appserver1 \
-           --name appserver2 ubuntu bash
-         root@179c063af97a#
-
-2. Let's view our data.
-
-         @@@ Sh
-         root@179c063af97a# cat /var/appvolume/data
-         Hello
-         Good bye
-
-3. Exit the container.
-
-         @@@ Sh
-         root@179c063af97a# exit
-
-4. Tidy up your containers.
-
-         @@@ Sh
-         $ docker rm -v appdata appserver1 appserver2
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Sharing a single file between the host and a container
-
-
-    @@@ Sh
-    $ echo 4815162342 > /tmp/numbers
-    $ docker run -it -v /tmp/numbers:/numbers ubuntu bash
-    root@274514a6e2eb:/# cat /numbers 
-    4815162342
-
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Sharing a socket and docker binary with a container
-
-
-    @@@ Sh
-    $ docker run -it -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/docker ubuntu ./docker
-    Usage: docker [OPTIONS] COMMAND [arg...]
-
-     -H=[unix:///var/run/docker.sock]: tcp://host:port to bind/connect to or unix://path/to/socket to use
-
-    A self-sufficient runtime for linux containers.
-
-    ....
-
-Be careful: if a container can access `/var/run/docker.sock`, it will
-be able to do *anything it wants* on the host!
 

@@ -16,5 +16,5 @@
 
   - students: feel free to ask questions there
 
-  - mentors: join the channel to answer questions
+  - TAs: join the channel to answer questions
 

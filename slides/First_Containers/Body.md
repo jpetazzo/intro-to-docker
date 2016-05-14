@@ -1,4 +1,4 @@
-<!SLIDE>
+<!SLIDE printonly>
 # Docker architecture
 
 Docker is a client-server application.
@@ -128,67 +128,4 @@ What if we start a new container, and try to run `figlet` again?
 * We started a *brand new container*.
 * The basic Ubuntu image was used, and `figlet` is not here.
 * We will see in the next chapters how to bake a custom image with `figlet`.
-   
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Hello World
 
-1. Run the ``docker run`` command.
-
-        @@@ Sh
-        $ docker run busybox echo hello world
-
-2. You should see "hello world" returned to your command line.
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Install and run curl in an Ubuntu container
-
-1. Start an Ubuntu container.
-
-        @@@ Sh
-        $ docker run -it ubuntu
-        root@04c0bb0a6c07:/#
-
-2. Update the package list.
-
-        @@@ Sh
-        root@04c0bb0a6c07:/# apt-get update
-        ...
-        Fetched 1514 kB in 14s (103 kB/s)
-        Reading package lists... Done
-
-3. Install `curl`.
-
-        @@@ Sh
-        root@04c0bb0a6c07:/# apt-get install curl
-        Reading package lists... Done
-        ...
-        Do you want to continue? [Y/n] 
-
-4. Answer `Y` or just press `Enter` and wait for the package to be installed.
-
-5. Run curl!
-
-        @@@ Sh
-	root@04c0bb0a6c07:/# curl ifconfig.me/ip
-        64.134.229.24
-
-6. Exit our container.
-
-        @@@ Sh
-	root@04c0bb0a6c07:/# exit
-
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Start a new container
-
-1. Start a new container.
-
-    @@@ Sh
-    $ docker run -it ubuntu
-    root@b13c164401fb:/#
-
-2. See that `curl` is not in this new container.
-
-    @@@ Sh
-    root@b13c164401fb:/# curl
-    bash: curl: command not found

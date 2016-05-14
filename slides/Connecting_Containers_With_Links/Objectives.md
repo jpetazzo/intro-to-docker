@@ -7,7 +7,3 @@ Links were the "legacy" way of connecting containers (before the implementation 
 
 They are still useful in some scenarios.
 
-At the end of this lesson, you will be able to:
-
-* Create links between containers.
-* Use names and links to communicate across containers.

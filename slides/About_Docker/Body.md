@@ -85,7 +85,7 @@
 1. Write installation instructions into an "INSTALL.txt" file
 2. Using this file, write an "install.sh" script that works *for you*
 3. Turn this file into a "Dockerfile", test it on your machine
-4. If the Dockefile buildson your machine, it will biuld *anywhere*
+4. If the Dockefile builds on your machine, it will biuld *anywhere*
 5. Rejoice as you escape dependency hell and "works on my machine"
 
 Never again "worked in dev - ops problem now!"
@@ -114,7 +114,7 @@ Also works to create dev, integration, QA environments in minutes!
 
 Way faster and cheaper than creating VMs each time!
 
-<!SLIDE>
+<!SLIDE printonly>
 # Use container images as build artefacts
 
 1. Build your app from Dockerfiles
@@ -127,7 +127,7 @@ Way faster and cheaper than creating VMs each time!
 
 Images contain all the libraries, dependencies, etc. needed to run the app.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Decouple "plumbing" from application logic
 
 1. Write your code to connect to named services ("db", "api"...)
@@ -138,12 +138,12 @@ Images contain all the libraries, dependencies, etc. needed to run the app.
 Note: this is not covered in this intro level workshop!
 
 
-<!SLIDE>
+<!SLIDE printonly>
 # What did Docker bring to the table?
 
 ## Docker before/after
 
-<!SLIDE>
+<!SLIDE printonly>
 # Formats and APIs, before Docker
 
 * No standardized exchange format.
@@ -160,7 +160,7 @@ Analogy:
 * They are steel boxes that are a standard size,
   <br/>with the same hooks and holes.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Formats and APIs, after Docker
 
 * Standardize the container format, because containers were not portable.
@@ -168,7 +168,7 @@ Analogy:
 * Emphasis on re-usable components, APIs, ecosystem of standard tools.
 * Improvement over ad-hoc, in-house, specific tools.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Shipping, before Docker
 
 * Ship packages: deb, rpm, gem, jar, homebrew...
@@ -176,7 +176,7 @@ Analogy:
 * "Works on my machine."
 * Base deployment often done from scratch (debootstrap...) and unreliable.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Shipping, after Docker
 
 * Ship container images with all their dependencies.
@@ -184,7 +184,7 @@ Analogy:
 * Only ship layers that have changed.
 * Save disk, network, memory usage.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Example
 
 Layers:
@@ -196,7 +196,7 @@ Layers:
 * Application JAR
 * Configuration
 
-<!SLIDE>
+<!SLIDE printonly>
 # Devs vs Ops, before Docker
 
 * Drop a tarball (or a commit hash) with instructions.
@@ -207,7 +207,7 @@ Layers:
 * ... or bounce it back to devs.
 * Shipping code causes frictions and delays.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Devs vs Ops, after Docker
 
 * Drop a container image or a Compose file.
@@ -220,7 +220,7 @@ Layers:
 * Devs can be empowered to make releases themselves
   more easily.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Clean separation of concerns
 
 ![sepcon](sepcon.png)
@@ -240,10 +240,10 @@ Layers:
 Containers have been around for a *very long time* indeed.
 
 
-<!SLIDE>
+<!SLIDE printonly>
 # VPS-olithic period (until 2007-2008)
 
-<!SLIDE>
+<!SLIDE printonly>
 # Containers = cheaper than VMs
 
 ![lightcont](lightcont.png)
@@ -251,10 +251,10 @@ Containers have been around for a *very long time* indeed.
 * Users: hosting providers.
 * Highly specialized audience with strong ops culture.
 
-<!SLIDE>
+<!SLIDE printonly>
 # PaaS-olithic period (2008-2013)
 
-<!SLIDE>
+<!SLIDE printonly>
 # Containers = easier than VMs
 
 ![heroku 2007](heroku-first-homepage.png)
@@ -283,7 +283,7 @@ Containers have been around for a *very long time* indeed.
 * The same year, dotCloud changes name to Docker.
 * In 2014, the PaaS activity is sold.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Docker early days (2013-2014)
 
 <!SLIDE>
@@ -294,7 +294,7 @@ Containers have been around for a *very long time* indeed.
 * CI platforms
 * developers, developers, developers, developers
 
-<!SLIDE>
+<!SLIDE printonly>
 # Positive feedback loop
 
 * In 2013, the technology under containers (cgroups, namespaces, copy-on-write storage...)
@@ -304,10 +304,10 @@ Containers have been around for a *very long time* indeed.
 * Any decent hosting/cloud provider can run containers today.
 * Containers become a great tool to deploy/move workloads to/from on-prem/cloud.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Maturity (2015-2016)
 
-<!SLIDE>
+<!SLIDE printonly>
 # Docker becomes an industry standard
 
 * Docker reaches the symbolic 1.0 milestone.

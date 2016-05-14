@@ -37,7 +37,7 @@ Or self-hosted image:
     @@@ docker
     FROM localhost:5000/funtoo
 
-<!SLIDE>
+<!SLIDE printonly>
 # More about ``FROM``
 
 * The ``FROM`` instruction can be specified more than once to build
@@ -59,7 +59,7 @@ Or self-hosted image:
 
     E.g.: ``ubuntu:14.04``.
 
-<!SLIDE>
+<!SLIDE printonly>
 # A use case for multiple ``FROM`` lines
 
 * Integrate CI and unit tests in the build system
@@ -242,6 +242,10 @@ Volumes can be attached to multiple containers, allowing to
 "port" data over from a container to another, e.g. to
 upgrade a database to a newer version.
 
+It is possible to start a container in "read-only" mode.
+The container filesystem will be made read-only, but volumes
+can still have read/write access if necessary.
+
 <!SLIDE>
 # The ``WORKDIR`` instruction
 
@@ -321,7 +325,7 @@ The second executes directly, without shell processing:
     @@@ docker
     CMD [ "nginx", "-g", "daemon off;" ]
 
-<!SLIDE>
+<!SLIDE printonly>
 # Overriding the ``CMD`` instruction
 
 The ``CMD`` can be overridden when you run a container.
@@ -350,7 +354,7 @@ If we were to run:
 
 Instead of trying to run ``-l``, the container will run ``/bin/ls -l``.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Overriding the ``ENTRYPOINT`` instruction
 
 The entry point can be overriden as well.
@@ -381,7 +385,7 @@ override the options when needed.
 
 This will override the options ``CMD`` provided with new flags.
 
-<!SLIDE>
+<!SLIDE printonly>
 # The ``ONBUILD`` instruction
 
 The ``ONBUILD`` instruction is a trigger. It sets instructions that will
@@ -411,11 +415,8 @@ to build other images.
 The dependencies are reinstalled every time, because the build system does not know if ``requirements.txt`` has been updated.
 
         @@@ Sh
-        FROM ubuntu:14.04
+        FROM python
         MAINTAINER Docker Education Team <education@docker.com>
-        RUN apt-get update
-        RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
-            python-all python-pip 
         COPY . /src/
         WORKDIR /src
         RUN pip install -qr requirements.txt
@@ -428,154 +429,11 @@ The dependencies are reinstalled every time, because the build system does not k
 Adding the dependencies as a separate step means that Docker can cache more efficiently and only install them when ``requirements.txt`` changes.
 
         @@@ sh
-        FROM ubuntu:14.04
+        FROM python
         MAINTAINER Docker Education Team <education@docker.com>
-        RUN apt-get update
-        RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q \
-            python-all python-pip 
         COPY ./requirements.txt /tmp/requirements.txt
         RUN pip install -qr /tmp/requirements.txt
         COPY . /src/
         WORKDIR /src
         EXPOSE 5000
         CMD ["python", "app.py"]
-
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Building your own ``Dockerfile``
-
-1. Create a directory to hold our ``Dockerfile``.
-
-        @@@ Sh
-        $ mkdir web_image
-
-2. Create a ``Dockerfile`` inside this directory.
-
-        @@@ Sh
-        $ cd web_image
-        $ touch Dockerfile
-
-3. Edit our ``Dockerfile``.
-
-        @@@ Sh
-        $ vim Dockerfile
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Adding ``FROM`` and ``MAINTAINER`` instructions
-
-1. Let's start with a ``FROM`` instruction.
-
-        @@@ docker
-        FROM ubuntu:14.04
-
-2. Add a ``MAINTAINER`` instruction.
-
-         @@@ docker
-         MAINTAINER Your Name <your@email.com>
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Installing some packages to support our application
-
-1. Update, install some required packages, and add a simple site to be served, using the ``RUN`` instruction.
-
-         @@@ docker
-         RUN apt-get update
-         RUN apt-get install -y nginx
-         RUN echo 'Hi, I am in your container' \
-             >/usr/share/nginx/html/index.html
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Install our web application.
-
-1. Set the `CMD` instruction using the array notation.  This will be run when
-the container is started.
-
-        @@@ docker
-        CMD ["nginx", "-g", "daemon off;"]
-
-2. Lastly, use `EXPOSE` to expose port 80.
-
-        @@@ docker
-        EXPOSE 80
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Building our web application image.
-
-1. Use ``docker build`` to build our image.
-
-        @@@ Sh
-        $ docker build -t <dockerhubUsername>/web_image .
-
-2. Review the build image with ``docker image``.
-
-        @@@ Sh
-        $ docker image <dockerhubUsername>/web_image
-        REPOSITORY                    TAG     IMAGE ID      CREATED        VIRTUAL SIZE
-        <dockerhubUsername>/web_image latest  e2a9fac29d86  12 seconds ago 246.8 MB
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Overriding the ``CMD`` instruction
-
-1. Specify a command to run instead of the ``CMD`` defined when doing ``docker
-   run``:
-
-        @@@Sh
-        docker run -it <dockerhubUsername>/web_image bash
-
-   This overrides the default ``CMD``.
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Overriding the ``ENTRYPOINT`` instruction
-
-1.  Specify a command to run instead of the ``ENTRYPOINT`` defined in the
-    Dockerfile.
-
-    Without ``--entrypoint``:
-
-        @@@ Sh
-        $ docker run -it training/ls
-        bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
-        boot  etc  lib   media  opt  root  sbin  sys  usr
-
-    With ``--entrypoint``:
-
-        @@@ Sh
-        $ docker run -it --entrypoint bash training/ls
-        root@d902fb7b1fc7:/#
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Running a container from our image
-
-1. Now let's run a container from our new image using the ``docker run``
-   command.  The ``-P`` automatically maps all ports exposed in an image to 
-   random ports on the host.
-
-        @@@ Sh
-        $ docker run -d -P <dockerhubUsername>/web_image
-
-
-2. Now checkout our running container using the ``docker ps`` command. The 
-   ``-l`` flag returns the last container created.
-
-        @@@ Sh
-        $ docker ps -l
-
-3. You should see something like:
-
-         @@@ Sh
-         CONTAINER ID IMAGE                                COMMAND              CREATED       STATUS       PORTS                 NAMES
-         25af0d10060f <dockerhubUsername>/web_image:latest nginx -g daemon off; 2 minutes ago Up 2 minutes 0.0.0.0:49162->80/tcp tender_newton
-
-   Make a note of the port number port ``5000`` is being redirected to.
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Using our web application
-
-1. Open a browser and browse to the redirected port on the Docker host.
-
-         @@@ Sh
-         http://<yourHostIP>:redirectedport
-
-2. You should see something like.
-
-![webapp](webapp.png)

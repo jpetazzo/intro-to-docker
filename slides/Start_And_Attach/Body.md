@@ -26,7 +26,7 @@ What does `-it` stand for?
 * `-t` means "allocate a terminal."
 * `-i` means "connect stdin to the terminal."
 
-<!SLIDE>
+<!SLIDE printonly>
 # Specifying a custom detach sequence
 
 * You don't like `^P^Q`? No problem!
@@ -45,7 +45,7 @@ Check that our container is still running:
     @@@ Sh
     $ docker ps -l
 
-<!SLIDE>
+<!SLIDE printonly>
 # Attaching to a container
 
 You can attach to a container:
@@ -100,6 +100,9 @@ You can re-attach to it if you want to interact with it:
 
     @@@ Sh
     $ docker attach <yourContainerID>
+
+Use `docker ps -a` to identify the container ID of a previous `jpetazzo/clock` container,
+and try those commands.
 
 <!SLIDE>
 # Attaching to a REPL

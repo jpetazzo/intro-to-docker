@@ -1,11 +1,9 @@
 <!SLIDE>
 # The Container Network Model
 
-The CNM was introduced in Engine 1.9.0.
+The CNM was introduced in Engine 1.9.0 (November 2015).
 
-DON'T PANIC: all the previous drivers shown in the previous chapter are still available.
-
-Docker now has the notion of a *network*, and a new top-level command to manipulate and see those networks: `docker network`.
+The CNM adds he notion of a *network*, and a new top-level command to manipulate and see those networks: `docker network`.
 
     @@@ Sh
     $ docker network ls
@@ -13,9 +11,8 @@ Docker now has the notion of a *network*, and a new top-level command to manipul
     6bde79dfcf70        bridge              bridge
     8d9c78725538        none                null
     eb0eeab782f4        host                host
-    4c1ff84d6d3f        skynet              bridge
-    228a4355d548        darknet             overlay
-    3f1733d3e233        darkernet           overlay
+    4c1ff84d6d3f        blog-dev            overlay
+    228a4355d548        blog-prod           overlay
 
 <!SLIDE>
 # What's in a network?
@@ -33,10 +30,10 @@ Docker now has the notion of a *network*, and a new top-level command to manipul
 <!SLIDE>
 # Creating a network
 
-Let's create a network.
+Let's create a network called `dev`.
 
     @@@ Sh
-    $ docker network create skynet
+    $ docker network create dev
     4c1ff84d6d3f1733d3e233ee039cac276f425a9d5228a4355d54878293a889ba
 
 The network is now visible with the `network ls` command:
@@ -47,52 +44,50 @@ The network is now visible with the `network ls` command:
     6bde79dfcf70        bridge              bridge
     8d9c78725538        none                null
     eb0eeab782f4        host                host
-    4c1ff84d6d3f        skynet              bridge
+    4c1ff84d6d3f        dev                 bridge
 
 <!SLIDE>
 # Placing containers on a network
 
-We will create two *named* containers on this network.
+We will create a *named* container on this network.
 
-First, let's create this container in the background.
+It will be reachable with its name, `search`.
 
     @@@ Sh
-    $ docker run -dti --name t800 --net skynet alpine sh
+    $ docker run -d --name search --net dev elasticsearch
     8abb80e229ce8926c7223beb69699f5f34d6f1d438bfc5682db893e798046863
-
-Now, create this other container in the foreground.
-
-    @@@ Sh
-    $ docker run -ti --name t1000 --net skynet ubuntu
-    root@0ecccdfa45ef:/#
 
 <!SLIDE>
 # Communication between containers
 
-From our new container (t1000), we can resolve and ping the other one, using its assigned name:
+Now, create another container on this network.
 
     @@@ Sh
-    root@0ecccdfa45ef:/# ping t800
-    PING t800 (172.18.0.2) 56(84) bytes of data.
-    64 bytes from t800 (172.18.0.2): icmp_seq=1 ttl=64 time=0.221 ms
-    64 bytes from t800 (172.18.0.2): icmp_seq=2 ttl=64 time=0.114 ms
-    64 bytes from t800 (172.18.0.2): icmp_seq=3 ttl=64 time=0.114 ms
+    $ docker run -ti --net dev ubuntu
+    root@0ecccdfa45ef:/#
+
+From this new container, we can resolve and ping the other one, using its assigned name:
+
+    @@@ Sh
+    root@0ecccdfa45ef:/# ping search
+    PING search (172.18.0.2) 56(84) bytes of data.
+    64 bytes from search.dev (172.18.0.2): icmp_seq=1 ttl=64 time=0.221 ms
+    64 bytes from search.dev (172.18.0.2): icmp_seq=2 ttl=64 time=0.114 ms
+    64 bytes from search.dev (172.18.0.2): icmp_seq=3 ttl=64 time=0.114 ms
     ^C
-    --- t800 ping statistics ---
+    --- search ping statistics ---
     3 packets transmitted, 3 received, 0% packet loss, time 2000ms
     rtt min/avg/max/mdev = 0.114/0.149/0.221/0.052 ms
     root@0ecccdfa45ef:/#
 
-How did that work?
-
-<!SLIDE>
+<!SLIDE printonly>
 # Resolving container addresses
 
 In Docker Engine 1.9, name resolution is implemented with /etc/hosts, and
 updating it each time containers are added/removed.
 
     @@@ Sh
-    root@0ecccdfa45ef:/# cat /etc/hosts
+    [root@0ecccdfa45ef /]# cat /etc/hosts
     172.18.0.3  0ecccdfa45ef
     127.0.0.1       localhost
     ::1     localhost ip6-localhost ip6-loopback
@@ -100,92 +95,12 @@ updating it each time containers are added/removed.
     ff00::0 ip6-mcastprefix
     ff02::1 ip6-allnodes
     ff02::2 ip6-allrouters
-    172.18.0.2      t800
-    172.18.0.2      t800.skynet
+    172.18.0.2      search
+    172.18.0.2      search.dev
 
 In Docker Engine 1.10, this has been replaced by a dynamic resolver.
 
 (This avoids race conditions when updating /etc/hosts.)
-
-<!SLIDE>
-# Connecting to multiple networks
-
-Let's create another network.
-
-    @@@ Sh
-    $ docker network create resistance
-    955b84336816b8e2265a156905aa716f5d1d880516ceaba48b9331f8f4e706aa
-
-Create a container in this network.
-
-    @@@ Sh
-    $ docker run --net resistance -ti --name sarahconnor ubuntu
-    root@4937d654a579:/# 
-
-This container cannot ping t800 (try it).
-
-Now, from another terminal, connect t800 to the resistance:
-
-    @@@ Sh
-    $ docker network connect resistance t800
-
-Then try again to ping t800 from sarahconnor. It works!
-
-<!SLIDE>
-# Implementation details
-
-With the "bridge" network driver, each container joining a network receives a new virtual interface.
-
-Each container receives a new virtual interface:
-
-    @@@ Sh
-    $ docker run --net container:t800 alpine ip a
-    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
-        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-        inet 127.0.0.1/8 scope host lo
-           valid_lft forever preferred_lft forever
-        inet6 ::1/128 scope host 
-           valid_lft forever preferred_lft forever
-    73: eth0@if74: <BROADCAST,MULTICAST,...> mtu 1500 qdisc noqueue state UP 
-        link/ether 02:42:ac:12:00:02 brd ff:ff:ff:ff:ff:ff
-        inet 172.18.0.2/16 scope global eth0
-           valid_lft forever preferred_lft forever
-        inet6 fe80::42:acff:fe12:2/64 scope link 
-           valid_lft forever preferred_lft forever
-    84: eth1@if85: <BROADCAST,MULTICAST,...> mtu 1500 qdisc noqueue state UP 
-        link/ether 02:42:ac:13:00:03 brd ff:ff:ff:ff:ff:ff
-        inet 172.19.0.3/16 scope global eth1
-           valid_lft forever preferred_lft forever
-        inet6 fe80::42:acff:fe13:3/64 scope link 
-           valid_lft forever preferred_lft forever
-
-<!SLIDE>
-# Custom networks
-
-* When creating a network, extra options can be provided.
-* `--internal` disables outbound traffic (the network won't have a default gateway).
-* `--gateway` indicates which address to use for the gateway (when utbound traffic is allowed).
-* `--subnet` (in CIDR notation) indicates the subnet to use.
-* `--ip-range` (in CIDR notation) indicates the subnet to allocate from.
-* `--aux-address` allows to specify a list of reserved addresses (which won't be allocated to containers).
-
-<!SLIDE>
-# Setting containers' IP address
-
-* It is possible to set a container's address with `--ip`.
-* The IP address has to be within the subnet used for the container.
-
-A full example would look like this.
-
-    @@@ Sh
-    $ docker network create --subnet 10.66.0.0/16 pubnet
-    42fb16ec412383db6289a3e39c3c0224f395d7f85bcb1859b279e7a564d4e135
-    $ docker run --net pubnet --ip 10.66.66.66 -d nginx
-    b2887adeb5578a01fd9c55c435cad56bbbe802350711d2743691f95743680b09
-
-*Note: don't hard code container IP addresses in your code!*
-
-*I repeat: don't hard code container IP addresses in your code!*
 
 <!SLIDE>
 # Connecting multiple containers together
@@ -193,7 +108,7 @@ A full example would look like this.
 * Let's try to run an application that requires two containers.
 * The first container is a web server.
 * The other one is a redis data store.
-* We will place them both on the `skynet` network created before.
+* We will place them both on the `dev` network created before.
 
 <!SLIDE>
 # Running the web server
@@ -204,7 +119,7 @@ A full example would look like this.
 Start the container, exposing all its ports:
 
     @@@ Sh
-    $ docker run --net skynet -d -P jpetazzo/trainingwheels
+    $ docker run --net dev -d -P jpetazzo/trainingwheels
 
 Check the port that has been allocated to it:
 
@@ -233,7 +148,7 @@ Note: we're not using a FQDN or an IP address here; just `redis`.
 Start the container:
 
     @@@ Sh
-    $ docker run --net skynet --name redis -d redis
+    $ docker run --net dev --name redis -d redis
 
 <!SLIDE>
 # Test the web server again
@@ -259,10 +174,89 @@ Let's remove the `redis` container:
 And create one that doesn't block the `redis` name:
 
     @@@ Sh
-    $ docker run --net skynet --net-alias redis -d redis
+    $ docker run --net dev --net-alias redis -d redis
 
 Check that the app still works (but the counter is back to 1,
 since we wiped out the old Redis container).
+
+<!SLIDE printonly>
+# Names are *local* to each network
+
+Let's try to ping our `search` container from another container, when that other container is *not* on the `dev` network.
+
+    @@@ Sh
+    $ docker run --rm alpine ping search
+    ping: bad address 'search'
+
+Names can be resolved only when containers are on the same network.
+
+Containers can contact each other only when they are on the same network (you can try to ping using the IP address to verify).
+
+<!SLIDE printonly>
+# Network aliases
+
+We would like to have another network, `prod`, with its own `search` container. But there can be only one container named `search`!
+
+We will use *network aliases*.
+
+A container can have multiple network aliases.
+
+Network aliases are *local* to a given network (only exist in this network).
+
+Multiple containers can have the same network alias (even on the same network). In Docker Engine 1.11, resolving a network alias yields the IP addresses of all containers holding this alias.
+
+<!SLIDE printonly>
+# Creating containers on another network
+
+Create the `prod` network.
+
+    @@@ Sh
+    $ docker create network prod
+    5a41562fecf2d8f115bedc16865f7336232a04268bdf2bd816aecca01b68d50c
+
+We can now create multiple containers with the `search` alias on the new `prod` network.
+
+    @@@ Sh
+    $ docker run -d --name prod-es-1 --net-alias search --net prod elasticsearch
+    38079d21caf0c5533a391700d9e9e920724e89200083df73211081c8a356d771
+    $ docker run -d --name prod-es-2 --net-alias search --net prod elasticsearch
+    1820087a9c600f43159688050dcc164c298183e1d2e62d5694fd46b10ac3bc3d
+
+<!SLIDE printonly>
+# Resolving network aliases
+
+Let's try DNS resolution first, using the `nslookup` tool that ships with the `alpine` image.
+
+    @@@ Sh
+    $ docker run --net prod --rm alpine nslookup search
+    Name:      search
+    Address 1: 172.23.0.3 prod-es-2.prod
+    Address 2: 172.23.0.2 prod-es-1.prod
+
+(You can ignore the `can't resolve '(null)'` errors.)
+
+<!SLIDE printonly>
+# Connecting to aliased containers
+
+Each ElasticSearch instance has a name (generated when it is started). This name can be seen when we issue a simple HTTP request on the ElasticSearch API endpoint.
+
+Try the following command a few times:
+
+    @@@ Sh
+    $ docker run --rm --net dev centos curl -s search:9200
+    {
+      "name" : "Tarot",
+    ...
+    }
+
+Then try it a few times by replacing `--net dev` with `--net prod`:
+
+    @@@ Sh
+    $ docker run --rm --net prod centos curl -s search:9200
+    {
+      "name" : "The Symbiote",
+    ...
+    }
 
 <!SLIDE>
 # Good to know ...
@@ -275,6 +269,49 @@ since we wiped out the old Redis container).
 
 Engine 1.11 allows DNS round-robin, providing a cheap way of load balancing traffic across multiple containers.
 
+<!SLIDE printonly>
+# A few words about round robin DNS
+
+Don't rely exclusively on round robin DNS to achieve load balancing.
+
+Many factors can affect DNS resolution, and you might see:
+
+- all traffic going to a single instance;
+- traffic being split (unevenly) between some instances;
+- different behavior depending on your application language;
+- different behavior depending on your base distro;
+- different behavior depending on other factors (sic).
+
+It's OK to use DNS to discover available endpoints, but remember that you have to re-resolve every now and then to discover new endpoints.
+
+<!SLIDE printonly>
+# Custom networks
+
+* When creating a network, extra options can be provided.
+* `--internal` disables outbound traffic (the network won't have a default gateway).
+* `--gateway` indicates which address to use for the gateway (when utbound traffic is allowed).
+* `--subnet` (in CIDR notation) indicates the subnet to use.
+* `--ip-range` (in CIDR notation) indicates the subnet to allocate from.
+* `--aux-address` allows to specify a list of reserved addresses (which won't be allocated to containers).
+
+<!SLIDE printonly>
+# Setting containers' IP address
+
+* It is possible to set a container's address with `--ip`.
+* The IP address has to be within the subnet used for the container.
+
+A full example would look like this.
+
+    @@@ Sh
+    $ docker network create --subnet 10.66.0.0/16 pubnet
+    42fb16ec412383db6289a3e39c3c0224f395d7f85bcb1859b279e7a564d4e135
+    $ docker run --net pubnet --ip 10.66.66.66 -d nginx
+    b2887adeb5578a01fd9c55c435cad56bbbe802350711d2743691f95743680b09
+
+*Note: don't hard code container IP addresses in your code!*
+
+*I repeat: don't hard code container IP addresses in your code!*
+
 <!SLIDE>
 # Overlay networks
 
@@ -284,7 +321,7 @@ Engine 1.11 allows DNS round-robin, providing a cheap way of load balancing traf
 * Other plugins (Weave, Calico...) can provide overlay networks as well.
 * Once you have an overlay network, *all the features that we've used in this chapter work identically.*
 
-<!SLIDE>
+<!SLIDE printonly>
 # Multi-host networking (overlay)
 
 Out of the scope for this intro-level workshop!
@@ -304,7 +341,7 @@ ping as if they were local.
 The overlay network is based on VXLAN and stores neighbor info
 in the key/value store.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Multi-host networking (plugins)
 
 Out of the scope for this intro-level workshop!

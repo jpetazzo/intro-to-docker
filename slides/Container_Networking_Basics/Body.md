@@ -104,7 +104,7 @@ There are (at least) three ways to integrate containers in your network.
   <br/>Then start your container by setting the port numbers manually.
 * Use a network plugin, connecting your containers with e.g. VLANs, tunnels...
 
-<!SLIDE>
+<!SLIDE printonly>
 # Finding the container's IP address
 
 We can use the `docker inspect` command to find the IP address of the
@@ -119,7 +119,7 @@ container.
 * Here, we provide it with a format string to extract exactly the
   private IP address of the container.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Pinging our container
 
 We can test connectivity to the container using the IP address we've
@@ -199,67 +199,3 @@ We've learned how to:
 
 In the next chapter, we will see how to connect
 containers together without exposing their ports.
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Create a container
-
-1. Create a new container.
-
-         @@@ Sh
-         $ docker run -d -p 80 training/webapp python -m SimpleHTTPServer 80
-
-2. Make a note of the container ID.
-
-3. Check the container is running.
-
-         @@@ Sh
-         $ docker ps
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Checking the container's port mapping
-
-1. Retrieve the container's port mapping.
-
-         @@@ Sh
-         $ docker port <yourContainerId> 80
-
-2. Note also that you can get this information using ``docker inspect -f``:
-
-         @@@ Sh
-         $ docker inspect -f "{{ json .NetworkSettings.Ports }}" <yourContainerID>
-         {"5000/tcp":null,"80/tcp":[{"HostIp":"0.0.0.0","HostPort":"49153"}]}
-
-2. Make a note of the port number returned.
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Browse to the web server
-
-1. Browse to the URL.
-
-        @@@ Sh
-        http://<yourHostIP>:<portNumber>
-
-2. You should see a directory listing for your container.
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Finding the container's IP address
-
-1. Now retrieve the container's IP address.
-
-        @@@ Sh
-        $ docker inspect --format \
-          '{{ .NetworkSettings.IPAddress }}' \
-          <yourContainerId>
-
-2. Make a note of the IP address returned.
-
-3. Ping the IP address.
-
-        @@@ Sh
-        $ ping <ipAddress>
-
-4. You should see a response.
-
-        @@@ Sh
-        64 bytes from <ipAddress>: icmp_req=2 ttl=64 time=0.085 ms
-        64 bytes from <ipAddress>: icmp_req=2 ttl=64 time=0.085 ms
