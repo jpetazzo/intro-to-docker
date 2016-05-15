@@ -3,7 +3,7 @@
 
 The CNM was introduced in Engine 1.9.0 (November 2015).
 
-The CNM adds he notion of a *network*, and a new top-level command to manipulate and see those networks: `docker network`.
+The CNM adds the notion of a *network*, and a new top-level command to manipulate and see those networks: `docker network`.
 
     @@@ Sh
     $ docker network ls
@@ -83,7 +83,7 @@ From this new container, we can resolve and ping the other one, using its assign
 <!SLIDE printonly>
 # Resolving container addresses
 
-In Docker Engine 1.9, name resolution is implemented with /etc/hosts, and
+In Docker Engine 1.9, name resolution is implemented with `/etc/hosts`, and
 updating it each time containers are added/removed.
 
     @@@ Sh
@@ -100,7 +100,7 @@ updating it each time containers are added/removed.
 
 In Docker Engine 1.10, this has been replaced by a dynamic resolver.
 
-(This avoids race conditions when updating /etc/hosts.)
+(This avoids race conditions when updating `/etc/hosts`.)
 
 <!SLIDE>
 # Connecting multiple containers together

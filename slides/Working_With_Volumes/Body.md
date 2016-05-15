@@ -233,7 +233,7 @@ Stop the Redis container.
 Start the new Redis container.
 
     @@@ Sh
-    $ docker run -d --name redis30 --volume-from redis28 redis:3.0
+    $ docker run -d --name redis30 --volumes-from redis28 redis:3.0
 
 <!SLIDE>
 # Testing the new Redis
@@ -256,7 +256,7 @@ Issue a few commands.
 * With Engine versions prior 1.9, volumes would be *orphaned* when the last container referencing them is destroyed.
 * Orphaned volumes are not deleted, but you cannot access them.
 
-    (Unless you do some serious archeology in `/var/lib/docker`.)
+    (Unless you do some serious archaeology in `/var/lib/docker`.)
 
 * Since Engine 1.9, orphaned volumes can be listed with `docker volume ls` and mounted to containers with `-v`.
 
