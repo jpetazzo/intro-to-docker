@@ -134,7 +134,7 @@ It is possible to execute multiple commands in a single step:
     @@@ docker
     RUN apt-get update && apt-get install -y wget && apt-get clean
 
-It is also possible to break a command on multiple lines:
+It is also possible to break a command onto multiple lines:
 
 It is possible to execute multiple commands in a single step:
 
@@ -407,7 +407,7 @@ to build other images.
 * Each line in a ``Dockerfile`` creates a new layer.
 * Build your ``Dockerfile`` to take advantage of Docker's caching system.
 * Combine multiple similar commands into one by using ``&&`` to continue commands and ``\\`` to wrap lines.
-* ``COPY`` dependency lists (``package.json``,``requirements.txt``, etc.) by themselves to avoid reinstalling unchanged dependencies every time.
+* ``COPY`` dependency lists (``package.json``, ``requirements.txt``, etc.) by themselves to avoid reinstalling unchanged dependencies every time.
 
 <!SLIDE>
 # Example "bad" ``Dockerfile``

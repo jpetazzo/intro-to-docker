@@ -16,7 +16,7 @@ This container just displays the time every second.
 * To stop it, press `^C`.
 * Docker has automatically downloaded the image `jpetazzo/clock`.
 * This image is a user image, created by `jpetazzo`.
-* We will tell more about user images (and other types of images) later.
+* We will hear more about user images (and other types of images) later.
 
 <!SLIDE>
 # Run a container in the background
@@ -61,7 +61,7 @@ Let's start two more containers.
     $ docker run -d jpetazzo/clock
     068cc994ffd0190bbe025ba74e4c0771a5d8f14734af772ddee8dc1aaf20567d
 
-Check that `docker ps` correctly reports our 3 containers.
+Check that `docker ps` correctly reports all 3 containers.
 
 <!SLIDE>
 # Two useful flags for `docker ps`

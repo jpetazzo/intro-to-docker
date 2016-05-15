@@ -170,7 +170,7 @@ The driver is selected with `docker run --net ...`.
 
 * Container is started with `docker run --net host ...`
 * It sees (and can access) the network interfaces of the host.
-* it can bind any address, any port (for ill and for good).
+* It can bind any address, any port (for ill and for good).
 * Network traffic doesn't have to go through NAT, bridge, or veth.
 * Performance = native!
 
