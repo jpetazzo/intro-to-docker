@@ -63,7 +63,7 @@ It will be reachable with its name, `search`.
 Now, create another container on this network.
 
     @@@ Sh
-    $ docker run -ti --net dev ubuntu
+    $ docker run -ti --net dev alpine
     root@0ecccdfa45ef:/#
 
 From this new container, we can resolve and ping the other one, using its assigned name:
