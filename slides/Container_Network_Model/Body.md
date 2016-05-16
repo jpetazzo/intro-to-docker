@@ -63,13 +63,13 @@ It will be reachable with its name, `search`.
 Now, create another container on this network.
 
     @@@ Sh
-    $ docker run -ti --net dev alpine
+    $ docker run -ti --net dev alpine sh
     root@0ecccdfa45ef:/#
 
 From this new container, we can resolve and ping the other one, using its assigned name:
 
     @@@ Sh
-    root@0ecccdfa45ef:/# ping search
+    / # ping search
     PING search (172.18.0.2) 56(84) bytes of data.
     64 bytes from search.dev (172.18.0.2): icmp_seq=1 ttl=64 time=0.221 ms
     64 bytes from search.dev (172.18.0.2): icmp_seq=2 ttl=64 time=0.114 ms
