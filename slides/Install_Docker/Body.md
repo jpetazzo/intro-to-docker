@@ -108,21 +108,29 @@ Using the ``docker`` client:
     @@@ Sh
     $ docker version
     Client:
-     Version:      1.9.0
-     API version:  1.21
-     Go version:   go1.4.2
-     Git commit:   76d6bc9
-     Built:        Tue Nov  3 17:29:38 UTC 2015
+     Version:      1.11.1
+     API version:  1.23
+     Go version:   go1.5.4
+     Git commit:   5604cbe
+     Built:        Tue Apr 26 23:38:55 2016
      OS/Arch:      linux/amd64
 
     Server:
-     Version:      1.9.0
-     API version:  1.21
-     Go version:   go1.4.2
-     Git commit:   76d6bc9
-     Built:        Tue Nov  3 17:29:38 UTC 2015
+     Version:      1.11.1
+     API version:  1.23
+     Go version:   go1.5.4
+     Git commit:   5604cbe
+     Built:        Tue Apr 26 23:38:55 2016
      OS/Arch:      linux/amd64
 
+<!SLIDE>
+# Docker Mac and Docker Windows
+
+* Docker Mac and Docker Windows are new products, now in private beta
+* They let you run Docker without VirtualBox
+* They are installed like normal applications (think QEMU, but faster)
+* If you want to get access to the beta: register on [beta.docker.com](http://beta.docker.com/),
+  <br/>and ping us after the workshop
 
 <!SLIDE center>
 # Su-su-sudo
@@ -181,20 +189,21 @@ without ``sudo``.
     @@@ Sh
     $ docker version
     Client:
-     Version:      1.9.0
-     API version:  1.21
-     Go version:   go1.4.2
-     Git commit:   76d6bc9
-     Built:        Tue Nov  3 17:29:38 UTC 2015
+     Version:      1.11.1
+     API version:  1.23
+     Go version:   go1.5.4
+     Git commit:   5604cbe
+     Built:        Tue Apr 26 23:38:55 2016
      OS/Arch:      linux/amd64
 
     Server:
-     Version:      1.9.0
-     API version:  1.21
-     Go version:   go1.4.2
-     Git commit:   76d6bc9
-     Built:        Tue Nov  3 17:29:38 UTC 2015
+     Version:      1.11.1
+     API version:  1.23
+     Go version:   go1.5.4
+     Git commit:   5604cbe
+     Built:        Tue Apr 26 23:38:55 2016
      OS/Arch:      linux/amd64
+
 
 <!SLIDE>
 # Section summary

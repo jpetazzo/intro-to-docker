@@ -93,20 +93,17 @@ We will explain both methods in a moment.
 
 There are three namespaces:
 
-* Root-like
+* Official images
 
-        @@@ Sh
-        ubuntu
+    e.g. `ubuntu`, `busybox` ...
 
-* User (and organizations)
+* User (and organizations) images
 
-        @@@ Sh
-        jpetazzo/clock
+    e.g. `jpetazzo/clock`
 
-* Self-Hosted
+* Self-hosted images
 
-        @@@ Sh
-        registry.example.com:5000/my-private-image
+    e.g. `registry.example.com:5000/my-private/image`
 
 Let's explain each of them.
 
@@ -157,15 +154,8 @@ For example:
     @@@ Sh
     localhost:5000/wordpress
 
-The remote host and port is:
-
-    @@@ Sh
-    localhost:5000
-
-The image name is:
-
-    @@@ Sh
-    wordpress
+* `localhost:5000` is the host and port of the registry
+* `wordpress` is the name of the image
 
 <!SLIDE>
 # How do you store and manage images?
