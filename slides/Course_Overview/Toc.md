@@ -20,7 +20,7 @@
 - Container Network Model
 - Connecting Containers with Links
 - Ambassadors
-- Local Development Work flow with Docker
+- Local Development Workflow with Docker
 - Working with Volumes
 - Compose For Development Stacks
 

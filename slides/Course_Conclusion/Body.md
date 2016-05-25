@@ -8,7 +8,7 @@ During this class, we:
 * Learned about images.
 * Got an understanding about how to manage connectivity and data in
   Docker containers.
-* Learned how to integrate Docker into your daily work flow.
+* Learned how to integrate Docker into your daily workflow.
 
 <!SLIDE>
 # Questions & Next Steps #
