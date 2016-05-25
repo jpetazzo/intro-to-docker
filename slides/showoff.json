@@ -10,8 +10,8 @@
     "sections": [
 
         "Course_Overview/Cover.md",
-        "Course_Overview/Objectives.md",
-        "Course_Overview/Body.md",
+        "Course_Overview/Intro.md",
+        "Course_Overview/Toc.md",
 
         "About_Docker/Cover.md",
         "About_Docker/Objectives.md",
@@ -57,6 +57,10 @@
         "Copying_Files_During_Build/Objectives.md",
         "Copying_Files_During_Build/Body.md",
 
+        "Dockerfile_Reference/Cover.md",
+        "Dockerfile_Reference/Objectives.md",
+        "Dockerfile_Reference/Body.md",
+
         "Docker_Hub_Tease/Cover.md",
         "Docker_Hub_Tease/Objectives.md",
         "Docker_Hub_Tease/Body.md",
@@ -69,6 +73,18 @@
         "Container_Networking_Basics/Objectives.md",
         "Container_Networking_Basics/Body.md",
 
+        "Container_Network_Model/Cover.md",
+        "Container_Network_Model/Objectives.md",
+        "Container_Network_Model/Body.md",
+
+        "Connecting_Containers_With_Links/Cover.md",
+        "Connecting_Containers_With_Links/Objectives.md",
+        "Connecting_Containers_With_Links/Body.md",
+
+        //"Ambassadors/Cover.md",
+        //"Ambassadors/Objectives.md",
+        //"Ambassadors/Body.md",
+
         "Local_Development_Workflow/Cover.md",
         "Local_Development_Workflow/Objectives.md",
         "Local_Development_Workflow/Body.md",
@@ -77,54 +93,9 @@
         "Working_With_Volumes/Objectives.md",
         "Working_With_Volumes/Body.md",
 
-        "Connecting_Containers/Cover.md",
-        "Connecting_Containers/Objectives.md",
-        "Connecting_Containers/Body.md",
-
-        "Ambassadors/Cover.md",
-        "Ambassadors/Objectives.md",
-        "Ambassadors/Body.md",
-
-        "Fig_For_Dev_Stacks/Cover.md",
-        "Fig_For_Dev_Stacks/Objectives.md",
-        "Fig_For_Dev_Stacks/Body.md",
-
-        "Dockerfile_Reference/Cover.md",
-        "Dockerfile_Reference/Objectives.md",
-        "Dockerfile_Reference/Body.md",
-
-        "Orchestration/Cover.md",
-        "Orchestration/Objectives.md",
-        "Orchestration/Body.md",
-
-        "Docker_Hub_Intro/Cover.md",
-        "Docker_Hub_Intro/Objectives.md",
-        "Docker_Hub_Intro/Body.md",
-
-        "Docker_Hub_Advanced/Cover.md",
-        "Docker_Hub_Advanced/Objectives.md",
-        "Docker_Hub_Advanced/Body.md",
-
-        "Testing_Workflow/Cover.md",
-        "Testing_Workflow/Objectives.md",
-        "Testing_Workflow/Body.md",
-
-        "Security/Cover.md",
-        "Security/Objectives.md",
-        "Security/Body.md",
-        "Security/Summary.md",
-
-        "Vulnerabilities/Cover.md",
-        "Vulnerabilities/Objectives.md",
-        "Vulnerabilities/Body.md",
-
-        "Securing_With_TLS/Cover.md",
-        "Securing_With_TLS/Objectives.md",
-        "Securing_With_TLS/Body.md",
-
-        "Docker_API/Cover.md",
-        "Docker_API/Objectives.md",
-        "Docker_API/Body.md",
+        "Compose_For_Dev_Stacks/Cover.md",
+        "Compose_For_Dev_Stacks/Objectives.md",
+        "Compose_For_Dev_Stacks/Body.md",
 
         "Course_Conclusion/Cover.md",
         "Course_Conclusion/Body.md"

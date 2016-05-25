@@ -1,4 +1,4 @@
 <!SLIDE center subsection>
-# Local Development Work flow with Docker
+# Local Development Workflow with Docker
 
 ![construction](construction.jpg)

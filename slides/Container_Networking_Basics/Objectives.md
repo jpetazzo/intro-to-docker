@@ -11,4 +11,4 @@ At the end of this lesson, you will be able to:
 * Manipulate container networking basics.
 * Find a container's IP address.
 
-We will also explain the network model used by Docker.
+We will also explain the different network models used by Docker.

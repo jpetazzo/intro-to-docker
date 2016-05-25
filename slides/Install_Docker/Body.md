@@ -1,4 +1,4 @@
-<!SLIDE>
+<!SLIDE printonly>
 # Installing Docker
 
 Docker is easy to install.
@@ -9,7 +9,7 @@ It runs on:
 * OS X via a virtual machine.
 * Microsoft Windows via a virtual machine.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Installing Docker on Linux
 
 It can be installed via:
@@ -24,14 +24,18 @@ It can be installed via:
 * Binary download from Docker (it's a single file).
 
 <!SLIDE>
-# Installing Docker on your Linux distribution
+# Installing Docker with upstream packages
 
-On Fedora:
+* Preferred method to install Docker on Linux.
+* Upstream's packages are more up-to-date than distros'.
+* Instructions per distro:
+  <br/>https://docs.docker.com/engine/installation/linux/
+* Package will be named `docker-engine`.
 
-    @@@ Sh
-    $ sudo yum install docker-io
+<!SLIDE printonly>
+# Installing Docker with distros packages
 
-On CentOS 7:
+On Red Hat derivatives (Fedora, CentOS):
 
     @@@ Sh
     $ sudo yum install docker
@@ -41,7 +45,7 @@ On Debian and derivatives:
     @@@ Sh
     $ sudo apt-get install docker.io
 
-<!SLIDE>
+<!SLIDE printonly>
 # Installation script from Docker
 
 You can use the ``curl`` command to install on several platforms:
@@ -61,27 +65,72 @@ This currently works on:
 
 Docker doesn't run natively on OS X or Microsoft Windows.
 
-To install Docker on these platforms we run a small virtual machine
-using a tool called [Boot2Docker](http://boot2docker.io).
+We recommend to use the Docker Toolbox, which installs
+the following components:
+
+* VirtualBox + Boot2Docker VM image (runs Docker Engine)
+* Kitematic GUI
+* Docker CLI
+* Docker Machine
+* Docker Compose
+* A handful of clever wrappers
+
+<!SLIDE> 
+# Running Docker on OS X and Windows
+
+When you execute `docker version` from the terminal:
+
+* the CLI prepares a request for the REST API,
+* environment variables tell the CLI where to send the request,
+* the request goes to the Boot2Docker VM in VirtualBox,
+* the Docker Engine in the VM processes the request.
+
+All communication with the Docker Engine happens over the API.
+
+This will also allow to use remote Engines exactly as if they were local.
+
+<!SLIDE printonly>
+# About boot2docker
+
+It is a very small VM image (~30 MB).
+
+It runs on most hypervisors and can also boot on actual hardware.
+
+Boot2Docker is not a "lite" version of Docker.
 
 ![Boot2Docker](logo.png)
 
-<!SLIDE>
+<!SLIDE printonly>
 # Check that Docker is working
 
 Using the ``docker`` client:
 
     @@@ Sh
     $ docker version
-    Client version: 1.5.0
-    Client API version: 1.17
-    Go version (client): go1.4.1
-    Git commit (client): a8a31ef
-    OS/Arch (client): linux/amd64
-    Server version: 1.5.0
-    Server API version: 1.17
-    Go version (server): go1.4.1
-    Git commit (server): a8a31ef
+    Client:
+     Version:      1.11.1
+     API version:  1.23
+     Go version:   go1.5.4
+     Git commit:   5604cbe
+     Built:        Tue Apr 26 23:38:55 2016
+     OS/Arch:      linux/amd64
+
+    Server:
+     Version:      1.11.1
+     API version:  1.23
+     Go version:   go1.5.4
+     Git commit:   5604cbe
+     Built:        Tue Apr 26 23:38:55 2016
+     OS/Arch:      linux/amd64
+
+<!SLIDE>
+# Docker Mac and Docker Windows
+
+* Docker Mac and Docker Windows are new products, now in private beta
+* They let you run Docker without VirtualBox
+* They are installed like normal applications (think QEMU, but faster)
+* If you want to get access to the beta: register on [beta.docker.com](http://beta.docker.com/),
+  <br/>and ping us after the workshop
 
 <!SLIDE center>
 # Su-su-sudo
@@ -89,15 +138,30 @@ Using the ``docker`` client:
 ![su-su-sudo](sudo.png)
 
 <!SLIDE>
-# The ``docker`` group
-
-**Warning!**
+# Important PSA about security
 
 The ``docker`` user is ``root`` equivalent.
 
 It provides ``root``-level access to the host.
 
 You should restrict access to it like you would protect ``root``.
+
+If you give somebody the ability to access the Docker API, you are giving them full access on the machine.
+
+Therefore, the Docker control socket is (by default) owned by the `docker` group, to avoid unauthorized access on multi-user machines.
+
+If your user is not in the `docker` group, you will need to prefix every command with `sudo`; e.g. `sudo docker version`.
+
+<!SLIDE printonly>
+# Reminder ...
+
+*Note:* if you were provided with a training VM for a hands-on
+tutorial, you can skip this chapter, since that VM already
+has Docker installed, and Docker has already been setup to run
+without ``sudo``.
+
+<!SLIDE printonly>
+# The ``docker`` group
 
 ## Add the Docker group
 
@@ -119,20 +183,27 @@ You should restrict access to it like you would protect ``root``.
     @@@ Sh
     $ exit
 
-<!SLIDE>
+<!SLIDE printonly>
 # Check that Docker works without sudo
 
     @@@ Sh
     $ docker version
-    Client version: 1.5.0
-    Client API version: 1.17
-    Go version (client): go1.4.1
-    Git commit (client): a8a31ef
-    OS/Arch (client): linux/amd64
-    Server version: 1.5.0
-    Server API version: 1.17
-    Go version (server): go1.4.1
-    Git commit (server): a8a31ef
+    Client:
+     Version:      1.11.1
+     API version:  1.23
+     Go version:   go1.5.4
+     Git commit:   5604cbe
+     Built:        Tue Apr 26 23:38:55 2016
+     OS/Arch:      linux/amd64
+
+    Server:
+     Version:      1.11.1
+     API version:  1.23
+     Go version:   go1.5.4
+     Git commit:   5604cbe
+     Built:        Tue Apr 26 23:38:55 2016
+     OS/Arch:      linux/amd64
+
 
 <!SLIDE>
 # Section summary
@@ -182,15 +253,15 @@ the Docker daemon.
 2. You should see:
 
          @@@ Sh
-         Client version: 0.11.1
-         Client API version: 1.11
-         Go version (client): go1.2.1
-         Git commit (client): fb99f99
-         Server version: 0.11.1
-         Server API version: 1.11
-         Git commit (server): fb99f99
-         Go version (server): go1.2.1
-         Last stable version: 0.11.1
+         Client version: 1.5.0
+         Client API version: 1.17
+         Go version (client): go1.4.1
+         Git commit (client): a8a31ef
+         OS/Arch (client): linux/amd64
+         Server version: 1.5.0
+         Server API version: 1.17
+         Go version (server): go1.4.1
+         Git commit (server): a8a31ef
 
 <!SLIDE supplemental exercises>
 # Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: See the Docker client help

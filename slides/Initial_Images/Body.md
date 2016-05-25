@@ -7,7 +7,13 @@
 * Each layer can add, change, and remove files.
 * Images can share layers to optimize disk usage, transfer times, and memory use.
 
-![docker layers](docker-filesystems-multilayer.png)
+* Example:
+  * CentOS
+  * JRE
+  * Tomcat
+  * Dependencies
+  * Application JAR
+  * Configuration
 
 <!SLIDE>
 # Differences between containers and images
@@ -47,38 +53,57 @@ If an image is read-only, how do we change it?
 * A new image is created by stacking the new layer on top of the old image.
 
 <!SLIDE>
-# In practice
+# A chicken-and-egg problem
 
-There are multiple ways to create new images.
+* The only way to create an image is by "freezing" a container.
+* The only way to create a container is by instanciating an image.
+* Help!
 
-* `docker commit`: creates a new layer (and a new image) from a container.
-* `docker build`: performs a repeatable build sequence.
-* `docker import`: loads a tarball into Docker, as a standalone base layer.
+<!SLIDE>
+# Creating the first images
 
-We will explain `commit` and `build` in later chapters.
+There is a special empty image called `scratch`. 
 
-`import` can be used for various hacks, but its main purpose is to bootstrap
-the creation of base images.
+* It allows to *build from scratch*.
+
+The `docker import` command loads a tarball into Docker.
+
+* The imported tarball becomes a standalone image.
+* That new image has a single layer.
+
+Note: you will probably never have to do this yourself.
+
+<!SLIDE>
+# Creating other images
+
+`docker commit`
+
+* Saves all the changes made to a container into a new layer.
+* Creates a new image (effectively a copy of the container).
+
+`docker build`
+
+* Performs a repeatable build sequence.
+* This is the preferred method!
+
+We will explain both methods in a moment.
 
 <!SLIDE>
 # Images namespaces
 
 There are three namespaces:
 
-* Root-like
+* Official images
 
-        @@@ Sh
-        ubuntu
+    e.g. `ubuntu`, `busybox` ...
 
-* User (and organizations)
+* User (and organizations) images
 
-        @@@ Sh
-        jpetazzo/clock
+    e.g. `jpetazzo/clock`
 
-* Self-Hosted
+* Self-hosted images
 
-        @@@ Sh
-        registry.example.com:5000/my-private-image
+    e.g. `registry.example.com:5000/my-private/image`
 
 Let's explain each of them.
 
@@ -129,25 +154,8 @@ For example:
     @@@ Sh
     localhost:5000/wordpress
 
-The remote host and port is:
-
-    @@@ Sh
-    localhost:5000
-
-The image name is:
-
-    @@@ Sh
-    wordpress
-
-<!SLIDE>
-# Historical detail
-
-Self-hosted registries used to be called *private* registries,
-but this was misleading!
-
-* A self-hosted registry can be public or private.
-* A registry in the User namespace on Docker Hub can be public or private.
-
+* `localhost:5000` is the host and port of the registry
+* `wordpress` is the name of the image
 
 <!SLIDE>
 # How do you store and manage images?
@@ -169,34 +177,33 @@ Let's look at what images are on our host now.
 
     @@@ Sh
     $ docker images
-    REPOSITORY         TAG     IMAGE ID     CREATED     VIRTUAL SIZE
-    ubuntu             13.10   9f676bd305a4 7 weeks ago 178 MB
-    ubuntu             saucy   9f676bd305a4 7 weeks ago 178 MB
-    ubuntu             raring  eb601b8965b8 7 weeks ago 166.5 MB
-    ubuntu             13.04   eb601b8965b8 7 weeks ago 166.5 MB
-    ubuntu             12.10   5ac751e8d623 7 weeks ago 161 MB
-    ubuntu             quantal 5ac751e8d623 7 weeks ago 161 MB
-    ubuntu             10.04   9cc9ea5ea540 7 weeks ago 180.8 MB
-    ubuntu             lucid   9cc9ea5ea540 7 weeks ago 180.8 MB
-    ubuntu             12.04   9cd978db300e 7 weeks ago 204.4 MB
-    ubuntu             latest  9cd978db300e 7 weeks ago 204.4 MB
-    ubuntu             precise 9cd978db300e 7 weeks ago 204.4 MB
+    REPOSITORY       TAG       IMAGE ID       CREATED         SIZE
+    fedora           latest    ddd5c9c1d0f2   3 days ago      204.7 MB
+    centos           latest    d0e7f81ca65c   3 days ago      196.6 MB
+    ubuntu           latest    07c86167cdc4   4 days ago      188 MB
+    redis            latest    4f5f397d4b7c   5 days ago      177.6 MB
+    postgres         latest    afe2b5e1859b   5 days ago      264.5 MB
+    alpine           latest    70c557e50ed6   5 days ago      4.798 MB
+    debian           latest    f50f9524513f   6 days ago      125.1 MB
+    busybox          latest    3240943c9ea3   2 weeks ago     1.114 MB
+    training/namer   latest    902673acc741   9 months ago    289.3 MB
+    jpetazzo/clock   latest    12068b93616f   12 months ago   2.433 MB
+
 
 <!SLIDE>
 # Searching for images
 
-Searches your registry for images:
+We cannot list *all* images on a remote registry, but
+we can search for a specific keyword:
 
     @@@ Sh
     $ docker search zookeeper
-    NAME                             DESCRIPTION                     STARS  ...
-    jplock/zookeeper                 Builds a docker image for ...   27
-    thefactory/zookeeper-exhibitor   Exhibitor-managed ZooKeepe...   2 
-    misakai/zookeeper                ZooKeeper is a service for...   1 
-    digitalwonderland/zookeeper      Latest Zookeeper - cluster...   1 
-    garland/zookeeper                                                1 
-    raycoding/piggybank-zookeeper    Zookeeper 3.4.6 running on...   1 
-    gregory90/zookeeper                                              0 
+    NAME                  DESCRIPTION                 STARS  OFFICIAL  AUTOMATED
+    jplock/zookeeper      Builds a docker image ...   103              [OK]
+    mesoscloud/zookeeper  ZooKeeper                   42               [OK]
+    springxd/zookeeper    A Docker image that ca...   5                [OK]
+    elevy/zookeeper       ZooKeeper configured t...   3                [OK]
+
 
 * "Stars" indicate the popularity of the image.
 * "Official" images are those in the root namespace.
@@ -230,10 +237,25 @@ There are two ways to download images.
 # Image and tags
 
 * Images can have tags.
-* Tags define image variants.
+* Tags define image versions or variants.
 * `docker pull ubuntu` will refer to `ubuntu:latest`.
-* The `:latest` tag can be updated frequently.
-* When using images it is always best to be specific.
+* The `:latest` tag is generally updated often.
+
+<!SLIDE>
+# When to (not) use tags
+
+Don't specify tags:
+
+* When doing rapid testing and prototyping.
+* When experimenting.
+* When you want the latest version.
+
+Do specify tags:
+
+* When recording a procedure into a script.
+* When going to production.
+* To ensure that the same version will be used everywhere.
+* To ensure repeatability later.
 
 <!SLIDE>
 # Section summary

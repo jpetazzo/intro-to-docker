@@ -16,7 +16,7 @@ This container just displays the time every second.
 * To stop it, press `^C`.
 * Docker has automatically downloaded the image `jpetazzo/clock`.
 * This image is a user image, created by `jpetazzo`.
-* We will tell more about user images (and other types of images) later.
+* We will hear more about user images (and other types of images) later.
 
 <!SLIDE>
 # Run a container in the background
@@ -40,8 +40,8 @@ With `docker ps`, just like the UNIX `ps` command, lists running processes.
 
     @@@ Sh
     $ docker ps
-    CONTAINER ID  IMAGE                  COMMAND  CREATED        STATUS        ...
-    47d677dcfba4  jpetazzo/clock:latest  ...      2 minutes ago  Up 2 minutes  ...
+    CONTAINER ID  IMAGE           ...  CREATED        STATUS        ...
+    47d677dcfba4  jpetazzo/clock  ...  2 minutes ago  Up 2 minutes  ...
 
 Docker tells us:
 
@@ -51,28 +51,41 @@ Docker tells us:
 * Other information (COMMAND, PORTS, NAMES) that we will explain later.
 
 <!SLIDE>
+# Starting more containers
+
+Let's start two more containers.
+
+    @@@ Sh
+    $ docker run -d jpetazzo/clock
+    57ad9bdfc06bb4407c47220cf59ce21585dce9a1298d7a67488359aeaea8ae2a
+    $ docker run -d jpetazzo/clock
+    068cc994ffd0190bbe025ba74e4c0771a5d8f14734af772ddee8dc1aaf20567d
+
+Check that `docker ps` correctly reports all 3 containers.
+
+<!SLIDE>
 # Two useful flags for `docker ps`
 
 To see only the last container that was started:
 
     @@@ Sh
     $ docker ps -l
-    CONTAINER ID  IMAGE                  COMMAND  CREATED        STATUS        ...
-    47d677dcfba4  jpetazzo/clock:latest  ...      2 minutes ago  Up 2 minutes  ...
+    CONTAINER ID  IMAGE           ...  CREATED        STATUS        ...
+    068cc994ffd0  jpetazzo/clock  ...  2 minutes ago  Up 2 minutes  ...
 
 To see only the ID of containers:
 
     @@@ Sh
     $ docker ps -q
+    068cc994ffd0
+    57ad9bdfc06b
     47d677dcfba4
-    66b1ce719198
-    ee0255a5572e
 
 Combine those flags to see only the ID of the last container started!
 
     @@@ Sh
     $ docker ps -lq
-    47d677dcfba4
+    068cc994ffd0
 
 <!SLIDE>
 # View the logs of a container
@@ -82,13 +95,13 @@ We told you that Docker was logging the container output.
 Let's see that now.
 
     @@@ Sh
-    $ docker logs 47d6
+    $ docker logs 068
     Fri Feb 20 00:39:52 UTC 2015
     Fri Feb 20 00:39:53 UTC 2015
     ...
 
 * We specified a *prefix* of the full container ID.
-* You can, of course, specify the full ID. 
+* You can, of course, specify the full ID.
 * The `logs` command will output the *entire* logs of the container.
   <br/>(Sometimes, that will be too much. Let's see how to address that.)
 
@@ -99,7 +112,7 @@ To avoid being spammed with eleventy pages of output,
 we can use the `--tail` option:
 
     @@@ Sh
-    $ docker logs --tail 3 47d6
+    $ docker logs --tail 3 068
     Fri Feb 20 00:55:35 UTC 2015
     Fri Feb 20 00:55:36 UTC 2015
     Fri Feb 20 00:55:37 UTC 2015
@@ -113,7 +126,7 @@ Just like with the standard UNIX command `tail -f`, we can
 follow the logs of our container:
 
     @@@ Sh
-    $ docker logs --tail 1 --follow 47d6
+    $ docker logs --tail 1 --follow 068
     Fri Feb 20 00:57:12 UTC 2015
     Fri Feb 20 00:57:13 UTC 2015
     ^C
@@ -141,17 +154,40 @@ Reminder: the `KILL` signal cannot be intercepted, and will
 forcibly terminate the container.
 
 <!SLIDE>
-# Killing it
+# Stopping our containers
 
-Let's kill our container:
+Let's stop one of those containers:
 
     @@@ Sh
-    $ docker kill 47d6
+    $ docker stop 47d6
     47d6
 
-Docker will echo the ID of the container we've just stopped.
+This will take 10 seconds:
 
-Let's check that our container doesn't show up anymore:
+* Docker sends the TERM signal;
+* the container doesn't react to this signal
+  (it's a simple Shell script with no special
+  signal handling);
+* 10 seconds later, since the container is still
+  running, Docker sends the KILL signal;
+* this terminates the container.
+
+<!SLIDE>
+# Killing the remaining containers
+
+Let's be less patient with the two other containers:
+
+    @@@ Sh
+    $ docker kill 068 57ad
+    068
+    57ad
+
+The `stop` and `kill` commands can take multiple container IDs.
+
+Those containers will be terminated immediately (without
+the 10 seconds delay).
+
+Let's check that our containers don't show up anymore:
 
     @@@ Sh
     $ docker ps
@@ -163,7 +199,9 @@ We can also see stopped containers, with the `-a` (`--all`) option.
 
     @@@ Sh
     $ docker ps -a
-    CONTAINER ID  IMAGE                  ...  CREATED      STATUS
-    47d677dcfba4  jpetazzo/clock:latest  ...  23 min. ago  Exited (0) 4 min. ago
-    5c1dfd4d81f1  jpetazzo/clock:latest  ...  40 min. ago  Exited (0) 40 min. ago
-    b13c164401fb  ubuntu:latest          ...  55 min. ago  Exited (130) 53 min. ago
+    CONTAINER ID  IMAGE           ...  CREATED      STATUS
+    068cc994ffd0  jpetazzo/clock  ...  21 min. ago  Exited (137) 3 min. ago
+    57ad9bdfc06b  jpetazzo/clock  ...  21 min. ago  Exited (137) 3 min. ago
+    47d677dcfba4  jpetazzo/clock  ...  23 min. ago  Exited (137) 3 min. ago
+    5c1dfd4d81f1  jpetazzo/clock  ...  40 min. ago  Exited (0) 40 min. ago
+    b13c164401fb  ubuntu          ...  55 min. ago  Exited (130) 53 min. ago

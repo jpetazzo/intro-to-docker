@@ -1,21 +1,4 @@
 <!SLIDE>
-# From `curl` to `wget`
-
-In this chapter, the package that we will install will be `wget`.
-
-Why are we using `wget` instead of `curl`?
-
-The reasons are purely pedagogic:
-
-* You will be able to do this section using a different distro (if you
-  are so inclined). While `curl` is pre-installed on `centos` and
-  `fedora`, `wget` is not.
-* To achieve the nice, clean output of `curl`, we need to pass extra
-  arguments to `wget`. While this would be annoying in a real life
-  situation, it will be an excellent opportunity to show how
-  to pass command-line options in Dockerfiles.
-
-<!SLIDE>
 # `Dockerfile` overview
 
 * A `Dockerfile` is a build recipe for a Docker image.
@@ -46,12 +29,13 @@ Of course, you can use any other editor of your choice.
     @@@ docker
     FROM ubuntu
     RUN apt-get update
-    RUN apt-get install -y wget
+    RUN apt-get install figlet
 
 * `FROM` indicates the base image for our build.
 * Each `RUN` line will be executed by Docker during the build.
 * Our `RUN` commands **must be non-interactive.**
   <br/>(No input can be provided to Docker during the build.)
+* In many cases, we will add the `-y` flag to `apt-get`.
 
 <!SLIDE>
 # Build it!
@@ -59,7 +43,7 @@ Of course, you can use any other editor of your choice.
 Save our file, then execute:
 
     @@@ Sh
-    $ docker build -t myimage .
+    $ docker build -t figlet .
 
 * `-t` indicates the tag to apply to the image.
 * `.` indicates the location of the *build context*.
@@ -73,7 +57,7 @@ Save our file, then execute:
 The output of `docker build` looks like this:
 
     @@@ Sh
-    $ docker build -t myimage .
+    $ docker build -t figlet .
     Sending build context to Docker daemon 2.048 kB
     Sending build context to Docker daemon 
     Step 0 : FROM ubuntu
@@ -82,7 +66,7 @@ The output of `docker build` looks like this:
      ---> Running in 840cb3533193
      ---> 7257c37726a1
     Removing intermediate container 840cb3533193
-    Step 2 : RUN apt-get install -y wget
+    Step 2 : RUN apt-get install figlet
      ---> Running in 2b44df762a2f
      ---> f9e8f1642759
     Removing intermediate container 2b44df762a2f
@@ -130,8 +114,9 @@ Why?
   same sequence.
 * Docker uses the exact strings defined in your Dockerfile, so:
 
-  * `RUN apt-get install -y wget curl` is different from
-    <br/> `RUN apt-get install -y curl wget`
+  * `RUN apt-get install figlet cowsay ` 
+    <br/> is different from
+    <br/> `RUN apt-get install cowsay figlet`
   * `RUN apt-get update` is not re-executed when the mirrors are updated
 
 You can force a rebuild with `docker build --no-cache ...`.
@@ -142,9 +127,14 @@ You can force a rebuild with `docker build --no-cache ...`.
 The resulting image is not different from the one produced manually.
 
     @@@ Sh
-    $ docker run -ti myimage bash
-    root@91f3c974c9a1:/# wget
-    wget: missing URL
+    $ docker run -ti figlet
+    root@91f3c974c9a1:/# figlet hello
+     _          _ _       
+    | |__   ___| | | ___  
+    | '_ \ / _ \ | |/ _ \ 
+    | | | |  __/ | | (_) |
+    |_| |_|\___|_|_|\___/ 
+
 
 * Sweet is the taste of success!
 
@@ -159,13 +149,53 @@ When an image was built with a Dockerfile, each layer corresponds to
 a line of the Dockerfile.
 
     @@@ Sh
-    $ docker history myimage
+    $ docker history figlet
     IMAGE         CREATED            CREATED BY                     SIZE
-    f9e8f1642759  About an hour ago  /bin/sh -c apt-get install -y  6.062 MB
-    7257c37726a1  About an hour ago  /bin/sh -c apt-get update      8.549 MB
-    e54ca5efa2e9  8 months ago       /bin/sh -c apt-get update &&   8 B
-    6c37f792ddac  8 months ago       /bin/sh -c apt-get update &&   83.43 MB
-    83ff768040a0  8 months ago       /bin/sh -c sed -i  s/^#\s*\(d  1.903 kB
-    2f4b4d6a4a06  8 months ago       /bin/sh -c echo  #!/bin/sh  >  194.5 kB
-    d7ac5e4f1812  8 months ago       /bin/sh -c #(nop) ADD file:ad  192.5 MB
-    511136ea3c5a  20 months ago                                     0 B
+    f9e8f1642759  About an hour ago  /bin/sh -c apt-get install fi  1.627 MB
+    7257c37726a1  About an hour ago  /bin/sh -c apt-get update      21.58 MB
+    07c86167cdc4  4 days ago         /bin/sh -c #(nop) CMD ["/bin   0 B
+    <missing>     4 days ago         /bin/sh -c sed -i 's/^#\s*\(   1.895 kB
+    <missing>     4 days ago         /bin/sh -c echo '#!/bin/sh'    194.5 kB
+    <missing>     4 days ago         /bin/sh -c #(nop) ADD file:b   187.8 MB
+
+
+<!SLIDE>
+# Introducing JSON syntax
+
+Most Dockerfile arguments can be passed in two forms:
+
+* plain string:
+  <br/>`RUN apt-get install figlet`
+* JSON list:
+  <br/>`RUN ["apt-get", "install", "figlet"]`
+
+Let's change our Dockerfile as follows!
+
+    @@@ Dockerfile
+    FROM ubuntu
+    RUN apt-get update
+    RUN ["apt-get", "install", "figlet"]
+
+Then build the new Dockerfile.
+
+    @@@ Sh
+    $ docker build -t figlet .
+
+<!SLIDE>
+# JSON syntax vs string syntax
+
+Compare the new history:
+
+    @@@ Sh
+    $ docker history figlet
+    IMAGE         CREATED            CREATED BY                     SIZE
+    27954bb5faaf  10 seconds ago     apt-get install figlet         1.627 MB
+    7257c37726a1  About an hour ago  /bin/sh -c apt-get update      21.58 MB
+    07c86167cdc4  4 days ago         /bin/sh -c #(nop) CMD ["/bin   0 B
+    <missing>     4 days ago         /bin/sh -c sed -i 's/^#\s*\(   1.895 kB
+    <missing>     4 days ago         /bin/sh -c echo '#!/bin/sh'    194.5 kB
+    <missing>     4 days ago         /bin/sh -c #(nop) ADD file:b   187.8 MB
+
+* JSON syntax specifies an *exact* command to execute.
+* String syntax specifies a command to be wrapped within `/bin/sh -c "..."`.
+

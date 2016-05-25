@@ -24,8 +24,11 @@ You need an SSH client.
         @@@ Sh
         $ ssh <login>@<ip-address>
 
-* On Windows, if you don't have an SSH client, you can download Putty
-  from www.putty.org.
+* On Windows, if you don't have an SSH client, you can download:
+  * Putty (www.putty.org)
+  * Git BASH (https://git-for-windows.github.io/)
+  * MobaXterm (http://moabaxterm.mobatek.net)
+
 
 <!SLIDE>
 # Checking your Virtual Machine
@@ -34,14 +37,20 @@ Once logged in, make sure that you can run a basic Docker command:
 
     @@@ Sh
     $ docker version
-    Client version: 1.4.1
-    Client API version: 1.16
-    Go version (client): go1.3.3
-    Git commit (client): 5bc2ff8
-    OS/Arch (client): linux/amd64
-    Server version: 1.4.1
-    Server API version: 1.16
-    Go version (server): go1.3.3
-    Git commit (server): 5bc2ff8
+    Client:
+     Version:      1.11.1
+     API version:  1.23
+     Go version:   go1.5.4
+     Git commit:   5604cbe
+     Built:        Tue Apr 26 23:38:55 2016
+     OS/Arch:      linux/amd64
+
+    Server:
+     Version:      1.11.1
+     API version:  1.23
+     Go version:   go1.5.4
+     Git commit:   5604cbe
+     Built:        Tue Apr 26 23:38:55 2016
+     OS/Arch:      linux/amd64
 
 * If this doesn't work, raise your hand so that an instructor can assist you!

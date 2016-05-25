@@ -5,9 +5,11 @@
 
 In this lesson, we will learn about:
 
-* Docker Inc. (the company)
-* Docker (the Open Source project)
-* Containers (how and why they are useful)
+* Why containers (non-technical elevator pitch)
+* Why containers (technical elevator pitch)
+* How Docker helps us to build, ship, and run
+* The history of containers
 
-We won't actually run Docker or containers in this chapter (yet!),
-but don't worry, we will get to that fast enough!
+We won't actually run Docker or containers in this chapter (yet!).
+
+Don't worry, we will get to that fast enough!

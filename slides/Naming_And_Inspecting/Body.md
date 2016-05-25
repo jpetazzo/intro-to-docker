@@ -43,11 +43,9 @@ This lets us enforce unicity of a given resource.
 <!SLIDE>
 # Renaming containers
 
-Since Docker 1.5 (released February 2015), you can rename containers
-with `docker rename`.
+* You can rename containers with `docker rename`.
 
-This allows you to "free up" a name without destroying the associated
-container, for instance.
+* This allows you to "free up" a name without destroying the associated container.
 
 <!SLIDE>
 # Inspecting a container
