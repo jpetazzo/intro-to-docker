@@ -17,15 +17,14 @@ Volumes can be declared in two different ways.
 * Within a ``Dockerfile``, with a ``VOLUME`` instruction.
 
         @@@ docker
-        VOLUME /var/lib/postgresql
+        VOLUME /uploads
 
 * On the command-line, with the ``-v`` flag for ``docker run``.
 
         @@@ Sh
-        $ docker run -d -v /var/lib/postgresql \
-          training/postgresql
+        $ docker run -d -v /uploads myapp
 
-In both cases, ``/var/lib/postgresql`` (inside the container) will be a volume.
+In both cases, ``/uploads`` (inside the container) will be a volume.
 
 <!SLIDE printonly>
 # Volumes bypass the copy-on-write system
@@ -38,6 +37,8 @@ Volumes act as passthroughs to the host filesystem.
   the resulting image.
 * If a ``RUN`` instruction in a ``Dockerfile`` changes the content of a
   volume, those changes are not recorded neither.
+* If a container is started with the ``--read-only`` flag, the volume
+  will still be writable (unless the volume is a read-only volume).
 
 <!SLIDE printonly>
 # Volumes can be shared across containers
@@ -67,19 +68,17 @@ In another terminal, let's start another container with the same volume.
 
 If a container is stopped, its volumes still exist and are available.
 
-In the last exemple, it doesn't matter if container ``alpha`` is running or not.
-
 Since Docker 1.9, we can see all existing volumes and manipulate them:
 
     @@@ Sh
     $ docker volume ls
     DRIVER              VOLUME NAME
     local               5b0b65e4316da67c2d471086640e6005ca2264f3...
-    local               vol02
-    local               vol04
+    local               pgdata-prod
+    local               pgdata-dev
     local               13b59c9936d78d109d094693446e174e5480d973...
 
-Some of those volume names were explicit (vol02, vol04).
+Some of those volume names were explicit (pgdata-prod, pgdata-dev).
 
 The others (the hex IDs) were generated automatically by Docker.
 
@@ -126,13 +125,11 @@ Consider the following (fictitious) example, using the previously created volume
 * We can now create and manipulate volumes as first-class concepts.
 * Volumes can be created without a container, then used in multiple containers.
 
-Let's create volumes directly (without data containers).
+Let's create a volume directly.
 
     @@@ Sh
-    $ docker volume create --name=files
-    files
-    $ docker volume create --name=logs
-    logs
+    $ docker volume create --name=website
+    website
 
 Volumes are not anchored to a specific path.
 
@@ -142,14 +139,38 @@ Volumes are not anchored to a specific path.
 * Volumes are used with the `-v` option.
 * When a host path does not contain a /, it is considered to be a volume name.
 
-If we had images `webserver`, `ftpserver`, and `lumberjack`, we could run the following example:
+Let's start a web server using the two previous volumes.
 
     @@@ Sh
-    $ docker run -d -v files:/var/www -v logs:/var/log webserver
-    $ docker run -d -v files:/home/ftp ftpserver
-    $ docker run -d -v logs:/var/log lumberjack
+    $ docker run -d -p 8888:80 \
+             -v website:/usr/share/nginx/html \
+             -v logs:/var/log/nginx \
+             nginx
 
-See how volumes can be mounted to any path in the container.
+Check that it's running correctly:
+
+    @@@ Sh
+    $ curl localhost:8888
+    <!DOCTYPE html>
+    ...
+    <h1>Welcome to nginx!</h1>
+    ...
+
+<!SLIDE>
+# Using a volume in another container
+
+* We will make changes to the volume from another container.
+* In this example, we will run a text editor in the other container, but this could be a FTP server, a WebDAV server, a Git receiver...
+
+Let's start another container using the `website` volume.
+
+    @@@ Sh
+    $ docker run -v website:/website -w /website -ti alpine vi index.html
+
+Make changes, save, and exit.
+
+Then run `curl localhost:8888` again to see your changes.
+
 
 <!SLIDE>
 # Managing volumes explicitly
@@ -173,6 +194,7 @@ Nice.
     @@@ Sh
     $ docker run -d -v /path/on/the/host:/path/in/container image ...
 
+
 <!SLIDE printonly>
 # Sharing a directory between the host and a container
 
@@ -188,7 +210,7 @@ Note that the paths must be absolute.
 
 Those volumes can also be shared with ``--volumes-from``.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Migrating data with `--volumes-from`
 
 The `--volumes-from` option tells Docker to re-use all the volumes
@@ -201,7 +223,7 @@ of an existing container.
 * The new container will inherit the data of the old one.
 * Newer containers can use `--volumes-from` too.
 
-<!SLIDE>
+<!SLIDE printonly>
 # Data migration in practice
 
 Let's create a Redis container.
@@ -222,7 +244,7 @@ Issue the following commands:
     SAVE
     QUIT
 
-<!SLIDE>
+<!SLIDE printonly>
 # Upgrading Redis
 
 Stop the Redis container.
@@ -235,7 +257,7 @@ Start the new Redis container.
     @@@ Sh
     $ docker run -d --name redis30 --volumes-from redis28 redis:3.0
 
-<!SLIDE>
+<!SLIDE printonly>
 # Testing the new Redis
 
 Connect to the Redis container and see our data.
@@ -312,6 +334,17 @@ One of the most interesting examples is to share the Docker control socket.
 
 Warning: when using such mounts, the container gains root-like access to the host.
 It can potentially do bad things.
+
+<!SLIDE>
+# Volume plugins
+
+You can install plugins to manage volumes backed by particular storage systems,
+or providing extra features. For instance:
+
+* [dvol](https://github.com/ClusterHQ/dvol) - allows to commit/branch/rollback volumes;
+* [Flocker](https://clusterhq.com/flocker/introduction/), [REX-Ray](https://github.com/emccode/rexray) - create and manage volumes backed by an enterprise storage system (e.g. SAN or NAS), or by cloud block stores (e.g. EBS);
+* [Blockbridge](http://www.blockbridge.com/), [Portworx](http://portworx.com/) - provide distributed block store for containers;
+* and much more!
 
 <!SLIDE>
 # Section summary

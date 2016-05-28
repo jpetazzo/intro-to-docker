@@ -18,7 +18,7 @@ By using Docker containers, we will get a consistent development environment.
 Let's run it with:
 
     @@@ Sh
-    $ docker run -dP jpetazzo/namer:master
+    $ docker run -dP jpetazzo/namer
 
 Check the port number with `docker ps` and open the application.
 
@@ -63,7 +63,7 @@ For that, we will use a *volume*.
 We will tell Docker to map the current directory to `/src` in the container.
 
     @@@ Sh
-    $ docker run -d -v $(pwd):/src -p 80:9292 jpetazzo/namer:master
+    $ docker run -d -v $(pwd):/src -p 80:9292 jpetazzo/namer
 
 * The ``-d`` flag indicates that the container should run in detached mode (in the background).
 * The ``-v`` flag provides volume mounting inside containers.
@@ -155,7 +155,7 @@ We can see the updated color of our company naming application.
           volumes:
             - .:/src
           ports:
-            - 9292:9292
+            - 80:9292
 
 <!SLIDE>
 # Why Compose?

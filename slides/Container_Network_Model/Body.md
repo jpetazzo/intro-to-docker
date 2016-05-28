@@ -266,8 +266,8 @@ Then try it a few times by replacing `--net dev` with `--net prod`:
 * Network aliases are *not* unique: you can give multiple containers the same alias *on the same network.*
   * In Engine 1.10: one container will be selected and only its IP address will be returned when resolving the network alias.
   * In Engine 1.11: when resolving the network alias, the DNS reply includes the IP addresses of all containers with this network alias.
-
-Engine 1.11 allows DNS round-robin, providing a cheap way of load balancing traffic across multiple containers.
+    This allows crude load balancing across multiple containers (but is not a substitute for a real load balancer).
+* Creation of networks and network aliases is generally automated with tools like Compose (covered in a few chapters).
 
 <!SLIDE printonly>
 # A few words about round robin DNS

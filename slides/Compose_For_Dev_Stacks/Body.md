@@ -103,30 +103,39 @@ them.
 Here is the file used in the demo:
 
     @@@ YAML
-    www:
-      build: www
-      ports:
-        - 8000:5000
-      links:
-        - redis
-      user: nobody
-      environment:
-        DEBUG: 1
-      command: python counter.py
-      volumes:
-        - ./www:/src
+    version: "2"
 
-    redis:
-      image: redis
+    services:
+      www:
+        build: www
+        ports:
+          - 8000:5000
+        user: nobody
+        environment:
+          DEBUG: 1
+        command: python counter.py
+        volumes:
+          - ./www:/src
 
-Each section of the YAML file (`web`, `redis`) corresponds to a container.
+      redis:
+        image: redis
 
-Let's see what can be in a section.
+<!SLIDE>
+# Compose file versions
+
+Version 1 directly has the various containers (`www`, `redis`...) at the top level of the  file.
+
+Version 2 has multiple sections:
+
+* `version` is mandatory and should be `"2"`.
+* `services` is mandatory and corresponds to the content of the version 1 format.
+* `networks` is optional and can define multiple networks on which containers can be placed.
+* `volumes` is optional and can define volumes to be used (and potentially shared) by the containers.
 
 <!SLIDE>
 # Containers in `docker-compose.yml`
 
-Each section of the YAML file must contain either `build`, or `image`.
+Each service in the YAML file must contain either `build`, or `image`.
 
 * `build` indicates a path containing a Dockerfile.
 * `image` indicates an image name (local, or on a registry).
@@ -145,8 +154,6 @@ Sometimes they have several minor improvements.
   <br/>You can specify local ports (i.e. `x:y` to expose public port `x`).
 * `volumes` translates to one (or multiple) `-v` options.
   <br/>You can use relative paths here.
-* `links` translates to one (or multiple) `--link` options.
-  <br/>You can refer to other Compose containers by their name.
 
 For the full list, check http://docs.docker.com/compose/yml/.
 
