@@ -1,6 +1,6 @@
 # Docker-Fundamentals
 
-This repository containes the course material that we use for the
+This repository contains the course material that we use for the
 "Docker Training" (sometimes also called "Introduction to Docker",
 "Docker Fundamentals", or the "Introduction to Docker Training Course").
 
