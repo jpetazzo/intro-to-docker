@@ -96,15 +96,17 @@ Note: the convention is `port-on-host:port-on-container`.
 <!SLIDE>
 # Plumbing containers into your infrastructure
 
-There are (at least) three ways to integrate containers in your network.
+There are many ways to integrate containers in your network.
 
 * Start the container, letting Docker allocate a public port for it.
   <br/>Then retrieve that port number and feed it to your configuration.
 * Pick a fixed port number in advance, when you generate your configuration.
   <br/>Then start your container by setting the port numbers manually.
 * Use a network plugin, connecting your containers with e.g. VLANs, tunnels...
+* Enable *Swarm Mode* to deploy across a cluster.
+  <br/>The container will then be reachable through any node of the cluster.
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Finding the container's IP address
 
 We can use the `docker inspect` command to find the IP address of the
@@ -119,7 +121,7 @@ container.
 * Here, we provide it with a format string to extract exactly the
   private IP address of the container.
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Pinging our container
 
 We can test connectivity to the container using the IP address we've

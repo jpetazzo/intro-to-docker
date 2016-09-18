@@ -1,4 +1,4 @@
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Docker architecture
 
 Docker is a client-server application.

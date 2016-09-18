@@ -51,7 +51,7 @@ and our container.
     A /usr/bin/figlet
     ...
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Docker tracks filesystem changes
 
 As explained before:

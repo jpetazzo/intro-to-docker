@@ -1,4 +1,4 @@
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Installing Docker
 
 Docker is easy to install.
@@ -9,7 +9,7 @@ It runs on:
 * OS X via a virtual machine.
 * Microsoft Windows via a virtual machine.
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Installing Docker on Linux
 
 It can be installed via:
@@ -32,7 +32,7 @@ It can be installed via:
   <br/>https://docs.docker.com/engine/installation/linux/
 * Package will be named `docker-engine`.
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Installing Docker with distros packages
 
 On Red Hat derivatives (Fedora, CentOS):
@@ -45,7 +45,7 @@ On Debian and derivatives:
     @@@ Sh
     $ sudo apt-get install docker.io
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Installation script from Docker
 
 You can use the ``curl`` command to install on several platforms:
@@ -65,8 +65,39 @@ This currently works on:
 
 Docker doesn't run natively on OS X or Microsoft Windows.
 
-We recommend to use the Docker Toolbox, which installs
-the following components:
+There are three ways to get Docker on OS X or Windows:
+
+* Using Docker Mac or Docker Windows (recommended);
+* Using the Docker Toolbox (formerly recommended);
+* Rolling your own with e.g. Parallels, VirtualBox, VMware...
+
+<!SLIDE> 
+# Running Docker on OS X and Windows
+
+When you execute `docker version` from the terminal:
+
+* the CLI connects to the Docker Engine over a standard socket,
+* the Docker Engine is, in fact, running in a VM,
+* ... but the CLI doesn't know or care about that,
+* the CLI sends a request using the REST API,
+* the Docker Engine in the VM processes the request,
+* the CLI gets the response and displays it to you.
+
+All communication with the Docker Engine happens over the API.
+
+This will also allow to use remote Engines exactly as if they were local.
+
+<!SLIDE>
+# Rolling your own install
+
+* Good luck, you're on your own!
+* There is (almost?) no good reason to do that.
+* If you want to do something very custom, the Docker Toolbox is probably better anyway.
+
+<!SLIDE>
+# Using the Docker Toolbox
+
+The Docker Toolbox installs the following components:
 
 * VirtualBox + Boot2Docker VM image (runs Docker Engine)
 * Kitematic GUI
@@ -75,21 +106,7 @@ the following components:
 * Docker Compose
 * A handful of clever wrappers
 
-<!SLIDE> 
-# Running Docker on OS X and Windows
-
-When you execute `docker version` from the terminal:
-
-* the CLI prepares a request for the REST API,
-* environment variables tell the CLI where to send the request,
-* the request goes to the Boot2Docker VM in VirtualBox,
-* the Docker Engine in the VM processes the request.
-
-All communication with the Docker Engine happens over the API.
-
-This will also allow to use remote Engines exactly as if they were local.
-
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # About boot2docker
 
 It is a very small VM image (~30 MB).
@@ -100,37 +117,18 @@ Boot2Docker is not a "lite" version of Docker.
 
 ![Boot2Docker](logo.png)
 
-<!SLIDE printonly>
-# Check that Docker is working
-
-Using the ``docker`` client:
-
-    @@@ Sh
-    $ docker version
-    Client:
-     Version:      1.11.1
-     API version:  1.23
-     Go version:   go1.5.4
-     Git commit:   5604cbe
-     Built:        Tue Apr 26 23:38:55 2016
-     OS/Arch:      linux/amd64
-
-    Server:
-     Version:      1.11.1
-     API version:  1.23
-     Go version:   go1.5.4
-     Git commit:   5604cbe
-     Built:        Tue Apr 26 23:38:55 2016
-     OS/Arch:      linux/amd64
-
 <!SLIDE>
 # Docker Mac and Docker Windows
 
-* Docker Mac and Docker Windows are new products, now in private beta
+* Docker Mac and Docker Windows are newer products
 * They let you run Docker without VirtualBox
 * They are installed like normal applications (think QEMU, but faster)
-* If you want to get access to the beta: register on [beta.docker.com](http://beta.docker.com/),
-  <br/>and ping us after the workshop
+* They provide better integration with enterprise VPNs
+* They support filesystem sharing through volumes (we'll talk about this later)
+
+Only downside (for now): only one instance at a time; so if you want
+to run a full cluster on your local machine, you can fallback on the
+Docker Toolbox (it can coexist with Docker Mac/Windows just fine).
 
 <!SLIDE center>
 # Su-su-sudo

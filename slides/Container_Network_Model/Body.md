@@ -179,7 +179,7 @@ And create one that doesn't block the `redis` name:
 Check that the app still works (but the counter is back to 1,
 since we wiped out the old Redis container).
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Names are *local* to each network
 
 Let's try to ping our `search` container from another container, when that other container is *not* on the `dev` network.
@@ -267,6 +267,7 @@ Then try it a few times by replacing `--net dev` with `--net prod`:
   * In Engine 1.10: one container will be selected and only its IP address will be returned when resolving the network alias.
   * In Engine 1.11: when resolving the network alias, the DNS reply includes the IP addresses of all containers with this network alias.
     This allows crude load balancing across multiple containers (but is not a substitute for a real load balancer).
+  * In Engine 1.12: enabling *Swarm Mode* gives access to clustering features, including an advanced load balancer using Linux IPVS.
 * Creation of networks and network aliases is generally automated with tools like Compose (covered in a few chapters).
 
 <!SLIDE printonly>
@@ -317,29 +318,22 @@ A full example would look like this.
 
 * The features we've seen so far only work when all containers are on a single host.
 * If containers span multiple hosts, we need an *overlay* network to connect them together.
-* Docker ships with a default network plugin, `overlay`, implementing an overlay network leveraging VXLAN and a key/value store.
+* Docker ships with a default network plugin, `overlay`, implementing an overlay network leveraging VXLAN.
 * Other plugins (Weave, Calico...) can provide overlay networks as well.
 * Once you have an overlay network, *all the features that we've used in this chapter work identically.*
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Multi-host networking (overlay)
 
 Out of the scope for this intro-level workshop!
 
 Very short instructions:
 
-- deploy a key/value store (Consul, Etcd, or Zookeeper)
-- add two extra flags to your Docker Engine
-- you can now create networks using the overlay driver!
+- enable Swarm Mode (`docker swarm init` then `docker swarm join` on other nodes)
+- `docker network create mynet --driver overlay`
+- `docker service create --network mynet myimage`
 
-When you create a network on one host with the overlay driver, it
-appears automatically on all other hosts.
-
-Containers placed on the same networks are able to resolve and
-ping as if they were local.
-
-The overlay network is based on VXLAN and stores neighbor info
-in the key/value store.
+See http://jpetazzo.github.io/orchestration-workshop for all the deets about clustering!
 
 <!SLIDE printonly>
 # Multi-host networking (plugins)

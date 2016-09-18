@@ -196,16 +196,16 @@ We can see a simple workflow:
 
     (You *are* using version control, right?)
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Debugging inside the container
 
-In 1.3, Docker introduced a feature called ``docker exec``.
+In 1.3, Docker introduced a feature called `docker exec`.
 
 It allows users to run a new process in a container which is already running.
 
-It is not meant to be used for production (except in emergencies, as a sort of pseudo-SSH), but it is handy for development.
+If sometimes you find yourself wishing you could SSH into a container: you can use `docker exec` instead.
 
-You can get a shell prompt inside an existing container this way. 
+You can get a shell prompt inside an existing container this way, or run an arbitrary process for automation.
 
 <!SLIDE printonly>
 # ``docker exec`` example
@@ -218,7 +218,7 @@ You can get a shell prompt inside an existing container this way.
     => [0, 1, 4, 9, 16]
     irb(main):002:0> exit
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Stopping the container
 
 Now that we're done let's stop our container.

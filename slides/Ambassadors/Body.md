@@ -1,4 +1,4 @@
-<!SLIDE>
+<!SLIDE printonly>
 # Ambassadors
 
 We've already seen a couple of ways we can manage our application
@@ -30,12 +30,12 @@ ambassador containers.
 <!SLIDE>
 # Interacting with ambassadors
 
-* The web application container uses a normal link to connect
+* The web application container uses normal Docker networking to connect
   to the ambassador.
-* The database container is linked with an ambassador as well.
+* The database container also talks with an ambassador.
 * For both containers, there is no difference between normal
   operation and operation with ambassador containers.
-* If the database container is moved, its new location will
+* If the database container is moved (or a failover happens), its new location will
   be tracked by the ambassador containers, and the web application
   container will still be able to connect, without reconfiguration.
 
@@ -138,4 +138,3 @@ For more information about the ambassador pattern, including demos on Swarm and 
 * AWS re:invent 2015 [DVO317](https://www.youtube.com/watch?v=7CZFpHUPqXw)
 * [SwarmWeek video about Swarm+Compose](https://youtube.com/watch?v=qbIvUvwa6As)
 
-Ambassadors are also covered in depth in the advanced/orchestration workshop.

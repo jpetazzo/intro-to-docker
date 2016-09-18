@@ -114,7 +114,7 @@ Also works to create dev, integration, QA environments in minutes!
 
 Way faster and cheaper than creating VMs each time!
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Use container images as build artefacts
 
 1. Build your app from Dockerfiles
@@ -127,7 +127,7 @@ Way faster and cheaper than creating VMs each time!
 
 Images contain all the libraries, dependencies, etc. needed to run the app.
 
-<!SLIDE printonly>
+<!SLIDE pprintonly>
 # Decouple "plumbing" from application logic
 
 1. Write your code to connect to named services ("db", "api"...)

@@ -18,8 +18,8 @@
 - Naming and inspecting containers
 - Introduction to Container Networking
 - Container Network Model
-- Connecting Containers with Links
-- Ambassadors
+- (Connecting Containers with Links)
+- (Ambassadors)
 - Local Development Workflow with Docker
 - Working with Volumes
 - Compose For Development Stacks

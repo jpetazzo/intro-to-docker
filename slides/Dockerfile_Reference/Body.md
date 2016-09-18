@@ -385,6 +385,17 @@ override the options when needed.
 
 This will override the options ``CMD`` provided with new flags.
 
+<!SLIDE>
+# Advanced Dockerfile instructions
+
+* ONBUILD lets you stash instructions that will be executed
+  when this image is used as a base for another one.
+* LABEL adds arbitrary metadata to the image.
+* ARG defines build-time variables (optional or mandatory).
+* STOPSIGNAL sets the signal for `docker stop` (`TERM` by default).
+* HEALTHCHECK defines a command assessing the status of the container.
+* SHELL sets the default program to use for string-syntax RUN, CMD, etc.
+
 <!SLIDE printonly>
 # The ``ONBUILD`` instruction
 

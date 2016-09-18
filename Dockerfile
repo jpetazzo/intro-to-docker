@@ -2,7 +2,9 @@ FROM ubuntu:14.04
 MAINTAINER Education Team at Docker <education@docker.com>
 
 RUN apt-get update
-RUN apt-get install -y curl wget git ruby ruby-dev libxml2-dev libxslt-dev build-essential zlib1g-dev
+RUN apt-get install -y curl wget git ruby2.0 ruby2.0-dev libxml2-dev libxslt-dev build-essential zlib1g-dev
+RUN ln -sf ruby2.0 /usr/bin/ruby
+RUN ln -sf gem2.0 /usr/bin/gem
 
 # Let's install prince. The first dpkg will fail because of missing dependencies,
 # so we'll install the dependencies with "install -f" then try again.
