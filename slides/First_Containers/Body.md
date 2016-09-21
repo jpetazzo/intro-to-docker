@@ -62,7 +62,7 @@ Try to run `figlet` in our container.
 Alright, we need to install it.
 
 <!SLIDE>
-# An obvservation
+# An observation
 
 Let's check how many packages are installed here.
 
