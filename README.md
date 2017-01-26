@@ -31,9 +31,10 @@ This will allow anyone to use this content for basic Docker courses.
 from material that was official in 2014, but that's pretty much it!
 
 Also note that this material was designed primarily for instructor-led
-training. Docker Inc. has [self-paced learning online materials](
-http://training.docker.com/category/self-paced-online) if you want to
-learn Docker on your own.
+training. If you want to learn Docker on your own, Docker Inc. has
+[self-paced learning online materials](
+http://training.docker.com/category/self-paced-online) as well as
+tons of [tutorials and hands on labs](https://github.com/docker/labs).
 
 Finally, keep in mind that this is an intro-level course. If you
 want to tackle more advanced topics, we invite you to check
