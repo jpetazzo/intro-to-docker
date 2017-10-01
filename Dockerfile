@@ -20,6 +20,7 @@ RUN git clone https://github.com/puppetlabs/showoff.git
 WORKDIR /usr/src/showoff
 RUN git checkout v0.10.2
 RUN gem install --no-rdoc --no-ri -v '<1.7' nokogiri
+RUN gem install --no-rdoc --no-ri -v '<3.0' public_suffix
 RUN gem build showoff.gemspec
 RUN gem install --no-rdoc --no-ri ./showoff-*.gem
 
