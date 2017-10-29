@@ -10,109 +10,30 @@ class: title
 ## Objectives
 
 We have seen simple Dockerfiles to illustrate how Docker build
-container images. In this chapter, we will see:
+container images.
 
-* The syntax and keywords that can be used in Dockerfiles.
-* Tips and tricks to write better Dockerfiles.
+In this section, we will see more Dockerfile commands.
 
 ---
 
 ## `Dockerfile` usage summary
 
 * `Dockerfile` instructions are executed in order.
+
 * Each instruction creates a new layer in the image.
-* Instructions are cached. If no changes are detected then the
-  instruction is skipped and the cached layer used.
+
+* Docker maintains a cache with the layers of previous builds.
+
+* When there are no changes in the instructions and files making a layer,
+  the builder re-uses the cached layer, without executing the instruction for that layer.
+
 * The `FROM` instruction MUST be the first non-comment instruction.
+
 * Lines starting with `#` are treated as comments.
-* You can only have one `CMD` and one `ENTRYPOINT` instruction in a `Dockerfile`.
 
----
+* Some instructions (like `CMD` or `ENTRYPOINT`) update a piece of metadata.
 
-## The `FROM` instruction
-
-* Specifies the source image to build this image.
-* Must be the first instruction in the `Dockerfile`, except for comments.
-
----
-
-## The `FROM` instruction
-Can specify a base image:
-
-```dockerfile
-FROM ubuntu
-```
-
-An image tagged with a specific version:
-
-```dockerfile
-FROM ubuntu:12.04
-```
-
-A user image:
-
-```dockerfile
-FROM training/sinatra
-```
-
-Or self-hosted image:
-
-```dockerfile
-FROM localhost:5000/funtoo
-```
-
----
-
-class: extra-details
-
-## More about `FROM`
-
-* The `FROM` instruction can be specified more than once to build
-  multiple images.
-
-```dockerfile
-FROM ubuntu:14.04
-. . .
-FROM fedora:20
-. . .
-```
-
-    Each `FROM` instruction marks the beginning of the build of a new image.
-
-    The `-t` command-line parameter will only apply to the last image.
-
-* If the build fails, existing tags are left unchanged.
-
-* An optional version tag can be added after the name of the image.
-
-    E.g.: `ubuntu:14.04`.
-
----
-
-class: extra-details
-
-## A use case for multiple `FROM` lines
-
-* Integrate CI and unit tests in the build system
-
-```dockerfile
-FROM <baseimage>
-RUN <install dependencies>
-COPY <code>
-RUN <build code>
-RUN <install test dependencies>
-COPY <test data sets and fixtures>
-RUN <unit tests>
-FROM <baseimage>
-RUN <install dependencies>
-COPY <vcode>
-RUN <build code>
-CMD, EXPOSE ...
-```
-
-* The build fails as soon as an instructions fails
-* If `RUN <unit tests>` fails, the build doesn't produce an image
-* If it succeeds, it produces a clean image (without test libraries and data)
+  (As a result, each call to these instructions makes the previous one useless.)
 
 ---
 
@@ -198,7 +119,15 @@ EXPOSE 53/tcp 53/udp
 ```
 
 * All ports are private by default.
-* The `Dockerfile` doesn't control if a port is publicly available.
+
+* Declaring a port with `EXPOSE` is not enough to make it public.
+
+* The `Dockerfile` doesn't control on which port a service gets exposed.
+
+---
+
+## Exposing ports
+
 * When you `docker run -p <port> ...`, that port becomes public.
 
     (Even if it was not declared with `EXPOSE`.)
@@ -224,6 +153,10 @@ COPY . /src
 This will add the contents of the *build context* (the directory
 passed as an argument to `docker build`) to the directory `/src`
 in the container.
+
+---
+
+## Build context isolation
 
 Note: you can only reference files and directories *inside* the
 build context. Absolute paths are taken as being anchored to
@@ -268,12 +201,18 @@ This would unpack `assets.zip` into `/var/www/htdocs/assets`.
 
 ## `ADD`, `COPY`, and the build cache
 
-* For most Dockerfiles instructions, Docker only checks
-  if the line in the Dockerfile has changed.
-* For `ADD` and `COPY`, Docker also checks if the files
+* Before creating a new layer, Docker checks its build cache.
+
+* For most Dockerfile instructions, Docker only looks at the
+  `Dockerfile` content to do the cache lookup.
+
+* For `ADD` and `COPY` instructions, Docker also checks if the files
   to be added to the container have been changed.
-* `ADD` always need to download the remote file before
-  it can check if it has been changed. (It cannot use,
+
+* `ADD` always needs to download the remote file before
+  it can check if it has been changed.
+
+  (It cannot use,
   e.g., ETags or If-Modified-Since headers.)
 
 ---
@@ -469,13 +408,13 @@ This will override the options `CMD` provided with new flags.
 
 ## Advanced Dockerfile instructions
 
-* ONBUILD lets you stash instructions that will be executed
+* `ONBUILD` lets you stash instructions that will be executed
   when this image is used as a base for another one.
-* LABEL adds arbitrary metadata to the image.
-* ARG defines build-time variables (optional or mandatory).
-* STOPSIGNAL sets the signal for `docker stop` (`TERM` by default).
-* HEALTHCHECK defines a command assessing the status of the container.
-* SHELL sets the default program to use for string-syntax RUN, CMD, etc.
+* `LABEL` adds arbitrary metadata to the image.
+* `ARG` defines build-time variables (optional or mandatory).
+* `STOPSIGNAL` sets the signal for `docker stop` (`TERM` by default).
+* `HEALTHCHECK` defines a command assessing the status of the container.
+* `SHELL` sets the default program to use for string-syntax RUN, CMD, etc.
 
 ---
 
@@ -496,44 +435,3 @@ ONBUILD COPY . /src
 * You can't chain `ONBUILD` instructions with `ONBUILD`.
 * `ONBUILD` can't be used to trigger `FROM` and `MAINTAINER`
   instructions.
-
----
-
-## Building an efficient `Dockerfile` 
-
-* Each line in a `Dockerfile` creates a new layer.
-* Build your `Dockerfile` to take advantage of Docker's caching system.
-* Combine multiple similar commands into one by using `&&` to continue commands and `\\` to wrap lines.
-* `COPY` dependency lists (`package.json`, `requirements.txt`, etc.) by themselves to avoid reinstalling unchanged dependencies every time.
-
----
-
-## Example "bad" `Dockerfile`
-
-The dependencies are reinstalled every time, because the build system does not know if `requirements.txt` has been updated.
-
-```bash
-FROM python
-MAINTAINER Docker Education Team <education@docker.com>
-COPY . /src/
-WORKDIR /src
-RUN pip install -qr requirements.txt
-EXPOSE 5000
-CMD ["python", "app.py"]
-```
-
----
-
-## Fixed `Dockerfile`
-
-Adding the dependencies as a separate step means that Docker can cache more efficiently and only install them when `requirements.txt` changes.
-
-        ```bash
-        FROM python
-        MAINTAINER Docker Education Team <education@docker.com>
-        COPY ./requirements.txt /tmp/requirements.txt
-        RUN pip install -qr /tmp/requirements.txt
-        COPY . /src/
-        WORKDIR /src
-        EXPOSE 5000
-        CMD ["python", "app.py"]
