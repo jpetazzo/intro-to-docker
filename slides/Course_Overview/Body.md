@@ -1,33 +1,20 @@
 <!SLIDE>
-# Course Agenda
-## Part 1
 
-* About Docker
-* Using the training virtual machines
-* Installing Docker
-* Our first containers
-* Running containers in the background
-* Images and containers
-* Building images manually
-* Building images automatically
-* Basic networking
-* Local development workflow
+# Logistics
 
-<!SLIDE>
-# Course Agenda
-## Part 2
+- Updated copy of the slides: http://container.training/
 
-* Working with volumes
-* Connecting containers
-* Advanced Dockerfiles
-* Orchestration
-* Ambassadors
-* The Docker Hub
-* Automated builds
-* Security
-* The Docker API
+- Note: the PDF version has extra slides
 
-<!SLIDE toc>
-# Table of Contents
+- You should have a little piece of paper,
+  <br/>with your training VM IP address + credentials
 
-~~~TOC~~~
+- Can't find the paper? Raise your hand and ask for one!
+
+- Backchannel:
+  <br/>[container.training/chat](http://container.training/chat/)
+
+  - students: feel free to ask questions there
+
+  - TAs: join the channel to answer questions
+

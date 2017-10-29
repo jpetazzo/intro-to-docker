@@ -115,3 +115,11 @@ API, you can:
 * Presentation given at LinuxCon 2014 (Chicago)
 
 http://www.slideshare.net/jpetazzo/docker-linux-containers-lxc-and-security
+<!SLIDE>
+# Section summary
+
+We have learned:
+
+* The security implications of exposing Docker's API
+* How to take basic steps to make containers more secure
+* Where to find more information on Docker security
