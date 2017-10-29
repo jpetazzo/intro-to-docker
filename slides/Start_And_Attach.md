@@ -1,11 +1,4 @@
-
-class: title
-
-# Restarting and Attaching to Containers
-
----
-
-## Objectives
+# Restarting and attaching to containers
 
 We have started containers in the foreground, and in the background.
 
@@ -33,12 +26,13 @@ Analogy: attaching to a container is like plugging a keyboard and screen to a ph
 
 ## Detaching from a container
 
-* If you have started an *interactive* container (with option `-it`),
-  <br/>you can detach from it.
+* If you have started an *interactive* container (with option `-it`), you can detach from it.
+
 * The "detach" sequence is `^P^Q`.
+
 * Otherwise you can detach by killing the Docker client.
-  <br/>(But not by hitting `^C`, as this would deliver `SIGINT`
-  to the container.)
+  
+  (But not by hitting `^C`, as this would deliver `SIGINT` to the container.)
 
 What does `-it` stand for?
 
@@ -109,6 +103,7 @@ Check that `^X x` doesn't work, but `^P ^Q` does.
 ## Checking container output
 
 * Use `docker attach` if you intend to send input to the container.
+
 * If you just want to see the output of a container, use `docker logs`.
 
 ```bash
@@ -144,9 +139,13 @@ and try those commands.
 ## Attaching to a REPL
 
 * REPL = Read Eval Print Loop
+
 * Shells, interpreters, TUI ...
+
 * Symptom: you `docker attach`, and see nothing
+
 * The REPL doesn't know that you just attached, and doesn't print anything
+
 * Try hitting `^L` or `Enter`
 
 ---
@@ -155,7 +154,10 @@ class: extra-details
 
 ## SIGWINCH
 
-* When you `docker attach`, the Docker Engine sends a couple of SIGWINCH signals to the container.
+* When you `docker attach`, the Docker Engine sends SIGWINCH signals to the container.
+
 * SIGWINCH = WINdow CHange; indicates a change in window size.
+
 * This will cause some CLI and TUI programs to redraw the screen.
+
 * But not all of them.
