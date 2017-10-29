@@ -7,7 +7,7 @@ class: title
 ---
 
 
-### Objectives
+## Objectives
 
 In this lesson, we will learn about:
 

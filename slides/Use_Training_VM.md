@@ -7,7 +7,7 @@ class: title
 ---
 
 
-### Objectives
+## Objectives
 
 In this section, we will see how to use your training Virtual Machine.
 

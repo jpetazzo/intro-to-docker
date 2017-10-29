@@ -7,7 +7,7 @@ class: title
 ---
 
 
-### Objectives
+## Objectives
 
 We have seen simple Dockerfiles to illustrate how Docker build
 container images. In this chapter, we will see:

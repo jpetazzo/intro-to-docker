@@ -7,7 +7,7 @@ class: title
 ---
 
 
-### Objectives
+## Objectives
 
 We will now run network services (accepting requests) in containers.
 

@@ -7,7 +7,7 @@ class: title
 ---
 
 
-### Objectives
+## Objectives
 
 In this lesson, we will learn about an important
 Docker concept: container *naming*.
