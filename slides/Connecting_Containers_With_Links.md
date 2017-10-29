@@ -5,7 +5,7 @@ class: title
 
 ![graph](graph.gif)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Connecting containers with links
+
 
 ### Objectives
 
@@ -118,9 +118,9 @@ Docker has created a DNS entry for the container, resolving to its internal IP a
     round-trip min/avg/max/stddev = 0.086/0.124/0.164/0.032 ms
 
 
-* The ``--link`` flag connects one container to another.
-* We specify the name of the container to link to, ``datastore``, and an
-  alias for the link, ``redis``, in the format ``name:alias``.
+* The `--link` flag connects one container to another.
+* We specify the name of the container to link to, `datastore`, and an
+  alias for the link, `redis`, in the format `name:alias`.
 
 ---
 class: extra-details
@@ -171,9 +171,9 @@ In addition to the DNS information, Docker will automatically set environment va
     RUBY_VERSION=2.1.2
 
 
-* Each variables is prefixed with the link alias: ``redis``.
+* Each variables is prefixed with the link alias: `redis`.
 * Includes connection information PLUS any environment variables set in
-  the ``datastore`` container via ``ENV`` instructions.
+  the `datastore` container via `ENV` instructions.
 
 ---
 ## Differences between network aliases and links

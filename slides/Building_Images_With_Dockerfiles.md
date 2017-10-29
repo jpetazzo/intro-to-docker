@@ -1,11 +1,11 @@
 ---
 class: title
 
-# Building Docker images
+# Building Docker images wth a Dockerfile
 
 ![construction](construction.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Building Images With A Dockerfile
+
 
 ### Objectives
 
@@ -20,19 +20,19 @@ At the end of this lesson, you will be able to:
 
 * A `Dockerfile` is a build recipe for a Docker image.
 * It contains a series of instructions telling Docker how an image is constructed.
-* The `docker build` command builds an image from a ``Dockerfile``.
+* The `docker build` command builds an image from a `Dockerfile`.
 
 ---
 ## Writing our first `Dockerfile`
 
 Our Dockerfile must be in a **new, empty directory**.
 
-1. Create a directory to hold our ``Dockerfile``.
+1. Create a directory to hold our `Dockerfile`.
 
         @@@ Sh
         $ mkdir myimage
 
-2. Create a ``Dockerfile`` inside this directory.
+2. Create a `Dockerfile` inside this directory.
 
         @@@ Sh
         $ cd myimage

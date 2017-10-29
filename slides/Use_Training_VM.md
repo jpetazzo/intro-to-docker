@@ -5,7 +5,7 @@ class: title
 
 ![SSH terminal](ssh.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Your training Virtual Machine
+
 
 ### Objectives
 

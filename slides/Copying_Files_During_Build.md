@@ -5,7 +5,7 @@ class: title
 
 ![Monks copying books](copy.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Copying files during the build
+
 
 ### Objectives
 

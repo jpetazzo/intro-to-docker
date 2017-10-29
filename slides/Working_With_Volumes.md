@@ -5,7 +5,7 @@ class: title
 
 ![volume](volume.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Working with Volumes
+
 
 ### Objectives
 
@@ -20,7 +20,7 @@ At the end of this lesson, you will be able to:
 Docker volumes can be used to achieve many things, including:
 
 * Bypassing the copy-on-write system to obtain native disk I/O performance.
-* Bypassing copy-on-write to leave some files out of ``docker commit``.
+* Bypassing copy-on-write to leave some files out of `docker commit`.
 * Sharing a directory between multiple containers.
 * Sharing a directory between the host and a container.
 * Sharing a *single file* between the host and a container.
@@ -30,17 +30,17 @@ Docker volumes can be used to achieve many things, including:
 
 Volumes can be declared in two different ways.
 
-* Within a ``Dockerfile``, with a ``VOLUME`` instruction.
+* Within a `Dockerfile`, with a `VOLUME` instruction.
 
         @@@ docker
         VOLUME /uploads
 
-* On the command-line, with the ``-v`` flag for ``docker run``.
+* On the command-line, with the `-v` flag for `docker run`.
 
         @@@ Sh
         $ docker run -d -v /uploads myapp
 
-In both cases, ``/uploads`` (inside the container) will be a volume.
+In both cases, `/uploads` (inside the container) will be a volume.
 
 ---
 class: extra-details
@@ -51,11 +51,11 @@ Volumes act as passthroughs to the host filesystem.
 
 * The I/O performance on a volume is exactly the same as I/O performance
   on the Docker host.
-* When you ``docker commit``, the content of volumes is not brought into
+* When you `docker commit`, the content of volumes is not brought into
   the resulting image.
-* If a ``RUN`` instruction in a ``Dockerfile`` changes the content of a
+* If a `RUN` instruction in a `Dockerfile` changes the content of a
   volume, those changes are not recorded neither.
-* If a container is started with the ``--read-only`` flag, the volume
+* If a container is started with the `--read-only` flag, the volume
   will still be writable (unless the volume is a read-only volume).
 
 ---
@@ -71,7 +71,7 @@ They will contain exactly the same thing, and remain in sync.
 
 Under the hood, they are actually the same directories on the host anyway.
 
-This is done using the ``--volumes-from`` flag for ``docker run``.
+This is done using the `--volumes-from` flag for `docker run`.
 
     @@@ Sh
     $ docker run -it --name alpha -v /var/log ubuntu bash
@@ -118,8 +118,8 @@ It is typically created with a no-op command:
     $ docker run --name logs -v /var/log busybox true
 
 * We created two data containers.
-* They are using the ``busybox`` image, a tiny image.
-* We used the command ``true``, possibly the simplest command in the world!
+* They are using the `busybox` image, a tiny image.
+* We used the command `true`, possibly the simplest command in the world!
 * We named each container to reference them easily later.
 
 ---
@@ -127,7 +127,7 @@ class: extra-details
 
 ## Using data containers
 
-Data containers are used by other containers thanks to ``--volumes-from``.
+Data containers are used by other containers thanks to `--volumes-from`.
 
 Consider the following (fictitious) example, using the previously created volumes:
 
@@ -136,10 +136,10 @@ Consider the following (fictitious) example, using the previously created volume
     $ docker run -d --volumes-from files ftpserver
     $ docker run -d --volumes-from logs lumberjack
 
-* The first container runs a webserver, serving content from ``/var/www``
-  and logging to ``/var/log``.
+* The first container runs a webserver, serving content from `/var/www`
+  and logging to `/var/log`.
 * The second container runs a FTP server, allowing to upload content to the
-  same ``/var/www`` path.
+  same `/var/www` path.
 * The third container collects the logs, and sends them to logstash, a log
   storage and analysis system, using the lumberjack protocol.
 
@@ -234,7 +234,7 @@ The previous example would become something like this:
 
 Note that the paths must be absolute.
 
-Those volumes can also be shared with ``--volumes-from``.
+Those volumes can also be shared with `--volumes-from`.
 
 ---
 class: extra-details
@@ -324,7 +324,7 @@ class: extra-details
 
 ## Checking volumes defined by an image
 
-Wondering if an image has volumes? Just use ``docker inspect``:
+Wondering if an image has volumes? Just use `docker inspect`:
 
     @@@ Sh
     $ # docker inspect training/datavol
@@ -343,7 +343,7 @@ class: extra-details
 ## Checking volumes used by a container
 
 To look which paths are actually volumes, and to what they are bound,
-use ``docker inspect`` (again):
+use `docker inspect` (again):
 
      @@@ Sh
      $ docker inspect <yourContainerID>
@@ -363,7 +363,7 @@ use ``docker inspect`` (again):
 ---
 ## Sharing a single file between the host and a container
 
-The same ``-v`` flag can be used to share a single file.
+The same `-v` flag can be used to share a single file.
 
 One of the most interesting examples is to share the Docker control socket.
 

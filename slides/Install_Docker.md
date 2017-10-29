@@ -3,9 +3,10 @@ class: title
 
 # Install Docker
 
+
 ![install](install.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Installing Docker
+
 
 ### Objectives
 
@@ -17,8 +18,10 @@ At the end of this lesson, you will know:
 *Note:* if you were provided with a training VM for a hands-on
 tutorial, you can skip this chapter, since that VM already
 has Docker installed, and Docker has already been setup to run
-without ``sudo``.
+without `sudo`.
+
 ---
+
 class: x-extra-details
 
 ## Installing Docker
@@ -76,7 +79,7 @@ class: x-extra-details
 
 ## Installation script from Docker
 
-You can use the ``curl`` command to install on several platforms:
+You can use the `curl` command to install on several platforms:
 
     @@@ Sh
     $ curl -s https://get.docker.com/ | sudo sh
@@ -163,11 +166,11 @@ Docker Toolbox (it can coexist with Docker Mac/Windows just fine).
 ---
 ## Important PSA about security
 
-The ``docker`` user is ``root`` equivalent.
+The `docker` user is `root` equivalent.
 
-It provides ``root``-level access to the host.
+It provides `root`-level access to the host.
 
-You should restrict access to it like you would protect ``root``.
+You should restrict access to it like you would protect `root`.
 
 If you give somebody the ability to access the Docker API, you are giving them full access on the machine.
 
@@ -183,12 +186,12 @@ class: extra-details
 *Note:* if you were provided with a training VM for a hands-on
 tutorial, you can skip this chapter, since that VM already
 has Docker installed, and Docker has already been setup to run
-without ``sudo``.
+without `sudo`.
 
 ---
 class: extra-details
 
-## The ``docker`` group
+## The `docker` group
 
 ### Add the Docker group
 
@@ -240,5 +243,5 @@ class: extra-details
 We've learned how to:
 
 * Install Docker.
-* Run Docker without ``sudo``.
+* Run Docker without `sudo`.
 

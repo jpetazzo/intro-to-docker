@@ -5,7 +5,7 @@ class: title
 
 ![image](image.png)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Understanding Docker Images
+
 
 ### Objectives
 

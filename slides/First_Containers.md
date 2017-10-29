@@ -5,7 +5,7 @@ class: title
 
 ![Plastic Containers](firstcontainers.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Our First Containers
+
 
 ### Objectives
 

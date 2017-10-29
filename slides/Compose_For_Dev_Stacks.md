@@ -5,7 +5,7 @@ class: title
 
 ![Compose](fig.png)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Using Docker Compose for Development Stacks
+
 
 ### Objectives
 

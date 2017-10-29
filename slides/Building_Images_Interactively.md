@@ -5,7 +5,7 @@ class: title
 
 ![cmatrix](cmatrix.png)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Building Images Interactively
+
 
 ### Objectives
 
@@ -58,7 +58,7 @@ Then run the command `apt-get install figlet` to install the program we are inte
 ---
 ## Inspect the changes
 
-Type ``exit`` at the container prompt to leave the interactive session.
+Type `exit` at the container prompt to leave the interactive session.
 
 Now let's run `docker diff` to see the difference between the base image
 and our container.
@@ -97,7 +97,7 @@ and a new image using this new layer.
     $ docker commit <yourContainerId>
     <newImageId>
 
-The output of the ``docker commit`` command will be the ID for your newly created image.
+The output of the `docker commit` command will be the ID for your newly created image.
 
 We can run this image:
 

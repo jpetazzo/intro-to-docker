@@ -1,11 +1,11 @@
----
+
 class: title
 
-# About Docker
+# Docker 30,000ft overview
 
 ![who](who.png)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Docker 30,000ft overview
+
 
 ### Objectives
 

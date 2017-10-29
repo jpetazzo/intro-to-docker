@@ -5,7 +5,7 @@ class: title
 
 ![Markings on container door](containermarkings.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Naming and inspecting containers
+
 
 ### Objectives
 

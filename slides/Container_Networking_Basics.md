@@ -5,7 +5,7 @@ class: title
 
 ![A dense graph network](network.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Container Networking Basics
+
 
 ### Objectives
 
@@ -149,7 +149,7 @@ class: x-extra-details
 ## Pinging our container
 
 We can test connectivity to the container using the IP address we've
-just discovered. Let's see this now by using the ``ping`` tool.
+just discovered. Let's see this now by using the `ping` tool.
 
     @@@ Sh
     $ ping <ipAddress>

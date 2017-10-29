@@ -5,7 +5,7 @@ class: title
 
 ![](ambassador.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Ambassadors
+
 
 ### Objectives
 

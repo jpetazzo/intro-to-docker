@@ -3,7 +3,7 @@ class: title
 
 # Restarting and Attaching to Containers
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Restarting and Attaching to Containers
+
 
 ### Objectives
 

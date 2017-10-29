@@ -5,7 +5,7 @@ class: title
 
 ![Container entry doors](entrypoint.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: CMD and ENTRYPOINT
+
 
 ### Objectives
 

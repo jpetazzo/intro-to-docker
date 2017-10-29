@@ -5,7 +5,7 @@ class: title
 
 ![Background Containers](background-containers.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Background Containers
+
 
 ### Objectives
 

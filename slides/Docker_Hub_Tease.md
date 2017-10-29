@@ -1,9 +1,9 @@
 ---
 class: title
 
-# A quick word about the Docker Hub
+# Publishing images to the Docker Hub
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Uploading our images to the Docker Hub
+
 
 We have built our first images.
 

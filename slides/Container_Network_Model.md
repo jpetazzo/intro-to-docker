@@ -5,7 +5,7 @@ class: title
 
 ![A denser graph network](complex-network.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: The Container Network Model
+
 
 ### Objectives
 

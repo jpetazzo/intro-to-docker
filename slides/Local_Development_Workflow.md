@@ -5,7 +5,7 @@ class: title
 
 ![construction](construction.jpg)
 ---
-## Lesson ~~~SECTION:MAJOR~~~: Local Development Workflow with Docker
+
 
 ### Objectives
 
@@ -80,25 +80,25 @@ We will tell Docker to map the current directory to `/src` in the container.
     @@@ Sh
     $ docker run -d -v $(pwd):/src -p 80:9292 jpetazzo/namer
 
-* The ``-d`` flag indicates that the container should run in detached mode (in the background).
-* The ``-v`` flag provides volume mounting inside containers.
-* The ``-p`` flag maps port ``9292`` inside the container to port ``80`` on the host.
-* ``jpetazzo/namer`` is the name of the image we will run.
+* The `-d` flag indicates that the container should run in detached mode (in the background).
+* The `-v` flag provides volume mounting inside containers.
+* The `-p` flag maps port `9292` inside the container to port `80` on the host.
+* `jpetazzo/namer` is the name of the image we will run.
 * We don't need to give a command to run because the Dockerfile already specifies `rackup`.
 
 ---
 ## Mounting volumes inside containers
 
-The ``-v`` flag mounts a directory from your host into your Docker
+The `-v` flag mounts a directory from your host into your Docker
 container. The flag structure is:
 
     @@@ Sh
     [host-path]:[container-path]:[rw|ro]
 
 * If [host-path] or [container-path] doesn't exist it is created.
-* You can control the write status of the volume with the ``ro`` and
-  ``rw`` options.
-* If you don't specify ``rw`` or ``ro``, it will be ``rw`` by default.
+* You can control the write status of the volume with the `ro` and
+  `rw` options.
+* If you don't specify `rw` or `ro`, it will be `rw` by default.
 
 There will be a full chapter about volumes!
 
@@ -193,7 +193,7 @@ We can see a simple workflow:
 
 2. Start a container from that image.
 
-    Use the ``-v`` flag to mount source code inside the container.
+    Use the `-v` flag to mount source code inside the container.
 
 3. Edit source code outside the containers, using regular tools.
 
@@ -227,7 +227,7 @@ You can get a shell prompt inside an existing container this way, or run an arbi
 ---
 class: extra-details
 
-## ``docker exec`` example
+## `docker exec` example
 
     @@@ Sh
     $ # You can run ruby commands in the area the app is running and more!
