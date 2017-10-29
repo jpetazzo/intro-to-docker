@@ -1,4 +1,4 @@
----
+
 class: title
 
 # Understanding Docker Images

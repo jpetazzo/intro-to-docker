@@ -1,4 +1,4 @@
----
+
 class: title
 
 # Publishing images to the Docker Hub
