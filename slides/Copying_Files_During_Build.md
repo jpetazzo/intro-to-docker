@@ -4,8 +4,8 @@ class: title
 # Copying files during the build
 
 ![Monks copying books](Copying_Files_During_Build/copy.jpg)
----
 
+---
 
 ## Objectives
 
@@ -19,7 +19,9 @@ Remember: the *build context* is the directory containing
 the Dockerfile.
 
 In this chapter, we will learn a new Dockerfile keyword: `COPY`.
+
 ---
+
 ## Build some C code
 
 We want to build a container that compiles a basic "Hello world" program in C.
@@ -38,6 +40,7 @@ Let's create a new directory, and put this file in there.
 Then we will write the Dockerfile.
 
 ---
+
 ## The Dockerfile
 
 On Debian and Ubuntu, the package `build-essential` will get us a compiler.
@@ -58,6 +61,7 @@ CMD /hello
 Create this Dockerfile.
 
 ---
+
 ## Testing our C program
 
 * Create `hello.c` and `Dockerfile` in the same direcotry.
@@ -67,6 +71,7 @@ Create this Dockerfile.
 Success!
 
 ---
+
 ## `COPY` and the build cache
 
 * Run the build again.
@@ -75,6 +80,7 @@ Success!
 * Those steps will not be executed again if the files haven't been changed.
 
 ---
+
 ## Details
 
 * You can `COPY` whole directories recursively.

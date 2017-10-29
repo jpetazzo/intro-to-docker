@@ -4,8 +4,8 @@ class: title
 # Building Docker images wth a Dockerfile
 
 ![construction](Building_Images_With_Dockerfiles/construction.jpg)
----
 
+---
 
 ## Objectives
 
@@ -15,7 +15,9 @@ At the end of this lesson, you will be able to:
 
 * Write a `Dockerfile`.
 * Build an image from a `Dockerfile`.
+
 ---
+
 ## `Dockerfile` overview
 
 * A `Dockerfile` is a build recipe for a Docker image.
@@ -23,6 +25,7 @@ At the end of this lesson, you will be able to:
 * The `docker build` command builds an image from a `Dockerfile`.
 
 ---
+
 ## Writing our first `Dockerfile`
 
 Our Dockerfile must be in a **new, empty directory**.
@@ -43,6 +46,7 @@ $ vim Dockerfile
 Of course, you can use any other editor of your choice.
 
 ---
+
 ## Type this into our Dockerfile...
 
 ```dockerfile
@@ -58,6 +62,7 @@ RUN apt-get install figlet
 * In many cases, we will add the `-y` flag to `apt-get`.
 
 ---
+
 ## Build it!
 
 Save our file, then execute:
@@ -73,6 +78,7 @@ $ docker build -t figlet .
   our Dockerfile is located.)
 
 ---
+
 ## What happens when we build the image?
 
 The output of `docker build` looks like this:
@@ -98,6 +104,7 @@ Successfully built f9e8f1642759
 * Let's explain what this output means.
 
 ---
+
 ## Sending the build context to Docker
 
 ```bash
@@ -110,6 +117,7 @@ Sending build context to Docker daemon 2.048 kB
 * Be careful (or patient) if that directory is big and your link is slow.
 
 ---
+
 ## Executing each step
 
 ```bash
@@ -127,6 +135,7 @@ Removing intermediate container 840cb3533193
 * The output of this step will be the base image for the next one.
 
 ---
+
 ## The caching system
 
 If you run the same build again, it will be instantaneous.
@@ -146,6 +155,7 @@ Why?
 You can force a rebuild with `docker build --no-cache ...`.
 
 ---
+
 ## Running the image
 
 The resulting image is not different from the one produced manually.
@@ -164,6 +174,7 @@ root@91f3c974c9a1:/# figlet hello
 * Sweet is the taste of success!
 
 ---
+
 ## Using image and viewing history
 
 The `history` command lists all the layers composing an image.
@@ -184,8 +195,8 @@ f9e8f1642759  About an hour ago  /bin/sh -c apt-get install fi  1.627 MB
 <missing>     4 days ago         /bin/sh -c #(nop) ADD file:b   187.8 MB
 ```
 
-
 ---
+
 ## Introducing JSON syntax
 
 Most Dockerfile arguments can be passed in two forms:
@@ -210,6 +221,7 @@ $ docker build -t figlet .
 ```
 
 ---
+
 ## JSON syntax vs string syntax
 
 Compare the new history:

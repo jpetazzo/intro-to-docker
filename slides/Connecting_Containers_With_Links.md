@@ -4,8 +4,8 @@ class: title
 # Connecting Containers With Links
 
 ![graph](Connecting_Containers_With_Links/graph.gif)
----
 
+---
 
 ## Objectives
 
@@ -14,6 +14,7 @@ Links were the "legacy" way of connecting containers (before the implementation 
 They are still useful in some scenarios.
 
 ---
+
 ## How *links* work
 
 * Links are created *between two containers*
@@ -22,6 +23,7 @@ They are still useful in some scenarios.
 * Links exist *only in the context of the client*
 
 ---
+
 class: extra-details
 
 ## The plan
@@ -31,6 +33,7 @@ class: extra-details
 * We don't need to use a custom network for this to work.
 
 ---
+
 class: extra-details
 
 ## Create the `redis` container
@@ -56,6 +59,7 @@ CONTAINER ID   IMAGE          COMMAND        ...   PORTS      NAMES
 * We could have used *any name we wanted.*
 
 ---
+
 class: extra-details
 
 ## Create the `www` container
@@ -71,6 +75,7 @@ Check the port number with `docker ps`, and connect to it.
 We get the same red error page as before.
 
 ---
+
 class: extra-details
 
 ## How our app connects to Redis
@@ -88,6 +93,7 @@ redis = redis.Redis("redis")
 *Obviously* it doesn't work.
 
 ---
+
 class: extra-details
 
 ## Creating a linked container
@@ -106,6 +112,7 @@ In this container, we can communicate with `datastore` using
 the `redis` DNS alias.
 
 ---
+
 class: extra-details
 
 ## DNS
@@ -129,6 +136,7 @@ round-trip min/avg/max/stddev = 0.086/0.124/0.164/0.032 ms
   alias for the link, `redis`, in the format `name:alias`.
 
 ---
+
 class: extra-details
 
 ## Starting our application
@@ -147,6 +155,7 @@ $ docker ps -l
 ```
 
 ---
+
 class: extra-details
 
 ## Confirming that our application works properly
@@ -158,6 +167,7 @@ http://<yourHostIP>:<port>
 ```
 
 ---
+
 ## Links and environment variables
 
 In addition to the DNS information, Docker will automatically set environment variables in our container, giving extra details about the linked container.
@@ -186,6 +196,7 @@ RUBY_VERSION=2.1.2
   the `datastore` container via `ENV` instructions.
 
 ---
+
 ## Differences between network aliases and links
 
 * With network aliases, you can start containers in *any order.*
@@ -200,6 +211,7 @@ RUBY_VERSION=2.1.2
 * Links give access to the environment of the target container.
 
 ---
+
 class: extra-details
 
 ## Section summary

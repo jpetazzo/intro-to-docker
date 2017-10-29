@@ -4,8 +4,8 @@ class: title
 # Naming and inspecting containers
 
 ![Markings on container door](Naming_And_Inspecting/containermarkings.jpg)
----
 
+---
 
 ## Objectives
 
@@ -18,7 +18,9 @@ Naming allows us to:
 * Ensure unicity of a specific container.
 
 We will also see the `inspect` command, which gives a lot of details about a container.
+
 ---
+
 ## Naming our containers
 
 So far, we have referenced containers with their ID.
@@ -36,6 +38,7 @@ etc.
 ```
 
 ---
+
 ## Default names
 
 When we create a container, if we don't give a specific
@@ -49,6 +52,7 @@ It will be the concatenation of:
 Examples: `happy_curie`, `clever_hopper`, `jovial_lovelace` ...
 
 ---
+
 ## Specifying a name
 
 You can set the name of the container when you create it.
@@ -63,6 +67,7 @@ to create the container.
 This lets us enforce unicity of a given resource.
 
 ---
+
 ## Renaming containers
 
 * You can rename containers with `docker rename`.
@@ -70,6 +75,7 @@ This lets us enforce unicity of a given resource.
 * This allows you to "free up" a name without destroying the associated container.
 
 ---
+
 ## Inspecting a container
 
 The `docker inspect` command will output a very detailed JSON map.
@@ -93,6 +99,7 @@ $ docker inspect <containerID>
 There are multiple ways to consume that information.
 
 ---
+
 ## Parsing JSON with the Shell
 
 * You *could* grep and cut or awk the output of `docker inspect`.
@@ -108,6 +115,7 @@ $ docker inspect <containerID> | jq .
 * We will see a better solution which doesn't require extra tools.
 
 ---
+
 ## Using `--format`
 
 You can specify a format string, which will be parsed by 

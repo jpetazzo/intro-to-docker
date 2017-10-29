@@ -4,8 +4,8 @@ class: title
 # Working with Volumes
 
 ![volume](Working_With_Volumes/volume.jpg)
----
 
+---
 
 ## Objectives
 
@@ -14,7 +14,9 @@ At the end of this lesson, you will be able to:
 * Create containers holding volumes.
 * Share volumes across containers.
 * Share a host directory with one or many containers.
+
 ---
+
 ## Working with Volumes
 
 Docker volumes can be used to achieve many things, including:
@@ -26,6 +28,7 @@ Docker volumes can be used to achieve many things, including:
 * Sharing a *single file* between the host and a container.
 
 ---
+
 ## Volumes are special directories in a container
 
 Volumes can be declared in two different ways.
@@ -45,6 +48,7 @@ $ docker run -d -v /uploads myapp
 In both cases, `/uploads` (inside the container) will be a volume.
 
 ---
+
 class: extra-details
 
 ## Volumes bypass the copy-on-write system
@@ -61,6 +65,7 @@ Volumes act as passthroughs to the host filesystem.
   will still be writable (unless the volume is a read-only volume).
 
 ---
+
 class: extra-details
 
 ## Volumes can be shared across containers
@@ -88,6 +93,7 @@ Fri May 30 05:06:27 UTC 2014
 ```
 
 ---
+
 ## Volumes exist independently of containers
 
 If a container is stopped, its volumes still exist and are available.
@@ -107,8 +113,8 @@ Some of those volume names were explicit (pgdata-prod, pgdata-dev).
 
 The others (the hex IDs) were generated automatically by Docker.
 
-
 ---
+
 class: extra-details
 
 ## Data containers (before Engine 1.9)
@@ -129,6 +135,7 @@ $ docker run --name logs -v /var/log busybox true
 * We named each container to reference them easily later.
 
 ---
+
 class: extra-details
 
 ## Using data containers
@@ -151,6 +158,7 @@ $ docker run -d --volumes-from logs lumberjack
   storage and analysis system, using the lumberjack protocol.
 
 ---
+
 ## Named volumes (since Engine 1.9)
 
 * We can now create and manipulate volumes as first-class concepts.
@@ -166,6 +174,7 @@ website
 Volumes are not anchored to a specific path.
 
 ---
+
 ## Using our named volumes
 
 * Volumes are used with the `-v` option.
@@ -191,6 +200,7 @@ $ curl localhost:8888
 ```
 
 ---
+
 ## Using a volume in another container
 
 * We will make changes to the volume from another container.
@@ -206,8 +216,8 @@ Make changes, save, and exit.
 
 Then run `curl localhost:8888` again to see your changes.
 
-
 ---
+
 ## Managing volumes explicitly
 
 In some cases, you want a specific directory on the host to be mapped
@@ -230,8 +240,8 @@ Nice.
 $ docker run -d -v /path/on/the/host:/path/in/container image ...
 ```
 
-
 ---
+
 class: extra-details
 
 ## Sharing a directory between the host and a container
@@ -250,6 +260,7 @@ Note that the paths must be absolute.
 Those volumes can also be shared with `--volumes-from`.
 
 ---
+
 class: extra-details
 
 ## Migrating data with `--volumes-from`
@@ -265,6 +276,7 @@ of an existing container.
 * Newer containers can use `--volumes-from` too.
 
 ---
+
 class: extra-details
 
 ## Data migration in practice
@@ -291,6 +303,7 @@ QUIT
 ```
 
 ---
+
 class: extra-details
 
 ## Upgrading Redis
@@ -308,6 +321,7 @@ $ docker run -d --name redis30 --volumes-from redis28 redis:3.0
 ```
 
 ---
+
 class: extra-details
 
 ## Testing the new Redis
@@ -327,6 +341,7 @@ QUIT
 ```
 
 ---
+
 ## What happens when you remove containers with volumes?
 
 * With Engine versions prior 1.9, volumes would be *orphaned* when the last container referencing them is destroyed.
@@ -340,6 +355,7 @@ Ultimately, _you_ are the one responsible for logging,
 monitoring, and backup of your volumes.
 
 ---
+
 class: extra-details
 
 ## Checking volumes defined by an image
@@ -359,6 +375,7 @@ $ # docker inspect training/datavol
 ```
 
 ---
+
 class: extra-details
 
 ## Checking volumes used by a container
@@ -383,6 +400,7 @@ $ docker inspect <yourContainerID>
 * We can see that our volume is present on the file system of the Docker host.
 
 ---
+
 ## Sharing a single file between the host and a container
 
 The same `-v` flag can be used to share a single file.
@@ -397,6 +415,7 @@ Warning: when using such mounts, the container gains root-like access to the hos
 It can potentially do bad things.
 
 ---
+
 ## Volume plugins
 
 You can install plugins to manage volumes backed by particular storage systems,
@@ -408,6 +427,7 @@ or providing extra features. For instance:
 * and much more!
 
 ---
+
 ## Section summary
 
 We've learned how to:

@@ -4,8 +4,8 @@ class: title
 # Container Networking Basics
 
 ![A dense graph network](Container_Networking_Basics/network.jpg)
----
 
+---
 
 ## Objectives
 
@@ -18,7 +18,9 @@ At the end of this lesson, you will be able to:
 * Find a container's IP address.
 
 We will also explain the different network models used by Docker.
+
 ---
+
 ## A simple, static web server
 
 Run the Docker Hub image `nginx`, which contains a basic web server:
@@ -36,6 +38,7 @@ $ docker run -d -P nginx
 But, how do we connect to our web server now?
 
 ---
+
 ## Finding our web server port
 
 We will use `docker ps`:
@@ -55,6 +58,7 @@ We will explain the whys and hows of this port mapping.
 But first, let's make sure that everything works properly.
 
 ---
+
 ## Connecting to our web server (GUI)
 
 Point your browser to the IP address of your Docker host, on the port
@@ -63,6 +67,7 @@ shown by `docker ps` for container port 80.
 ![Screenshot](Container_Networking_Basics/web.png)
 
 ---
+
 ## Connecting to our web server (CLI)
 
 You can also use `curl` directly from the Docker host.
@@ -80,6 +85,7 @@ $ curl localhost:32769
 ```
 
 ---
+
 ## Why are we mapping ports?
 
 * We are out of IPv4 addresses.
@@ -89,6 +95,7 @@ $ curl localhost:32769
 * Ports have to be mapped to avoid conflicts.
 
 ---
+
 ## Finding the web server port in a script
 
 Parsing the output of `docker ps` would be painful.
@@ -101,6 +108,7 @@ $ docker port <containerID> 80
 ```
 
 ---
+
 ## Manual allocation of port numbers
 
 If you want to set port numbers yourself, no problem:
@@ -119,6 +127,7 @@ $ docker run -d -p 8080:80 -p 8888:80 nginx
 Note: the convention is `port-on-host:port-on-container`.
 
 ---
+
 ## Plumbing containers into your infrastructure
 
 There are many ways to integrate containers in your network.
@@ -132,6 +141,7 @@ There are many ways to integrate containers in your network.
   <br/>The container will then be reachable through any node of the cluster.
 
 ---
+
 class: x-extra-details
 
 ## Finding the container's IP address
@@ -150,6 +160,7 @@ $ docker inspect --format '{{ .NetworkSettings.IPAddress }}' <yourContainerID>
   private IP address of the container.
 
 ---
+
 class: x-extra-details
 
 ## Pinging our container
@@ -165,6 +176,7 @@ $ ping <ipAddress>
 ```
 
 ---
+
 ## The different network drivers
 
 A container can use one of the following drivers:
@@ -177,6 +189,7 @@ A container can use one of the following drivers:
 The driver is selected with `docker run --net ...`.
 
 ---
+
 ## The default bridge
 
 * By default, the container gets a virtual `eth0` interface.
@@ -191,6 +204,7 @@ The driver is selected with `docker run --net ...`.
 * The container can have its own routes, iptables rules, etc.
 
 ---
+
 ## The null driver
 
 * Container is started with `docker run --net none ...`
@@ -199,6 +213,7 @@ The driver is selected with `docker run --net ...`.
 * Useful for isolated/untrusted workloads.
 
 ---
+
 ## The host driver
 
 * Container is started with `docker run --net host ...`
@@ -213,6 +228,7 @@ Use cases:
 * Peer discovery (e.g. Erlang port mapper, Raft, Serf...)
 
 ---
+
 ## The container driver
 
 * Container is started with `docker run --net container:id ...`
@@ -222,6 +238,7 @@ Use cases:
   <br/>(i.e. one can bind to 127.0.0.1 and the others can connect to it.)
 
 ---
+
 ## Section summary
 
 We've learned how to:

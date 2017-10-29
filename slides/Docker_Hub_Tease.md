@@ -2,8 +2,8 @@
 class: title
 
 # Publishing images to the Docker Hub
----
 
+---
 
 We have built our first images.
 

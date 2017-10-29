@@ -4,8 +4,8 @@ class: title
 # Your training Virtual Machine
 
 ![SSH terminal](Use_Training_VM/ssh.jpg)
----
 
+---
 
 ## Objectives
 
@@ -18,7 +18,9 @@ private Docker VM.
 If you are following this course on your own, without access to an
 official training Virtual Machine, just skip this lesson, and check
 "Installing Docker" instead.
+
 ---
+
 ## Your training Virtual Machine
 
 This section assumes that you are following this course as part of
@@ -33,8 +35,8 @@ as well as some useful tools.
 It will stay up and running for the whole training, but it will be destroyed
 shortly after the training.
 
-
 ---
+
 ## Connecting to your Virtual Machine
 
 You need an SSH client.
@@ -50,8 +52,8 @@ $ ssh <login>@<ip-address>
   * Git BASH (https://git-for-windows.github.io/)
   * MobaXterm (http://moabaxterm.mobatek.net)
 
-
 ---
+
 ## Checking your Virtual Machine
 
 Once logged in, make sure that you can run a basic Docker command:

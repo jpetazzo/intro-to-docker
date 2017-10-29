@@ -4,8 +4,8 @@ class: title
 # Ambassadors
 
 ![](Ambassadors/ambassador.jpg)
----
 
+---
 
 ## Objectives
 
@@ -20,6 +20,7 @@ Ambassadors abstract the connection details for your services:
 * authentication (what if my service requires credentials, certificates, or otherwise?)
 
 ---
+
 class: extra-details
 
 ## Ambassadors
@@ -34,6 +35,7 @@ We're now going to see a pattern for service portability we call:
 ambassadors.
 
 ---
+
 ## Introduction to Ambassadors
 
 The ambassador pattern:
@@ -51,6 +53,7 @@ ambassador containers.
 ![ambassador](Ambassadors/diagram.png)
 
 ---
+
 ## Interacting with ambassadors
 
 * The web application container uses normal Docker networking to connect
@@ -63,6 +66,7 @@ ambassador containers.
   container will still be able to connect, without reconfiguration.
 
 ---
+
 ## Ambassadors for simple service discovery
 
 Use case:
@@ -79,6 +83,7 @@ The ambassador will be:
 * forwarding connections to the actual Redis service.
 
 ---
+
 ## Ambassadors for service migration
 
 Use case:
@@ -96,6 +101,7 @@ The ambassador will be:
 * updating the forwarding destination when the DNS SRV records are updated.
 
 ---
+
 ## Ambassadors for credentials injection
 
 Use case:
@@ -114,6 +120,7 @@ The ambassador will be:
 * performing authentication with the target Redis service before forwarding traffic.
 
 ---
+
 ## Ambassadors for load balancing
 
 Use case:
@@ -131,6 +138,7 @@ The ambassador will be:
 * dispatching requests across all backends transparently.
 
 ---
+
 ## "Ambassador" is a *pattern*
 
 There are many ways to implement the pattern.
@@ -150,6 +158,7 @@ Different deployments will use different underlying technologies.
 * Ambassadors can be used in addition to, or instead of, overlay networks.
 
 ---
+
 ## Section summary
 
 We've learned how to:

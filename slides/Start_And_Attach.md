@@ -2,8 +2,8 @@
 class: title
 
 # Restarting and Attaching to Containers
----
 
+---
 
 ## Objectives
 
@@ -14,7 +14,9 @@ In this chapter, we will see how to:
 * Put a container in the background.
 * Attach to a background container to bring it to the foreground.
 * Restart a stopped container.
+
 ---
+
 ## Background and foreground
 
 The distinction between foreground and background containers is arbitrary.
@@ -28,6 +30,7 @@ It is always possible to detach from a container, and to reattach to a container
 Analogy: attaching to a container is like plugging a keyboard and screen to a physical server.
 
 ---
+
 ## Detaching from a container
 
 * If you have started an *interactive* container (with option `-it`),
@@ -43,6 +46,7 @@ What does `-it` stand for?
 * `-i` means "connect stdin to the terminal."
 
 ---
+
 class: extra-details
 
 ## Specifying a custom detach sequence
@@ -66,6 +70,7 @@ $ docker ps -l
 ```
 
 ---
+
 class: extra-details
 
 ## Attaching to a container
@@ -89,6 +94,7 @@ $ docker attach $(docker ps -lq)
 Check that `^X x` doesn't work, but `^P ^Q` does.
 
 ---
+
 ## Detaching from non-interactive containers
 
 * **Warning:** if the container was started without `-it`...
@@ -99,6 +105,7 @@ Check that `^X x` doesn't work, but `^P ^Q` does.
 * Remember: you can always detach by killing the Docker client.
 
 ---
+
 ## Checking container output
 
 * Use `docker attach` if you intend to send input to the container.
@@ -109,6 +116,7 @@ $ docker logs --tail 1 --follow <containerID>
 ```
 
 ---
+
 ## Restarting a container
 
 When a container has exited, it is in stopped state.
@@ -132,6 +140,7 @@ Use `docker ps -a` to identify the container ID of a previous `jpetazzo/clock` c
 and try those commands.
 
 ---
+
 ## Attaching to a REPL
 
 * REPL = Read Eval Print Loop
@@ -141,6 +150,7 @@ and try those commands.
 * Try hitting `^L` or `Enter`
 
 ---
+
 class: extra-details
 
 ## SIGWINCH

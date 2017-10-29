@@ -4,8 +4,8 @@ class: title
 # The Container Network Model
 
 ![A denser graph network](Container_Network_Model/complex-network.jpg)
----
 
+---
 
 ## Objectives
 
@@ -19,7 +19,9 @@ At the end of this lesson, you will be able to:
 * Set the IP address of a container.
 
 We will also explain the principle of overlay networks and network plugins.
+
 ---
+
 ## The Container Network Model
 
 The CNM was introduced in Engine 1.9.0 (November 2015).
@@ -37,6 +39,7 @@ eb0eeab782f4        host                host
 ```
 
 ---
+
 ## What's in a network?
 
 * Conceptually, a network is a virtual switch.
@@ -50,6 +53,7 @@ eb0eeab782f4        host                host
 * More drivers can be provided by plugins (OVS, VLAN...)
 
 ---
+
 ## Creating a network
 
 Let's create a network called `dev`.
@@ -71,6 +75,7 @@ eb0eeab782f4        host                host
 ```
 
 ---
+
 ## Placing containers on a network
 
 We will create a *named* container on this network.
@@ -83,6 +88,7 @@ $ docker run -d --name search --net dev elasticsearch
 ```
 
 ---
+
 ## Communication between containers
 
 Now, create another container on this network.
@@ -108,6 +114,7 @@ root@0ecccdfa45ef:/#
 ```
 
 ---
+
 class: extra-details
 
 ## Resolving container addresses
@@ -133,6 +140,7 @@ In Docker Engine 1.10, this has been replaced by a dynamic resolver.
 (This avoids race conditions when updating `/etc/hosts`.)
 
 ---
+
 ## Connecting multiple containers together
 
 * Let's try to run an application that requires two containers.
@@ -141,6 +149,7 @@ In Docker Engine 1.10, this has been replaced by a dynamic resolver.
 * We will place them both on the `dev` network created before.
 
 ---
+
 ## Running the web server
 
 * The application is provided by the container image `jpetazzo/trainingwheels`.
@@ -159,6 +168,7 @@ $ docker ps -l
 ```
 
 ---
+
 ## Test the web server
 
 * If we connect to the application now, we will see an error page:
@@ -171,6 +181,7 @@ $ docker ps -l
 Note: we're not using a FQDN or an IP address here; just `redis`.
 
 ---
+
 ## Start the data store
 
 * We need to start a Redis container.
@@ -184,6 +195,7 @@ $ docker run --net dev --name redis -d redis
 ```
 
 ---
+
 ## Test the web server again
 
 * If we connect to the application now, we should see that the app is working correctly:
@@ -193,6 +205,7 @@ $ docker run --net dev --name redis -d redis
 * When the app tries to resolve `redis`, instead of getting a DNS error, it gets the IP address of our Redis container.
 
 ---
+
 ## A few words on *scope*
 
 * What if we want to run multiple copies of our application?
@@ -215,6 +228,7 @@ Check that the app still works (but the counter is back to 1,
 since we wiped out the old Redis container).
 
 ---
+
 class: x-extra-details
 
 ## Names are *local* to each network
@@ -231,6 +245,7 @@ Names can be resolved only when containers are on the same network.
 Containers can contact each other only when they are on the same network (you can try to ping using the IP address to verify).
 
 ---
+
 class: extra-details
 
 ## Network aliases
@@ -246,6 +261,7 @@ Network aliases are *local* to a given network (only exist in this network).
 Multiple containers can have the same network alias (even on the same network). In Docker Engine 1.11, resolving a network alias yields the IP addresses of all containers holding this alias.
 
 ---
+
 class: extra-details
 
 ## Creating containers on another network
@@ -267,6 +283,7 @@ $ docker run -d --name prod-es-2 --net-alias search --net prod elasticsearch
 ```
 
 ---
+
 class: extra-details
 
 ## Resolving network aliases
@@ -283,6 +300,7 @@ Address 2: 172.23.0.2 prod-es-1.prod
 (You can ignore the `can't resolve '(null)'` errors.)
 
 ---
+
 class: extra-details
 
 ## Connecting to aliased containers
@@ -310,6 +328,7 @@ $ docker run --rm --net prod centos curl -s search:9200
 ```
 
 ---
+
 ## Good to know ...
 
 * Docker will not create network names and aliases on the default `bridge` network.
@@ -322,6 +341,7 @@ $ docker run --rm --net prod centos curl -s search:9200
 * Creation of networks and network aliases is generally automated with tools like Compose (covered in a few chapters).
 
 ---
+
 class: extra-details
 
 ## A few words about round robin DNS
@@ -339,6 +359,7 @@ Many factors can affect DNS resolution, and you might see:
 It's OK to use DNS to discover available endpoints, but remember that you have to re-resolve every now and then to discover new endpoints.
 
 ---
+
 class: extra-details
 
 ## Custom networks
@@ -351,6 +372,7 @@ class: extra-details
 * `--aux-address` allows to specify a list of reserved addresses (which won't be allocated to containers).
 
 ---
+
 class: extra-details
 
 ## Setting containers' IP address
@@ -372,6 +394,7 @@ b2887adeb5578a01fd9c55c435cad56bbbe802350711d2743691f95743680b09
 *I repeat: don't hard code container IP addresses in your code!*
 
 ---
+
 ## Overlay networks
 
 * The features we've seen so far only work when all containers are on a single host.
@@ -381,6 +404,7 @@ b2887adeb5578a01fd9c55c435cad56bbbe802350711d2743691f95743680b09
 * Once you have an overlay network, *all the features that we've used in this chapter work identically.*
 
 ---
+
 class: x-extra-details
 
 ## Multi-host networking (overlay)
@@ -396,6 +420,7 @@ Very short instructions:
 See http://jpetazzo.github.io/orchestration-workshop for all the deets about clustering!
 
 ---
+
 class: extra-details
 
 ## Multi-host networking (plugins)
@@ -410,6 +435,7 @@ General idea:
 - you can then `docker network create --driver pluginname`
 
 ---
+
 ## Section summary
 
 We've learned how to:

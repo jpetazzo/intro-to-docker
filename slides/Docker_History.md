@@ -1,6 +1,7 @@
 # History of containers ... and Docker
 
 ---
+
 ## First experimentations
 
 * [IBM VM/370 (1972)](https://en.wikipedia.org/wiki/VM_%28operating_system%29)
@@ -12,7 +13,6 @@
 * [FreeBSD jails (1999)](https://www.freebsd.org/cgi/man.cgi?query=jail&sektion=8&manpath=FreeBSD+4.0-RELEASE)
 
 Containers have been around for a *very long time* indeed.
-
 
 ---
 
@@ -79,6 +79,7 @@ class: pic
 ## Docker early days (2013-2014)
 
 ---
+
 ## First users of Docker
 
 * PAAS builders (Flynn, Dokku, Tsuru, Deis...)

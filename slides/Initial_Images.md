@@ -4,8 +4,8 @@ class: title
 # Understanding Docker Images
 
 ![image](Initial_Images/image.png)
----
 
+---
 
 ## Objectives
 
@@ -16,7 +16,9 @@ In this lesson, we will explain:
 * The various image namespaces.
 * How to search and download images.
 * Image tags and when to use them.
+
 ---
+
 ## What is an image?
 
 * An image is a collection of files + some meta data.
@@ -34,6 +36,7 @@ In this lesson, we will explain:
   * Configuration
 
 ---
+
 ## Differences between containers and images
 
 * An image is a read-only filesystem.
@@ -46,6 +49,7 @@ In this lesson, we will explain:
 Let's give a couple of metaphors to illustrate those concepts.
 
 ---
+
 ## Image as stencils
 
 Images are like templates or stencils that you can create containers from.
@@ -53,6 +57,7 @@ Images are like templates or stencils that you can create containers from.
 ![stencil](Initial_Images/stenciling-wall.jpg)
 
 ---
+
 ## Object-oriented programming
 
 * Images are conceptually similar to *classes*.
@@ -60,6 +65,7 @@ Images are like templates or stencils that you can create containers from.
 * Containers are conceptually similar to *instances*.
 
 ---
+
 ## Wait a minute...
 
 If an image is read-only, how do we change it?
@@ -71,6 +77,7 @@ If an image is read-only, how do we change it?
 * A new image is created by stacking the new layer on top of the old image.
 
 ---
+
 ## A chicken-and-egg problem
 
 * The only way to create an image is by "freezing" a container.
@@ -78,6 +85,7 @@ If an image is read-only, how do we change it?
 * Help!
 
 ---
+
 ## Creating the first images
 
 There is a special empty image called `scratch`. 
@@ -92,6 +100,7 @@ The `docker import` command loads a tarball into Docker.
 Note: you will probably never have to do this yourself.
 
 ---
+
 ## Creating other images
 
 `docker commit`
@@ -107,6 +116,7 @@ Note: you will probably never have to do this yourself.
 We will explain both methods in a moment.
 
 ---
+
 ## Images namespaces
 
 There are three namespaces:
@@ -126,6 +136,7 @@ There are three namespaces:
 Let's explain each of them.
 
 ---
+
 ## Root namespace
 
 The root namespace is for official images. They are put there by Docker Inc.,
@@ -137,8 +148,8 @@ Those images include:
 * Distro images to be used as bases for your builds, like ubuntu, fedora...
 * Ready-to-use components and services, like redis, postgresql...
 
-
 ---
+
 ## User namespace
 
 The user namespace holds images for Docker Hub users and organizations.
@@ -162,6 +173,7 @@ clock
 ```
 
 ---
+
 ## Self-Hosted namespace
 
 This namespace holds images which are not hosted on Docker Hub, but on third
@@ -180,6 +192,7 @@ localhost:5000/wordpress
 * `wordpress` is the name of the image
 
 ---
+
 ## How do you store and manage images?
 
 Images can be stored:
@@ -193,6 +206,7 @@ To be more accurate: you can use the Docker client to tell a Docker server
 to push and pull images to and from a registry.
 
 ---
+
 ## Showing current images
 
 Let's look at what images are on our host now.
@@ -212,8 +226,8 @@ training/namer   latest    902673acc741   9 months ago    289.3 MB
 jpetazzo/clock   latest    12068b93616f   12 months ago   2.433 MB
 ```
 
-
 ---
+
 ## Searching for images
 
 We cannot list *all* images on a remote registry, but
@@ -235,6 +249,7 @@ elevy/zookeeper       ZooKeeper configured t...   3                [OK]
   <br/>(This means that their build recipe is always available.)
 
 ---
+
 ## Downloading images
 
 There are two ways to download images.
@@ -243,6 +258,7 @@ There are two ways to download images.
 * Implicitly, when executing `docker run` and the image is not found locally.
 
 ---
+
 ## Pulling an image
 
 ```bash
@@ -259,6 +275,7 @@ d1881793a057: Download complete
   we would like. It is a *version tag*.
 
 ---
+
 ## Image and tags
 
 * Images can have tags.
@@ -267,6 +284,7 @@ d1881793a057: Download complete
 * The `:latest` tag is generally updated often.
 
 ---
+
 ## When to (not) use tags
 
 Don't specify tags:
@@ -283,6 +301,7 @@ Do specify tags:
 * To ensure repeatability later.
 
 ---
+
 ## Section summary
 
 We've learned how to:

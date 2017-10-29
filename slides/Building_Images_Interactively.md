@@ -4,8 +4,8 @@ class: title
 # Building Images Interactively
 
 ![cmatrix](Building_Images_Interactively/cmatrix.png)
----
 
+---
 
 ## Objectives
 
@@ -20,7 +20,9 @@ We will:
 * Install software manually in the container, and turn it
   into a new image.
 * Learn about new commands: `docker commit`, `docker tag`, and `docker diff`.
+
 ---
+
 ## Building Images Interactively
 
 As we have seen, the images on the Docker Hub are sometimes very basic.
@@ -34,11 +36,13 @@ First, we will do it manually with `docker commit`.
 Then, in an upcoming chapter, we will use a `Dockerfile` and `docker build`.
 
 ---
+
 ## Building from a base
 
 Our base will be the `ubuntu` image.
 
 ---
+
 ## Create a new container and make some changes
 
 Start an Ubuntu container:
@@ -58,6 +62,7 @@ root@<yourContainerId>:#/ apt-get update && apt-get install figlet
 ```
 
 ---
+
 ## Inspect the changes
 
 Type `exit` at the container prompt to leave the interactive session.
@@ -77,6 +82,7 @@ A /usr/bin/figlet
 ```
 
 ---
+
 class: x-extra-details
 
 ## Docker tracks filesystem changes
@@ -91,6 +97,7 @@ As explained before:
   doesn't incur a huge copy.)
 
 ---
+
 ## Commit and run your image
 
 The `docker commit` command will create a new layer with those changes,
@@ -115,8 +122,8 @@ root@fcfb62f0bfde:/# figlet hello
 |_| |_|\___|_|_|\___/ 
 ```
 
-
 ---
+
 ## Tagging images
 
 Referring to an image by its ID is not convenient. Let's tag it instead.
@@ -140,6 +147,7 @@ $ docker run -it figlet
 ```
 
 ---
+
 ## What's next?
 
 Manual process = bad.

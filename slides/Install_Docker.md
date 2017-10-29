@@ -5,8 +5,8 @@ class: title
 
 
 ![install](Install_Docker/install.jpg)
----
 
+---
 
 ## Objectives
 
@@ -35,6 +35,7 @@ It runs on:
 * Microsoft Windows via a virtual machine.
 
 ---
+
 class: x-extra-details
 
 ## Installing Docker on Linux
@@ -51,6 +52,7 @@ It can be installed via:
 * Binary download from Docker (it's a single file).
 
 ---
+
 ## Installing Docker with upstream packages
 
 * Preferred method to install Docker on Linux.
@@ -60,6 +62,7 @@ It can be installed via:
 * Package will be named `docker-engine`.
 
 ---
+
 class: x-extra-details
 
 ## Installing Docker with distros packages
@@ -77,6 +80,7 @@ $ sudo apt-get install docker.io
 ```
 
 ---
+
 class: x-extra-details
 
 ## Installation script from Docker
@@ -95,6 +99,7 @@ This currently works on:
 * Gentoo
 
 ---
+
 ## Installing on OS X and Microsoft Windows
 
 Docker doesn't run natively on OS X or Microsoft Windows.
@@ -122,6 +127,7 @@ All communication with the Docker Engine happens over the API.
 This will also allow to use remote Engines exactly as if they were local.
 
 ---
+
 ## Rolling your own install
 
 * Good luck, you're on your own!
@@ -129,6 +135,7 @@ This will also allow to use remote Engines exactly as if they were local.
 * If you want to do something very custom, the Docker Toolbox is probably better anyway.
 
 ---
+
 ## Using the Docker Toolbox
 
 The Docker Toolbox installs the following components:
@@ -141,6 +148,7 @@ The Docker Toolbox installs the following components:
 * A handful of clever wrappers
 
 ---
+
 class: x-extra-details
 
 ## About boot2docker
@@ -154,6 +162,7 @@ Boot2Docker is not a "lite" version of Docker.
 ![Boot2Docker](Install_Docker/logo.png)
 
 ---
+
 ## Docker Mac and Docker Windows
 
 * Docker Mac and Docker Windows are newer products
@@ -167,6 +176,7 @@ to run a full cluster on your local machine, you can fallback on the
 Docker Toolbox (it can coexist with Docker Mac/Windows just fine).
 
 ---
+
 ## Important PSA about security
 
 The `docker` user is `root` equivalent.
@@ -182,6 +192,7 @@ Therefore, the Docker control socket is (by default) owned by the `docker` group
 If your user is not in the `docker` group, you will need to prefix every command with `sudo`; e.g. `sudo docker version`.
 
 ---
+
 class: extra-details
 
 ## Reminder ...
@@ -192,6 +203,7 @@ has Docker installed, and Docker has already been setup to run
 without `sudo`.
 
 ---
+
 class: extra-details
 
 ## The `docker` group
@@ -221,6 +233,7 @@ $ exit
 ```
 
 ---
+
 class: extra-details
 
 ## Check that Docker works without sudo
@@ -244,8 +257,8 @@ Client:
      Built:        Tue Apr 26 23:38:55 2016
      OS/Arch:      linux/amd64
 
-
 ---
+
 ## Section summary
 
 We've learned how to:

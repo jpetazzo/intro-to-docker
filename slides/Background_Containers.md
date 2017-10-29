@@ -4,8 +4,8 @@ class: title
 # Background Containers
 
 ![Background Containers](Background_Containers/background-containers.jpg)
----
 
+---
 
 ## Objectives
 
@@ -19,7 +19,9 @@ We will now see how to:
 * Check the logs of a container.
 * Stop a container.
 * List stopped containers.
+
 ---
+
 ## A non-interactive container
 
 We will run a small custom container.
@@ -41,6 +43,7 @@ Fri Feb 20 00:28:55 UTC 2015
 * We will hear more about user images (and other types of images) later.
 
 ---
+
 ## Run a container in the background
 
 Containers can be started in the background, with the `-d` flag (daemon mode):
@@ -55,6 +58,7 @@ $ docker run -d jpetazzo/clock
 * Docker gives us the ID of the container.
 
 ---
+
 ## List running containers
 
 How can we check that our container is still running?
@@ -75,6 +79,7 @@ Docker tells us:
 * Other information (COMMAND, PORTS, NAMES) that we will explain later.
 
 ---
+
 ## Starting more containers
 
 Let's start two more containers.
@@ -89,6 +94,7 @@ $ docker run -d jpetazzo/clock
 Check that `docker ps` correctly reports all 3 containers.
 
 ---
+
 ## Two useful flags for `docker ps`
 
 To see only the last container that was started:
@@ -116,6 +122,7 @@ $ docker ps -lq
 ```
 
 ---
+
 ## View the logs of a container
 
 We told you that Docker was logging the container output.
@@ -135,6 +142,7 @@ Fri Feb 20 00:39:53 UTC 2015
   <br/>(Sometimes, that will be too much. Let's see how to address that.)
 
 ---
+
 ## View only the tail of the logs
 
 To avoid being spammed with eleventy pages of output,
@@ -150,6 +158,7 @@ Fri Feb 20 00:55:37 UTC 2015
 * The parameter is the number of lines that we want to see.
 
 ---
+
 ## Follow the logs in real time
 
 Just like with the standard UNIX command `tail -f`, we can
@@ -167,6 +176,7 @@ Fri Feb 20 00:57:13 UTC 2015
 * Use `^C` to exit.
 
 ---
+
 ## Stop our container
 
 There are two ways we can terminate our detached container.
@@ -185,6 +195,7 @@ Reminder: the `KILL` signal cannot be intercepted, and will
 forcibly terminate the container.
 
 ---
+
 ## Stopping our containers
 
 Let's stop one of those containers:
@@ -205,6 +216,7 @@ This will take 10 seconds:
 * this terminates the container.
 
 ---
+
 ## Killing the remaining containers
 
 Let's be less patient with the two other containers:
@@ -227,6 +239,7 @@ $ docker ps
 ```
 
 ---
+
 ## List stopped containers
 
 We can also see stopped containers, with the `-a` (`--all`) option.

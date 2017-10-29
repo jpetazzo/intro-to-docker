@@ -109,6 +109,7 @@ class: pic
 ![elimatrix](About_Docker/elimatrix.png)
 
 ---
+
 ## Results
 
 * Dev-to-prod reduced from 9 months to 15 minutes (ING)
@@ -214,7 +215,6 @@ class: extra-details
 
 Note: this is not covered in this intro level workshop!
 
-
 ---
 
 class: extra-details
@@ -224,6 +224,7 @@ class: extra-details
 ### Docker before/after
 
 ---
+
 class: extra-details
 
 ## Formats and APIs, before Docker
@@ -259,6 +260,7 @@ class: extra-details
 * Improvement over ad-hoc, in-house, specific tools.
 
 ---
+
 class: extra-details
 
 ## Shipping, before Docker
@@ -272,6 +274,7 @@ class: extra-details
 * Base deployment often done from scratch (debootstrap...) and unreliable.
 
 ---
+
 class: extra-details
 
 ## Shipping, after Docker
@@ -285,6 +288,7 @@ class: extra-details
 * Save disk, network, memory usage.
 
 ---
+
 class: extra-details
 
 ## Example
@@ -299,6 +303,7 @@ Layers:
 * Configuration
 
 ---
+
 class: extra-details
 
 ## Devs vs Ops, before Docker
@@ -318,6 +323,7 @@ class: extra-details
 * Shipping code causes frictions and delays.
 
 ---
+
 class: extra-details
 
 ## Devs vs Ops, after Docker

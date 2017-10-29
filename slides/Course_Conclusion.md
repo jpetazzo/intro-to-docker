@@ -4,7 +4,9 @@ class: title
 # Course Conclusion
 
 ![end](Course_Conclusion/end.jpg)
+
 ---
+
 ## Course Summary #
 
 During this class, we:
@@ -17,6 +19,7 @@ During this class, we:
 * Learned how to integrate Docker into your daily workflow.
 
 ---
+
 ## Questions & Next Steps #
 
 **Still Learning:**
@@ -33,6 +36,7 @@ During this class, we:
 * Get Docker help on Stack Overflow - [http://stackoverflow.com/search?q=docker](http://stackoverflow.com/search?q=docker)
 
 ---
+
 class: title
 
 <br>

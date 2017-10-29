@@ -4,8 +4,8 @@ class: title
 # Local Development Workflow with Docker
 
 ![construction](Local_Development_Workflow/construction.jpg)
----
 
+---
 
 ## Objectives
 
@@ -13,7 +13,9 @@ At the end of this lesson, you will be able to:
 
 * Share code between container and host.
 * Use a simple local development workflow.
+
 ---
+
 ## Using a Docker container for local development
 
 Never again:
@@ -25,6 +27,7 @@ Never again:
 By using Docker containers, we will get a consistent development environment.
 
 ---
+
 ## Our "namer" application
 
 * The code is available on https://github.com/jpetazzo/namer.
@@ -38,8 +41,8 @@ $ docker run -dP jpetazzo/namer
 
 Check the port number with `docker ps` and open the application.
 
-
 ---
+
 ## Let's look at the code
 
 Let's download our application's source code.
@@ -56,6 +59,7 @@ Gemfile
 ```
 
 ---
+
 ## Where's my code?
 
 According to the Dockerfile, the code is copied into `/src` :
@@ -75,6 +79,7 @@ We want to make changes *inside the container* without rebuilding it each time.
 For that, we will use a *volume*.
 
 ---
+
 ## Our first volume
 
 We will tell Docker to map the current directory to `/src` in the container.
@@ -90,6 +95,7 @@ $ docker run -d -v $(pwd):/src -p 80:9292 jpetazzo/namer
 * We don't need to give a command to run because the Dockerfile already specifies `rackup`.
 
 ---
+
 ## Mounting volumes inside containers
 
 The `-v` flag mounts a directory from your host into your Docker
@@ -107,6 +113,7 @@ container. The flag structure is:
 There will be a full chapter about volumes!
 
 ---
+
 ## Testing the development container
 
 Now let us see if our new container is running.
@@ -118,6 +125,7 @@ CONTAINER ID  IMAGE   COMMAND CREATED       STATUS PORTS                NAMES
 ```
 
 ---
+
 ## Viewing our application
 
 Now let's browse to our web application on:
@@ -131,6 +139,7 @@ We can see our company naming application.
 ![web application 1](Local_Development_Workflow/webapp1.png)
 
 ---
+
 ## Making a change to our application
 
 Our customer really doesn't like the color of our text. Let's change it.
@@ -152,6 +161,7 @@ color: red;
 ```
 
 ---
+
 ## Refreshing our application
 
 Now let's refresh our browser:
@@ -165,6 +175,7 @@ We can see the updated color of our company naming application.
 ![web application 2](Local_Development_Workflow/webapp2.png)
 
 ---
+
 ## Improving the workflow with Compose
 
 * You can also start the container with the following command:
@@ -185,6 +196,7 @@ www:
 ```
 
 ---
+
 ## Why Compose?
 
 * Specifying all those "docker run" parameters is tedious.
@@ -195,6 +207,7 @@ www:
   <br/>(More on this later.)
 
 ---
+
 ## Workflow explained
 
 We can see a simple workflow:
@@ -224,6 +237,7 @@ We can see a simple workflow:
     (You *are* using version control, right?)
 
 ---
+
 class: x-extra-details
 
 ## Debugging inside the container
@@ -237,6 +251,7 @@ If sometimes you find yourself wishing you could SSH into a container: you can u
 You can get a shell prompt inside an existing container this way, or run an arbitrary process for automation.
 
 ---
+
 class: extra-details
 
 ## `docker exec` example
@@ -251,6 +266,7 @@ irb(main):002:0> exit
 ```
 
 ---
+
 class: x-extra-details
 
 ## Stopping the container
@@ -268,6 +284,7 @@ $ docker rm <yourContainerID>
 ```
 
 ---
+
 ## Section summary
 
 We've learned how to:

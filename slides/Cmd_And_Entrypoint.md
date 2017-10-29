@@ -4,8 +4,8 @@ class: title
 # CMD and ENTRYPOINT
 
 ![Container entry doors](Cmd_And_Entrypoint/entrypoint.jpg)
----
 
+---
 
 ## Objectives
 
@@ -16,7 +16,9 @@ Dockerfile commands:
 
 Those commands allow us to set the default command
 to run in a container.
+
 ---
+
 ## Defining a default command
 
 When people run our container, we want to greet them with a nice hello message, and using a custom font.
@@ -31,6 +33,7 @@ figlet -f script hello
 * `hello` is the message that we want it to display.
 
 ---
+
 ## Adding `CMD` to our Dockerfile
 
 Our new Dockerfile will look like this:
@@ -48,6 +51,7 @@ CMD figlet -f script hello
 * As a result, while you can have multiple `CMD` lines, it is useless.
 
 ---
+
 ## Build and test our image
 
 Let's build it:
@@ -69,8 +73,8 @@ $ docker run figlet
 |   |_/|__/|__/|__/\__/ 
 ```
 
-
 ---
+
 ## Overriding `CMD`
 
 If we want to get a shell into our container (instead of running
@@ -85,6 +89,7 @@ root@7ac86a641116:/#
 * It replaced the value of `CMD`.
 
 ---
+
 ## Using `ENTRYPOINT`
 
 We want to be able to specify a different message on the command line,
@@ -104,8 +109,8 @@ $ docker run figlet salut
 
 We will use the `ENTRYPOINT` verb in Dockerfile.
 
-
 ---
+
 ## Adding `ENTRYPOINT` to our Dockerfile
 
 Our new Dockerfile will look like this:
@@ -124,6 +129,7 @@ ENTRYPOINT ["figlet", "-f", "script"]
 Why did we use JSON syntax for our `ENTRYPOINT`?
 
 ---
+
 ## Implications of JSON vs string syntax
 
 * When CMD or ENTRYPOINT use string syntax, they get wrapped in `sh -c`.
@@ -142,6 +148,7 @@ sh -c "figlet -f script" salut
 ```
 
 ---
+
 ## Build and test our image
 
 Let's build it:
@@ -166,6 +173,7 @@ $ docker run figlet salut
 Great success!
 
 ---
+
 ## Using `CMD` and `ENTRYPOINT` together
 
 What if we want to define a default message for our container?
@@ -177,6 +185,7 @@ Then we will use `ENTRYPOINT` and `CMD` together.
 * They *both* have to use JSON syntax.
 
 ---
+
 ## `CMD` and `ENTRYPOINT` together
 
 Our new Dockerfile will look like this:
@@ -195,6 +204,7 @@ CMD ["hello world"]
 * Otherwise, our extra command-line arguments are used instead of `CMD`.
 
 ---
+
 ## Build and test our image
 
 Let's build it:
@@ -223,8 +233,8 @@ $ docker run figlet
     |/ \   /  \_|/  /  |    / |/ |/ |  |   |  / |/ |  /  |  /  \_
     |   |_/\__/ |__/\_/|_/    |  |  |_/ \_/|_/  |  |_/\_/|_/\__/ 
 
-
 ---
+
 ## Overriding `ENTRYPOINT`
 
 What if we want to run a shell in our container?

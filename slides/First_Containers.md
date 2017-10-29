@@ -4,8 +4,8 @@ class: title
 # Our First Containers
 
 ![Plastic Containers](First_Containers/firstcontainers.jpg)
----
 
+---
 
 ## Objectives
 
@@ -13,7 +13,9 @@ At the end of this lesson, you will have:
 
 * Seen Docker in action.
 * Started your first containers.
+
 ---
+
 class: x-extra-details
 
 ## Docker architecture
@@ -31,7 +33,9 @@ Docker is a client-server application.
   <br/>Collection of public images.
   <br/>The Docker daemon talks to it via the registry API.
  
+
 ---
+
 ## Hello World
 
 In your Docker environment, just run the following command:
@@ -41,16 +45,16 @@ $ docker run busybox echo hello world
 hello world
 ```
 
-
 ---
+
 ## That was our first container!
 
 * We used one of the smallest, simplest images available: `busybox`.
 * `busybox` is typically used in embedded systems (phones, routers...)
 * We ran a single process and echo'ed `hello world`.
 
-
 ---
+
 ## A more useful container
 
 Let's run a more exciting container:
@@ -67,9 +71,8 @@ root@04c0bb0a6c07:/#
   * `-i` tells Docker to connect us to the container's stdin.
   * `-t` tells Docker that we want a pseudo-terminal.
 
-
-
 ---
+
 ## Do something in our container
 
 Try to run `figlet` in our container.
@@ -82,6 +85,7 @@ bash: figlet: command not found
 Alright, we need to install it.
 
 ---
+
 ## An observation
 
 Let's check how many packages are installed here.
@@ -97,6 +101,7 @@ root@04c0bb0a6c07:/# dpkg -l | wc -l
   and compare the results.
 
 ---
+
 ## Install a package in our container
 
 We want `figlet`, so let's install it:
@@ -122,8 +127,8 @@ One minute later, `figlet` is installed!
 |_| |_|\___|_|_|\___/ 
 ```
 
-
 ---
+
 ## Exiting our container
 
 Just exit the shell, like you would usually do.
@@ -138,8 +143,8 @@ root@04c0bb0a6c07:/# exit
 
 * It still exists on disk, but all compute resources have been freed up.
 
-
 ---
+
 ## Starting another container
 
 What if we start a new container, and try to run `figlet` again?
