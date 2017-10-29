@@ -3,7 +3,7 @@ class: title
 
 # Our First Containers
 
-![Plastic Containers](firstcontainers.jpg)
+![Plastic Containers](First_Containers/firstcontainers.jpg)
 ---
 
 

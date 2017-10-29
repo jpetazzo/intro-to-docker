@@ -3,7 +3,7 @@ class: title
 
 # Understanding Docker Images
 
-![image](image.png)
+![image](Initial_Images/image.png)
 ---
 
 
@@ -50,7 +50,7 @@ Let's give a couple of metaphors to illustrate those concepts.
 
 Images are like templates or stencils that you can create containers from.
 
-![stencil](stenciling-wall.jpg)
+![stencil](Initial_Images/stenciling-wall.jpg)
 
 ---
 ## Object-oriented programming

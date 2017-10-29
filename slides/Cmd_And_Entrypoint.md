@@ -3,7 +3,7 @@ class: title
 
 # CMD and ENTRYPOINT
 
-![Container entry doors](entrypoint.jpg)
+![Container entry doors](Cmd_And_Entrypoint/entrypoint.jpg)
 ---
 
 

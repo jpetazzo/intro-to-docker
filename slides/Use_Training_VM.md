@@ -3,7 +3,7 @@ class: title
 
 # Your training Virtual Machine
 
-![SSH terminal](ssh.jpg)
+![SSH terminal](Use_Training_VM/ssh.jpg)
 ---
 
 

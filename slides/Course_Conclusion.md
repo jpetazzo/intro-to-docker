@@ -3,7 +3,7 @@ class: title
 
 # Course Conclusion
 
-![end](end.jpg)
+![end](Course_Conclusion/end.jpg)
 ---
 ## Course Summary #
 
@@ -39,4 +39,4 @@ class: title
 <br>
 ## Thank You #
 <br>
-![Docker Inc](../_images/DockerLogo.png) 
+![Docker Inc](Course_Conclusion/../_images/DockerLogo.png) 

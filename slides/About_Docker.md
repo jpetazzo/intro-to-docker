@@ -3,7 +3,7 @@ class: title
 
 # Docker 30,000ft overview
 
-![who](who.png)
+![who](About_Docker/who.png)
 ---
 
 
@@ -54,37 +54,37 @@ Don't worry, we will get to that fast enough!
 ---
 ## The deployment problem
 
-![problem](problem.png)
+![problem](About_Docker/problem.png)
 
 ---
 ## The Matrix from Hell
 
-![matrix](matrix.png)
+![matrix](About_Docker/matrix.png)
 
 ---
 ## An inspiration and some ancient history!
 
-![history](history.png)
+![history](About_Docker/history.png)
 
 ---
 ## Intermodal shipping containers
 
-![shipping](shipping.png)
+![shipping](About_Docker/shipping.png)
 
 ---
 ## This spawned a Shipping Container Ecosystem!
 
-![shipeco](shipeco.png)
+![shipeco](About_Docker/shipeco.png)
 
 ---
 ## A shipping container system for applications
 
-![shipapp](appcont.png)
+![shipapp](About_Docker/appcont.png)
 
 ---
 ## Eliminate the matrix from Hell
 
-![elimatrix](elimatrix.png)
+![elimatrix](About_Docker/elimatrix.png)
 
 ---
 ## Results
@@ -267,7 +267,7 @@ class: extra-details
 
 ## Clean separation of concerns
 
-![sepcon](sepcon.png)
+![sepcon](About_Docker/sepcon.png)
 
 
 ---
@@ -294,7 +294,7 @@ class: extra-details
 
 ## Containers = cheaper than VMs
 
-![lightcont](lightcont.png)
+![lightcont](About_Docker/lightcont.png)
 
 * Users: hosting providers.
 * Highly specialized audience with strong ops culture.
@@ -309,7 +309,7 @@ class: extra-details
 
 ## Containers = easier than VMs
 
-![heroku 2007](heroku-first-homepage.png)
+![heroku 2007](About_Docker/heroku-first-homepage.png)
 
 * I can't speak for Heroku, but containers were (one of) dotCloud's secret weapon
 

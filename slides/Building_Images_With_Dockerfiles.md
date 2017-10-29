@@ -3,7 +3,7 @@ class: title
 
 # Building Docker images wth a Dockerfile
 
-![construction](construction.jpg)
+![construction](Building_Images_With_Dockerfiles/construction.jpg)
 ---
 
 

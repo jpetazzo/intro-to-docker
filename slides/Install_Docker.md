@@ -4,7 +4,7 @@ class: title
 # Install Docker
 
 
-![install](install.jpg)
+![install](Install_Docker/install.jpg)
 ---
 
 
@@ -151,7 +151,7 @@ It runs on most hypervisors and can also boot on actual hardware.
 
 Boot2Docker is not a "lite" version of Docker.
 
-![Boot2Docker](logo.png)
+![Boot2Docker](Install_Docker/logo.png)
 
 ---
 ## Docker Mac and Docker Windows

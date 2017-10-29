@@ -3,7 +3,7 @@ class: title
 
 # The Container Network Model
 
-![A denser graph network](complex-network.jpg)
+![A denser graph network](Container_Network_Model/complex-network.jpg)
 ---
 
 
@@ -163,7 +163,7 @@ $ docker ps -l
 
 * If we connect to the application now, we will see an error page:
 
-![Trainingwheels error](trainingwheels-error.png)
+![Trainingwheels error](Container_Network_Model/trainingwheels-error.png)
 
 * This is because the Redis service is not running.
 * This container tries to resolve the name `redis`.
@@ -188,7 +188,7 @@ $ docker run --net dev --name redis -d redis
 
 * If we connect to the application now, we should see that the app is working correctly:
 
-![Trainingwheels OK](trainingwheels-ok.png)
+![Trainingwheels OK](Container_Network_Model/trainingwheels-ok.png)
 
 * When the app tries to resolve `redis`, instead of getting a DNS error, it gets the IP address of our Redis container.
 

@@ -3,7 +3,7 @@ class: title
 
 # Building Images Interactively
 
-![cmatrix](cmatrix.png)
+![cmatrix](Building_Images_Interactively/cmatrix.png)
 ---
 
 

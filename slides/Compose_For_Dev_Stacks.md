@@ -3,7 +3,7 @@ class: title
 
 # Compose For Development Stacks
 
-![Compose](fig.png)
+![Compose](Compose_For_Dev_Stacks/fig.png)
 ---
 
 
@@ -44,7 +44,7 @@ Before diving in, let's see a small example of Compose in action.
 ---
 ## Compose in action
 
-![composeup](composeup.gif)
+![composeup](Compose_For_Dev_Stacks/composeup.gif)
 
 ---
 ## Checking if Compose is installed
@@ -108,7 +108,7 @@ including linking the relevant containers together.
 
 Verify that the app is running at `http://<yourHostIP>:8000`.
 
-![composeapp](composeapp.png)
+![composeapp](Compose_For_Dev_Stacks/composeapp.png)
 
 ---
 ## Stopping the app

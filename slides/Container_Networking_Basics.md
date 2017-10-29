@@ -3,7 +3,7 @@ class: title
 
 # Container Networking Basics
 
-![A dense graph network](network.jpg)
+![A dense graph network](Container_Networking_Basics/network.jpg)
 ---
 
 
@@ -60,7 +60,7 @@ But first, let's make sure that everything works properly.
 Point your browser to the IP address of your Docker host, on the port
 shown by `docker ps` for container port 80.
 
-![Screenshot](web.png)
+![Screenshot](Container_Networking_Basics/web.png)
 
 ---
 ## Connecting to our web server (CLI)
