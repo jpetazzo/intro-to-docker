@@ -1,0 +1,27 @@
+title: FIXME
+
+chat: FIXME
+
+chapters:
+- - About_Docker.md
+  - Use_Training_VM.md
+  - Install_Docker.md
+  - First_Containers.md
+  - Background_Containers.md
+  - Start_And_Attach.md
+  - Initial_Images.md
+  - Building_Images_Interactively.md
+  - Building_Images_With_Dockerfiles.md
+  - Cmd_And_Entrypoint.md
+  - Copying_Files_During_Build.md
+  - Dockerfile_Reference.md
+  - Docker_Hub_Tease.md
+  - Naming_And_Inspecting.md
+  - Container_Networking_Basics.md
+  - Container_Network_Model.md
+  - Connecting_Containers_With_Links.md
+  - Ambassadors.md
+  - Local_Development_Workflow.md
+  - Working_With_Volumes.md
+  - Compose_For_Dev_Stacks.md
+  - Course_Conclusion.md
