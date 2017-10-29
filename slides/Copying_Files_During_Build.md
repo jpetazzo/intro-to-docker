@@ -65,7 +65,9 @@ Create this Dockerfile.
 ## Testing our C program
 
 * Create `hello.c` and `Dockerfile` in the same direcotry.
+
 * Run `docker build -t hello .` in this directory.
+
 * Run `docker run hello`, you should see `Hello, world!`.
 
 Success!
@@ -75,8 +77,11 @@ Success!
 ## `COPY` and the build cache
 
 * Run the build again.
+
 * Now, modify `hello.c` and run the build again.
+
 * Docker can cache steps involving `COPY`.
+
 * Those steps will not be executed again if the files haven't been changed.
 
 ---
@@ -84,9 +89,12 @@ Success!
 ## Details
 
 * You can `COPY` whole directories recursively.
+
 * Older Dockerfiles also have the `ADD` instruction.
   <br/>It is similar but can automatically extract archives.
+
 * If we really wanted to compile C code in a compiler, we would:
 
   * Place it in a different directory, with the `WORKDIR` instruction.
+
   * Even better, use the `gcc` official image.
