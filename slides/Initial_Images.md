@@ -145,17 +145,17 @@ The user namespace holds images for Docker Hub users and organizations.
 
 For example:
 
-    @@@ Sh
+    ```bash
     jpetazzo/clock
 
 The Docker Hub user is:
 
-    @@@ Sh
+    ```bash
     jpetazzo
 
 The image name is:
 
-    @@@ Sh
+    ```bash
     clock
 
 ---
@@ -169,7 +169,7 @@ registry server.
 
 For example:
 
-    @@@ Sh
+    ```bash
     localhost:5000/wordpress
 
 * `localhost:5000` is the host and port of the registry
@@ -193,7 +193,7 @@ to push and pull images to and from a registry.
 
 Let's look at what images are on our host now.
 
-    @@@ Sh
+    ```bash
     $ docker images
     REPOSITORY       TAG       IMAGE ID       CREATED         SIZE
     fedora           latest    ddd5c9c1d0f2   3 days ago      204.7 MB
@@ -214,7 +214,7 @@ Let's look at what images are on our host now.
 We cannot list *all* images on a remote registry, but
 we can search for a specific keyword:
 
-    @@@ Sh
+    ```bash
     $ docker search zookeeper
     NAME                  DESCRIPTION                 STARS  OFFICIAL  AUTOMATED
     jplock/zookeeper      Builds a docker image ...   103              [OK]
@@ -239,7 +239,7 @@ There are two ways to download images.
 ---
 ## Pulling an image
 
-    @@@ Sh
+    ```bash
     $ docker pull debian:jessie
     Pulling repository debian
     b164861940b8: Download complete 

@@ -23,7 +23,7 @@ We will also explain the different network models used by Docker.
 
 Run the Docker Hub image `nginx`, which contains a basic web server:
 
-    @@@ Sh
+    ```bash
     $ docker run -d -P nginx
     66b1ce719198711292c8f34f84a7b68c3876cf9f67015e752b94e189d35a204e
 
@@ -39,7 +39,7 @@ But, how do we connect to our web server now?
 
 We will use `docker ps`:
 
-    @@@ Sh
+    ```bash
     $ docker ps
     CONTAINER ID  IMAGE  ...  PORTS                                          ...
     e40ffb406c9e  nginx  ...  0.0.0.0:32769->80/tcp, 0.0.0.0:32768->443/tcp  ...
@@ -68,7 +68,7 @@ You can also use `curl` directly from the Docker host.
 Make sure to use the right port number if it is different
 from the example below:
 
-    @@@ Sh
+    ```bash
     $ curl localhost:32769
     <!DOCTYPE html>
     <html>
@@ -92,7 +92,7 @@ Parsing the output of `docker ps` would be painful.
 
 There is a command to help us:
 
-    @@@ Sh
+    ```bash
     $ docker port <containerID> 80
     32769
 
@@ -101,7 +101,7 @@ There is a command to help us:
 
 If you want to set port numbers yourself, no problem:
 
-    @@@ Sh
+    ```bash
     $ docker run -d -p 80:80 nginx
     $ docker run -d -p 8000:80 nginx
     $ docker run -d -p 8080:80 -p 8888:80 nginx
@@ -134,7 +134,7 @@ class: x-extra-details
 We can use the `docker inspect` command to find the IP address of the
 container.
 
-    @@@ Sh
+    ```bash
     $ docker inspect --format '{{ .NetworkSettings.IPAddress }}' <yourContainerID>
     172.17.0.3
 
@@ -151,7 +151,7 @@ class: x-extra-details
 We can test connectivity to the container using the IP address we've
 just discovered. Let's see this now by using the `ping` tool.
 
-    @@@ Sh
+    ```bash
     $ ping <ipAddress>
     64 bytes from <ipAddress>: icmp_req=1 ttl=64 time=0.085 ms
     64 bytes from <ipAddress>: icmp_req=2 ttl=64 time=0.085 ms

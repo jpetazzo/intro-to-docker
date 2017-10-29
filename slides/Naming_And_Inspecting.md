@@ -29,7 +29,7 @@ But each container can also be referenced by its name.
 
 If a container is named `prod-db`, I can do:
 
-    @@@ Sh
+    ```bash
     $ docker logs prod-db
     $ docker stop prod-db
     etc.
@@ -52,7 +52,7 @@ Examples: `happy_curie`, `clever_hopper`, `jovial_lovelace` ...
 
 You can set the name of the container when you create it.
 
-    @@@ Sh
+    ```bash
     $ docker run --name ticktock jpetazzo/clock
 
 If you specify a name that already exists, Docker will refuse
@@ -72,7 +72,7 @@ This lets us enforce unicity of a given resource.
 
 The `docker inspect` command will output a very detailed JSON map.
 
-    @@@ Sh
+    ```bash
     $ docker inspect <containerID>
     [{
 	"AppArmorProfile": "",
@@ -98,7 +98,7 @@ There are multiple ways to consume that information.
 * If you really must parse JSON from the Shell, use JQ!
   <br/>(It's great.)
 
-        @@@ Sh
+        ```bash
         $ docker inspect <containerID> | jq .
 
 * We will see a better solution which doesn't require extra tools.
@@ -109,7 +109,7 @@ There are multiple ways to consume that information.
 You can specify a format string, which will be parsed by 
 Go's text/template package.
 
-    @@@ Sh
+    ```bash
     $ docker inspect --format '{{ json .Created }}' <containerID>
     "2015-02-24T07:21:11.712240394Z"
 

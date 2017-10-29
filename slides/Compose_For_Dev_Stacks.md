@@ -54,7 +54,7 @@ pre-installed.
 
 You can always check that it is installed by running:
 
-    @@@ Sh
+    ```bash
     $ docker-compose --version
 
 ---
@@ -65,7 +65,7 @@ If you want to install Compose on your machine, there are (at least) two methods
 Compose is written in Python. If you have `pip` and use it to manage other Python
 packages, you can install compose with:
 
-    @@@ Sh
+    ```bash
     $ sudo pip install docker-compose
 
 (Note: if you are familiar with `virtualenv`, you can also use it to install Compose.)
@@ -73,7 +73,7 @@ packages, you can install compose with:
 If you do not have `pip`, or do not want to use it to install Compose, you can
 also retrieve an all-in-one binary file:
 
-    @@@ Sh
+    ```bash
     $ curl -L \
       https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` \
       > /usr/local/bin/docker-compose
@@ -84,7 +84,7 @@ also retrieve an all-in-one binary file:
 
 First step: clone the source code for the app we will be working on.
 
-    @@@ Sh
+    ```bash
     $ cd
     $ git clone git://github.com/jpetazzo/trainingwheels
     ...
@@ -93,7 +93,7 @@ First step: clone the source code for the app we will be working on.
 
 Second step: start your app.
 
-    @@@ Sh
+    ```bash
     $ docker-compose up
 
 Watch Compose build and run your app with the correct parameters,
@@ -119,7 +119,7 @@ them.
 
 Here is the file used in the demo:
 
-    @@@ YAML
+    ```yaml
     version: "2"
 
     services:
@@ -182,12 +182,12 @@ It will execute `docker build` for all containers mentioning a `build` path.
 
 It is common to execute the build and run steps in sequence:
 
-    @@@ Sh
+    ```bash
     docker-compose build && docker-compose up
 
 Another common option is to start containers in the background:
 
-    @@@ Sh
+    ```bash
     docker-compose up -d
 
 ---
@@ -200,7 +200,7 @@ Compose makes it easier; with `docker-compose ps` you will see only the status o
 containers of the current stack:
 
 
-    @@@ Sh
+    ```bash
     $ docker-compose ps
     Name                      Command             State           Ports          
     ----------------------------------------------------------------------------
@@ -214,12 +214,12 @@ containers of the current stack:
 If you have started your application in the background with Compose and
 want to stop it easily, you can use the `kill` command:
 
-    @@@ Sh
+    ```bash
     $ docker-compose kill
 
 Likewise, `docker-compose rm` will let you remove containers (after confirmation):
 
-    @@@ Sh
+    ```bash
     $ docker-compose rm
     Going to remove trainingwheels_redis_1, trainingwheels_www_1
     Are you sure? [yN] y
@@ -228,7 +228,7 @@ Likewise, `docker-compose rm` will let you remove containers (after confirmation
 
 Alternatively, `docker-compose down` will stop and remove containers.
 
-    @@@ Sh
+    ```bash
     $ docker-compose down
     Stopping trainingwheels_www_1 ... done
     Stopping trainingwheels_redis_1 ... done

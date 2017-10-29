@@ -29,12 +29,12 @@ Our Dockerfile must be in a **new, empty directory**.
 
 1. Create a directory to hold our `Dockerfile`.
 
-        @@@ Sh
+        ```bash
         $ mkdir myimage
 
 2. Create a `Dockerfile` inside this directory.
 
-        @@@ Sh
+        ```bash
         $ cd myimage
         $ vim Dockerfile
 
@@ -43,7 +43,7 @@ Of course, you can use any other editor of your choice.
 ---
 ## Type this into our Dockerfile...
 
-    @@@ docker
+    ```dockerfile
     FROM ubuntu
     RUN apt-get update
     RUN apt-get install figlet
@@ -59,7 +59,7 @@ Of course, you can use any other editor of your choice.
 
 Save our file, then execute:
 
-    @@@ Sh
+    ```bash
     $ docker build -t figlet .
 
 * `-t` indicates the tag to apply to the image.
@@ -73,7 +73,7 @@ Save our file, then execute:
 
 The output of `docker build` looks like this:
 
-    @@@ Sh
+    ```bash
     $ docker build -t figlet .
     Sending build context to Docker daemon 2.048 kB
     Sending build context to Docker daemon 
@@ -95,7 +95,7 @@ The output of `docker build` looks like this:
 ---
 ## Sending the build context to Docker
 
-    @@@ Sh
+    ```bash
     Sending build context to Docker daemon 2.048 kB
 
 * The build context is the `.` directory given to `docker build`.
@@ -106,7 +106,7 @@ The output of `docker build` looks like this:
 ---
 ## Executing each step
 
-    @@@ Sh
+    ```bash
     Step 1 : RUN apt-get update
      ---> Running in 840cb3533193
     (...output of the RUN command...)
@@ -143,7 +143,7 @@ You can force a rebuild with `docker build --no-cache ...`.
 
 The resulting image is not different from the one produced manually.
 
-    @@@ Sh
+    ```bash
     $ docker run -ti figlet
     root@91f3c974c9a1:/# figlet hello
      _          _ _       
@@ -165,7 +165,7 @@ For each layer, it shows its creation time, size, and creation command.
 When an image was built with a Dockerfile, each layer corresponds to
 a line of the Dockerfile.
 
-    @@@ Sh
+    ```bash
     $ docker history figlet
     IMAGE         CREATED            CREATED BY                     SIZE
     f9e8f1642759  About an hour ago  /bin/sh -c apt-get install fi  1.627 MB
@@ -188,14 +188,14 @@ Most Dockerfile arguments can be passed in two forms:
 
 Let's change our Dockerfile as follows!
 
-    @@@ Dockerfile
+    ```dockerfile
     FROM ubuntu
     RUN apt-get update
     RUN ["apt-get", "install", "figlet"]
 
 Then build the new Dockerfile.
 
-    @@@ Sh
+    ```bash
     $ docker build -t figlet .
 
 ---
@@ -203,7 +203,7 @@ Then build the new Dockerfile.
 
 Compare the new history:
 
-    @@@ Sh
+    ```bash
     $ docker history figlet
     IMAGE         CREATED            CREATED BY                     SIZE
     27954bb5faaf  10 seconds ago     apt-get install figlet         1.627 MB

@@ -119,7 +119,7 @@ Never again "worked in dev - ops problem now!"
 3. Describe your stack with a Compose file
 4. On-board somebody with two commands:
 
-          @@@
+          ```bash
           git clone ...
           docker-compose up
 

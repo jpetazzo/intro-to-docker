@@ -26,7 +26,7 @@ The CNM was introduced in Engine 1.9.0 (November 2015).
 
 The CNM adds the notion of a *network*, and a new top-level command to manipulate and see those networks: `docker network`.
 
-    @@@ Sh
+    ```bash
     $ docker network ls
     NETWORK ID          NAME                DRIVER
     6bde79dfcf70        bridge              bridge
@@ -53,13 +53,13 @@ The CNM adds the notion of a *network*, and a new top-level command to manipulat
 
 Let's create a network called `dev`.
 
-    @@@ Sh
+    ```bash
     $ docker network create dev
     4c1ff84d6d3f1733d3e233ee039cac276f425a9d5228a4355d54878293a889ba
 
 The network is now visible with the `network ls` command:
 
-    @@@ Sh
+    ```bash
     $ docker network ls
     NETWORK ID          NAME                DRIVER
     6bde79dfcf70        bridge              bridge
@@ -74,7 +74,7 @@ We will create a *named* container on this network.
 
 It will be reachable with its name, `search`.
 
-    @@@ Sh
+    ```bash
     $ docker run -d --name search --net dev elasticsearch
     8abb80e229ce8926c7223beb69699f5f34d6f1d438bfc5682db893e798046863
 
@@ -83,13 +83,13 @@ It will be reachable with its name, `search`.
 
 Now, create another container on this network.
 
-    @@@ Sh
+    ```bash
     $ docker run -ti --net dev alpine sh
     root@0ecccdfa45ef:/#
 
 From this new container, we can resolve and ping the other one, using its assigned name:
 
-    @@@ Sh
+    ```bash
     / # ping search
     PING search (172.18.0.2) 56(84) bytes of data.
     64 bytes from search.dev (172.18.0.2): icmp_seq=1 ttl=64 time=0.221 ms
@@ -109,7 +109,7 @@ class: extra-details
 In Docker Engine 1.9, name resolution is implemented with `/etc/hosts`, and
 updating it each time containers are added/removed.
 
-    @@@ Sh
+    ```bash
     [root@0ecccdfa45ef /]# cat /etc/hosts
     172.18.0.3  0ecccdfa45ef
     127.0.0.1       localhost
@@ -141,12 +141,12 @@ In Docker Engine 1.10, this has been replaced by a dynamic resolver.
 
 Start the container, exposing all its ports:
 
-    @@@ Sh
+    ```bash
     $ docker run --net dev -d -P jpetazzo/trainingwheels
 
 Check the port that has been allocated to it:
 
-    @@@ Sh
+    ```bash
     $ docker ps -l
 
 ---
@@ -170,7 +170,7 @@ Note: we're not using a FQDN or an IP address here; just `redis`.
 
 Start the container:
 
-    @@@ Sh
+    ```bash
     $ docker run --net dev --name redis -d redis
 
 ---
@@ -191,12 +191,12 @@ Start the container:
 
 Let's remove the `redis` container:
 
-    @@@ Sh
+    ```bash
     $ docker rm -f redis
 
 And create one that doesn't block the `redis` name:
 
-    @@@ Sh
+    ```bash
     $ docker run --net dev --net-alias redis -d redis
 
 Check that the app still works (but the counter is back to 1,
@@ -209,7 +209,7 @@ class: x-extra-details
 
 Let's try to ping our `search` container from another container, when that other container is *not* on the `dev` network.
 
-    @@@ Sh
+    ```bash
     $ docker run --rm alpine ping search
     ping: bad address 'search'
 
@@ -239,13 +239,13 @@ class: extra-details
 
 Create the `prod` network.
 
-    @@@ Sh
+    ```bash
     $ docker create network prod
     5a41562fecf2d8f115bedc16865f7336232a04268bdf2bd816aecca01b68d50c
 
 We can now create multiple containers with the `search` alias on the new `prod` network.
 
-    @@@ Sh
+    ```bash
     $ docker run -d --name prod-es-1 --net-alias search --net prod elasticsearch
     38079d21caf0c5533a391700d9e9e920724e89200083df73211081c8a356d771
     $ docker run -d --name prod-es-2 --net-alias search --net prod elasticsearch
@@ -258,7 +258,7 @@ class: extra-details
 
 Let's try DNS resolution first, using the `nslookup` tool that ships with the `alpine` image.
 
-    @@@ Sh
+    ```bash
     $ docker run --net prod --rm alpine nslookup search
     Name:      search
     Address 1: 172.23.0.3 prod-es-2.prod
@@ -275,7 +275,7 @@ Each ElasticSearch instance has a name (generated when it is started). This name
 
 Try the following command a few times:
 
-    @@@ Sh
+    ```bash
     $ docker run --rm --net dev centos curl -s search:9200
     {
       "name" : "Tarot",
@@ -284,7 +284,7 @@ Try the following command a few times:
 
 Then try it a few times by replacing `--net dev` with `--net prod`:
 
-    @@@ Sh
+    ```bash
     $ docker run --rm --net prod centos curl -s search:9200
     {
       "name" : "The Symbiote",
@@ -342,7 +342,7 @@ class: extra-details
 
 A full example would look like this.
 
-    @@@ Sh
+    ```bash
     $ docker network create --subnet 10.66.0.0/16 pubnet
     42fb16ec412383db6289a3e39c3c0224f395d7f85bcb1859b279e7a564d4e135
     $ docker run --net pubnet --ip 10.66.66.66 -d nginx

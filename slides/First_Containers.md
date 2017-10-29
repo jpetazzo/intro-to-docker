@@ -36,7 +36,7 @@ Docker is a client-server application.
 
 In your Docker environment, just run the following command:
 
-    @@@ Sh
+    ```bash
     $ docker run busybox echo hello world
     hello world
 
@@ -54,7 +54,7 @@ In your Docker environment, just run the following command:
 
 Let's run a more exciting container:
 
-    @@@ Sh
+    ```bash
     $ docker run -it ubuntu
     root@04c0bb0a6c07:/#
 
@@ -72,7 +72,7 @@ Let's run a more exciting container:
 
 Try to run `figlet` in our container.
 
-    @@@ Sh
+    ```bash
     root@04c0bb0a6c07:/# figlet hello
     bash: figlet: command not found
 
@@ -83,7 +83,7 @@ Alright, we need to install it.
 
 Let's check how many packages are installed here.
 
-    @@@ Sh
+    ```bash
     root@04c0bb0a6c07:/# dpkg -l | wc -l
     189
 
@@ -97,7 +97,7 @@ Let's check how many packages are installed here.
 
 We want `figlet`, so let's install it:
 
-    @@@ Sh
+    ```bash
     root@04c0bb0a6c07:/# apt-get update
     ...
     Fetched 1514 kB in 14s (103 kB/s)
@@ -108,7 +108,7 @@ We want `figlet`, so let's install it:
 
 One minute later, `figlet` is installed!
 
-    @@@ Sh
+    ```bash
     # figlet hello
      _          _ _       
     | |__   ___| | | ___  
@@ -124,7 +124,7 @@ Just exit the shell, like you would usually do.
 
 (E.g. with `^D` or `exit`)
 
-    @@@ Sh
+    ```bash
     root@04c0bb0a6c07:/# exit
 
 * Our container is now in a *stopped* state.
@@ -137,7 +137,7 @@ Just exit the shell, like you would usually do.
 
 What if we start a new container, and try to run `figlet` again?
  
-    @@@ Sh
+    ```bash
     $ docker run -it ubuntu
     root@b13c164401fb:/# figlet
     bash: figlet: command not found

@@ -66,12 +66,12 @@ class: x-extra-details
 
 On Red Hat derivatives (Fedora, CentOS):
 
-    @@@ Sh
+    ```bash
     $ sudo yum install docker
 
 On Debian and derivatives:
 
-    @@@ Sh
+    ```bash
     $ sudo apt-get install docker.io
 
 ---
@@ -81,7 +81,7 @@ class: x-extra-details
 
 You can use the `curl` command to install on several platforms:
 
-    @@@ Sh
+    ```bash
     $ curl -s https://get.docker.com/ | sudo sh
 
 This currently works on:
@@ -195,22 +195,22 @@ class: extra-details
 
 ### Add the Docker group
 
-    @@@ Sh
+    ```bash
     $ sudo groupadd docker
 
 ### Add ourselves to the group
 
-    @@@ Sh
+    ```bash
     $ sudo gpasswd -a $USER docker
 
 ### Restart the Docker daemon
 
-    @@@ Sh
+    ```bash
     $ sudo service docker restart
 
 ### Log out
 
-    @@@ Sh
+    ```bash
     $ exit
 
 ---
@@ -218,7 +218,7 @@ class: extra-details
 
 ## Check that Docker works without sudo
 
-    @@@ Sh
+    ```bash
     $ docker version
     Client:
      Version:      1.11.1

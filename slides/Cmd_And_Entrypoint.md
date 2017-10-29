@@ -23,7 +23,7 @@ When people run our container, we want to greet them with a nice hello message, 
 
 For that, we will execute:
 
-    @@@ Sh
+    ```bash
     figlet -f script hello
 
 * `-f script` tells figlet to use a fancy font.
@@ -34,7 +34,7 @@ For that, we will execute:
 
 Our new Dockerfile will look like this:
 
-    @@@ docker
+    ```dockerfile
     FROM ubuntu
     RUN apt-get update
     RUN ["apt-get", "install", "figlet"]
@@ -50,14 +50,14 @@ Our new Dockerfile will look like this:
 
 Let's build it:
 
-    @@@ Sh
+    ```bash
     $ docker build -t figlet .
     ...
     Successfully built 042dff3b4a8d
 
 And run it:
 
-    @@@ Sh
+    ```bash
     $ docker run figlet
      _          _   _       
     | |        | | | |      
@@ -72,7 +72,7 @@ And run it:
 If we want to get a shell into our container (instead of running
 `figlet`), we just have to specify a different program to run:
 
-    @@@ Sh
+    ```bash
     $ docker run -it figlet bash
     root@7ac86a641116:/# 
 
@@ -87,7 +87,7 @@ while retaining `figlet` and some default parameters.
 
 In other words, we would like to be able to do this:
 
-    @@@ Sh
+    ```bash
     $ docker run figlet salut
                _            
               | |           
@@ -104,7 +104,7 @@ We will use the `ENTRYPOINT` verb in Dockerfile.
 
 Our new Dockerfile will look like this:
 
-    @@@ docker
+    ```dockerfile
     FROM ubuntu
     RUN apt-get update
     RUN ["apt-get", "install", "figlet"]
@@ -124,12 +124,12 @@ Why did we use JSON syntax for our `ENTRYPOINT`?
 
 What if we used `ENTRYPOINT` with string syntax?
 
-    @@@ Sh
+    ```bash
     $ docker run figlet salut
 
 This would run the following command in the `figlet` image:
 
-    @@@ Sh
+    ```bash
     sh -c "figlet -f script" salut
 
 ---
@@ -137,14 +137,14 @@ This would run the following command in the `figlet` image:
 
 Let's build it:
 
-    @@@ Sh
+    ```bash
     $ docker build -t figlet .
     ...
     Successfully built 36f588918d73
 
 And run it:
 
-    @@@ Sh
+    ```bash
     $ docker run figlet salut
                _            
               | |           
@@ -170,7 +170,7 @@ Then we will use `ENTRYPOINT` and `CMD` together.
 
 Our new Dockerfile will look like this:
 
-    @@@ docker
+    ```dockerfile
     FROM ubuntu
     RUN apt-get update
     RUN ["apt-get", "install", "figlet"]
@@ -187,14 +187,14 @@ Our new Dockerfile will look like this:
 
 Let's build it:
 
-    @@@ Sh
+    ```bash
     $ docker build -t figlet .
     ...
     Successfully built 6e0b6a048a07
 
 And run it:
 
-    @@@ Sh
+    ```bash
     $ docker run figlet
      _          _   _                             _        
     | |        | | | |                           | |    |  
@@ -220,7 +220,7 @@ that would just tell figlet to display the word "bash."
 
 We use the `--entrypoint` parameter:
 
-    @@@ Sh
+    ```bash
     $ docker run -it --entrypoint bash figlet
     root@6027e44e2955:/# 
 

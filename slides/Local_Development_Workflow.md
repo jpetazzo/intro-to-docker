@@ -32,7 +32,7 @@ By using Docker containers, we will get a consistent development environment.
 
 Let's run it with:
 
-    @@@ Sh
+    ```bash
     $ docker run -dP jpetazzo/namer
 
 Check the port number with `docker ps` and open the application.
@@ -43,7 +43,7 @@ Check the port number with `docker ps` and open the application.
 
 Let's download our application's source code.
 
-    @@@ Sh
+    ```bash
     $ git clone https://github.com/jpetazzo/namer
     $ cd namer
     $ ls -1
@@ -77,7 +77,7 @@ For that, we will use a *volume*.
 
 We will tell Docker to map the current directory to `/src` in the container.
 
-    @@@ Sh
+    ```bash
     $ docker run -d -v $(pwd):/src -p 80:9292 jpetazzo/namer
 
 * The `-d` flag indicates that the container should run in detached mode (in the background).
@@ -92,7 +92,7 @@ We will tell Docker to map the current directory to `/src` in the container.
 The `-v` flag mounts a directory from your host into your Docker
 container. The flag structure is:
 
-    @@@ Sh
+    ```bash
     [host-path]:[container-path]:[rw|ro]
 
 * If [host-path] or [container-path] doesn't exist it is created.
@@ -107,7 +107,7 @@ There will be a full chapter about volumes!
 
 Now let us see if our new container is running.
 
-    @@@ Sh
+    ```bash
     $ docker ps
     CONTAINER ID  IMAGE   COMMAND CREATED       STATUS PORTS                NAMES
     045885b68bc5  trai... rackup  3 seconds ago Up ... 0.0.0.0:80->9292/tcp ...
@@ -117,7 +117,7 @@ Now let us see if our new container is running.
 
 Now let's browse to our web application on:
 
-    @@@ Sh 
+    ```bash 
     http://<yourHostIP>:80
 
 We can see our company naming application. 
@@ -129,17 +129,17 @@ We can see our company naming application.
 
 Our customer really doesn't like the color of our text. Let's change it.
 
-    @@@ Sh
+    ```bash
     $ vi company_name_generator.rb
 
 And change
 
-    @@@ CSS
+    ```css
     color: royalblue;
 
 To:
 
-    @@@ CSS
+    ```css
     color: red;
 
 ---
@@ -147,7 +147,7 @@ To:
 
 Now let's refresh our browser:
 
-    @@@ Sh
+    ```bash
     http://<yourHostIP>:80
 
 We can see the updated color of our company naming application.
@@ -159,12 +159,12 @@ We can see the updated color of our company naming application.
 
 * You can also start the container with the following command:
 
-        @@@ Sh
+        ```bash
         $ docker-compose up -d
 
 * This works thanks to the Compose file, `docker-compose.yml`:
 
-        @@@ YAML
+        ```yaml
         www:
           build: .
           volumes:
@@ -229,7 +229,7 @@ class: extra-details
 
 ## `docker exec` example
 
-    @@@ Sh
+    ```bash
     $ # You can run ruby commands in the area the app is running and more!
     $ docker exec -it <yourContainerId> bash
     root@5ca27cf74c2e:/opt/namer# irb
@@ -244,12 +244,12 @@ class: x-extra-details
 
 Now that we're done let's stop our container.
 
-    @@@ Sh
+    ```bash
     $ docker stop <yourContainerID>
 
 And remove it.
 
-    @@@ Sh
+    ```bash
     $ docker rm <yourContainerID>
 
 ---

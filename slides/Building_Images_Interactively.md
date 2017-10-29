@@ -43,7 +43,7 @@ Our base will be the `ubuntu` image.
 
 Start an Ubuntu container:
 
-    @@@ Sh
+    ```bash
     $ docker run -it ubuntu
     root@<yourContainerId>:#/
 
@@ -51,7 +51,7 @@ Run the command `apt-get update` to refresh the list of packages available to in
 
 Then run the command `apt-get install figlet` to install the program we are interested in.
 
-    @@@ Sh
+    ```bash
     root@<yourContainerId>:#/ apt-get update && apt-get install figlet
     .... OUTPUT OF APT-GET COMMANDS ....
 
@@ -63,7 +63,7 @@ Type `exit` at the container prompt to leave the interactive session.
 Now let's run `docker diff` to see the difference between the base image
 and our container.
 
-    @@@ Sh
+    ```bash
     $ docker diff <yourContainerId>
     C /root
     A /root/.bash_history
@@ -93,7 +93,7 @@ As explained before:
 The `docker commit` command will create a new layer with those changes,
 and a new image using this new layer.
 
-    @@@ Sh
+    ```bash
     $ docker commit <yourContainerId>
     <newImageId>
 
@@ -101,7 +101,7 @@ The output of the `docker commit` command will be the ID for your newly created 
 
 We can run this image:
 
-    @@@ Sh
+    ```bash
     $ docker run -it <newImageId>
     root@fcfb62f0bfde:/# figlet hello
      _          _ _       
@@ -118,17 +118,17 @@ Referring to an image by its ID is not convenient. Let's tag it instead.
 
 We can use the `tag` command:
 
-    @@@ Sh
+    ```bash
     $ docker tag <newImageId> figlet
 
 But we can also specify the tag as an extra argument to `commit`:
 
-    @@@ Sh
+    ```bash
     $ docker commit <containerId> figlet
 
 And then run it using its tag:
 
-    @@@ Sh
+    ```bash
     $ docker run -it figlet
 
 ---

@@ -37,13 +37,13 @@ class: extra-details
 
 Let's launch a container from the `redis` image.
 
-    @@@ Sh
+    ```bash
     $ docker run -d --name datastore redis
     <yourContainerID>
 
 Let's check the container is running:
 
-    @@@ Sh
+    ```bash
     $ docker ps -l
     CONTAINER ID   IMAGE          COMMAND        ...   PORTS      NAMES
     9efd72a4f320   redis:latest   redis-server   ...   6379/tcp   datastore
@@ -60,7 +60,7 @@ class: extra-details
 
 If we create the web container without any extra option, it will not be able to connect to redis.
 
-    @@@ Sh
+    ```bash
     $ docker run -dP jpetazzo/trainingwheels
 
 Check the port number with `docker ps`, and connect to it.
@@ -74,7 +74,7 @@ class: extra-details
 
 Remember, in the code, we connect to the name `redis`:
 
-    @@@ Python
+    ```python
     redis = redis.Redis("redis")
 
 * This means "try to connect to 'redis'".
@@ -94,7 +94,7 @@ Links indicate an intent: "this container will connect to this other container."
 
 Here is how to create our first link:
 
-    @@@ Sh
+    ```bash
     $ docker run -ti --link datastore:redis alpine sh
 
 In this container, we can communicate with `datastore` using
@@ -107,7 +107,7 @@ class: extra-details
 
 Docker has created a DNS entry for the container, resolving to its internal IP address.
 
-    @@@ Sh
+    ```bash
     $ docker run -it --link datastore:redis alpine ping redis
     PING redis (172.17.0.29): 56 data bytes
     64 bytes from 172.17.0.29: icmp_seq=0 ttl=64 time=0.164 ms
@@ -130,12 +130,12 @@ class: extra-details
 Now that we've poked around a bit let's start the application itself in
 a fresh container:
 
-    @@@ Sh
+    ```bash
     $ docker run -d -P --link datastore:redis jpetazzo/trainingwheels
 
 Now let's check the port number associated to the container.
 
-    @@@ Sh
+    ```bash
     $ docker ps -l
 
 ---
@@ -145,7 +145,7 @@ class: extra-details
 
 Finally, let's browse to our application and confirm it's working.
 
-    @@@ Sh
+    ```bash
     http://<yourHostIP>:<port>
 
 ---
@@ -153,7 +153,7 @@ Finally, let's browse to our application and confirm it's working.
 
 In addition to the DNS information, Docker will automatically set environment variables in our container, giving extra details about the linked container.
 
-    @@@ Sh
+    ```bash
     $ docker run --link datastore:redis alpine env
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     HOSTNAME=0738e57b771e

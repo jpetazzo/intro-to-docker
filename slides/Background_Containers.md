@@ -26,7 +26,7 @@ We will run a small custom container.
 
 This container just displays the time every second.
 
-    @@@ Sh
+    ```bash
     $ docker run jpetazzo/clock
     Fri Feb 20 00:28:53 UTC 2015
     Fri Feb 20 00:28:54 UTC 2015
@@ -44,7 +44,7 @@ This container just displays the time every second.
 
 Containers can be started in the background, with the `-d` flag (daemon mode):
 
-    @@@ Sh
+    ```bash
     $ docker run -d jpetazzo/clock
     47d677dcfba4277c6cc68fcaa51f932b544cab1a187c853b7d0caf4e8debe5ad
 
@@ -59,7 +59,7 @@ How can we check that our container is still running?
 
 With `docker ps`, just like the UNIX `ps` command, lists running processes.
 
-    @@@ Sh
+    ```bash
     $ docker ps
     CONTAINER ID  IMAGE           ...  CREATED        STATUS        ...
     47d677dcfba4  jpetazzo/clock  ...  2 minutes ago  Up 2 minutes  ...
@@ -76,7 +76,7 @@ Docker tells us:
 
 Let's start two more containers.
 
-    @@@ Sh
+    ```bash
     $ docker run -d jpetazzo/clock
     57ad9bdfc06bb4407c47220cf59ce21585dce9a1298d7a67488359aeaea8ae2a
     $ docker run -d jpetazzo/clock
@@ -89,14 +89,14 @@ Check that `docker ps` correctly reports all 3 containers.
 
 To see only the last container that was started:
 
-    @@@ Sh
+    ```bash
     $ docker ps -l
     CONTAINER ID  IMAGE           ...  CREATED        STATUS        ...
     068cc994ffd0  jpetazzo/clock  ...  2 minutes ago  Up 2 minutes  ...
 
 To see only the ID of containers:
 
-    @@@ Sh
+    ```bash
     $ docker ps -q
     068cc994ffd0
     57ad9bdfc06b
@@ -104,7 +104,7 @@ To see only the ID of containers:
 
 Combine those flags to see only the ID of the last container started!
 
-    @@@ Sh
+    ```bash
     $ docker ps -lq
     068cc994ffd0
 
@@ -115,7 +115,7 @@ We told you that Docker was logging the container output.
 
 Let's see that now.
 
-    @@@ Sh
+    ```bash
     $ docker logs 068
     Fri Feb 20 00:39:52 UTC 2015
     Fri Feb 20 00:39:53 UTC 2015
@@ -132,7 +132,7 @@ Let's see that now.
 To avoid being spammed with eleventy pages of output,
 we can use the `--tail` option:
 
-    @@@ Sh
+    ```bash
     $ docker logs --tail 3 068
     Fri Feb 20 00:55:35 UTC 2015
     Fri Feb 20 00:55:36 UTC 2015
@@ -146,7 +146,7 @@ we can use the `--tail` option:
 Just like with the standard UNIX command `tail -f`, we can
 follow the logs of our container:
 
-    @@@ Sh
+    ```bash
     $ docker logs --tail 1 --follow 068
     Fri Feb 20 00:57:12 UTC 2015
     Fri Feb 20 00:57:13 UTC 2015
@@ -179,7 +179,7 @@ forcibly terminate the container.
 
 Let's stop one of those containers:
 
-    @@@ Sh
+    ```bash
     $ docker stop 47d6
     47d6
 
@@ -198,7 +198,7 @@ This will take 10 seconds:
 
 Let's be less patient with the two other containers:
 
-    @@@ Sh
+    ```bash
     $ docker kill 068 57ad
     068
     57ad
@@ -210,7 +210,7 @@ the 10 seconds delay).
 
 Let's check that our containers don't show up anymore:
 
-    @@@ Sh
+    ```bash
     $ docker ps
 
 ---
@@ -218,7 +218,7 @@ Let's check that our containers don't show up anymore:
 
 We can also see stopped containers, with the `-a` (`--all`) option.
 
-    @@@ Sh
+    ```bash
     $ docker ps -a
     CONTAINER ID  IMAGE           ...  CREATED      STATUS
     068cc994ffd0  jpetazzo/clock  ...  21 min. ago  Exited (137) 3 min. ago

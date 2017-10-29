@@ -32,12 +32,12 @@ Volumes can be declared in two different ways.
 
 * Within a `Dockerfile`, with a `VOLUME` instruction.
 
-        @@@ docker
+        ```dockerfile
         VOLUME /uploads
 
 * On the command-line, with the `-v` flag for `docker run`.
 
-        @@@ Sh
+        ```bash
         $ docker run -d -v /uploads myapp
 
 In both cases, `/uploads` (inside the container) will be a volume.
@@ -73,13 +73,13 @@ Under the hood, they are actually the same directories on the host anyway.
 
 This is done using the `--volumes-from` flag for `docker run`.
 
-    @@@ Sh
+    ```bash
     $ docker run -it --name alpha -v /var/log ubuntu bash
     root@99020f87e695:/# date >/var/log/now
 
 In another terminal, let's start another container with the same volume.
 
-    @@@ Sh
+    ```bash
     $ docker run --volumes-from alpha ubuntu cat /var/log/now
     Fri May 30 05:06:27 UTC 2014
 
@@ -90,7 +90,7 @@ If a container is stopped, its volumes still exist and are available.
 
 Since Docker 1.9, we can see all existing volumes and manipulate them:
 
-    @@@ Sh
+    ```bash
     $ docker volume ls
     DRIVER              VOLUME NAME
     local               5b0b65e4316da67c2d471086640e6005ca2264f3...
@@ -113,7 +113,7 @@ one (or many) volumes.
 
 It is typically created with a no-op command:
 
-    @@@ Sh
+    ```bash
     $ docker run --name files -v /var/www busybox true
     $ docker run --name logs -v /var/log busybox true
 
@@ -131,7 +131,7 @@ Data containers are used by other containers thanks to `--volumes-from`.
 
 Consider the following (fictitious) example, using the previously created volumes:
 
-    @@@ Sh
+    ```bash
     $ docker run -d --volumes-from files --volumes-from logs webserver
     $ docker run -d --volumes-from files ftpserver
     $ docker run -d --volumes-from logs lumberjack
@@ -151,7 +151,7 @@ Consider the following (fictitious) example, using the previously created volume
 
 Let's create a volume directly.
 
-    @@@ Sh
+    ```bash
     $ docker volume create --name=website
     website
 
@@ -165,7 +165,7 @@ Volumes are not anchored to a specific path.
 
 Let's start a web server using the two previous volumes.
 
-    @@@ Sh
+    ```bash
     $ docker run -d -p 8888:80 \
              -v website:/usr/share/nginx/html \
              -v logs:/var/log/nginx \
@@ -173,7 +173,7 @@ Let's start a web server using the two previous volumes.
 
 Check that it's running correctly:
 
-    @@@ Sh
+    ```bash
     $ curl localhost:8888
     <!DOCTYPE html>
     ...
@@ -188,7 +188,7 @@ Check that it's running correctly:
 
 Let's start another container using the `website` volume.
 
-    @@@ Sh
+    ```bash
     $ docker run -v website:/website -w /website -ti alpine vi index.html
 
 Make changes, save, and exit.
@@ -215,7 +215,7 @@ inside the container:
 Wait, we already met the last use-case in our example development workflow!
 Nice.
 
-    @@@ Sh
+    ```bash
     $ docker run -d -v /path/on/the/host:/path/in/container image ...
 
 
@@ -226,7 +226,7 @@ class: extra-details
 
 The previous example would become something like this:
 
-    @@@ Sh
+    ```bash
     $ mkdir -p /mnt/files /mnt/logs
     $ docker run -d -v /mnt/files:/var/www -v /mnt/logs:/var/log webserver
     $ docker run -d -v /mnt/files:/home/ftp ftpserver
@@ -258,17 +258,17 @@ class: extra-details
 
 Let's create a Redis container.
 
-    @@@ Sh
+    ```bash
     $ docker run -d --name redis28 redis:2.8
 
 Connect to the Redis container and set some data.
 
-    @@@ Sh
+    ```bash
     $ docker run -ti --link redis28:redis alpine telnet redis 6379
 
 Issue the following commands:
 
-    @@@ Sh
+    ```bash
     SET counter 42
     INFO server
     SAVE
@@ -281,12 +281,12 @@ class: extra-details
 
 Stop the Redis container.
 
-    @@@ Sh
+    ```bash
     $ docker stop redis28
 
 Start the new Redis container.
 
-    @@@ Sh
+    ```bash
     $ docker run -d --name redis30 --volumes-from redis28 redis:3.0
 
 ---
@@ -296,12 +296,12 @@ class: extra-details
 
 Connect to the Redis container and see our data.
 
-    @@@ Sh
+    ```bash
     docker run -ti --link redis30:redis alpine telnet redis 6379
 
 Issue a few commands.
 
-    @@@ Sh
+    ```bash
     GET counter
     INFO server
     QUIT
@@ -326,7 +326,7 @@ class: extra-details
 
 Wondering if an image has volumes? Just use `docker inspect`:
 
-    @@@ Sh
+    ```bash
     $ # docker inspect training/datavol
     [{
       "config": {
@@ -345,7 +345,7 @@ class: extra-details
 To look which paths are actually volumes, and to what they are bound,
 use `docker inspect` (again):
 
-     @@@ Sh
+     ```bash
      $ docker inspect <yourContainerID>
      [{
        "ID": "<yourContainerID>",
@@ -367,7 +367,7 @@ The same `-v` flag can be used to share a single file.
 
 One of the most interesting examples is to share the Docker control socket.
 
-    @@@ Sh
+    ```bash
     $ docker run -it -v /var/run/docker.sock:/var/run/docker.sock docker sh
 
 Warning: when using such mounts, the container gains root-like access to the host.

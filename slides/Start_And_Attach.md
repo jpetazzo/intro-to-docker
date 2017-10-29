@@ -53,14 +53,14 @@ class: extra-details
 
 Start a container with a custom detach command:
 
-    @@@ Sh
+    ```bash
     $ docker run -ti --detach-keys ctrl-x,x jpetazzo/clock
 
 Detach by hitting `^X x`. (This is ctrl-x then x, not ctrl-x twice!)
 
 Check that our container is still running:
 
-    @@@ Sh
+    ```bash
     $ docker ps -l
 
 ---
@@ -70,7 +70,7 @@ class: extra-details
 
 You can attach to a container:
 
-    @@@ Sh
+    ```bash
     $ docker attach <containerID>
 
 * The container must be running.
@@ -79,7 +79,7 @@ You can attach to a container:
 
 Try it on our previous container:
 
-    @@@ Sh
+    ```bash
     $ docker attach $(docker ps -lq)
 
 Check that `^X x` doesn't work, but `^P ^Q` does.
@@ -100,7 +100,7 @@ Check that `^X x` doesn't work, but `^P ^Q` does.
 * Use `docker attach` if you intend to send input to the container.
 * If you just want to see the output of a container, use `docker logs`.
 
-        @@@ Sh
+        ```bash
         $ docker logs --tail 1 --follow <containerID>
 
 ---
@@ -110,7 +110,7 @@ When a container has exited, it is in stopped state.
 
 It can then be restarted with the `start` command.
 
-     @@@ Sh
+     ```bash
      $ docker start <yourContainerID>
 
 The container will be restarted using the same options you launched it
@@ -118,7 +118,7 @@ with.
 
 You can re-attach to it if you want to interact with it:
 
-    @@@ Sh
+    ```bash
     $ docker attach <yourContainerID>
 
 Use `docker ps -a` to identify the container ID of a previous `jpetazzo/clock` container,

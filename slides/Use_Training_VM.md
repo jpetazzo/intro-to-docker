@@ -41,7 +41,7 @@ You need an SSH client.
 
 * On OS X, Linux, and other UNIX systems, just use `ssh`:
 
-        @@@ Sh
+        ```bash
         $ ssh <login>@<ip-address>
 
 * On Windows, if you don't have an SSH client, you can download:
@@ -55,7 +55,7 @@ You need an SSH client.
 
 Once logged in, make sure that you can run a basic Docker command:
 
-    @@@ Sh
+    ```bash
     $ docker version
     Client:
      Version:      1.11.1
