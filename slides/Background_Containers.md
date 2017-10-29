@@ -87,6 +87,9 @@ Let's start two more containers.
 ```bash
 $ docker run -d jpetazzo/clock
 57ad9bdfc06bb4407c47220cf59ce21585dce9a1298d7a67488359aeaea8ae2a
+```
+
+```bash
 $ docker run -d jpetazzo/clock
 068cc994ffd0190bbe025ba74e4c0771a5d8f14734af772ddee8dc1aaf20567d
 ```
@@ -95,9 +98,12 @@ Check that `docker ps` correctly reports all 3 containers.
 
 ---
 
-## Two useful flags for `docker ps`
+## Viewing only the last container started
 
-To see only the last container that was started:
+When many containers are already running, it can be useful to
+see only the last container that was started.
+
+This can be achieved with the `-l` ("Last") flag:
 
 ```bash
 $ docker ps -l
@@ -105,7 +111,15 @@ CONTAINER ID  IMAGE           ...  CREATED        STATUS        ...
 068cc994ffd0  jpetazzo/clock  ...  2 minutes ago  Up 2 minutes  ...
 ```
 
-To see only the ID of containers:
+---
+
+## View only the IDs of the containers
+
+Many Docker commands will work on container IDs: `docker stop`, `docker rm`...
+
+If we want to list only the IDs of our containers (without the other colums
+or the header line),
+we can use the `-q` ("Quiet", "Quick") flag:
 
 ```bash
 $ docker ps -q
@@ -114,12 +128,21 @@ $ docker ps -q
 47d677dcfba4
 ```
 
-Combine those flags to see only the ID of the last container started!
+---
+
+## Combining flags
+
+We can combine `-l` and `-q` to see only the ID of the last container started:
 
 ```bash
 $ docker ps -lq
 068cc994ffd0
 ```
+
+At a first glance, it looks like this would be particularly useful in scripts.
+
+However, if we want to start a container and get its ID in a reliable way,
+it is better to use `docker run -d`, which we will cover in a bit.
 
 ---
 
@@ -244,11 +267,12 @@ $ docker ps
 
 We can also see stopped containers, with the `-a` (`--all`) option.
 
-    ```bash
-    $ docker ps -a
-    CONTAINER ID  IMAGE           ...  CREATED      STATUS
-    068cc994ffd0  jpetazzo/clock  ...  21 min. ago  Exited (137) 3 min. ago
-    57ad9bdfc06b  jpetazzo/clock  ...  21 min. ago  Exited (137) 3 min. ago
-    47d677dcfba4  jpetazzo/clock  ...  23 min. ago  Exited (137) 3 min. ago
-    5c1dfd4d81f1  jpetazzo/clock  ...  40 min. ago  Exited (0) 40 min. ago
-    b13c164401fb  ubuntu          ...  55 min. ago  Exited (130) 53 min. ago
+```bash
+$ docker ps -a
+CONTAINER ID  IMAGE           ...  CREATED      STATUS
+068cc994ffd0  jpetazzo/clock  ...  21 min. ago  Exited (137) 3 min. ago
+57ad9bdfc06b  jpetazzo/clock  ...  21 min. ago  Exited (137) 3 min. ago
+47d677dcfba4  jpetazzo/clock  ...  23 min. ago  Exited (137) 3 min. ago
+5c1dfd4d81f1  jpetazzo/clock  ...  40 min. ago  Exited (0) 40 min. ago
+b13c164401fb  ubuntu          ...  55 min. ago  Exited (130) 53 min. ago
+```
