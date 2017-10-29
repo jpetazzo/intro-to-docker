@@ -32,8 +32,9 @@ By using Docker containers, we will get a consistent development environment.
 
 Let's run it with:
 
-    ```bash
-    $ docker run -dP jpetazzo/namer
+```bash
+$ docker run -dP jpetazzo/namer
+```
 
 Check the port number with `docker ps` and open the application.
 
@@ -43,15 +44,16 @@ Check the port number with `docker ps` and open the application.
 
 Let's download our application's source code.
 
-    ```bash
-    $ git clone https://github.com/jpetazzo/namer
-    $ cd namer
-    $ ls -1
-    company_name_generator.rb
-    config.ru
-    docker-compose.yml
-    Dockerfile
-    Gemfile
+```bash
+$ git clone https://github.com/jpetazzo/namer
+$ cd namer
+$ ls -1
+company_name_generator.rb
+config.ru
+docker-compose.yml
+Dockerfile
+Gemfile
+```
 
 ---
 ## Where's my code?
@@ -77,8 +79,9 @@ For that, we will use a *volume*.
 
 We will tell Docker to map the current directory to `/src` in the container.
 
-    ```bash
-    $ docker run -d -v $(pwd):/src -p 80:9292 jpetazzo/namer
+```bash
+$ docker run -d -v $(pwd):/src -p 80:9292 jpetazzo/namer
+```
 
 * The `-d` flag indicates that the container should run in detached mode (in the background).
 * The `-v` flag provides volume mounting inside containers.
@@ -92,8 +95,9 @@ We will tell Docker to map the current directory to `/src` in the container.
 The `-v` flag mounts a directory from your host into your Docker
 container. The flag structure is:
 
-    ```bash
-    [host-path]:[container-path]:[rw|ro]
+```bash
+[host-path]:[container-path]:[rw|ro]
+```
 
 * If [host-path] or [container-path] doesn't exist it is created.
 * You can control the write status of the volume with the `ro` and
@@ -107,18 +111,20 @@ There will be a full chapter about volumes!
 
 Now let us see if our new container is running.
 
-    ```bash
-    $ docker ps
-    CONTAINER ID  IMAGE   COMMAND CREATED       STATUS PORTS                NAMES
-    045885b68bc5  trai... rackup  3 seconds ago Up ... 0.0.0.0:80->9292/tcp ...
+```bash
+$ docker ps
+CONTAINER ID  IMAGE   COMMAND CREATED       STATUS PORTS                NAMES
+045885b68bc5  trai... rackup  3 seconds ago Up ... 0.0.0.0:80->9292/tcp ...
+```
 
 ---
 ## Viewing our application
 
 Now let's browse to our web application on:
 
-    ```bash 
-    http://<yourHostIP>:80
+```bash 
+http://<yourHostIP>:80
+```
 
 We can see our company naming application. 
 
@@ -129,26 +135,30 @@ We can see our company naming application.
 
 Our customer really doesn't like the color of our text. Let's change it.
 
-    ```bash
-    $ vi company_name_generator.rb
+```bash
+$ vi company_name_generator.rb
+```
 
 And change
 
-    ```css
-    color: royalblue;
+```css
+color: royalblue;
+```
 
 To:
 
-    ```css
-    color: red;
+```css
+color: red;
+```
 
 ---
 ## Refreshing our application
 
 Now let's refresh our browser:
 
-    ```bash
-    http://<yourHostIP>:80
+```bash
+http://<yourHostIP>:80
+```
 
 We can see the updated color of our company naming application.
 
@@ -159,18 +169,20 @@ We can see the updated color of our company naming application.
 
 * You can also start the container with the following command:
 
-        ```bash
-        $ docker-compose up -d
+```bash
+$ docker-compose up -d
+```
 
 * This works thanks to the Compose file, `docker-compose.yml`:
 
-        ```yaml
-        www:
-          build: .
-          volumes:
-            - .:/src
-          ports:
-            - 80:9292
+```yaml
+www:
+  build: .
+  volumes:
+    - .:/src
+  ports:
+    - 80:9292
+```
 
 ---
 ## Why Compose?
@@ -229,13 +241,14 @@ class: extra-details
 
 ## `docker exec` example
 
-    ```bash
-    $ # You can run ruby commands in the area the app is running and more!
-    $ docker exec -it <yourContainerId> bash
-    root@5ca27cf74c2e:/opt/namer# irb
-    irb(main):001:0> [0, 1, 2, 3, 4].map {|x| x ** 2}.compact
-    => [0, 1, 4, 9, 16]
-    irb(main):002:0> exit
+```bash
+$ # You can run ruby commands in the area the app is running and more!
+$ docker exec -it <yourContainerId> bash
+root@5ca27cf74c2e:/opt/namer# irb
+irb(main):001:0> [0, 1, 2, 3, 4].map {|x| x ** 2}.compact
+=> [0, 1, 4, 9, 16]
+irb(main):002:0> exit
+```
 
 ---
 class: x-extra-details
@@ -244,13 +257,15 @@ class: x-extra-details
 
 Now that we're done let's stop our container.
 
-    ```bash
-    $ docker stop <yourContainerID>
+```bash
+$ docker stop <yourContainerID>
+```
 
 And remove it.
 
-    ```bash
-    $ docker rm <yourContainerID>
+```bash
+$ docker rm <yourContainerID>
+```
 
 ---
 ## Section summary

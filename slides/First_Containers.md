@@ -36,9 +36,10 @@ Docker is a client-server application.
 
 In your Docker environment, just run the following command:
 
-    ```bash
-    $ docker run busybox echo hello world
-    hello world
+```bash
+$ docker run busybox echo hello world
+hello world
+```
 
 
 ---
@@ -54,9 +55,10 @@ In your Docker environment, just run the following command:
 
 Let's run a more exciting container:
 
-    ```bash
-    $ docker run -it ubuntu
-    root@04c0bb0a6c07:/#
+```bash
+$ docker run -it ubuntu
+root@04c0bb0a6c07:/#
+```
 
 * This is a brand new container.
 * It runs a bare-bones, no-frills `ubuntu` system.
@@ -72,9 +74,10 @@ Let's run a more exciting container:
 
 Try to run `figlet` in our container.
 
-    ```bash
-    root@04c0bb0a6c07:/# figlet hello
-    bash: figlet: command not found
+```bash
+root@04c0bb0a6c07:/# figlet hello
+bash: figlet: command not found
+```
 
 Alright, we need to install it.
 
@@ -83,9 +86,10 @@ Alright, we need to install it.
 
 Let's check how many packages are installed here.
 
-    ```bash
-    root@04c0bb0a6c07:/# dpkg -l | wc -l
-    189
+```bash
+root@04c0bb0a6c07:/# dpkg -l | wc -l
+189
+```
 
 * `dpkg -l` lists the packages installed in our container
 * `wc -l` counts them
@@ -97,24 +101,26 @@ Let's check how many packages are installed here.
 
 We want `figlet`, so let's install it:
 
-    ```bash
-    root@04c0bb0a6c07:/# apt-get update
-    ...
-    Fetched 1514 kB in 14s (103 kB/s)
-    Reading package lists... Done
-    root@04c0bb0a6c07:/# apt-get install figlet
-    Reading package lists... Done
-    ...
+```bash
+root@04c0bb0a6c07:/# apt-get update
+...
+Fetched 1514 kB in 14s (103 kB/s)
+Reading package lists... Done
+root@04c0bb0a6c07:/# apt-get install figlet
+Reading package lists... Done
+...
+```
 
 One minute later, `figlet` is installed!
 
-    ```bash
-    # figlet hello
-     _          _ _       
-    | |__   ___| | | ___  
-    | '_ \ / _ \ | |/ _ \ 
-    | | | |  __/ | | (_) |
-    |_| |_|\___|_|_|\___/ 
+```bash
+# figlet hello
+ _          _ _       
+| |__   ___| | | ___  
+| '_ \ / _ \ | |/ _ \ 
+| | | |  __/ | | (_) |
+|_| |_|\___|_|_|\___/ 
+```
 
 
 ---
@@ -124,8 +130,9 @@ Just exit the shell, like you would usually do.
 
 (E.g. with `^D` or `exit`)
 
-    ```bash
-    root@04c0bb0a6c07:/# exit
+```bash
+root@04c0bb0a6c07:/# exit
+```
 
 * Our container is now in a *stopped* state.
 
@@ -137,10 +144,11 @@ Just exit the shell, like you would usually do.
 
 What if we start a new container, and try to run `figlet` again?
  
-    ```bash
-    $ docker run -it ubuntu
-    root@b13c164401fb:/# figlet
-    bash: figlet: command not found
+```bash
+$ docker run -it ubuntu
+root@b13c164401fb:/# figlet
+bash: figlet: command not found
+```
 
 * We started a *brand new container*.
 * The basic Ubuntu image was used, and `figlet` is not here.

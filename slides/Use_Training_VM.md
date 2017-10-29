@@ -41,8 +41,9 @@ You need an SSH client.
 
 * On OS X, Linux, and other UNIX systems, just use `ssh`:
 
-        ```bash
-        $ ssh <login>@<ip-address>
+```bash
+$ ssh <login>@<ip-address>
+```
 
 * On Windows, if you don't have an SSH client, you can download:
   * Putty (www.putty.org)
@@ -55,15 +56,16 @@ You need an SSH client.
 
 Once logged in, make sure that you can run a basic Docker command:
 
-    ```bash
-    $ docker version
-    Client:
-     Version:      1.11.1
-     API version:  1.23
-     Go version:   go1.5.4
-     Git commit:   5604cbe
-     Built:        Tue Apr 26 23:38:55 2016
-     OS/Arch:      linux/amd64
+```bash
+$ docker version
+Client:
+ Version:      1.11.1
+ API version:  1.23
+ Go version:   go1.5.4
+ Git commit:   5604cbe
+ Built:        Tue Apr 26 23:38:55 2016
+ OS/Arch:      linux/amd64
+```
 
     Server:
      Version:      1.11.1

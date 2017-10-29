@@ -145,18 +145,21 @@ The user namespace holds images for Docker Hub users and organizations.
 
 For example:
 
-    ```bash
-    jpetazzo/clock
+```bash
+jpetazzo/clock
+```
 
 The Docker Hub user is:
 
-    ```bash
-    jpetazzo
+```bash
+jpetazzo
+```
 
 The image name is:
 
-    ```bash
-    clock
+```bash
+clock
+```
 
 ---
 ## Self-Hosted namespace
@@ -169,8 +172,9 @@ registry server.
 
 For example:
 
-    ```bash
-    localhost:5000/wordpress
+```bash
+localhost:5000/wordpress
+```
 
 * `localhost:5000` is the host and port of the registry
 * `wordpress` is the name of the image
@@ -193,19 +197,20 @@ to push and pull images to and from a registry.
 
 Let's look at what images are on our host now.
 
-    ```bash
-    $ docker images
-    REPOSITORY       TAG       IMAGE ID       CREATED         SIZE
-    fedora           latest    ddd5c9c1d0f2   3 days ago      204.7 MB
-    centos           latest    d0e7f81ca65c   3 days ago      196.6 MB
-    ubuntu           latest    07c86167cdc4   4 days ago      188 MB
-    redis            latest    4f5f397d4b7c   5 days ago      177.6 MB
-    postgres         latest    afe2b5e1859b   5 days ago      264.5 MB
-    alpine           latest    70c557e50ed6   5 days ago      4.798 MB
-    debian           latest    f50f9524513f   6 days ago      125.1 MB
-    busybox          latest    3240943c9ea3   2 weeks ago     1.114 MB
-    training/namer   latest    902673acc741   9 months ago    289.3 MB
-    jpetazzo/clock   latest    12068b93616f   12 months ago   2.433 MB
+```bash
+$ docker images
+REPOSITORY       TAG       IMAGE ID       CREATED         SIZE
+fedora           latest    ddd5c9c1d0f2   3 days ago      204.7 MB
+centos           latest    d0e7f81ca65c   3 days ago      196.6 MB
+ubuntu           latest    07c86167cdc4   4 days ago      188 MB
+redis            latest    4f5f397d4b7c   5 days ago      177.6 MB
+postgres         latest    afe2b5e1859b   5 days ago      264.5 MB
+alpine           latest    70c557e50ed6   5 days ago      4.798 MB
+debian           latest    f50f9524513f   6 days ago      125.1 MB
+busybox          latest    3240943c9ea3   2 weeks ago     1.114 MB
+training/namer   latest    902673acc741   9 months ago    289.3 MB
+jpetazzo/clock   latest    12068b93616f   12 months ago   2.433 MB
+```
 
 
 ---
@@ -214,13 +219,14 @@ Let's look at what images are on our host now.
 We cannot list *all* images on a remote registry, but
 we can search for a specific keyword:
 
-    ```bash
-    $ docker search zookeeper
-    NAME                  DESCRIPTION                 STARS  OFFICIAL  AUTOMATED
-    jplock/zookeeper      Builds a docker image ...   103              [OK]
-    mesoscloud/zookeeper  ZooKeeper                   42               [OK]
-    springxd/zookeeper    A Docker image that ca...   5                [OK]
-    elevy/zookeeper       ZooKeeper configured t...   3                [OK]
+```bash
+$ docker search zookeeper
+NAME                  DESCRIPTION                 STARS  OFFICIAL  AUTOMATED
+jplock/zookeeper      Builds a docker image ...   103              [OK]
+mesoscloud/zookeeper  ZooKeeper                   42               [OK]
+springxd/zookeeper    A Docker image that ca...   5                [OK]
+elevy/zookeeper       ZooKeeper configured t...   3                [OK]
+```
 
 
 * "Stars" indicate the popularity of the image.
@@ -239,12 +245,13 @@ There are two ways to download images.
 ---
 ## Pulling an image
 
-    ```bash
-    $ docker pull debian:jessie
-    Pulling repository debian
-    b164861940b8: Download complete 
-    b164861940b8: Pulling image (jessie) from debian 
-    d1881793a057: Download complete 
+```bash
+$ docker pull debian:jessie
+Pulling repository debian
+b164861940b8: Download complete 
+b164861940b8: Pulling image (jessie) from debian 
+d1881793a057: Download complete 
+```
 
 * As seen previously, images are made up of layers.
 * Docker has downloaded all the necessary layers.

@@ -26,11 +26,12 @@ We want to build a container that compiles a basic "Hello world" program in C.
 
 Here is the program, `hello.c`:
 
-    ```bash
-    int main () {
-      puts("Hello, world!");
-      return 0;
-    }
+```bash
+int main () {
+  puts("Hello, world!");
+  return 0;
+}
+```
 
 Let's create a new directory, and put this file in there.
 
@@ -45,13 +46,14 @@ When installing it, don't forget to specify the `-y` flag, otherwise the build w
 
 Then we will use `COPY` to place the source file into the container.
 
-    ```bash
-    FROM ubuntu
-    RUN apt-get update
-    RUN apt-get install -y build-essential
-    COPY hello.c /
-    RUN make hello
-    CMD /hello
+```bash
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install -y build-essential
+COPY hello.c /
+RUN make hello
+CMD /hello
+```
 
 Create this Dockerfile.
 

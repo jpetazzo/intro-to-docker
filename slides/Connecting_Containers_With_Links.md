@@ -37,16 +37,18 @@ class: extra-details
 
 Let's launch a container from the `redis` image.
 
-    ```bash
-    $ docker run -d --name datastore redis
-    <yourContainerID>
+```bash
+$ docker run -d --name datastore redis
+<yourContainerID>
+```
 
 Let's check the container is running:
 
-    ```bash
-    $ docker ps -l
-    CONTAINER ID   IMAGE          COMMAND        ...   PORTS      NAMES
-    9efd72a4f320   redis:latest   redis-server   ...   6379/tcp   datastore
+```bash
+$ docker ps -l
+CONTAINER ID   IMAGE          COMMAND        ...   PORTS      NAMES
+9efd72a4f320   redis:latest   redis-server   ...   6379/tcp   datastore
+```
 
 
 * Our container is launched and running an instance of Redis.
@@ -60,8 +62,9 @@ class: extra-details
 
 If we create the web container without any extra option, it will not be able to connect to redis.
 
-    ```bash
-    $ docker run -dP jpetazzo/trainingwheels
+```bash
+$ docker run -dP jpetazzo/trainingwheels
+```
 
 Check the port number with `docker ps`, and connect to it.
 
@@ -74,8 +77,9 @@ class: extra-details
 
 Remember, in the code, we connect to the name `redis`:
 
-    ```python
-    redis = redis.Redis("redis")
+```python
+redis = redis.Redis("redis")
+```
 
 * This means "try to connect to 'redis'".
 * Not 192.168.123.234.
@@ -94,8 +98,9 @@ Links indicate an intent: "this container will connect to this other container."
 
 Here is how to create our first link:
 
-    ```bash
-    $ docker run -ti --link datastore:redis alpine sh
+```bash
+$ docker run -ti --link datastore:redis alpine sh
+```
 
 In this container, we can communicate with `datastore` using
 the `redis` DNS alias.
@@ -107,15 +112,16 @@ class: extra-details
 
 Docker has created a DNS entry for the container, resolving to its internal IP address.
 
-    ```bash
-    $ docker run -it --link datastore:redis alpine ping redis
-    PING redis (172.17.0.29): 56 data bytes
-    64 bytes from 172.17.0.29: icmp_seq=0 ttl=64 time=0.164 ms
-    64 bytes from 172.17.0.29: icmp_seq=1 ttl=64 time=0.122 ms
-    64 bytes from 172.17.0.29: icmp_seq=2 ttl=64 time=0.086 ms
-    ^C--- redis ping statistics ---
-    3 packets transmitted, 3 packets received, 0% packet loss
-    round-trip min/avg/max/stddev = 0.086/0.124/0.164/0.032 ms
+```bash
+$ docker run -it --link datastore:redis alpine ping redis
+PING redis (172.17.0.29): 56 data bytes
+64 bytes from 172.17.0.29: icmp_seq=0 ttl=64 time=0.164 ms
+64 bytes from 172.17.0.29: icmp_seq=1 ttl=64 time=0.122 ms
+64 bytes from 172.17.0.29: icmp_seq=2 ttl=64 time=0.086 ms
+^C--- redis ping statistics ---
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max/stddev = 0.086/0.124/0.164/0.032 ms
+```
 
 
 * The `--link` flag connects one container to another.
@@ -130,13 +136,15 @@ class: extra-details
 Now that we've poked around a bit let's start the application itself in
 a fresh container:
 
-    ```bash
-    $ docker run -d -P --link datastore:redis jpetazzo/trainingwheels
+```bash
+$ docker run -d -P --link datastore:redis jpetazzo/trainingwheels
+```
 
 Now let's check the port number associated to the container.
 
-    ```bash
-    $ docker ps -l
+```bash
+$ docker ps -l
+```
 
 ---
 class: extra-details
@@ -145,30 +153,32 @@ class: extra-details
 
 Finally, let's browse to our application and confirm it's working.
 
-    ```bash
-    http://<yourHostIP>:<port>
+```bash
+http://<yourHostIP>:<port>
+```
 
 ---
 ## Links and environment variables
 
 In addition to the DNS information, Docker will automatically set environment variables in our container, giving extra details about the linked container.
 
-    ```bash
-    $ docker run --link datastore:redis alpine env
-    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-    HOSTNAME=0738e57b771e
-    REDIS_PORT=tcp://172.17.0.120:6379
-    REDIS_PORT_6379_TCP=tcp://172.17.0.120:6379
-    REDIS_PORT_6379_TCP_ADDR=172.17.0.120
-    REDIS_PORT_6379_TCP_PORT=6379
-    REDIS_PORT_6379_TCP_PROTO=tcp
-    REDIS_NAME=/dreamy_wilson/redis
-    REDIS_ENV_REDIS_VERSION=2.8.13
-    REDIS_ENV_REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-2.8.13.tar.gz
-    REDIS_ENV_REDIS_DOWNLOAD_SHA1=a72925a35849eb2d38a1ea076a3db82072d4ee43
-    HOME=/
-    RUBY_MAJOR=2.1
-    RUBY_VERSION=2.1.2
+```bash
+$ docker run --link datastore:redis alpine env
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=0738e57b771e
+REDIS_PORT=tcp://172.17.0.120:6379
+REDIS_PORT_6379_TCP=tcp://172.17.0.120:6379
+REDIS_PORT_6379_TCP_ADDR=172.17.0.120
+REDIS_PORT_6379_TCP_PORT=6379
+REDIS_PORT_6379_TCP_PROTO=tcp
+REDIS_NAME=/dreamy_wilson/redis
+REDIS_ENV_REDIS_VERSION=2.8.13
+REDIS_ENV_REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-2.8.13.tar.gz
+REDIS_ENV_REDIS_DOWNLOAD_SHA1=a72925a35849eb2d38a1ea076a3db82072d4ee43
+HOME=/
+RUBY_MAJOR=2.1
+RUBY_VERSION=2.1.2
+```
 
 
 * Each variables is prefixed with the link alias: `redis`.

@@ -23,8 +23,9 @@ When people run our container, we want to greet them with a nice hello message, 
 
 For that, we will execute:
 
-    ```bash
-    figlet -f script hello
+```bash
+figlet -f script hello
+```
 
 * `-f script` tells figlet to use a fancy font.
 * `hello` is the message that we want it to display.
@@ -34,11 +35,12 @@ For that, we will execute:
 
 Our new Dockerfile will look like this:
 
-    ```dockerfile
-    FROM ubuntu
-    RUN apt-get update
-    RUN ["apt-get", "install", "figlet"]
-    CMD figlet -f script hello
+```dockerfile
+FROM ubuntu
+RUN apt-get update
+RUN ["apt-get", "install", "figlet"]
+CMD figlet -f script hello
+```
 
 * `CMD` defines a default command to run when none is given.
 * It can appear at any point in the file.
@@ -50,20 +52,22 @@ Our new Dockerfile will look like this:
 
 Let's build it:
 
-    ```bash
-    $ docker build -t figlet .
-    ...
-    Successfully built 042dff3b4a8d
+```bash
+$ docker build -t figlet .
+...
+Successfully built 042dff3b4a8d
+```
 
 And run it:
 
-    ```bash
-    $ docker run figlet
-     _          _   _       
-    | |        | | | |      
-    | |     _  | | | |  __  
-    |/ \   |/  |/  |/  /  \_
-    |   |_/|__/|__/|__/\__/ 
+```bash
+$ docker run figlet
+ _          _   _       
+| |        | | | |      
+| |     _  | | | |  __  
+|/ \   |/  |/  |/  /  \_
+|   |_/|__/|__/|__/\__/ 
+```
 
 
 ---
@@ -72,9 +76,10 @@ And run it:
 If we want to get a shell into our container (instead of running
 `figlet`), we just have to specify a different program to run:
 
-    ```bash
-    $ docker run -it figlet bash
-    root@7ac86a641116:/# 
+```bash
+$ docker run -it figlet bash
+root@7ac86a641116:/# 
+```
 
 * We specified `bash`.
 * It replaced the value of `CMD`.
@@ -87,13 +92,14 @@ while retaining `figlet` and some default parameters.
 
 In other words, we would like to be able to do this:
 
-    ```bash
-    $ docker run figlet salut
-               _            
-              | |           
-     ,   __,  | |       _|_ 
-    / \_/  |  |/  |   |  |  
-     \/ \_/|_/|__/ \_/|_/|_/
+```bash
+$ docker run figlet salut
+           _            
+          | |           
+ ,   __,  | |       _|_ 
+/ \_/  |  |/  |   |  |  
+ \/ \_/|_/|__/ \_/|_/|_/
+```
 
 
 We will use the `ENTRYPOINT` verb in Dockerfile.
@@ -104,11 +110,12 @@ We will use the `ENTRYPOINT` verb in Dockerfile.
 
 Our new Dockerfile will look like this:
 
-    ```dockerfile
-    FROM ubuntu
-    RUN apt-get update
-    RUN ["apt-get", "install", "figlet"]
-    ENTRYPOINT ["figlet", "-f", "script"]
+```dockerfile
+FROM ubuntu
+RUN apt-get update
+RUN ["apt-get", "install", "figlet"]
+ENTRYPOINT ["figlet", "-f", "script"]
+```
 
 * `ENTRYPOINT` defines a base command (and its parameters) for the container.
 * The command line arguments are appended to those parameters.
@@ -124,33 +131,37 @@ Why did we use JSON syntax for our `ENTRYPOINT`?
 
 What if we used `ENTRYPOINT` with string syntax?
 
-    ```bash
-    $ docker run figlet salut
+```bash
+$ docker run figlet salut
+```
 
 This would run the following command in the `figlet` image:
 
-    ```bash
-    sh -c "figlet -f script" salut
+```bash
+sh -c "figlet -f script" salut
+```
 
 ---
 ## Build and test our image
 
 Let's build it:
 
-    ```bash
-    $ docker build -t figlet .
-    ...
-    Successfully built 36f588918d73
+```bash
+$ docker build -t figlet .
+...
+Successfully built 36f588918d73
+```
 
 And run it:
 
-    ```bash
-    $ docker run figlet salut
-               _            
-              | |           
-     ,   __,  | |       _|_ 
-    / \_/  |  |/  |   |  |  
-     \/ \_/|_/|__/ \_/|_/|_/
+```bash
+$ docker run figlet salut
+           _            
+          | |           
+ ,   __,  | |       _|_ 
+/ \_/  |  |/  |   |  |  
+ \/ \_/|_/|__/ \_/|_/|_/
+```
 
 Great success!
 
@@ -170,12 +181,13 @@ Then we will use `ENTRYPOINT` and `CMD` together.
 
 Our new Dockerfile will look like this:
 
-    ```dockerfile
-    FROM ubuntu
-    RUN apt-get update
-    RUN ["apt-get", "install", "figlet"]
-    ENTRYPOINT ["figlet", "-f", "script"]
-    CMD ["hello world"]
+```dockerfile
+FROM ubuntu
+RUN apt-get update
+RUN ["apt-get", "install", "figlet"]
+ENTRYPOINT ["figlet", "-f", "script"]
+CMD ["hello world"]
+```
 
 * `ENTRYPOINT` defines a base command (and its parameters) for the container.
 * If we don't specify extra command-line arguments when starting the container,
@@ -187,20 +199,22 @@ Our new Dockerfile will look like this:
 
 Let's build it:
 
-    ```bash
-    $ docker build -t figlet .
-    ...
-    Successfully built 6e0b6a048a07
+```bash
+$ docker build -t figlet .
+...
+Successfully built 6e0b6a048a07
+```
 
 And run it:
 
-    ```bash
-    $ docker run figlet
-     _          _   _                             _        
-    | |        | | | |                           | |    |  
-    | |     _  | | | |  __             __   ,_   | |  __|  
-    |/ \   |/  |/  |/  /  \_  |  |  |_/  \_/  |  |/  /  |  
-    |   |_/|__/|__/|__/\__/    \/ \/  \__/    |_/|__/\_/|_/
+```bash
+$ docker run figlet
+ _          _   _                             _        
+| |        | | | |                           | |    |  
+| |     _  | | | |  __             __   ,_   | |  __|  
+|/ \   |/  |/  |/  /  \_  |  |  |_/  \_/  |  |/  /  |  
+|   |_/|__/|__/|__/\__/    \/ \/  \__/    |_/|__/\_/|_/
+```
 
     $ docker run figlet hola mundo
      _           _                                               
@@ -220,7 +234,8 @@ that would just tell figlet to display the word "bash."
 
 We use the `--entrypoint` parameter:
 
-    ```bash
-    $ docker run -it --entrypoint bash figlet
-    root@6027e44e2955:/# 
+```bash
+$ docker run -it --entrypoint bash figlet
+root@6027e44e2955:/# 
+```
 

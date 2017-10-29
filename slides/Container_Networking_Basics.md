@@ -23,9 +23,10 @@ We will also explain the different network models used by Docker.
 
 Run the Docker Hub image `nginx`, which contains a basic web server:
 
-    ```bash
-    $ docker run -d -P nginx
-    66b1ce719198711292c8f34f84a7b68c3876cf9f67015e752b94e189d35a204e
+```bash
+$ docker run -d -P nginx
+66b1ce719198711292c8f34f84a7b68c3876cf9f67015e752b94e189d35a204e
+```
 
 * Docker will download the image from the Docker Hub.
 * `-d` tells Docker to run the image in the background.
@@ -39,10 +40,11 @@ But, how do we connect to our web server now?
 
 We will use `docker ps`:
 
-    ```bash
-    $ docker ps
-    CONTAINER ID  IMAGE  ...  PORTS                                          ...
-    e40ffb406c9e  nginx  ...  0.0.0.0:32769->80/tcp, 0.0.0.0:32768->443/tcp  ...
+```bash
+$ docker ps
+CONTAINER ID  IMAGE  ...  PORTS                                          ...
+e40ffb406c9e  nginx  ...  0.0.0.0:32769->80/tcp, 0.0.0.0:32768->443/tcp  ...
+```
 
 
 * The web server is running on ports 80 and 443 inside the container.
@@ -68,13 +70,14 @@ You can also use `curl` directly from the Docker host.
 Make sure to use the right port number if it is different
 from the example below:
 
-    ```bash
-    $ curl localhost:32769
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>Welcome to nginx!</title>
-    ...
+```bash
+$ curl localhost:32769
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+...
+```
 
 ---
 ## Why are we mapping ports?
@@ -92,19 +95,21 @@ Parsing the output of `docker ps` would be painful.
 
 There is a command to help us:
 
-    ```bash
-    $ docker port <containerID> 80
-    32769
+```bash
+$ docker port <containerID> 80
+32769
+```
 
 ---
 ## Manual allocation of port numbers
 
 If you want to set port numbers yourself, no problem:
 
-    ```bash
-    $ docker run -d -p 80:80 nginx
-    $ docker run -d -p 8000:80 nginx
-    $ docker run -d -p 8080:80 -p 8888:80 nginx
+```bash
+$ docker run -d -p 80:80 nginx
+$ docker run -d -p 8000:80 nginx
+$ docker run -d -p 8080:80 -p 8888:80 nginx
+```
 
 * We are running two NGINX web servers.
 * The first one is exposed on port 80.
@@ -134,9 +139,10 @@ class: x-extra-details
 We can use the `docker inspect` command to find the IP address of the
 container.
 
-    ```bash
-    $ docker inspect --format '{{ .NetworkSettings.IPAddress }}' <yourContainerID>
-    172.17.0.3
+```bash
+$ docker inspect --format '{{ .NetworkSettings.IPAddress }}' <yourContainerID>
+172.17.0.3
+```
 
 * `docker inspect` is an advanced command, that can retrieve a ton
   of information about our containers.
@@ -151,11 +157,12 @@ class: x-extra-details
 We can test connectivity to the container using the IP address we've
 just discovered. Let's see this now by using the `ping` tool.
 
-    ```bash
-    $ ping <ipAddress>
-    64 bytes from <ipAddress>: icmp_req=1 ttl=64 time=0.085 ms
-    64 bytes from <ipAddress>: icmp_req=2 ttl=64 time=0.085 ms
-    64 bytes from <ipAddress>: icmp_req=3 ttl=64 time=0.085 ms
+```bash
+$ ping <ipAddress>
+64 bytes from <ipAddress>: icmp_req=1 ttl=64 time=0.085 ms
+64 bytes from <ipAddress>: icmp_req=2 ttl=64 time=0.085 ms
+64 bytes from <ipAddress>: icmp_req=3 ttl=64 time=0.085 ms
+```
 
 ---
 ## The different network drivers

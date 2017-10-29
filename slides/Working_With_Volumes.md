@@ -32,13 +32,15 @@ Volumes can be declared in two different ways.
 
 * Within a `Dockerfile`, with a `VOLUME` instruction.
 
-        ```dockerfile
-        VOLUME /uploads
+```dockerfile
+VOLUME /uploads
+```
 
 * On the command-line, with the `-v` flag for `docker run`.
 
-        ```bash
-        $ docker run -d -v /uploads myapp
+```bash
+$ docker run -d -v /uploads myapp
+```
 
 In both cases, `/uploads` (inside the container) will be a volume.
 
@@ -73,15 +75,17 @@ Under the hood, they are actually the same directories on the host anyway.
 
 This is done using the `--volumes-from` flag for `docker run`.
 
-    ```bash
-    $ docker run -it --name alpha -v /var/log ubuntu bash
-    root@99020f87e695:/# date >/var/log/now
+```bash
+$ docker run -it --name alpha -v /var/log ubuntu bash
+root@99020f87e695:/# date >/var/log/now
+```
 
 In another terminal, let's start another container with the same volume.
 
-    ```bash
-    $ docker run --volumes-from alpha ubuntu cat /var/log/now
-    Fri May 30 05:06:27 UTC 2014
+```bash
+$ docker run --volumes-from alpha ubuntu cat /var/log/now
+Fri May 30 05:06:27 UTC 2014
+```
 
 ---
 ## Volumes exist independently of containers
@@ -90,13 +94,14 @@ If a container is stopped, its volumes still exist and are available.
 
 Since Docker 1.9, we can see all existing volumes and manipulate them:
 
-    ```bash
-    $ docker volume ls
-    DRIVER              VOLUME NAME
-    local               5b0b65e4316da67c2d471086640e6005ca2264f3...
-    local               pgdata-prod
-    local               pgdata-dev
-    local               13b59c9936d78d109d094693446e174e5480d973...
+```bash
+$ docker volume ls
+DRIVER              VOLUME NAME
+local               5b0b65e4316da67c2d471086640e6005ca2264f3...
+local               pgdata-prod
+local               pgdata-dev
+local               13b59c9936d78d109d094693446e174e5480d973...
+```
 
 Some of those volume names were explicit (pgdata-prod, pgdata-dev).
 
@@ -113,9 +118,10 @@ one (or many) volumes.
 
 It is typically created with a no-op command:
 
-    ```bash
-    $ docker run --name files -v /var/www busybox true
-    $ docker run --name logs -v /var/log busybox true
+```bash
+$ docker run --name files -v /var/www busybox true
+$ docker run --name logs -v /var/log busybox true
+```
 
 * We created two data containers.
 * They are using the `busybox` image, a tiny image.
@@ -131,10 +137,11 @@ Data containers are used by other containers thanks to `--volumes-from`.
 
 Consider the following (fictitious) example, using the previously created volumes:
 
-    ```bash
-    $ docker run -d --volumes-from files --volumes-from logs webserver
-    $ docker run -d --volumes-from files ftpserver
-    $ docker run -d --volumes-from logs lumberjack
+```bash
+$ docker run -d --volumes-from files --volumes-from logs webserver
+$ docker run -d --volumes-from files ftpserver
+$ docker run -d --volumes-from logs lumberjack
+```
 
 * The first container runs a webserver, serving content from `/var/www`
   and logging to `/var/log`.
@@ -151,9 +158,10 @@ Consider the following (fictitious) example, using the previously created volume
 
 Let's create a volume directly.
 
-    ```bash
-    $ docker volume create --name=website
-    website
+```bash
+$ docker volume create --name=website
+website
+```
 
 Volumes are not anchored to a specific path.
 
@@ -165,20 +173,22 @@ Volumes are not anchored to a specific path.
 
 Let's start a web server using the two previous volumes.
 
-    ```bash
-    $ docker run -d -p 8888:80 \
-             -v website:/usr/share/nginx/html \
-             -v logs:/var/log/nginx \
-             nginx
+```bash
+$ docker run -d -p 8888:80 \
+         -v website:/usr/share/nginx/html \
+         -v logs:/var/log/nginx \
+         nginx
+```
 
 Check that it's running correctly:
 
-    ```bash
-    $ curl localhost:8888
-    <!DOCTYPE html>
-    ...
-    <h1>Welcome to nginx!</h1>
-    ...
+```bash
+$ curl localhost:8888
+<!DOCTYPE html>
+...
+<h1>Welcome to nginx!</h1>
+...
+```
 
 ---
 ## Using a volume in another container
@@ -188,8 +198,9 @@ Check that it's running correctly:
 
 Let's start another container using the `website` volume.
 
-    ```bash
-    $ docker run -v website:/website -w /website -ti alpine vi index.html
+```bash
+$ docker run -v website:/website -w /website -ti alpine vi index.html
+```
 
 Make changes, save, and exit.
 
@@ -215,8 +226,9 @@ inside the container:
 Wait, we already met the last use-case in our example development workflow!
 Nice.
 
-    ```bash
-    $ docker run -d -v /path/on/the/host:/path/in/container image ...
+```bash
+$ docker run -d -v /path/on/the/host:/path/in/container image ...
+```
 
 
 ---
@@ -226,11 +238,12 @@ class: extra-details
 
 The previous example would become something like this:
 
-    ```bash
-    $ mkdir -p /mnt/files /mnt/logs
-    $ docker run -d -v /mnt/files:/var/www -v /mnt/logs:/var/log webserver
-    $ docker run -d -v /mnt/files:/home/ftp ftpserver
-    $ docker run -d -v /mnt/logs:/var/log lumberjack
+```bash
+$ mkdir -p /mnt/files /mnt/logs
+$ docker run -d -v /mnt/files:/var/www -v /mnt/logs:/var/log webserver
+$ docker run -d -v /mnt/files:/home/ftp ftpserver
+$ docker run -d -v /mnt/logs:/var/log lumberjack
+```
 
 Note that the paths must be absolute.
 
@@ -258,21 +271,24 @@ class: extra-details
 
 Let's create a Redis container.
 
-    ```bash
-    $ docker run -d --name redis28 redis:2.8
+```bash
+$ docker run -d --name redis28 redis:2.8
+```
 
 Connect to the Redis container and set some data.
 
-    ```bash
-    $ docker run -ti --link redis28:redis alpine telnet redis 6379
+```bash
+$ docker run -ti --link redis28:redis alpine telnet redis 6379
+```
 
 Issue the following commands:
 
-    ```bash
-    SET counter 42
-    INFO server
-    SAVE
-    QUIT
+```bash
+SET counter 42
+INFO server
+SAVE
+QUIT
+```
 
 ---
 class: extra-details
@@ -281,13 +297,15 @@ class: extra-details
 
 Stop the Redis container.
 
-    ```bash
-    $ docker stop redis28
+```bash
+$ docker stop redis28
+```
 
 Start the new Redis container.
 
-    ```bash
-    $ docker run -d --name redis30 --volumes-from redis28 redis:3.0
+```bash
+$ docker run -d --name redis30 --volumes-from redis28 redis:3.0
+```
 
 ---
 class: extra-details
@@ -296,15 +314,17 @@ class: extra-details
 
 Connect to the Redis container and see our data.
 
-    ```bash
-    docker run -ti --link redis30:redis alpine telnet redis 6379
+```bash
+docker run -ti --link redis30:redis alpine telnet redis 6379
+```
 
 Issue a few commands.
 
-    ```bash
-    GET counter
-    INFO server
-    QUIT
+```bash
+GET counter
+INFO server
+QUIT
+```
 
 ---
 ## What happens when you remove containers with volumes?
@@ -326,16 +346,17 @@ class: extra-details
 
 Wondering if an image has volumes? Just use `docker inspect`:
 
-    ```bash
-    $ # docker inspect training/datavol
-    [{
-      "config": {
-        . . .
-        "Volumes": {
-            "/var/webapp": {}
-        },
-        . . .
-    }]
+```bash
+$ # docker inspect training/datavol
+[{
+  "config": {
+    . . .
+    "Volumes": {
+        "/var/webapp": {}
+    },
+    . . .
+}]
+```
 
 ---
 class: extra-details
@@ -345,18 +366,19 @@ class: extra-details
 To look which paths are actually volumes, and to what they are bound,
 use `docker inspect` (again):
 
-     ```bash
-     $ docker inspect <yourContainerID>
-     [{
-       "ID": "<yourContainerID>",
-     . . .
-       "Volumes": {
-          "/var/webapp": "/var/lib/docker/vfs/dir/f4280c5b6207ed531efd4cc673ff620cef2a7980f747dbbcca001db61de04468"
-       },
-       "VolumesRW": {
-          "/var/webapp": true
-       },
-     }]
+```bash
+$ docker inspect <yourContainerID>
+[{
+  "ID": "<yourContainerID>",
+. . .
+  "Volumes": {
+     "/var/webapp": "/var/lib/docker/vfs/dir/f4280c5b6207ed531efd4cc673ff620cef2a7980f747dbbcca001db61de04468"
+  },
+  "VolumesRW": {
+     "/var/webapp": true
+  },
+}]
+```
 
 * We can see that our volume is present on the file system of the Docker host.
 
@@ -367,8 +389,9 @@ The same `-v` flag can be used to share a single file.
 
 One of the most interesting examples is to share the Docker control socket.
 
-    ```bash
-    $ docker run -it -v /var/run/docker.sock:/var/run/docker.sock docker sh
+```bash
+$ docker run -it -v /var/run/docker.sock:/var/run/docker.sock docker sh
+```
 
 Warning: when using such mounts, the container gains root-like access to the host.
 It can potentially do bad things.

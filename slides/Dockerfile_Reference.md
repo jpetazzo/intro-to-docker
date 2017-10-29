@@ -35,23 +35,27 @@ container images. In this chapter, we will see:
 ## The `FROM` instruction
 Can specify a base image:
 
-    ```dockerfile
-    FROM ubuntu
+```dockerfile
+FROM ubuntu
+```
 
 An image tagged with a specific version:
 
-    ```dockerfile
-    FROM ubuntu:12.04
+```dockerfile
+FROM ubuntu:12.04
+```
 
 A user image:
 
-    ```dockerfile
-    FROM training/sinatra
+```dockerfile
+FROM training/sinatra
+```
 
 Or self-hosted image:
 
-    ```dockerfile
-    FROM localhost:5000/funtoo
+```dockerfile
+FROM localhost:5000/funtoo
+```
 
 ---
 class: extra-details
@@ -61,11 +65,12 @@ class: extra-details
 * The `FROM` instruction can be specified more than once to build
   multiple images.
 
-        ```dockerfile
-        FROM ubuntu:14.04
-        . . .
-        FROM fedora:20
-        . . .
+```dockerfile
+FROM ubuntu:14.04
+. . .
+FROM fedora:20
+. . .
+```
 
     Each `FROM` instruction marks the beginning of the build of a new image.
 
@@ -84,19 +89,20 @@ class: extra-details
 
 * Integrate CI and unit tests in the build system
 
-        ```dockerfile
-        FROM <baseimage>
-        RUN <install dependencies>
-        COPY <code>
-        RUN <build code>
-        RUN <install test dependencies>
-        COPY <test data sets and fixtures>
-        RUN <unit tests>
-        FROM <baseimage>
-        RUN <install dependencies>
-        COPY <vcode>
-        RUN <build code>
-        CMD, EXPOSE ...
+```dockerfile
+FROM <baseimage>
+RUN <install dependencies>
+COPY <code>
+RUN <build code>
+RUN <install test dependencies>
+COPY <test data sets and fixtures>
+RUN <unit tests>
+FROM <baseimage>
+RUN <install dependencies>
+COPY <vcode>
+RUN <build code>
+CMD, EXPOSE ...
+```
 
 * The build fails as soon as an instructions fails
 * If `RUN <unit tests>` fails, the build doesn't produce an image
@@ -107,8 +113,9 @@ class: extra-details
 
 The `MAINTAINER` instruction tells you who wrote the `Dockerfile`.
 
-    ```dockerfile
-    MAINTAINER Docker Education Team <education@docker.com>
+```dockerfile
+MAINTAINER Docker Education Team <education@docker.com>
+```
 
 It's optional but recommended.
 
@@ -120,14 +127,16 @@ The `RUN` instruction can be specified in two ways.
 With shell wrapping, which runs the specified command inside a shell,
 with `/bin/sh -c`:
 
-    ```dockerfile
-    RUN apt-get update
+```dockerfile
+RUN apt-get update
+```
 
 Or using the `exec` method, which avoids shell string expansion, and
 allows execution in images that don't have `/bin/sh`:
 
-    ```dockerfile
-    RUN [ "apt-get", "update" ]
+```dockerfile
+RUN [ "apt-get", "update" ]
+```
 
 ---
 ## More about the `RUN` instruction
@@ -151,17 +160,19 @@ you should use `CMD` and/or `ENTRYPOINT`.
 
 It is possible to execute multiple commands in a single step:
 
-    ```dockerfile
-    RUN apt-get update && apt-get install -y wget && apt-get clean
+```dockerfile
+RUN apt-get update && apt-get install -y wget && apt-get clean
+```
 
 It is also possible to break a command onto multiple lines:
 
 It is possible to execute multiple commands in a single step:
 
-    ```dockerfile
-    RUN apt-get update \
-     && apt-get install -y wget \
-     && apt-get clean
+```dockerfile
+RUN apt-get update \
+ && apt-get install -y wget \
+ && apt-get clean
+```
 
 ---
 ## The `EXPOSE` instruction
@@ -169,10 +180,11 @@ It is possible to execute multiple commands in a single step:
 The `EXPOSE` instruction tells Docker what ports are to be published
 in this image.
 
-    ```dockerfile
-    EXPOSE 8080
-    EXPOSE 80 443
-    EXPOSE 53/tcp 53/udp
+```dockerfile
+EXPOSE 8080
+EXPOSE 80 443
+EXPOSE 53/tcp 53/udp
+```
 
 * All ports are private by default.
 * The `Dockerfile` doesn't control if a port is publicly available.
@@ -193,8 +205,9 @@ A *private port* is not reachable from outside.
 The `COPY` instruction adds files and content from your host into the
 image.
 
-    ```dockerfile
-    COPY . /src
+```dockerfile
+COPY . /src
+```
 
 This will add the contents of the *build context* (the directory
 passed as an argument to `docker build`) to the directory `/src`
@@ -204,9 +217,10 @@ Note: you can only reference files and directories *inside* the
 build context. Absolute paths are taken as being anchored to
 the build context, so the two following lines are equivalent:
 
-    ```dockerfile
-    COPY . /src
-    COPY / /src
+```dockerfile
+COPY . /src
+COPY / /src
+```
 
 Attempts to use `..` to get out of the build context will be
 detected and blocked with Docker, and the build will fail.
@@ -220,16 +234,18 @@ Otherwise, a `Dockerfile` could succeed on host A, but fail on host B.
 
 `ADD` can get remote files:
 
-    ```dockerfile
-    ADD http://www.example.com/webapp.jar /opt/
+```dockerfile
+ADD http://www.example.com/webapp.jar /opt/
+```
 
 This would download the `webapp.jar` file and place it in the `/opt`
 directory.
 
 `ADD` will automatically unpack zip files and tar archives:
 
-    ```dockerfile
-    ADD ./assets.zip /var/www/htdocs/assets/
+```dockerfile
+ADD ./assets.zip /var/www/htdocs/assets/
+```
 
 This would unpack `assets.zip` into `/var/www/htdocs/assets`.
 
@@ -252,8 +268,9 @@ This would unpack `assets.zip` into `/var/www/htdocs/assets`.
 The `VOLUME` instruction tells Docker that a specific directory
 should be a *volume*.
 
-    ```dockerfile
-    VOLUME /var/lib/mysql
+```dockerfile
+VOLUME /var/lib/mysql
+```
 
 Filesystem access in volumes bypasses the copy-on-write layer,
 offering native performance to I/O done in those directories.
@@ -275,8 +292,9 @@ instructions.
 It also affects `CMD` and `ENTRYPOINT`, since it sets the working
 directory used when starting the container.
    
-    ```dockerfile
-    WORKDIR /src
+```dockerfile
+WORKDIR /src
+```
 
 You can specify `WORKDIR` again to change the working directory for
 further operations.
@@ -287,19 +305,22 @@ further operations.
 The `ENV` instruction specifies environment variables that should be
 set in any container launched from the image.
 
-    ```dockerfile
-    ENV WEBAPP_PORT 8080
+```dockerfile
+ENV WEBAPP_PORT 8080
+```
 
 This will result in an environment variable being created in any
 containers created from this image of
 
-    ```bash
-    WEBAPP_PORT=8080
+```bash
+WEBAPP_PORT=8080
+```
 
 You can also specify environment variables when you use `docker run`.
 
-    ```bash
-    $ docker run -e WEBAPP_PORT=8000 -e WEBAPP_HOST=www.example.com ...
+```bash
+$ docker run -e WEBAPP_PORT=8000 -e WEBAPP_HOST=www.example.com ...
+```
 
 ---
 ## The `USER` instruction
@@ -315,21 +336,24 @@ It can be used multiple times to change back to root or to another user.
 The `CMD` instruction is a default command run when a container is
 launched from the image.
 
-    ```dockerfile
-    CMD [ "nginx", "-g", "daemon off;" ]
+```dockerfile
+CMD [ "nginx", "-g", "daemon off;" ]
+```
 
 Means we don't need to specify `nginx -g "daemon off;"` when running the
 container.
 
 Instead of:
 
-    ```bash
-    $ docker run <dockerhubUsername>/web_image nginx -g "daemon off;"
+```bash
+$ docker run <dockerhubUsername>/web_image nginx -g "daemon off;"
+```
 
 We can just do:
 
-    ```bash
-    $ docker run <dockerhubUsername>/web_image
+```bash
+$ docker run <dockerhubUsername>/web_image
+```
 
 ---
 ## More about the `CMD` instruction
@@ -337,13 +361,15 @@ We can just do:
 Just like `RUN`, the `CMD` instruction comes in two forms.
 The first executes in a shell:
 
-    ```dockerfile
-    CMD nginx -g "daemon off;"
+```dockerfile
+CMD nginx -g "daemon off;"
+```
 
 The second executes directly, without shell processing:
 
-    ```dockerfile
-    CMD [ "nginx", "-g", "daemon off;" ]
+```dockerfile
+CMD [ "nginx", "-g", "daemon off;" ]
+```
 
 ---
 class: extra-details
@@ -352,8 +378,9 @@ class: extra-details
 
 The `CMD` can be overridden when you run a container.
 
-    ```bash
-    $ docker run -it <dockerhubUsername>/web_image bash
+```bash
+$ docker run -it <dockerhubUsername>/web_image bash
+```
 
 Will run `bash` instead of `nginx -g "daemon off;"`.
 
@@ -366,13 +393,15 @@ entry point.
 
 Note: you have to use the "exec" syntax (`[ "..." ]`).
 
-    ```dockerfile
-    ENTRYPOINT [ "/bin/ls" ]
+```dockerfile
+ENTRYPOINT [ "/bin/ls" ]
+```
 
 If we were to run:
 
-    ```bash
-    $ docker run training/ls -l
+```bash
+$ docker run training/ls -l
+```
 
 Instead of trying to run `-l`, the container will run `/bin/ls -l`.
 
@@ -383,12 +412,13 @@ class: extra-details
 
 The entry point can be overriden as well.
 
-    ```bash
-    $ docker run -it training/ls
-    bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
-    boot  etc  lib   media  opt  root  sbin  sys  usr
-    $ docker run -it --entrypoint bash training/ls
-    root@d902fb7b1fc7:/#
+```bash
+$ docker run -it training/ls
+bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media  opt  root  sbin  sys  usr
+$ docker run -it --entrypoint bash training/ls
+root@d902fb7b1fc7:/#
+```
 
 ---
 ## How `CMD` and `ENTRYPOINT` interact
@@ -396,16 +426,18 @@ The entry point can be overriden as well.
 The `CMD` and `ENTRYPOINT` instructions work best when used
 together.
 
-    ```dockerfile
-    ENTRYPOINT [ "nginx" ]
-    CMD [ "-g", "daemon off;" ]
+```dockerfile
+ENTRYPOINT [ "nginx" ]
+CMD [ "-g", "daemon off;" ]
+```
 
 The `ENTRYPOINT` specifies the command to be run and the `CMD`
 specifies its options. On the command line we can then potentially
 override the options when needed.
 
-    ```bash
-    $ docker run -d <dockerhubUsername>/web_image -t
+```bash
+$ docker run -d <dockerhubUsername>/web_image -t
+```
 
 This will override the options `CMD` provided with new flags.
 
@@ -431,8 +463,9 @@ be executed when another image is built from the image being build.
 This is useful for building images which will be used as a base
 to build other images.
 
-    ```dockerfile
-    ONBUILD COPY . /src
+```dockerfile
+ONBUILD COPY . /src
+```
 
 * You can't chain `ONBUILD` instructions with `ONBUILD`.
 * `ONBUILD` can't be used to trigger `FROM` and `MAINTAINER`
@@ -451,14 +484,15 @@ to build other images.
 
 The dependencies are reinstalled every time, because the build system does not know if `requirements.txt` has been updated.
 
-        ```bash
-        FROM python
-        MAINTAINER Docker Education Team <education@docker.com>
-        COPY . /src/
-        WORKDIR /src
-        RUN pip install -qr requirements.txt
-        EXPOSE 5000
-        CMD ["python", "app.py"]
+```bash
+FROM python
+MAINTAINER Docker Education Team <education@docker.com>
+COPY . /src/
+WORKDIR /src
+RUN pip install -qr requirements.txt
+EXPOSE 5000
+CMD ["python", "app.py"]
+```
 
 ---
 ## Fixed `Dockerfile`

@@ -29,10 +29,11 @@ But each container can also be referenced by its name.
 
 If a container is named `prod-db`, I can do:
 
-    ```bash
-    $ docker logs prod-db
-    $ docker stop prod-db
-    etc.
+```bash
+$ docker logs prod-db
+$ docker stop prod-db
+etc.
+```
 
 ---
 ## Default names
@@ -52,8 +53,9 @@ Examples: `happy_curie`, `clever_hopper`, `jovial_lovelace` ...
 
 You can set the name of the container when you create it.
 
-    ```bash
-    $ docker run --name ticktock jpetazzo/clock
+```bash
+$ docker run --name ticktock jpetazzo/clock
+```
 
 If you specify a name that already exists, Docker will refuse
 to create the container.
@@ -72,9 +74,9 @@ This lets us enforce unicity of a given resource.
 
 The `docker inspect` command will output a very detailed JSON map.
 
-    ```bash
-    $ docker inspect <containerID>
-    [{
+```bash
+$ docker inspect <containerID>
+[{
 	"AppArmorProfile": "",
 	"Args": [],
 	"Config": {
@@ -85,7 +87,8 @@ The `docker inspect` command will output a very detailed JSON map.
 		"bash"
 	    ],
 	    "CpuShares": 0,
-    ...
+...
+```
 
 There are multiple ways to consume that information.
 
@@ -98,8 +101,9 @@ There are multiple ways to consume that information.
 * If you really must parse JSON from the Shell, use JQ!
   <br/>(It's great.)
 
-        ```bash
-        $ docker inspect <containerID> | jq .
+```bash
+$ docker inspect <containerID> | jq .
+```
 
 * We will see a better solution which doesn't require extra tools.
 
@@ -109,9 +113,10 @@ There are multiple ways to consume that information.
 You can specify a format string, which will be parsed by 
 Go's text/template package.
 
-    ```bash
-    $ docker inspect --format '{{ json .Created }}' <containerID>
-    "2015-02-24T07:21:11.712240394Z"
+```bash
+$ docker inspect --format '{{ json .Created }}' <containerID>
+"2015-02-24T07:21:11.712240394Z"
+```
 
 * The generic syntax is to wrap the expression with double curly braces.
 * The expression starts with a dot representing the JSON object.
