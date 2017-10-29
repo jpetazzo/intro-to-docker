@@ -12,27 +12,8 @@ class: title
 At the end of this lesson, you will have:
 
 * Seen Docker in action.
+
 * Started your first containers.
-
----
-
-class: x-extra-details
-
-## Docker architecture
-
-Docker is a client-server application.
-
-* **The Docker Engine (or "daemon")**
-  <br/>Receives and processes incoming Docker API requests.
-
-* **The Docker client**
-  <br/>Talks to the Docker daemon via the Docker API.
-  <br/>We'll use mostly the CLI embedded within the `docker` binary.
- 
-* **Docker Hub Registry**
-  <br/>Collection of public images.
-  <br/>The Docker daemon talks to it via the registry API.
- 
 
 ---
 
@@ -45,12 +26,17 @@ $ docker run busybox echo hello world
 hello world
 ```
 
+(If your Docker install is brand new, you will also see a few extra lines,
+corresponding to the download of the `busybox` image.)
+
 ---
 
 ## That was our first container!
 
 * We used one of the smallest, simplest images available: `busybox`.
+
 * `busybox` is typically used in embedded systems (phones, routers...)
+
 * We ran a single process and echo'ed `hello world`.
 
 ---
@@ -119,7 +105,7 @@ Reading package lists... Done
 One minute later, `figlet` is installed!
 
 ```bash
-# figlet hello
+root@04c0bb0a6c07:/# figlet hello
  _          _ _       
 | |__   ___| | | ___  
 | '_ \ / _ \ | |/ _ \ 
@@ -156,6 +142,7 @@ bash: figlet: command not found
 ```
 
 * We started a *brand new container*.
-* The basic Ubuntu image was used, and `figlet` is not here.
-* We will see in the next chapters how to bake a custom image with `figlet`.
 
+* The basic Ubuntu image was used, and `figlet` is not here.
+
+* We will see in the next chapters how to bake a custom image with `figlet`.

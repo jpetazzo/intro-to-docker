@@ -13,9 +13,9 @@ chapters:
 - - Docker_Overview.md
   - Docker_History.md
   - Training_Environment.md
-
   - Install_Docker.md
   - First_Containers.md
+
   - Background_Containers.md
   - Start_And_Attach.md
   - Initial_Images.md
