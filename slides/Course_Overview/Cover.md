@@ -1,4 +1,5 @@
-<!SLIDE center cover>
+class: title
+
 # Introduction to Docker #
 
 ## Version: ~~~CONFIG:training_version~~~ ##

@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Connecting containers with links
+---
+## Lesson ~~~SECTION:MAJOR~~~: Connecting containers with links
 
-## Objectives
+### Objectives
 
 Links were the "legacy" way of connecting containers (before the implementation of the CNM).
 

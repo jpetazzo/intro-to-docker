@@ -1,5 +1,5 @@
-<!SLIDE>
-# Introduction to the Docker API
+---
+## Introduction to the Docker API
 
 So far we've used Docker's command line tools to interact with it.
 Docker also has a fully fledged RESTful API you can work with.
@@ -10,8 +10,8 @@ The API allows:
 * Run containers.
 * Manage containers.
 
-<!SLIDE>
-# Docker API details
+---
+## Docker API details
 
 The Docker API is:
 
@@ -26,8 +26,8 @@ In the examples below, we will assume that Docker has been
 setup so that the API listens on port 2375, because tools
 like ``curl`` can't talk to a local UNIX socket directly.
 
-<!SLIDE>
-# Testing the Docker API
+---
+## Testing the Docker API
 
 Let's start by using the ``info`` endpoint to test the Docker API.
 
@@ -65,8 +65,8 @@ This endpoint returns basic information about our Docker host.
         "SwapLimit": 1
     }
 
-<!SLIDE>
-# Doing ``docker run`` via the API
+---
+## Doing ``docker run`` via the API
 
 It is simple to do ``docker run`` with the CLI, but it is
 more complex with the API. It involves multiple calls.
@@ -77,8 +77,8 @@ involve hijacking the HTTP connection. This is easily
 handled with Docker client libraries, but for now, we
 will use regular tools like ``curl``.
 
-<!SLIDE>
-# Container lifecycle with the API
+---
+## Container lifecycle with the API
 
 To run a container, you must:
 
@@ -89,8 +89,8 @@ To run a container, you must:
 
 Each of those operations corresponds to a specific API call.
 
-<!SLIDE>
-# "Create" vs. "Start"
+---
+## "Create" vs. "Start"
 
 The ``create`` API call creates the container, and gives us
 the ID of the newly created container. The container does not
@@ -110,8 +110,8 @@ must be specified with ``start``.
 To see the list of all parameters, check the API reference
 documentation.
 
-<!SLIDE>
-# Creating a new container via the API
+---
+## Creating a new container via the API
 
 Let's use ``curl`` to create a simple container.
 
@@ -133,8 +133,8 @@ Let's use ``curl`` to create a simple container.
 * You can add more parameters in the JSON structure.
 * The only mandatory parameter is the ``Image`` to use.
 
-<!SLIDE>
-# Starting our new container via the API
+---
+## Starting our new container via the API
 
 In the previous step, the API gave you a container ID.
 
@@ -147,8 +147,8 @@ You will have to copy-paste that ID.
 
 No output will be shown (unless an error happens).
 
-<!SLIDE>
-# Inspecting our launched container
+---
+## Inspecting our launched container
 
 We can also inspect our freshly launched container.
 
@@ -173,8 +173,8 @@ We can also inspect our freshly launched container.
 
 * It returns the same hash the ``docker inspect`` command returns.
 
-<!SLIDE>
-# Waiting for our container to exit and check its status code
+---
+## Waiting for our container to exit and check its status code
 
 Our test container will run and exit almost instantly.
 
@@ -193,8 +193,8 @@ container.
 * The ``StatusCode`` of ``0`` means that the process
   exited normally, without error.
 
-<!SLIDE>
-# Viewing container output (logs)
+---
+## Viewing container output (logs)
 
 Our container is supposed to echo ``hello world``.
 
@@ -212,8 +212,8 @@ Let's verify that.
 * Check the API reference documentation to see all available
   options.
 
-<!SLIDE>
-# Stopping a container
+---
+## Stopping a container
 
 We can also stop a container using the API.
 
@@ -224,8 +224,8 @@ We can also stop a container using the API.
 * Note that you have to use a ``POST`` call here.
 * If it succeeds it will return a HTTP 204 response code.
 
-<!SLIDE>
-# Working with images
+---
+## Working with images
 
 We can also work with Docker images.
 
@@ -252,8 +252,8 @@ We can also work with Docker images.
 
 * Returns a hash of all images.
 
-<!SLIDE>
-# Searching the Docker Hub for an image
+---
+## Searching the Docker Hub for an image
 
 We can also search the Docker Hub for specific images.
 
@@ -278,8 +278,8 @@ We can also search the Docker Hub for specific images.
 
 This returns a list of images and their metadata.
 
-<!SLIDE>
-# Creating an image
+---
+## Creating an image
 
 We can then add one of these images to our Docker host.
 
@@ -290,8 +290,8 @@ We can then add one of these images to our Docker host.
 
 This will pull down the ``training/namer`` image and add it to our Docker host.
 
-<!SLIDE>
-# Section summary
+---
+## Section summary
 
 We've learned how to:
 

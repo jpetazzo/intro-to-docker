@@ -1,5 +1,5 @@
-<!SLIDE>
-# Using a Docker container for local development
+---
+## Using a Docker container for local development
 
 Never again:
 
@@ -9,8 +9,8 @@ Never again:
 
 By using Docker containers, we will get a consistent development environment.
 
-<!SLIDE>
-# Our "namer" application
+---
+## Our "namer" application
 
 * The code is available on https://github.com/jpetazzo/namer.
 * The image jpetazzo/namer is automatically built by the Docker Hub.
@@ -23,8 +23,8 @@ Let's run it with:
 Check the port number with `docker ps` and open the application.
 
 
-<!SLIDE>
-# Let's look at the code
+---
+## Let's look at the code
 
 Let's download our application's source code.
 
@@ -38,8 +38,8 @@ Let's download our application's source code.
     Dockerfile
     Gemfile
 
-<!SLIDE>
-# Where's my code?
+---
+## Where's my code?
 
 According to the Dockerfile, the code is copied into `/src` :
 
@@ -57,8 +57,8 @@ We want to make changes *inside the container* without rebuilding it each time.
 
 For that, we will use a *volume*.
 
-<!SLIDE>
-# Our first volume
+---
+## Our first volume
 
 We will tell Docker to map the current directory to `/src` in the container.
 
@@ -71,8 +71,8 @@ We will tell Docker to map the current directory to `/src` in the container.
 * ``jpetazzo/namer`` is the name of the image we will run.
 * We don't need to give a command to run because the Dockerfile already specifies `rackup`.
 
-<!SLIDE>
-# Mounting volumes inside containers
+---
+## Mounting volumes inside containers
 
 The ``-v`` flag mounts a directory from your host into your Docker
 container. The flag structure is:
@@ -87,8 +87,8 @@ container. The flag structure is:
 
 There will be a full chapter about volumes!
 
-<!SLIDE>
-# Testing the development container
+---
+## Testing the development container
 
 Now let us see if our new container is running.
 
@@ -97,8 +97,8 @@ Now let us see if our new container is running.
     CONTAINER ID  IMAGE   COMMAND CREATED       STATUS PORTS                NAMES
     045885b68bc5  trai... rackup  3 seconds ago Up ... 0.0.0.0:80->9292/tcp ...
 
-<!SLIDE>
-# Viewing our application
+---
+## Viewing our application
 
 Now let's browse to our web application on:
 
@@ -109,8 +109,8 @@ We can see our company naming application.
 
 ![web application 1](webapp1.png)
 
-<!SLIDE>
-# Making a change to our application
+---
+## Making a change to our application
 
 Our customer really doesn't like the color of our text. Let's change it.
 
@@ -127,8 +127,8 @@ To:
     @@@ CSS
     color: red;
 
-<!SLIDE>
-# Refreshing our application
+---
+## Refreshing our application
 
 Now let's refresh our browser:
 
@@ -139,8 +139,8 @@ We can see the updated color of our company naming application.
 
 ![web application 2](webapp2.png)
 
-<!SLIDE>
-# Improving the workflow with Compose
+---
+## Improving the workflow with Compose
 
 * You can also start the container with the following command:
 
@@ -157,8 +157,8 @@ We can see the updated color of our company naming application.
           ports:
             - 80:9292
 
-<!SLIDE>
-# Why Compose?
+---
+## Why Compose?
 
 * Specifying all those "docker run" parameters is tedious.
 * And error-prone.
@@ -167,8 +167,8 @@ We can see the updated color of our company naming application.
 * Compose can also deal with complex, multi-container apps.
   <br/>(More on this later.)
 
-<!SLIDE>
-# Workflow explained
+---
+## Workflow explained
 
 We can see a simple workflow:
 
@@ -196,8 +196,10 @@ We can see a simple workflow:
 
     (You *are* using version control, right?)
 
-<!SLIDE pprintonly>
-# Debugging inside the container
+---
+class: x-extra-details
+
+## Debugging inside the container
 
 In 1.3, Docker introduced a feature called `docker exec`.
 
@@ -207,8 +209,10 @@ If sometimes you find yourself wishing you could SSH into a container: you can u
 
 You can get a shell prompt inside an existing container this way, or run an arbitrary process for automation.
 
-<!SLIDE printonly>
-# ``docker exec`` example
+---
+class: extra-details
+
+## ``docker exec`` example
 
     @@@ Sh
     $ # You can run ruby commands in the area the app is running and more!
@@ -218,8 +222,10 @@ You can get a shell prompt inside an existing container this way, or run an arbi
     => [0, 1, 4, 9, 16]
     irb(main):002:0> exit
 
-<!SLIDE pprintonly>
-# Stopping the container
+---
+class: x-extra-details
+
+## Stopping the container
 
 Now that we're done let's stop our container.
 
@@ -231,8 +237,8 @@ And remove it.
     @@@ Sh
     $ docker rm <yourContainerID>
 
-<!SLIDE>
-# Section summary
+---
+## Section summary
 
 We've learned how to:
 

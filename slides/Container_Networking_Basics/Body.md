@@ -1,5 +1,5 @@
-<!SLIDE>
-# A simple, static web server
+---
+## A simple, static web server
 
 Run the Docker Hub image `nginx`, which contains a basic web server:
 
@@ -14,8 +14,8 @@ Run the Docker Hub image `nginx`, which contains a basic web server:
 
 But, how do we connect to our web server now?
 
-<!SLIDE>
-# Finding our web server port
+---
+## Finding our web server port
 
 We will use `docker ps`:
 
@@ -32,16 +32,16 @@ We will explain the whys and hows of this port mapping.
 
 But first, let's make sure that everything works properly.
 
-<!SLIDE>
-# Connecting to our web server (GUI)
+---
+## Connecting to our web server (GUI)
 
 Point your browser to the IP address of your Docker host, on the port
 shown by `docker ps` for container port 80.
 
 ![Screenshot](web.png)
 
-<!SLIDE>
-# Connecting to our web server (CLI)
+---
+## Connecting to our web server (CLI)
 
 You can also use `curl` directly from the Docker host.
 
@@ -56,8 +56,8 @@ from the example below:
     <title>Welcome to nginx!</title>
     ...
 
-<!SLIDE>
-# Why are we mapping ports?
+---
+## Why are we mapping ports?
 
 * We are out of IPv4 addresses.
 * Containers cannot have public IPv4 addresses.
@@ -65,8 +65,8 @@ from the example below:
 * Services have to be exposed port by port.
 * Ports have to be mapped to avoid conflicts.
 
-<!SLIDE>
-# Finding the web server port in a script
+---
+## Finding the web server port in a script
 
 Parsing the output of `docker ps` would be painful.
 
@@ -76,8 +76,8 @@ There is a command to help us:
     $ docker port <containerID> 80
     32769
 
-<!SLIDE>
-# Manual allocation of port numbers
+---
+## Manual allocation of port numbers
 
 If you want to set port numbers yourself, no problem:
 
@@ -93,8 +93,8 @@ If you want to set port numbers yourself, no problem:
 
 Note: the convention is `port-on-host:port-on-container`.
 
-<!SLIDE>
-# Plumbing containers into your infrastructure
+---
+## Plumbing containers into your infrastructure
 
 There are many ways to integrate containers in your network.
 
@@ -106,8 +106,10 @@ There are many ways to integrate containers in your network.
 * Enable *Swarm Mode* to deploy across a cluster.
   <br/>The container will then be reachable through any node of the cluster.
 
-<!SLIDE pprintonly>
-# Finding the container's IP address
+---
+class: x-extra-details
+
+## Finding the container's IP address
 
 We can use the `docker inspect` command to find the IP address of the
 container.
@@ -121,8 +123,10 @@ container.
 * Here, we provide it with a format string to extract exactly the
   private IP address of the container.
 
-<!SLIDE pprintonly>
-# Pinging our container
+---
+class: x-extra-details
+
+## Pinging our container
 
 We can test connectivity to the container using the IP address we've
 just discovered. Let's see this now by using the ``ping`` tool.
@@ -133,8 +137,8 @@ just discovered. Let's see this now by using the ``ping`` tool.
     64 bytes from <ipAddress>: icmp_req=2 ttl=64 time=0.085 ms
     64 bytes from <ipAddress>: icmp_req=3 ttl=64 time=0.085 ms
 
-<!SLIDE>
-# The different network drivers
+---
+## The different network drivers
 
 A container can use one of the following drivers:
 
@@ -145,8 +149,8 @@ A container can use one of the following drivers:
 
 The driver is selected with `docker run --net ...`.
 
-<!SLIDE>
-# The default bridge
+---
+## The default bridge
 
 * By default, the container gets a virtual `eth0` interface.
   <br/>(In addition to its own private `lo` loopback interface.)
@@ -159,16 +163,16 @@ The driver is selected with `docker run --net ...`.
 * Inbound traffic goes through an iptables DNAT rule.
 * The container can have its own routes, iptables rules, etc.
 
-<!SLIDE>
-# The null driver
+---
+## The null driver
 
 * Container is started with `docker run --net none ...`
 * It only gets the `lo` loopback interface. No `eth0`.
 * It can't send or receive network traffic.
 * Useful for isolated/untrusted workloads.
 
-<!SLIDE>
-# The host driver
+---
+## The host driver
 
 * Container is started with `docker run --net host ...`
 * It sees (and can access) the network interfaces of the host.
@@ -181,8 +185,8 @@ Use cases:
 * Performance sensitive applications (VOIP, gaming, streaming...)
 * Peer discovery (e.g. Erlang port mapper, Raft, Serf...)
 
-<!SLIDE>
-# The container driver
+---
+## The container driver
 
 * Container is started with `docker run --net container:id ...`
 * It re-uses the network stack of another container.
@@ -190,8 +194,8 @@ Use cases:
 * Those containers can communicate over their `lo` interface.
   <br/>(i.e. one can bind to 127.0.0.1 and the others can connect to it.)
 
-<!SLIDE>
-# Section summary
+---
+## Section summary
 
 We've learned how to:
 

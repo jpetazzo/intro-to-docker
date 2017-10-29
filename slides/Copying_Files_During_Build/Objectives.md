@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Copying files during the build
+---
+## Lesson ~~~SECTION:MAJOR~~~: Copying files during the build
 
-## Objectives
+### Objectives
 
 So far, we have installed things in our container images
 by downloading packages.

@@ -1,4 +1,6 @@
-<!SLIDE center subsection>
+---
+class: title
+
 # Building Docker images
 
 ![construction](construction.jpg)

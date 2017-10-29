@@ -1,5 +1,5 @@
-<!SLIDE>
-# Vulnerabilities
+---
+## Vulnerabilities
 
 When a vulnerability is discovered, it is common practice for
 the vendor or community to issue a *security advisory*.
@@ -15,8 +15,8 @@ The security advisory will typically indicate:
   unauthorized access or modification to data).
 * How to remediate it (typically by upgrading affected software).
 
-<!SLIDE>
-# Vulnerabilities in Docker
+---
+## Vulnerabilities in Docker
 
 The typical method to deal with Docker vulnerabilities is:
 
@@ -26,8 +26,8 @@ The typical method to deal with Docker vulnerabilities is:
 * Start the Docker daemon.
 * Start the container.
 
-<!SLIDE>
-# Vulnerabilities in images
+---
+## Vulnerabilities in images
 
 If a vulnerability is announced concerning a package that you
 are using in your images, you should upgrade those images.
@@ -38,8 +38,8 @@ Assuming that updated packages are available, you should:
 * Re-execute a `docker build --no-cache` of all your built images.
 * Re-start all containers using the updated images.
 
-<!SLIDE>
-# Detecting vulnerabilities
+---
+## Detecting vulnerabilities
 
 You can use traditional auditing systems, but Docker provides
 new, efficient, non-intrusive ways to perform security audit

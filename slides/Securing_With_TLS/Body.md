@@ -1,10 +1,10 @@
-<!SLIDE>
-# Why should I care?
+---
+## Why should I care?
 
 * Docker does not have any access controls on its network API unless you use TLS! 
 
-<!SLIDE>
-# What is TLS
+---
+## What is TLS
 
 * TLS is Transport Layer Security. 
 * The protocol that secures websites with `https` URLs. 
@@ -13,23 +13,23 @@
 * These Certificates indicate that a trusted party believes the server is who it says it is.
 * Each transaction is therefor encrypted *and* authenticated.
 
-<!SLIDE>
-# How Docker Uses TLS
+---
+## How Docker Uses TLS
 
 * Docker provides mechanisms to authenticate both the server the client to _each other_.
 * Provides strong authentication, authorization and encryption for any API connection over the network.
 * Client keys can be distributed to authorized clients
 
-<!SLIDE>
-# Environment Preparation
+---
+## Environment Preparation
 
 * You need to make sure that OpenSSL version 1.0.1 is installed on your machine. 
 * Make a directory for all of the files to reside.
 * Make sure that the directory is protected and backed up!
 * *Treat these files the same as a root password.*
 
-<!SLIDE>
-# Creating a Certificate Authority
+---
+## Creating a Certificate Authority
 
 First, initialize the CA serial file and generate CA private and public
 keys:
@@ -41,8 +41,8 @@ keys:
 
 We will use the `ca.pem` file to sign all of the other keys later.
 
-<!SLIDE>
-# Create and Sign the Server Key
+---
+## Create and Sign the Server Key
 Now that we have a CA, we can create a server key and certificate
 signing request. Make sure that `CN` matches the hostname you run the Docker daemon on:
 
@@ -57,8 +57,8 @@ Next we're going to sign the key with our CA:
     $ openssl x509 -req -days 365 -in server.csr -CA ca.pem -CAkey ca-key.pem \
       -out server-cert.pem
 
-<!SLIDE>
-# Create and Sign the Client Key
+---
+## Create and Sign the Client Key
 
 	@@@ Sh
     $ openssl genrsa -des3 -out client-key.pem 2048
@@ -77,8 +77,8 @@ Now sign the key:
     $ openssl x509 -req -days 365 -in client.csr -CA ca.pem -CAkey ca-key.pem \
       -out client-cert.pem -extfile extfile.cnf
 
-<!SLIDE>
-# Configuring the Docker Daemon for TLS
+---
+## Configuring the Docker Daemon for TLS
 
 * By default, Docker does not listen on the network at all.
 * To enable remote connections, use the `-H` flag.
@@ -91,8 +91,8 @@ _Note: You will need to modify the startup scripts on your server for this to be
 
 
 
-<!SLIDE>
-# Configuring the Docker Client for TLS
+---
+## Configuring the Docker Client for TLS
 
 If you want to secure your Docker client connections by default, you can move the key files
 to the `.docker` directory in your home directory. Set the `DOCKER_HOST` variable as well.
@@ -108,8 +108,8 @@ Then you can run docker with the `--tlsverify` option.
 	@@@ Sh
     $ docker --tlsverify ps
 
-<!SLIDE>
-# Section Summary
+---
+## Section Summary
 
 We learned how to:
 

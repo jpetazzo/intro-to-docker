@@ -1,5 +1,5 @@
-<!SLIDE>
-# Your training Virtual Machine
+---
+## Your training Virtual Machine
 
 This section assumes that you are following this course as part of
 an official Docker training or workshop, and have been given credentials
@@ -14,8 +14,8 @@ It will stay up and running for the whole training, but it will be destroyed
 shortly after the training.
 
 
-<!SLIDE>
-# Connecting to your Virtual Machine
+---
+## Connecting to your Virtual Machine
 
 You need an SSH client.
 
@@ -30,8 +30,8 @@ You need an SSH client.
   * MobaXterm (http://moabaxterm.mobatek.net)
 
 
-<!SLIDE>
-# Checking your Virtual Machine
+---
+## Checking your Virtual Machine
 
 Once logged in, make sure that you can run a basic Docker command:
 

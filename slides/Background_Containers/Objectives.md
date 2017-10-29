@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Background Containers
+---
+## Lesson ~~~SECTION:MAJOR~~~: Background Containers
 
-## Objectives
+### Objectives
 
 Our first containers were *interactive*.
 

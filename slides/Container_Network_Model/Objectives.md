@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: The Container Network Model
+---
+## Lesson ~~~SECTION:MAJOR~~~: The Container Network Model
 
-## Objectives
+### Objectives
 
 We will learn about the CNM (Container Network Model).
 

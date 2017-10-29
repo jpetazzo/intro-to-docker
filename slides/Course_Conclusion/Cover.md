@@ -1,4 +1,6 @@
-<!SLIDE center subsection>
+---
+class: title
+
 # Course Conclusion
 
 ![end](end.jpg)

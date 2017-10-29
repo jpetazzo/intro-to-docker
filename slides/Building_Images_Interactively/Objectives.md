@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Building Images Interactively
+---
+## Lesson ~~~SECTION:MAJOR~~~: Building Images Interactively
 
-## Objectives
+### Objectives
 
 In this lesson, we will create our first container image.
 

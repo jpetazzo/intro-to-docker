@@ -1,5 +1,5 @@
-<!SLIDE>
-# Naming our containers
+---
+## Naming our containers
 
 So far, we have referenced containers with their ID.
 
@@ -14,8 +14,8 @@ If a container is named `prod-db`, I can do:
     $ docker stop prod-db
     etc.
 
-<!SLIDE>
-# Default names
+---
+## Default names
 
 When we create a container, if we don't give a specific
 name, Docker will pick one for us.
@@ -27,8 +27,8 @@ It will be the concatenation of:
 
 Examples: `happy_curie`, `clever_hopper`, `jovial_lovelace` ...
 
-<!SLIDE>
-# Specifying a name
+---
+## Specifying a name
 
 You can set the name of the container when you create it.
 
@@ -40,15 +40,15 @@ to create the container.
 
 This lets us enforce unicity of a given resource.
 
-<!SLIDE>
-# Renaming containers
+---
+## Renaming containers
 
 * You can rename containers with `docker rename`.
 
 * This allows you to "free up" a name without destroying the associated container.
 
-<!SLIDE>
-# Inspecting a container
+---
+## Inspecting a container
 
 The `docker inspect` command will output a very detailed JSON map.
 
@@ -69,8 +69,8 @@ The `docker inspect` command will output a very detailed JSON map.
 
 There are multiple ways to consume that information.
 
-<!SLIDE>
-# Parsing JSON with the Shell
+---
+## Parsing JSON with the Shell
 
 * You *could* grep and cut or awk the output of `docker inspect`.
 * Please, don't.
@@ -83,8 +83,8 @@ There are multiple ways to consume that information.
 
 * We will see a better solution which doesn't require extra tools.
 
-<!SLIDE>
-# Using `--format`
+---
+## Using `--format`
 
 You can specify a format string, which will be parsed by 
 Go's text/template package.

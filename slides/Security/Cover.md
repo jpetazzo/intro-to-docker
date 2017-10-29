@@ -1,4 +1,6 @@
-<!SLIDE center subsection>
+---
+class: title
+
 # Security
 
 ![](hackers.jpg)

@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Local Development Workflow with Docker
+---
+## Lesson ~~~SECTION:MAJOR~~~: Local Development Workflow with Docker
 
-## Objectives
+### Objectives
 
 At the end of this lesson, you will be able to:
 

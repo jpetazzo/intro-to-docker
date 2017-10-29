@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Using Docker Compose for Development Stacks
+---
+## Lesson ~~~SECTION:MAJOR~~~: Using Docker Compose for Development Stacks
 
-## Objectives
+### Objectives
 
 Dockerfiles are great to build a single container.
 

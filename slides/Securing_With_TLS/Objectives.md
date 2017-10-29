@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Securing Docker with TLS
+---
+## Lesson ~~~SECTION:MAJOR~~~: Securing Docker with TLS
 
-## Objectives
+### Objectives
 
 At the end of this lesson, you will be able to:
 

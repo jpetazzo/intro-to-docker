@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Using the Docker Hub
+---
+## Lesson ~~~SECTION:MAJOR~~~: Using the Docker Hub
 
-## Objectives
+### Objectives
 
 At the end of this lesson, you will be able to:
 

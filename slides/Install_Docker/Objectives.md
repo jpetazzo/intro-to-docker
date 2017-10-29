@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Installing Docker
+---
+## Lesson ~~~SECTION:MAJOR~~~: Installing Docker
 
-## Objectives
+### Objectives
 
 At the end of this lesson, you will know:
 

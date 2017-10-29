@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Ambassadors
+---
+## Lesson ~~~SECTION:MAJOR~~~: Ambassadors
 
-## Objectives
+### Objectives
 
 At the end of this lesson, you will be able to understand the ambassador pattern.
 

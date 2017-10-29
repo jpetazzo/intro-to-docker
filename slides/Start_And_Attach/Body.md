@@ -1,5 +1,5 @@
-<!SLIDE>
-# Background and foreground
+---
+## Background and foreground
 
 The distinction between foreground and background containers is arbitrary.
 
@@ -11,8 +11,8 @@ It is always possible to detach from a container, and to reattach to a container
 
 Analogy: attaching to a container is like plugging a keyboard and screen to a physical server.
 
-<!SLIDE>
-# Detaching from a container
+---
+## Detaching from a container
 
 * If you have started an *interactive* container (with option `-it`),
   <br/>you can detach from it.
@@ -26,8 +26,10 @@ What does `-it` stand for?
 * `-t` means "allocate a terminal."
 * `-i` means "connect stdin to the terminal."
 
-<!SLIDE printonly>
-# Specifying a custom detach sequence
+---
+class: extra-details
+
+## Specifying a custom detach sequence
 
 * You don't like `^P^Q`? No problem!
 * You can change the sequence with `docker run --detach-keys`.
@@ -45,8 +47,10 @@ Check that our container is still running:
     @@@ Sh
     $ docker ps -l
 
-<!SLIDE printonly>
-# Attaching to a container
+---
+class: extra-details
+
+## Attaching to a container
 
 You can attach to a container:
 
@@ -64,8 +68,8 @@ Try it on our previous container:
 
 Check that `^X x` doesn't work, but `^P ^Q` does.
 
-<!SLIDE>
-# Detaching from non-interactive containers
+---
+## Detaching from non-interactive containers
 
 * **Warning:** if the container was started without `-it`...
 
@@ -74,8 +78,8 @@ Check that `^X x` doesn't work, but `^P ^Q` does.
 
 * Remember: you can always detach by killing the Docker client.
 
-<!SLIDE>
-# Checking container output
+---
+## Checking container output
 
 * Use `docker attach` if you intend to send input to the container.
 * If you just want to see the output of a container, use `docker logs`.
@@ -83,8 +87,8 @@ Check that `^X x` doesn't work, but `^P ^Q` does.
         @@@ Sh
         $ docker logs --tail 1 --follow <containerID>
 
-<!SLIDE>
-# Restarting a container
+---
+## Restarting a container
 
 When a container has exited, it is in stopped state.
 
@@ -104,8 +108,8 @@ You can re-attach to it if you want to interact with it:
 Use `docker ps -a` to identify the container ID of a previous `jpetazzo/clock` container,
 and try those commands.
 
-<!SLIDE>
-# Attaching to a REPL
+---
+## Attaching to a REPL
 
 * REPL = Read Eval Print Loop
 * Shells, interpreters, TUI ...
@@ -113,8 +117,10 @@ and try those commands.
 * The REPL doesn't know that you just attached, and doesn't print anything
 * Try hitting `^L` or `Enter`
 
-<!SLIDE printonly>
-# SIGWINCH
+---
+class: extra-details
+
+## SIGWINCH
 
 * When you `docker attach`, the Docker Engine sends a couple of SIGWINCH signals to the container.
 * SIGWINCH = WINdow CHange; indicates a change in window size.

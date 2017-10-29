@@ -1,5 +1,5 @@
-<!SLIDE>
-# What is Docker Compose?
+---
+## What is Docker Compose?
 
 Docker Compose (formerly known as fig) is an external tool. It is optional (you do not
 need Compose to run Docker and containers) but we recommend it highly!
@@ -10,8 +10,8 @@ The general idea of Compose is to enable a very simple, powerful onboarding work
 2. Run `docker-compose up`.
 3. Your app is up and running!
 
-<!SLIDE>
-# Compose overview
+---
+## Compose overview
 
 This is how you work with Compose:
 
@@ -24,13 +24,13 @@ This is how you work with Compose:
 
 Before diving in, let's see a small example of Compose in action.
 
-<!SLIDE>
-# Compose in action
+---
+## Compose in action
 
 ![composeup](composeup.gif)
 
-<!SLIDE>
-# Checking if Compose is installed
+---
+## Checking if Compose is installed
 
 If you are using the official training virtual machines, Compose has been
 pre-installed.
@@ -40,8 +40,8 @@ You can always check that it is installed by running:
     @@@ Sh
     $ docker-compose --version
 
-<!SLIDE>
-# Installing Compose
+---
+## Installing Compose
 
 If you want to install Compose on your machine, there are (at least) two methods.
 
@@ -62,8 +62,8 @@ also retrieve an all-in-one binary file:
       > /usr/local/bin/docker-compose
     $ chmod +x /usr/local/bin/docker-compose
 
-<!SLIDE>
-# Launching Our First Stack with Compose
+---
+## Launching Our First Stack with Compose
 
 First step: clone the source code for the app we will be working on.
 
@@ -82,23 +82,23 @@ Second step: start your app.
 Watch Compose build and run your app with the correct parameters,
 including linking the relevant containers together.
 
-<!SLIDE>
-# Launching Our First Stack with Compose
+---
+## Launching Our First Stack with Compose
 
 Verify that the app is running at `http://<yourHostIP>:8000`.
 
 ![composeapp](composeapp.png)
 
-<!SLIDE>
-# Stopping the app
+---
+## Stopping the app
 
 When you hit `^C`, Compose tries to gracefully terminate all of the containers.
 
 After ten seconds (or if you press `^C` again) it will forcibly kill
 them.
 
-<!SLIDE>
-# The `docker-compose.yml` file
+---
+## The `docker-compose.yml` file
 
 Here is the file used in the demo:
 
@@ -120,8 +120,8 @@ Here is the file used in the demo:
       redis:
         image: redis
 
-<!SLIDE>
-# Compose file versions
+---
+## Compose file versions
 
 Version 1 directly has the various containers (`www`, `redis`...) at the top level of the  file.
 
@@ -132,8 +132,8 @@ Version 2 has multiple sections:
 * `networks` is optional and can define multiple networks on which containers can be placed.
 * `volumes` is optional and can define volumes to be used (and potentially shared) by the containers.
 
-<!SLIDE>
-# Containers in `docker-compose.yml`
+---
+## Containers in `docker-compose.yml`
 
 Each service in the YAML file must contain either `build`, or `image`.
 
@@ -146,8 +146,8 @@ They encode the parameters that you would typically add to `docker run`.
 
 Sometimes they have several minor improvements.
 
-<!SLIDE>
-# Container parameters
+---
+## Container parameters
 
 * `command` indicates what to run (like `CMD` in a Dockerfile).
 * `ports` translates to one (or multiple) `-p` options to map ports.
@@ -157,8 +157,8 @@ Sometimes they have several minor improvements.
 
 For the full list, check http://docs.docker.com/compose/yml/.
 
-<!SLIDE>
-# Compose commands
+---
+## Compose commands
 
 We already saw `docker-compose up`, but another one is `docker-compose build`.
 It will execute `docker build` for all containers mentioning a `build` path.
@@ -173,8 +173,8 @@ Another common option is to start containers in the background:
     @@@ Sh
     docker-compose up -d
 
-<!SLIDE>
-# Check container status
+---
+## Check container status
 
 It can be tedious to check the status of your containers with `docker ps`,
 especially when running multiple apps at the same time.
@@ -191,8 +191,8 @@ containers of the current stack:
     trainingwheels_www_1     python counter.py    Up      0.0.0.0:8000->5000/tcp 
 
 
-<!SLIDE>
-# Cleaning up
+---
+## Cleaning up
 
 If you have started your application in the background with Compose and
 want to stop it easily, you can use the `kill` command:
@@ -219,8 +219,8 @@ Alternatively, `docker-compose down` will stop and remove containers.
     Removing trainingwheels_redis_1 ... done
 
 
-<!SLIDE>
-# Special handling of volumes
+---
+## Special handling of volumes
 
 Compose is smart. If your container uses volumes, when you restart your
 application, Compose will create a new container, but carefully re-use

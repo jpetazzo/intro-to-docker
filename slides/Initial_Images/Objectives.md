@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Understanding Docker Images
+---
+## Lesson ~~~SECTION:MAJOR~~~: Understanding Docker Images
 
-## Objectives
+### Objectives
 
 In this lesson, we will explain:
 

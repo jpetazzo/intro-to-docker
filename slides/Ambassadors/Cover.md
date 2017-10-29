@@ -1,4 +1,6 @@
-<!SLIDE center subsection>
+---
+class: title
+
 # Ambassadors
 
 ![](ambassador.jpg)

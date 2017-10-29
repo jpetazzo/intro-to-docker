@@ -1,5 +1,5 @@
-<!SLIDE>
-# Sign up for a Docker Hub account
+---
+## Sign up for a Docker Hub account
 
 Note: if you already have an account on the Index/Hub, don't create another one.
 
@@ -9,13 +9,13 @@ Note: if you already have an account on the Index/Hub, don't create another one.
 
 ![Register](registerhub.png)
 
-<!SLIDE>
-# Activate your account through e-mail.
+---
+## Activate your account through e-mail.
 
 - Check your e-mail and click the confirmation link.
 
-<!SLIDE>
-# Login
+---
+## Login
 Let's use our new account to login to the Docker Hub!
 
     @@@ Sh
@@ -27,8 +27,8 @@ Let's use our new account to login to the Docker Hub!
 
 Our credentials will be stored in ``~/.dockercfg``.
 
-<!SLIDE>
-# The ``.dockercfg`` configuration file
+---
+## The ``.dockercfg`` configuration file
 
 The ``~/.dockercfg`` configuration file holds our Docker registry
 authentication credentials.
@@ -47,13 +47,13 @@ It should be owned by your user with permissions of ``0600``.
 
 **You should protect this file!**
 
-<!SLIDE>
-# Navigating Docker Hub
+---
+## Navigating Docker Hub
 
 ![Navigating](dockerhub.png)
 
-<!SLIDE>
-# Repositories
+---
+## Repositories
 
 - Store all public and private images in the registry
 - Apply to your namespace
@@ -61,8 +61,8 @@ It should be owned by your user with permissions of ``0600``.
 
 ![Repositories](blankrepositories.png)
 
-<!SLIDE>
-# Public Repositories
+---
+## Public Repositories
 
 - Docker Hub provides access to tens of thousands of pre-made images that you can build from.
 - Some of these are `official builds` and live in the root namespace.
@@ -70,23 +70,23 @@ It should be owned by your user with permissions of ``0600``.
 
 ![Public Repositories](publicrepos.png)
 
-<!SLIDE>
-# Official Repositories
+---
+## Official Repositories
 
 - Are maintained by the product owners
 - Blessed by Docker
 
 ![Official Repositories](officialrepos.png)
 
-<!SLIDE>
-# New Repository (1/3)
+---
+## New Repository (1/3)
 
 - Pull down `Add Repository` menu and select `Repository`
 
 ![New Repository](addrepo.png)
 
-<!SLIDE>
-# New Repository (2/3)
+---
+## New Repository (2/3)
 
 - Leave `namespace` at the default (your username)
 - Give your repository a name
@@ -96,8 +96,8 @@ It should be owned by your user with permissions of ``0600``.
 
 ![Repository Form](addrepo2.png)
 
-<!SLIDE>
-# New Repository (3/3)
+---
+## New Repository (3/3)
 
 - Click `Repositories` and you will see your new repository.
 - You can push images to this repository from the `docker` commandline.
@@ -105,8 +105,8 @@ It should be owned by your user with permissions of ``0600``.
 
 ![Repository List](addrepo3.png)
 
-<!SLIDE>
-# Repository Settings
+---
+## Repository Settings
 
 You can change the following:
 
@@ -117,8 +117,8 @@ You can change the following:
 
 ![Repository Settings](settings.png)
 
-<!SLIDE>
-# Collaborators
+---
+## Collaborators
 
 You can invite other Docker Hub to collaborate on your projects.
 
@@ -127,8 +127,8 @@ You can invite other Docker Hub to collaborate on your projects.
 
 ![Collaborators](collab.png)
 
-<!SLIDE>
-# Webhooks
+---
+## Webhooks
 
 - Notify external applications that an image has been uploaded to the repository.
 - Powerful tool for integrating with your development workflow.
@@ -136,8 +136,8 @@ You can invite other Docker Hub to collaborate on your projects.
 
 ![Webhooks](webhooks.png)
 
-<!SLIDE>
-# Automated Builds
+---
+## Automated Builds
 
 - Automatically build an image when source code is changed.
 - Integrated with Github and Bitbucket
@@ -147,8 +147,8 @@ You can invite other Docker Hub to collaborate on your projects.
     - You will need a Github account to follow along later, so go ahead and create one now if you don't
       have one yet.
 
-<!SLIDE>
-# Section summary
+---
+## Section summary
 
 We've learned how to:
 

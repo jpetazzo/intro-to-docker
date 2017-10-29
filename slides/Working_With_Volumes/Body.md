@@ -1,5 +1,5 @@
-<!SLIDE>
-# Working with Volumes
+---
+## Working with Volumes
 
 Docker volumes can be used to achieve many things, including:
 
@@ -9,8 +9,8 @@ Docker volumes can be used to achieve many things, including:
 * Sharing a directory between the host and a container.
 * Sharing a *single file* between the host and a container.
 
-<!SLIDE>
-# Volumes are special directories in a container
+---
+## Volumes are special directories in a container
 
 Volumes can be declared in two different ways.
 
@@ -26,8 +26,10 @@ Volumes can be declared in two different ways.
 
 In both cases, ``/uploads`` (inside the container) will be a volume.
 
-<!SLIDE printonly>
-# Volumes bypass the copy-on-write system
+---
+class: extra-details
+
+## Volumes bypass the copy-on-write system
 
 Volumes act as passthroughs to the host filesystem.
 
@@ -40,8 +42,10 @@ Volumes act as passthroughs to the host filesystem.
 * If a container is started with the ``--read-only`` flag, the volume
   will still be writable (unless the volume is a read-only volume).
 
-<!SLIDE printonly>
-# Volumes can be shared across containers
+---
+class: extra-details
+
+## Volumes can be shared across containers
 
 You can start a container with *exactly the same volumes* as another one.
 
@@ -63,8 +67,8 @@ In another terminal, let's start another container with the same volume.
     $ docker run --volumes-from alpha ubuntu cat /var/log/now
     Fri May 30 05:06:27 UTC 2014
 
-<!SLIDE>
-# Volumes exist independently of containers
+---
+## Volumes exist independently of containers
 
 If a container is stopped, its volumes still exist and are available.
 
@@ -83,8 +87,10 @@ Some of those volume names were explicit (pgdata-prod, pgdata-dev).
 The others (the hex IDs) were generated automatically by Docker.
 
 
-<!SLIDE printonly>
-# Data containers (before Engine 1.9)
+---
+class: extra-details
+
+## Data containers (before Engine 1.9)
 
 A *data container* is a container created for the sole purpose of referencing
 one (or many) volumes.
@@ -100,8 +106,10 @@ It is typically created with a no-op command:
 * We used the command ``true``, possibly the simplest command in the world!
 * We named each container to reference them easily later.
 
-<!SLIDE printonly>
-# Using data containers
+---
+class: extra-details
+
+## Using data containers
 
 Data containers are used by other containers thanks to ``--volumes-from``.
 
@@ -119,8 +127,8 @@ Consider the following (fictitious) example, using the previously created volume
 * The third container collects the logs, and sends them to logstash, a log
   storage and analysis system, using the lumberjack protocol.
 
-<!SLIDE>
-# Named volumes (since Engine 1.9)
+---
+## Named volumes (since Engine 1.9)
 
 * We can now create and manipulate volumes as first-class concepts.
 * Volumes can be created without a container, then used in multiple containers.
@@ -133,8 +141,8 @@ Let's create a volume directly.
 
 Volumes are not anchored to a specific path.
 
-<!SLIDE>
-# Using our named volumes
+---
+## Using our named volumes
 
 * Volumes are used with the `-v` option.
 * When a host path does not contain a /, it is considered to be a volume name.
@@ -156,8 +164,8 @@ Check that it's running correctly:
     <h1>Welcome to nginx!</h1>
     ...
 
-<!SLIDE>
-# Using a volume in another container
+---
+## Using a volume in another container
 
 * We will make changes to the volume from another container.
 * In this example, we will run a text editor in the other container, but this could be a FTP server, a WebDAV server, a Git receiver...
@@ -172,8 +180,8 @@ Make changes, save, and exit.
 Then run `curl localhost:8888` again to see your changes.
 
 
-<!SLIDE>
-# Managing volumes explicitly
+---
+## Managing volumes explicitly
 
 In some cases, you want a specific directory on the host to be mapped
 inside the container:
@@ -195,8 +203,10 @@ Nice.
     $ docker run -d -v /path/on/the/host:/path/in/container image ...
 
 
-<!SLIDE printonly>
-# Sharing a directory between the host and a container
+---
+class: extra-details
+
+## Sharing a directory between the host and a container
 
 The previous example would become something like this:
 
@@ -210,8 +220,10 @@ Note that the paths must be absolute.
 
 Those volumes can also be shared with ``--volumes-from``.
 
-<!SLIDE printonly>
-# Migrating data with `--volumes-from`
+---
+class: extra-details
+
+## Migrating data with `--volumes-from`
 
 The `--volumes-from` option tells Docker to re-use all the volumes
 of an existing container.
@@ -223,8 +235,10 @@ of an existing container.
 * The new container will inherit the data of the old one.
 * Newer containers can use `--volumes-from` too.
 
-<!SLIDE printonly>
-# Data migration in practice
+---
+class: extra-details
+
+## Data migration in practice
 
 Let's create a Redis container.
 
@@ -244,8 +258,10 @@ Issue the following commands:
     SAVE
     QUIT
 
-<!SLIDE printonly>
-# Upgrading Redis
+---
+class: extra-details
+
+## Upgrading Redis
 
 Stop the Redis container.
 
@@ -257,8 +273,10 @@ Start the new Redis container.
     @@@ Sh
     $ docker run -d --name redis30 --volumes-from redis28 redis:3.0
 
-<!SLIDE printonly>
-# Testing the new Redis
+---
+class: extra-details
+
+## Testing the new Redis
 
 Connect to the Redis container and see our data.
 
@@ -272,8 +290,8 @@ Issue a few commands.
     INFO server
     QUIT
 
-<!SLIDE>
-# What happens when you remove containers with volumes?
+---
+## What happens when you remove containers with volumes?
 
 * With Engine versions prior 1.9, volumes would be *orphaned* when the last container referencing them is destroyed.
 * Orphaned volumes are not deleted, but you cannot access them.
@@ -285,8 +303,10 @@ Issue a few commands.
 Ultimately, _you_ are the one responsible for logging,
 monitoring, and backup of your volumes.
 
-<!SLIDE printonly>
-# Checking volumes defined by an image
+---
+class: extra-details
+
+## Checking volumes defined by an image
 
 Wondering if an image has volumes? Just use ``docker inspect``:
 
@@ -301,8 +321,10 @@ Wondering if an image has volumes? Just use ``docker inspect``:
         . . .
     }]
 
-<!SLIDE printonly>
-# Checking volumes used by a container
+---
+class: extra-details
+
+## Checking volumes used by a container
 
 To look which paths are actually volumes, and to what they are bound,
 use ``docker inspect`` (again):
@@ -322,8 +344,8 @@ use ``docker inspect`` (again):
 
 * We can see that our volume is present on the file system of the Docker host.
 
-<!SLIDE>
-# Sharing a single file between the host and a container
+---
+## Sharing a single file between the host and a container
 
 The same ``-v`` flag can be used to share a single file.
 
@@ -335,8 +357,8 @@ One of the most interesting examples is to share the Docker control socket.
 Warning: when using such mounts, the container gains root-like access to the host.
 It can potentially do bad things.
 
-<!SLIDE>
-# Volume plugins
+---
+## Volume plugins
 
 You can install plugins to manage volumes backed by particular storage systems,
 or providing extra features. For instance:
@@ -346,8 +368,8 @@ or providing extra features. For instance:
 * [Blockbridge](http://www.blockbridge.com/), [Portworx](http://portworx.com/) - provide distributed block store for containers;
 * and much more!
 
-<!SLIDE>
-# Section summary
+---
+## Section summary
 
 We've learned how to:
 

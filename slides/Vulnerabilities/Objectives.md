@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Dealing with Vulnerabilities
+---
+## Lesson ~~~SECTION:MAJOR~~~: Dealing with Vulnerabilities
 
-## Objectives
+### Objectives
 
 We will discuss how to address security vulnerabilities disclosures:
 

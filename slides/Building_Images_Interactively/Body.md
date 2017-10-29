@@ -1,5 +1,5 @@
-<!SLIDE>
-# Building Images Interactively
+---
+## Building Images Interactively
 
 As we have seen, the images on the Docker Hub are sometimes very basic.
 
@@ -11,13 +11,13 @@ First, we will do it manually with `docker commit`.
 
 Then, in an upcoming chapter, we will use a `Dockerfile` and `docker build`.
 
-<!SLIDE>
-# Building from a base
+---
+## Building from a base
 
 Our base will be the `ubuntu` image.
 
-<!SLIDE>
-# Create a new container and make some changes
+---
+## Create a new container and make some changes
 
 Start an Ubuntu container:
 
@@ -33,8 +33,8 @@ Then run the command `apt-get install figlet` to install the program we are inte
     root@<yourContainerId>:#/ apt-get update && apt-get install figlet
     .... OUTPUT OF APT-GET COMMANDS ....
 
-<!SLIDE>
-# Inspect the changes
+---
+## Inspect the changes
 
 Type ``exit`` at the container prompt to leave the interactive session.
 
@@ -51,8 +51,10 @@ and our container.
     A /usr/bin/figlet
     ...
 
-<!SLIDE pprintonly>
-# Docker tracks filesystem changes
+---
+class: x-extra-details
+
+## Docker tracks filesystem changes
 
 As explained before:
 
@@ -63,8 +65,8 @@ As explained before:
   <br/>(i.e. starting a container based on a big image
   doesn't incur a huge copy.)
 
-<!SLIDE>
-# Commit and run your image
+---
+## Commit and run your image
 
 The `docker commit` command will create a new layer with those changes,
 and a new image using this new layer.
@@ -87,8 +89,8 @@ We can run this image:
     |_| |_|\___|_|_|\___/ 
 
 
-<!SLIDE>
-# Tagging images
+---
+## Tagging images
 
 Referring to an image by its ID is not convenient. Let's tag it instead.
 
@@ -107,8 +109,8 @@ And then run it using its tag:
     @@@ Sh
     $ docker run -it figlet
 
-<!SLIDE>
-# What's next?
+---
+## What's next?
 
 Manual process = bad.
 

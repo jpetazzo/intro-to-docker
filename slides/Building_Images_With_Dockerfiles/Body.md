@@ -1,12 +1,12 @@
-<!SLIDE>
-# `Dockerfile` overview
+---
+## `Dockerfile` overview
 
 * A `Dockerfile` is a build recipe for a Docker image.
 * It contains a series of instructions telling Docker how an image is constructed.
 * The `docker build` command builds an image from a ``Dockerfile``.
 
-<!SLIDE>
-# Writing our first `Dockerfile`
+---
+## Writing our first `Dockerfile`
 
 Our Dockerfile must be in a **new, empty directory**.
 
@@ -23,8 +23,8 @@ Our Dockerfile must be in a **new, empty directory**.
 
 Of course, you can use any other editor of your choice.
 
-<!SLIDE>
-# Type this into our Dockerfile...
+---
+## Type this into our Dockerfile...
 
     @@@ docker
     FROM ubuntu
@@ -37,8 +37,8 @@ Of course, you can use any other editor of your choice.
   <br/>(No input can be provided to Docker during the build.)
 * In many cases, we will add the `-y` flag to `apt-get`.
 
-<!SLIDE>
-# Build it!
+---
+## Build it!
 
 Save our file, then execute:
 
@@ -51,8 +51,8 @@ Save our file, then execute:
   but to keep things simple: this is the directory where
   our Dockerfile is located.)
 
-<!SLIDE>
-# What happens when we build the image?
+---
+## What happens when we build the image?
 
 The output of `docker build` looks like this:
 
@@ -75,8 +75,8 @@ The output of `docker build` looks like this:
 * The output of the `RUN` commands has been omitted.
 * Let's explain what this output means.
 
-<!SLIDE>
-# Sending the build context to Docker
+---
+## Sending the build context to Docker
 
     @@@ Sh
     Sending build context to Docker daemon 2.048 kB
@@ -86,8 +86,8 @@ The output of `docker build` looks like this:
 * This allows to use a remote machine to build using local files.
 * Be careful (or patient) if that directory is big and your link is slow.
 
-<!SLIDE>
-# Executing each step
+---
+## Executing each step
 
     @@@ Sh
     Step 1 : RUN apt-get update
@@ -102,8 +102,8 @@ The output of `docker build` looks like this:
 * The build container (`840cb3533193`) is removed.
 * The output of this step will be the base image for the next one.
 
-<!SLIDE>
-# The caching system
+---
+## The caching system
 
 If you run the same build again, it will be instantaneous.
 
@@ -121,8 +121,8 @@ Why?
 
 You can force a rebuild with `docker build --no-cache ...`.
 
-<!SLIDE>
-# Running the image
+---
+## Running the image
 
 The resulting image is not different from the one produced manually.
 
@@ -138,8 +138,8 @@ The resulting image is not different from the one produced manually.
 
 * Sweet is the taste of success!
 
-<!SLIDE>
-# Using image and viewing history
+---
+## Using image and viewing history
 
 The `history` command lists all the layers composing an image.
 
@@ -159,8 +159,8 @@ a line of the Dockerfile.
     <missing>     4 days ago         /bin/sh -c #(nop) ADD file:b   187.8 MB
 
 
-<!SLIDE>
-# Introducing JSON syntax
+---
+## Introducing JSON syntax
 
 Most Dockerfile arguments can be passed in two forms:
 
@@ -181,8 +181,8 @@ Then build the new Dockerfile.
     @@@ Sh
     $ docker build -t figlet .
 
-<!SLIDE>
-# JSON syntax vs string syntax
+---
+## JSON syntax vs string syntax
 
 Compare the new history:
 

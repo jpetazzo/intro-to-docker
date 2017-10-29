@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Restarting and Attaching to Containers
+---
+## Lesson ~~~SECTION:MAJOR~~~: Restarting and Attaching to Containers
 
-## Objectives
+### Objectives
 
 We have started containers in the foreground, and in the background.
 

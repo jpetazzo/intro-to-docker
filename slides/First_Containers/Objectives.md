@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Our First Containers
+---
+## Lesson ~~~SECTION:MAJOR~~~: Our First Containers
 
-## Objectives
+### Objectives
 
 At the end of this lesson, you will have:
 

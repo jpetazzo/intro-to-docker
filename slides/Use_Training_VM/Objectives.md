@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Your training Virtual Machine
+---
+## Lesson ~~~SECTION:MAJOR~~~: Your training Virtual Machine
 
-## Objectives
+### Objectives
 
 In this section, we will see how to use your training Virtual Machine.
 

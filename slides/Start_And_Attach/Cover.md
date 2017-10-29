@@ -1,2 +1,4 @@
-<!SLIDE center  subsection>
+---
+class: title
+
 # Restarting and Attaching to Containers

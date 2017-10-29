@@ -1,2 +1,4 @@
-<!SLIDE center  subsection>
+---
+class: title
+
 # Securing Docker with TLS

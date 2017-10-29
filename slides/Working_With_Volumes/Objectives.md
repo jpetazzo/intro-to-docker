@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Working with Volumes
+---
+## Lesson ~~~SECTION:MAJOR~~~: Working with Volumes
 
-## Objectives
+### Objectives
 
 At the end of this lesson, you will be able to:
 

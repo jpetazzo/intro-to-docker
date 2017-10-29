@@ -1,5 +1,5 @@
-<!SLIDE>
-# What can we do with Docker API access?
+---
+## What can we do with Docker API access?
 
 Someone who has access to the Docker API will have full root
 privileges on the Docker host.
@@ -13,8 +13,8 @@ If you give root privileges to someone, assume that they can do
 * Installing stealth rootkits.
 * Shutting down the machine.
 
-<!SLIDE>
-# Accessing the host filesystem
+---
+## Accessing the host filesystem
 
 To do that, we will use ``-v`` to expose the host filesystem
 inside a container:
@@ -28,8 +28,8 @@ If you want to explore freely the host filesystem:
     @@@ Sh
     $ docker run -it -v /:/hostfs -w /hostfs ubuntu bash
 
-<!SLIDE>
-# Modifying the host filesystem
+---
+## Modifying the host filesystem
 
 Volumes are read-write by default, so let's create a dummy file
 on the host filesystem:
@@ -43,8 +43,8 @@ Note: if you are using boot2docker or a remote Docker host,
 you won't see the ``hi-there`` file. It will be in the
 boot2docker VM, or on the remote Docker host instead.
 
-<!SLIDE>
-# Privileged containers
+---
+## Privileged containers
 
 If you start a container with ``--privileged``, it will be able
 to access all devices and perform all operations.
@@ -56,8 +56,8 @@ A container could also be started with ``--net host`` and
 ``--privileged`` together, and be able to sniff all the traffic
 going in and out of the machine.
 
-<!SLIDE>
-# Other harmful operations
+---
+## Other harmful operations
 
 We won't explain how to do this (because we don't want you
 to break your Docker machines), but with access to the Docker
@@ -69,24 +69,24 @@ API, you can:
 * Insert kernel modules.
 * Run malicious processes and insert special kernel code to hide them.
 
-<!SLIDE>
-# What to do?
+---
+## What to do?
 
 * Do not expose the Docker API to the general public.
 * If you expose the Docker API, secure it with TLS certificates.
 * TLS certificates will be presented in the next section.
 * Make sure that your users are trained to not give away credentials.
 
-<!SLIDE>
-# Security of containers themselves
+---
+## Security of containers themselves
 
 * "Containers Do Not Contain!"
 * Containers themselves do not have security features.
 * Security is ensured by a number of other mechanisms.
 * We will now review some of those mechanisms.
 
-<!SLIDE>
-# Do not run processes as root
+---
+## Do not run processes as root
 
 * By default, Docker runs everything as root.
 * This is a security risk.
@@ -94,8 +94,8 @@ API, you can:
   but until then, you should specify ``USER`` in your Dockerfiles,
   or use ``su`` or ``sudo``.
 
-<!SLIDE>
-# Don't colocate security-sensitive containers
+---
+## Don't colocate security-sensitive containers
 
 * If a container contains security-sensitive information,
   put it on its own Docker host, without other containers.
@@ -103,20 +103,20 @@ API, you can:
   non-sensitive applications...) can be put together.
 
 
-<!SLIDE>
-# Run AppArmor or SELinux
+---
+## Run AppArmor or SELinux
 
 * Both of these will provide you with an additional layer of protection if 
   an attacker is able to gain elevated access.
 
-<!SLIDE>
-# Learn more about containers and security
+---
+## Learn more about containers and security
 
 * Presentation given at LinuxCon 2014 (Chicago)
 
 http://www.slideshare.net/jpetazzo/docker-linux-containers-lxc-and-security
-<!SLIDE>
-# Section summary
+---
+## Section summary
 
 We have learned:
 

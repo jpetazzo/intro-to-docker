@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Security
+---
+## Lesson ~~~SECTION:MAJOR~~~: Security
 
-## Objectives
+### Objectives
 
 At the end of this lesson, you will know:
 

@@ -1,3 +1,5 @@
-<!SLIDE center subsection>
+---
+class: title
+
 # The Docker API
 

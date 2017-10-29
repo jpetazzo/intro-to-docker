@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Advanced Dockerfiles
+---
+## Lesson ~~~SECTION:MAJOR~~~: Advanced Dockerfiles
 
-## Objectives
+### Objectives
 
 We have seen simple Dockerfiles to illustrate how Docker build
 container images. In this chapter, we will see:

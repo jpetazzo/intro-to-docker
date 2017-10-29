@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Docker 30,000ft overview
+---
+## Lesson ~~~SECTION:MAJOR~~~: Docker 30,000ft overview
 
-## Objectives
+### Objectives
 
 In this lesson, we will learn about:
 

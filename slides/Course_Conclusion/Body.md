@@ -1,5 +1,5 @@
-<!SLIDE>
-# Course Summary #
+---
+## Course Summary #
 
 During this class, we:
 
@@ -10,8 +10,8 @@ During this class, we:
   Docker containers.
 * Learned how to integrate Docker into your daily workflow.
 
-<!SLIDE>
-# Questions & Next Steps #
+---
+## Questions & Next Steps #
 
 **Still Learning:**
 
@@ -26,10 +26,11 @@ During this class, we:
 * Docker on Twitter - [http://twitter.com/docker](http://twitter.com/docker)
 * Get Docker help on Stack Overflow - [http://stackoverflow.com/search?q=docker](http://stackoverflow.com/search?q=docker)
 
-<!SLIDE center>
+---
+class: title
 
 <br>
 <br>
-# Thank You #
+## Thank You #
 <br>
 ![Docker Inc](../_images/DockerLogo.png) 

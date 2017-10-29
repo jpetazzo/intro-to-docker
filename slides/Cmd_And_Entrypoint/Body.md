@@ -1,5 +1,5 @@
-<!SLIDE>
-# Defining a default command
+---
+## Defining a default command
 
 When people run our container, we want to greet them with a nice hello message, and using a custom font.
 
@@ -11,8 +11,8 @@ For that, we will execute:
 * `-f script` tells figlet to use a fancy font.
 * `hello` is the message that we want it to display.
 
-<!SLIDE>
-# Adding `CMD` to our Dockerfile
+---
+## Adding `CMD` to our Dockerfile
 
 Our new Dockerfile will look like this:
 
@@ -27,8 +27,8 @@ Our new Dockerfile will look like this:
 * Each `CMD` will replace and override the previous one.
 * As a result, while you can have multiple `CMD` lines, it is useless.
 
-<!SLIDE>
-# Build and test our image
+---
+## Build and test our image
 
 Let's build it:
 
@@ -48,8 +48,8 @@ And run it:
     |   |_/|__/|__/|__/\__/ 
 
 
-<!SLIDE>
-# Overriding `CMD`
+---
+## Overriding `CMD`
 
 If we want to get a shell into our container (instead of running
 `figlet`), we just have to specify a different program to run:
@@ -61,8 +61,8 @@ If we want to get a shell into our container (instead of running
 * We specified `bash`.
 * It replaced the value of `CMD`.
 
-<!SLIDE>
-# Using `ENTRYPOINT`
+---
+## Using `ENTRYPOINT`
 
 We want to be able to specify a different message on the command line,
 while retaining `figlet` and some default parameters.
@@ -81,8 +81,8 @@ In other words, we would like to be able to do this:
 We will use the `ENTRYPOINT` verb in Dockerfile.
 
 
-<!SLIDE>
-# Adding `ENTRYPOINT` to our Dockerfile
+---
+## Adding `ENTRYPOINT` to our Dockerfile
 
 Our new Dockerfile will look like this:
 
@@ -98,8 +98,8 @@ Our new Dockerfile will look like this:
 
 Why did we use JSON syntax for our `ENTRYPOINT`?
 
-<!SLIDE>
-# Implications of JSON vs string syntax
+---
+## Implications of JSON vs string syntax
 
 * When CMD or ENTRYPOINT use string syntax, they get wrapped in `sh -c`.
 * To avoid this wrapping, you must use JSON syntax.
@@ -114,8 +114,8 @@ This would run the following command in the `figlet` image:
     @@@ Sh
     sh -c "figlet -f script" salut
 
-<!SLIDE>
-# Build and test our image
+---
+## Build and test our image
 
 Let's build it:
 
@@ -136,8 +136,8 @@ And run it:
 
 Great success!
 
-<!SLIDE>
-# Using `CMD` and `ENTRYPOINT` together
+---
+## Using `CMD` and `ENTRYPOINT` together
 
 What if we want to define a default message for our container?
 
@@ -147,8 +147,8 @@ Then we will use `ENTRYPOINT` and `CMD` together.
 * `CMD` will define the default parameter(s) for this command.
 * They *both* have to use JSON syntax.
 
-<!SLIDE>
-# `CMD` and `ENTRYPOINT` together
+---
+## `CMD` and `ENTRYPOINT` together
 
 Our new Dockerfile will look like this:
 
@@ -164,8 +164,8 @@ Our new Dockerfile will look like this:
   the value of `CMD` is appended.
 * Otherwise, our extra command-line arguments are used instead of `CMD`.
 
-<!SLIDE>
-# Build and test our image
+---
+## Build and test our image
 
 Let's build it:
 
@@ -192,8 +192,8 @@ And run it:
     |   |_/\__/ |__/\_/|_/    |  |  |_/ \_/|_/  |  |_/\_/|_/\__/ 
 
 
-<!SLIDE>
-# Overriding `ENTRYPOINT`
+---
+## Overriding `ENTRYPOINT`
 
 What if we want to run a shell in our container?
 

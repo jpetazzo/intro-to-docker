@@ -1,4 +1,6 @@
-<!SLIDE center subsection>
+---
+class: title
+
 # Working with Volumes
 
 ![volume](volume.jpg)

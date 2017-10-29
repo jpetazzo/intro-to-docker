@@ -1,5 +1,5 @@
-<!SLIDE>
-# Build some C code
+---
+## Build some C code
 
 We want to build a container that compiles a basic "Hello world" program in C.
 
@@ -15,8 +15,8 @@ Let's create a new directory, and put this file in there.
 
 Then we will write the Dockerfile.
 
-<!SLIDE>
-# The Dockerfile
+---
+## The Dockerfile
 
 On Debian and Ubuntu, the package `build-essential` will get us a compiler.
 
@@ -34,8 +34,8 @@ Then we will use `COPY` to place the source file into the container.
 
 Create this Dockerfile.
 
-<!SLIDE>
-# Testing our C program
+---
+## Testing our C program
 
 * Create `hello.c` and `Dockerfile` in the same direcotry.
 * Run `docker build -t hello .` in this directory.
@@ -43,16 +43,16 @@ Create this Dockerfile.
 
 Success!
 
-<!SLIDE>
-# `COPY` and the build cache
+---
+## `COPY` and the build cache
 
 * Run the build again.
 * Now, modify `hello.c` and run the build again.
 * Docker can cache steps involving `COPY`.
 * Those steps will not be executed again if the files haven't been changed.
 
-<!SLIDE>
-# Details
+---
+## Details
 
 * You can `COPY` whole directories recursively.
 * Older Dockerfiles also have the `ADD` instruction.

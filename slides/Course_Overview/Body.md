@@ -1,6 +1,6 @@
-<!SLIDE>
+---
 
-# Logistics
+## Logistics
 
 - Updated copy of the slides: http://container.training/
 

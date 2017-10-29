@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Building Images With A Dockerfile
+---
+## Lesson ~~~SECTION:MAJOR~~~: Building Images With A Dockerfile
 
-## Objectives
+### Objectives
 
 We will build a container image automatically, with a `Dockerfile`.
 

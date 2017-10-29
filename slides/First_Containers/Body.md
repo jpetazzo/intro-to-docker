@@ -1,5 +1,7 @@
-<!SLIDE pprintonly>
-# Docker architecture
+---
+class: x-extra-details
+
+## Docker architecture
 
 Docker is a client-server application.
 
@@ -14,8 +16,8 @@ Docker is a client-server application.
   <br/>Collection of public images.
   <br/>The Docker daemon talks to it via the registry API.
  
-<!SLIDE>
-# Hello World
+---
+## Hello World
 
 In your Docker environment, just run the following command:
 
@@ -24,16 +26,16 @@ In your Docker environment, just run the following command:
     hello world
 
 
-<!SLIDE>
-# That was our first container!
+---
+## That was our first container!
 
 * We used one of the smallest, simplest images available: `busybox`.
 * `busybox` is typically used in embedded systems (phones, routers...)
 * We ran a single process and echo'ed `hello world`.
 
 
-<!SLIDE>
-# A more useful container
+---
+## A more useful container
 
 Let's run a more exciting container:
 
@@ -50,8 +52,8 @@ Let's run a more exciting container:
 
 
 
-<!SLIDE>
-# Do something in our container
+---
+## Do something in our container
 
 Try to run `figlet` in our container.
 
@@ -61,8 +63,8 @@ Try to run `figlet` in our container.
 
 Alright, we need to install it.
 
-<!SLIDE>
-# An observation
+---
+## An observation
 
 Let's check how many packages are installed here.
 
@@ -75,8 +77,8 @@ Let's check how many packages are installed here.
 * If you have a Debian or Ubuntu machine, you can run the same command 
   and compare the results.
 
-<!SLIDE>
-# Install a package in our container
+---
+## Install a package in our container
 
 We want `figlet`, so let's install it:
 
@@ -100,8 +102,8 @@ One minute later, `figlet` is installed!
     |_| |_|\___|_|_|\___/ 
 
 
-<!SLIDE>
-# Exiting our container
+---
+## Exiting our container
 
 Just exit the shell, like you would usually do.
 
@@ -115,8 +117,8 @@ Just exit the shell, like you would usually do.
 * It still exists on disk, but all compute resources have been freed up.
 
 
-<!SLIDE>
-# Starting another container
+---
+## Starting another container
 
 What if we start a new container, and try to run `figlet` again?
  

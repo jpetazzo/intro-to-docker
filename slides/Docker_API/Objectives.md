@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: The Docker API
+---
+## Lesson ~~~SECTION:MAJOR~~~: The Docker API
 
-## Objectives
+### Objectives
 
 At the end of this lesson, you will be able to:
 

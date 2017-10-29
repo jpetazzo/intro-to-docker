@@ -1,5 +1,5 @@
-<!SLIDE>
-# A non-interactive container
+---
+## A non-interactive container
 
 We will run a small custom container.
 
@@ -18,8 +18,8 @@ This container just displays the time every second.
 * This image is a user image, created by `jpetazzo`.
 * We will hear more about user images (and other types of images) later.
 
-<!SLIDE>
-# Run a container in the background
+---
+## Run a container in the background
 
 Containers can be started in the background, with the `-d` flag (daemon mode):
 
@@ -31,8 +31,8 @@ Containers can be started in the background, with the `-d` flag (daemon mode):
 * But don't worry: Docker collects that output and logs it!
 * Docker gives us the ID of the container.
 
-<!SLIDE>
-# List running containers
+---
+## List running containers
 
 How can we check that our container is still running?
 
@@ -50,8 +50,8 @@ Docker tells us:
 * That our container has been running (`Up`) for a couple of minutes.
 * Other information (COMMAND, PORTS, NAMES) that we will explain later.
 
-<!SLIDE>
-# Starting more containers
+---
+## Starting more containers
 
 Let's start two more containers.
 
@@ -63,8 +63,8 @@ Let's start two more containers.
 
 Check that `docker ps` correctly reports all 3 containers.
 
-<!SLIDE>
-# Two useful flags for `docker ps`
+---
+## Two useful flags for `docker ps`
 
 To see only the last container that was started:
 
@@ -87,8 +87,8 @@ Combine those flags to see only the ID of the last container started!
     $ docker ps -lq
     068cc994ffd0
 
-<!SLIDE>
-# View the logs of a container
+---
+## View the logs of a container
 
 We told you that Docker was logging the container output.
 
@@ -105,8 +105,8 @@ Let's see that now.
 * The `logs` command will output the *entire* logs of the container.
   <br/>(Sometimes, that will be too much. Let's see how to address that.)
 
-<!SLIDE>
-# View only the tail of the logs
+---
+## View only the tail of the logs
 
 To avoid being spammed with eleventy pages of output,
 we can use the `--tail` option:
@@ -119,8 +119,8 @@ we can use the `--tail` option:
 
 * The parameter is the number of lines that we want to see.
 
-<!SLIDE>
-# Follow the logs in real time
+---
+## Follow the logs in real time
 
 Just like with the standard UNIX command `tail -f`, we can
 follow the logs of our container:
@@ -135,8 +135,8 @@ follow the logs of our container:
 * Then, it will continue to display the logs in real time.
 * Use `^C` to exit.
 
-<!SLIDE>
-# Stop our container
+---
+## Stop our container
 
 There are two ways we can terminate our detached container.
 
@@ -153,8 +153,8 @@ sends `KILL.`
 Reminder: the `KILL` signal cannot be intercepted, and will
 forcibly terminate the container.
 
-<!SLIDE>
-# Stopping our containers
+---
+## Stopping our containers
 
 Let's stop one of those containers:
 
@@ -172,8 +172,8 @@ This will take 10 seconds:
   running, Docker sends the KILL signal;
 * this terminates the container.
 
-<!SLIDE>
-# Killing the remaining containers
+---
+## Killing the remaining containers
 
 Let's be less patient with the two other containers:
 
@@ -192,8 +192,8 @@ Let's check that our containers don't show up anymore:
     @@@ Sh
     $ docker ps
 
-<!SLIDE>
-# List stopped containers
+---
+## List stopped containers
 
 We can also see stopped containers, with the `-a` (`--all`) option.
 

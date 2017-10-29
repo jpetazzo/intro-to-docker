@@ -1,5 +1,7 @@
-<!SLIDE pprintonly>
-# Installing Docker
+---
+class: x-extra-details
+
+## Installing Docker
 
 Docker is easy to install.
 
@@ -9,8 +11,10 @@ It runs on:
 * OS X via a virtual machine.
 * Microsoft Windows via a virtual machine.
 
-<!SLIDE pprintonly>
-# Installing Docker on Linux
+---
+class: x-extra-details
+
+## Installing Docker on Linux
 
 It can be installed via:
 
@@ -23,8 +27,8 @@ It can be installed via:
 * Installation script from Docker.
 * Binary download from Docker (it's a single file).
 
-<!SLIDE>
-# Installing Docker with upstream packages
+---
+## Installing Docker with upstream packages
 
 * Preferred method to install Docker on Linux.
 * Upstream's packages are more up-to-date than distros'.
@@ -32,8 +36,10 @@ It can be installed via:
   <br/>https://docs.docker.com/engine/installation/linux/
 * Package will be named `docker-engine`.
 
-<!SLIDE pprintonly>
-# Installing Docker with distros packages
+---
+class: x-extra-details
+
+## Installing Docker with distros packages
 
 On Red Hat derivatives (Fedora, CentOS):
 
@@ -45,8 +51,10 @@ On Debian and derivatives:
     @@@ Sh
     $ sudo apt-get install docker.io
 
-<!SLIDE pprintonly>
-# Installation script from Docker
+---
+class: x-extra-details
+
+## Installation script from Docker
 
 You can use the ``curl`` command to install on several platforms:
 
@@ -60,8 +68,8 @@ This currently works on:
 * Fedora
 * Gentoo
 
-<!SLIDE>
-# Installing on OS X and Microsoft Windows
+---
+## Installing on OS X and Microsoft Windows
 
 Docker doesn't run natively on OS X or Microsoft Windows.
 
@@ -71,8 +79,8 @@ There are three ways to get Docker on OS X or Windows:
 * Using the Docker Toolbox (formerly recommended);
 * Rolling your own with e.g. Parallels, VirtualBox, VMware...
 
-<!SLIDE> 
-# Running Docker on OS X and Windows
+--- 
+## Running Docker on OS X and Windows
 
 When you execute `docker version` from the terminal:
 
@@ -87,15 +95,15 @@ All communication with the Docker Engine happens over the API.
 
 This will also allow to use remote Engines exactly as if they were local.
 
-<!SLIDE>
-# Rolling your own install
+---
+## Rolling your own install
 
 * Good luck, you're on your own!
 * There is (almost?) no good reason to do that.
 * If you want to do something very custom, the Docker Toolbox is probably better anyway.
 
-<!SLIDE>
-# Using the Docker Toolbox
+---
+## Using the Docker Toolbox
 
 The Docker Toolbox installs the following components:
 
@@ -106,8 +114,10 @@ The Docker Toolbox installs the following components:
 * Docker Compose
 * A handful of clever wrappers
 
-<!SLIDE pprintonly>
-# About boot2docker
+---
+class: x-extra-details
+
+## About boot2docker
 
 It is a very small VM image (~30 MB).
 
@@ -117,8 +127,8 @@ Boot2Docker is not a "lite" version of Docker.
 
 ![Boot2Docker](logo.png)
 
-<!SLIDE>
-# Docker Mac and Docker Windows
+---
+## Docker Mac and Docker Windows
 
 * Docker Mac and Docker Windows are newer products
 * They let you run Docker without VirtualBox
@@ -130,13 +140,8 @@ Only downside (for now): only one instance at a time; so if you want
 to run a full cluster on your local machine, you can fallback on the
 Docker Toolbox (it can coexist with Docker Mac/Windows just fine).
 
-<!SLIDE center>
-# Su-su-sudo
-
-![su-su-sudo](sudo.png)
-
-<!SLIDE>
-# Important PSA about security
+---
+## Important PSA about security
 
 The ``docker`` user is ``root`` equivalent.
 
@@ -150,39 +155,45 @@ Therefore, the Docker control socket is (by default) owned by the `docker` group
 
 If your user is not in the `docker` group, you will need to prefix every command with `sudo`; e.g. `sudo docker version`.
 
-<!SLIDE printonly>
-# Reminder ...
+---
+class: extra-details
+
+## Reminder ...
 
 *Note:* if you were provided with a training VM for a hands-on
 tutorial, you can skip this chapter, since that VM already
 has Docker installed, and Docker has already been setup to run
 without ``sudo``.
 
-<!SLIDE printonly>
-# The ``docker`` group
+---
+class: extra-details
 
-## Add the Docker group
+## The ``docker`` group
+
+### Add the Docker group
 
     @@@ Sh
     $ sudo groupadd docker
 
-## Add ourselves to the group
+### Add ourselves to the group
 
     @@@ Sh
     $ sudo gpasswd -a $USER docker
 
-## Restart the Docker daemon
+### Restart the Docker daemon
 
     @@@ Sh
     $ sudo service docker restart
 
-## Log out
+### Log out
 
     @@@ Sh
     $ exit
 
-<!SLIDE printonly>
-# Check that Docker works without sudo
+---
+class: extra-details
+
+## Check that Docker works without sudo
 
     @@@ Sh
     $ docker version
@@ -203,8 +214,8 @@ without ``sudo``.
      OS/Arch:      linux/amd64
 
 
-<!SLIDE>
-# Section summary
+---
+## Section summary
 
 We've learned how to:
 

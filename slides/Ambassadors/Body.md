@@ -1,5 +1,7 @@
-<!SLIDE printonly>
-# Ambassadors
+---
+class: extra-details
+
+## Ambassadors
 
 We've already seen a couple of ways we can manage our application
 architecture in Docker.
@@ -10,8 +12,8 @@ architecture in Docker.
 We're now going to see a pattern for service portability we call:
 ambassadors.
 
-<!SLIDE>
-# Introduction to Ambassadors
+---
+## Introduction to Ambassadors
 
 The ambassador pattern:
 
@@ -23,12 +25,12 @@ The ambassador pattern:
 To do this, instead of directly connecting containers you insert
 ambassador containers.
 
-<!SLIDE>
+---
 
 ![ambassador](diagram.png)
 
-<!SLIDE>
-# Interacting with ambassadors
+---
+## Interacting with ambassadors
 
 * The web application container uses normal Docker networking to connect
   to the ambassador.
@@ -39,8 +41,8 @@ ambassador containers.
   be tracked by the ambassador containers, and the web application
   container will still be able to connect, without reconfiguration.
 
-<!SLIDE>
-# Ambassadors for simple service discovery
+---
+## Ambassadors for simple service discovery
 
 Use case:
 
@@ -55,8 +57,8 @@ The ambassador will be:
 * listening on port 6379,
 * forwarding connections to the actual Redis service.
 
-<!SLIDE>
-# Ambassadors for service migration
+---
+## Ambassadors for service migration
 
 Use case:
 
@@ -72,8 +74,8 @@ The ambassador will be:
 * running an additional routine to monitor DNS SRV records,
 * updating the forwarding destination when the DNS SRV records are updated.
 
-<!SLIDE>
-# Ambassadors for credentials injection
+---
+## Ambassadors for credentials injection
 
 Use case:
 
@@ -90,8 +92,8 @@ The ambassador will be:
 * running a custom proxy that accepts connections on Redis default port,
 * performing authentication with the target Redis service before forwarding traffic.
 
-<!SLIDE>
-# Ambassadors for load balancing
+---
+## Ambassadors for load balancing
 
 Use case:
 
@@ -107,8 +109,8 @@ The ambassador will be:
 * running a load balancer (e.g. HAProxy or NGINX),
 * dispatching requests across all backends transparently.
 
-<!SLIDE>
-# "Ambassador" is a *pattern*
+---
+## "Ambassador" is a *pattern*
 
 There are many ways to implement the pattern.
 
@@ -126,8 +128,8 @@ Different deployments will use different underlying technologies.
   requirements.
 * Ambassadors can be used in addition to, or instead of, overlay networks.
 
-<!SLIDE>
-# Section summary
+---
+## Section summary
 
 We've learned how to:
 

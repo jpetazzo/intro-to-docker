@@ -1,5 +1,5 @@
-<!SLIDE>
-# What is an image?
+---
+## What is an image?
 
 * An image is a collection of files + some meta data.
   <br/>(Technically: those files form the root filesystem of a container.)
@@ -15,8 +15,8 @@
   * Application JAR
   * Configuration
 
-<!SLIDE>
-# Differences between containers and images
+---
+## Differences between containers and images
 
 * An image is a read-only filesystem.
 * A container is an encapsulated set of processes running in a
@@ -27,22 +27,22 @@
 
 Let's give a couple of metaphors to illustrate those concepts.
 
-<!SLIDE>
-# Image as stencils
+---
+## Image as stencils
 
 Images are like templates or stencils that you can create containers from.
 
 ![stencil](stenciling-wall.jpg)
 
-<!SLIDE>
-# Object-oriented programming
+---
+## Object-oriented programming
 
 * Images are conceptually similar to *classes*.
 * Layers are conceptually similar to *inheritance*.
 * Containers are conceptually similar to *instances*.
 
-<!SLIDE>
-# Wait a minute...
+---
+## Wait a minute...
 
 If an image is read-only, how do we change it?
 
@@ -52,15 +52,15 @@ If an image is read-only, how do we change it?
 * When we are satisfied with those changes, we transform them into a new layer.
 * A new image is created by stacking the new layer on top of the old image.
 
-<!SLIDE>
-# A chicken-and-egg problem
+---
+## A chicken-and-egg problem
 
 * The only way to create an image is by "freezing" a container.
 * The only way to create a container is by instanciating an image.
 * Help!
 
-<!SLIDE>
-# Creating the first images
+---
+## Creating the first images
 
 There is a special empty image called `scratch`. 
 
@@ -73,8 +73,8 @@ The `docker import` command loads a tarball into Docker.
 
 Note: you will probably never have to do this yourself.
 
-<!SLIDE>
-# Creating other images
+---
+## Creating other images
 
 `docker commit`
 
@@ -88,8 +88,8 @@ Note: you will probably never have to do this yourself.
 
 We will explain both methods in a moment.
 
-<!SLIDE>
-# Images namespaces
+---
+## Images namespaces
 
 There are three namespaces:
 
@@ -107,8 +107,8 @@ There are three namespaces:
 
 Let's explain each of them.
 
-<!SLIDE>
-# Root namespace
+---
+## Root namespace
 
 The root namespace is for official images. They are put there by Docker Inc.,
 but they are generally authored and maintained by third parties.
@@ -120,8 +120,8 @@ Those images include:
 * Ready-to-use components and services, like redis, postgresql...
 
 
-<!SLIDE>
-# User namespace
+---
+## User namespace
 
 The user namespace holds images for Docker Hub users and organizations.
 
@@ -140,8 +140,8 @@ The image name is:
     @@@ Sh
     clock
 
-<!SLIDE>
-# Self-Hosted namespace
+---
+## Self-Hosted namespace
 
 This namespace holds images which are not hosted on Docker Hub, but on third
 party registries.
@@ -157,8 +157,8 @@ For example:
 * `localhost:5000` is the host and port of the registry
 * `wordpress` is the name of the image
 
-<!SLIDE>
-# How do you store and manage images?
+---
+## How do you store and manage images?
 
 Images can be stored:
 
@@ -170,8 +170,8 @@ You can use the Docker client to download (pull) or upload (push) images.
 To be more accurate: you can use the Docker client to tell a Docker server
 to push and pull images to and from a registry.
 
-<!SLIDE>
-# Showing current images
+---
+## Showing current images
 
 Let's look at what images are on our host now.
 
@@ -190,8 +190,8 @@ Let's look at what images are on our host now.
     jpetazzo/clock   latest    12068b93616f   12 months ago   2.433 MB
 
 
-<!SLIDE>
-# Searching for images
+---
+## Searching for images
 
 We cannot list *all* images on a remote registry, but
 we can search for a specific keyword:
@@ -210,16 +210,16 @@ we can search for a specific keyword:
 * "Automated" images are built automatically by the Docker Hub.
   <br/>(This means that their build recipe is always available.)
 
-<!SLIDE>
-# Downloading images
+---
+## Downloading images
 
 There are two ways to download images.
 
 * Explicitly, with `docker pull`.
 * Implicitly, when executing `docker run` and the image is not found locally.
 
-<!SLIDE>
-# Pulling an image
+---
+## Pulling an image
 
     @@@ Sh
     $ docker pull debian:jessie
@@ -233,16 +233,16 @@ There are two ways to download images.
 * In this example, `:jessie` indicates which exact version of Debian
   we would like. It is a *version tag*.
 
-<!SLIDE>
-# Image and tags
+---
+## Image and tags
 
 * Images can have tags.
 * Tags define image versions or variants.
 * `docker pull ubuntu` will refer to `ubuntu:latest`.
 * The `:latest` tag is generally updated often.
 
-<!SLIDE>
-# When to (not) use tags
+---
+## When to (not) use tags
 
 Don't specify tags:
 
@@ -257,8 +257,8 @@ Do specify tags:
 * To ensure that the same version will be used everywhere.
 * To ensure repeatability later.
 
-<!SLIDE>
-# Section summary
+---
+## Section summary
 
 We've learned how to:
 

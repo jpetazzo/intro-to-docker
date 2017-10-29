@@ -1,20 +1,24 @@
-<!SLIDE>
-# How *links* work
+---
+## How *links* work
 
 * Links are created *between two containers*
 * Links are created *from the client to the server*
 * Links associate an arbitrary name to an existing container
 * Links exist *only in the context of the client*
 
-<!SLIDE printonly>
-# The plan
+---
+class: extra-details
+
+## The plan
 
 * We will create the `redis` container first.
 * Then, we will create the `www` container, *with a link to the previous container.*
 * We don't need to use a custom network for this to work.
 
-<!SLIDE printonly>
-# Create the `redis` container
+---
+class: extra-details
+
+## Create the `redis` container
 
 Let's launch a container from the `redis` image.
 
@@ -34,8 +38,10 @@ Let's check the container is running:
 * We used the `--name` flag to reference our container easily later.
 * We could have used *any name we wanted.*
 
-<!SLIDE printonly>
-# Create the `www` container
+---
+class: extra-details
+
+## Create the `www` container
 
 If we create the web container without any extra option, it will not be able to connect to redis.
 
@@ -46,8 +52,10 @@ Check the port number with `docker ps`, and connect to it.
 
 We get the same red error page as before.
 
-<!SLIDE printonly>
-# How our app connects to Redis
+---
+class: extra-details
+
+## How our app connects to Redis
 
 Remember, in the code, we connect to the name `redis`:
 
@@ -60,8 +68,10 @@ Remember, in the code, we connect to the name `redis`:
 
 *Obviously* it doesn't work.
 
-<!SLIDE printonly>
-# Creating a linked container
+---
+class: extra-details
+
+## Creating a linked container
 
 Docker allows to specify *links*.
 
@@ -75,8 +85,10 @@ Here is how to create our first link:
 In this container, we can communicate with `datastore` using
 the `redis` DNS alias.
 
-<!SLIDE printonly>
-# DNS
+---
+class: extra-details
+
+## DNS
 
 Docker has created a DNS entry for the container, resolving to its internal IP address.
 
@@ -95,8 +107,10 @@ Docker has created a DNS entry for the container, resolving to its internal IP a
 * We specify the name of the container to link to, ``datastore``, and an
   alias for the link, ``redis``, in the format ``name:alias``.
 
-<!SLIDE printonly>
-# Starting our application
+---
+class: extra-details
+
+## Starting our application
 
 Now that we've poked around a bit let's start the application itself in
 a fresh container:
@@ -109,16 +123,18 @@ Now let's check the port number associated to the container.
     @@@ Sh
     $ docker ps -l
 
-<!SLIDE printonly>
-# Confirming that our application works properly
+---
+class: extra-details
+
+## Confirming that our application works properly
 
 Finally, let's browse to our application and confirm it's working.
 
     @@@ Sh
     http://<yourHostIP>:<port>
 
-<!SLIDE>
-# Links and environment variables
+---
+## Links and environment variables
 
 In addition to the DNS information, Docker will automatically set environment variables in our container, giving extra details about the linked container.
 
@@ -144,8 +160,8 @@ In addition to the DNS information, Docker will automatically set environment va
 * Includes connection information PLUS any environment variables set in
   the ``datastore`` container via ``ENV`` instructions.
 
-<!SLIDE>
-# Differences between network aliases and links
+---
+## Differences between network aliases and links
 
 * With network aliases, you can start containers in *any order.*
 * With links, you have to start the server (in our example: Redis) first.
@@ -158,8 +174,10 @@ In addition to the DNS information, Docker will automatically set environment va
 * Network aliases don't populate environment variables.
 * Links give access to the environment of the target container.
 
-<!SLIDE printonly>
-# Section summary
+---
+class: extra-details
+
+## Section summary
 
 We've learned how to:
 

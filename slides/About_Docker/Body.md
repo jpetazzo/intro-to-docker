@@ -1,10 +1,10 @@
-<!SLIDE>
-# Elevator pitch
+---
+## Elevator pitch
 
-## (for your manager, boss...)
+### (for your manager, boss...)
 
-<!SLIDE>
-# OK... Why the buzz around containers?
+---
+## OK... Why the buzz around containers?
 
 * The software industry has changed.
 * Before:
@@ -18,8 +18,8 @@
   * multiple environments
   * quickly scaling out
 
-<!SLIDE>
-# Deployment becomes very complex
+---
+## Deployment becomes very complex
 
 * Many different stacks:
   * languages
@@ -30,43 +30,43 @@
   * pre-production, QA, staging...
   * production: on prem, cloud, hybrid
 
-<!SLIDE>
-# The deployment problem
+---
+## The deployment problem
 
 ![problem](problem.png)
 
-<!SLIDE>
-# The Matrix from Hell
+---
+## The Matrix from Hell
 
 ![matrix](matrix.png)
 
-<!SLIDE>
-# An inspiration and some ancient history!
+---
+## An inspiration and some ancient history!
 
 ![history](history.png)
 
-<!SLIDE>
-# Intermodal shipping containers
+---
+## Intermodal shipping containers
 
 ![shipping](shipping.png)
 
-<!SLIDE>
-# This spawned a Shipping Container Ecosystem!
+---
+## This spawned a Shipping Container Ecosystem!
 
 ![shipeco](shipeco.png)
 
-<!SLIDE>
-# A shipping container system for applications
+---
+## A shipping container system for applications
 
 ![shipapp](appcont.png)
 
-<!SLIDE>
-# Eliminate the matrix from Hell
+---
+## Eliminate the matrix from Hell
 
 ![elimatrix](elimatrix.png)
 
-<!SLIDE>
-# Results
+---
+## Results
 
 * Dev-to-prod reduced from 9 months to 15 minutes (ING)
 
@@ -74,13 +74,13 @@
 
 * Dev-to-prod reduced from weeks to minutes (GILT)
 
-<!SLIDE>
-# Elevator pitch
+---
+## Elevator pitch
 
-## (for your fellow devs and ops)
+### (for your fellow devs and ops)
 
-<!SLIDE>
-# Escape dependency hell
+---
+## Escape dependency hell
 
 1. Write installation instructions into an "INSTALL.txt" file
 2. Using this file, write an "install.sh" script that works *for you*
@@ -90,8 +90,8 @@
 
 Never again "worked in dev - ops problem now!"
 
-<!SLIDE>
-# On-board developers and contributors rapidly
+---
+## On-board developers and contributors rapidly
 
 1. Write Dockerfiles for your application components
 2. Use pre-made images from the Docker Hub (mysql, redis...)
@@ -104,8 +104,8 @@ Never again "worked in dev - ops problem now!"
 
 Also works to create dev, integration, QA environments in minutes!
 
-<!SLIDE>
-# Implement reliable CI easily
+---
+## Implement reliable CI easily
 
 1. Build test environment with a Dockerfile or Compose file
 2. For each test run, stage up a new container or stack
@@ -114,8 +114,10 @@ Also works to create dev, integration, QA environments in minutes!
 
 Way faster and cheaper than creating VMs each time!
 
-<!SLIDE pprintonly>
-# Use container images as build artefacts
+---
+class: x-extra-details
+
+## Use container images as build artefacts
 
 1. Build your app from Dockerfiles
 2. Store the resulting images in a registry
@@ -127,8 +129,10 @@ Way faster and cheaper than creating VMs each time!
 
 Images contain all the libraries, dependencies, etc. needed to run the app.
 
-<!SLIDE pprintonly>
-# Decouple "plumbing" from application logic
+---
+class: x-extra-details
+
+## Decouple "plumbing" from application logic
 
 1. Write your code to connect to named services ("db", "api"...)
 2. Use Compose to start your stack
@@ -138,13 +142,17 @@ Images contain all the libraries, dependencies, etc. needed to run the app.
 Note: this is not covered in this intro level workshop!
 
 
-<!SLIDE printonly>
-# What did Docker bring to the table?
+---
+class: extra-details
 
-## Docker before/after
+## What did Docker bring to the table?
 
-<!SLIDE printonly>
-# Formats and APIs, before Docker
+### Docker before/after
+
+---
+class: extra-details
+
+## Formats and APIs, before Docker
 
 * No standardized exchange format.
   <br/>(No, a rootfs tarball is *not* a format!)
@@ -160,32 +168,40 @@ Analogy:
 * They are steel boxes that are a standard size,
   <br/>with the same hooks and holes.
 
-<!SLIDE printonly>
-# Formats and APIs, after Docker
+---
+class: extra-details
+
+## Formats and APIs, after Docker
 
 * Standardize the container format, because containers were not portable.
 * Make containers easy to use for developers.
 * Emphasis on re-usable components, APIs, ecosystem of standard tools.
 * Improvement over ad-hoc, in-house, specific tools.
 
-<!SLIDE printonly>
-# Shipping, before Docker
+---
+class: extra-details
+
+## Shipping, before Docker
 
 * Ship packages: deb, rpm, gem, jar, homebrew...
 * Dependency hell.
 * "Works on my machine."
 * Base deployment often done from scratch (debootstrap...) and unreliable.
 
-<!SLIDE printonly>
-# Shipping, after Docker
+---
+class: extra-details
+
+## Shipping, after Docker
 
 * Ship container images with all their dependencies.
 * Images are bigger, but they are broken down into layers.
 * Only ship layers that have changed.
 * Save disk, network, memory usage.
 
-<!SLIDE printonly>
-# Example
+---
+class: extra-details
+
+## Example
 
 Layers:
 
@@ -196,8 +212,10 @@ Layers:
 * Application JAR
 * Configuration
 
-<!SLIDE printonly>
-# Devs vs Ops, before Docker
+---
+class: extra-details
+
+## Devs vs Ops, before Docker
 
 * Drop a tarball (or a commit hash) with instructions.
 * Dev environment very different from production.
@@ -207,8 +225,10 @@ Layers:
 * ... or bounce it back to devs.
 * Shipping code causes frictions and delays.
 
-<!SLIDE printonly>
-# Devs vs Ops, after Docker
+---
+class: extra-details
+
+## Devs vs Ops, after Docker
 
 * Drop a container image or a Compose file.
 * Ops can always run that container image.
@@ -220,17 +240,19 @@ Layers:
 * Devs can be empowered to make releases themselves
   more easily.
 
-<!SLIDE printonly>
-# Clean separation of concerns
+---
+class: extra-details
+
+## Clean separation of concerns
 
 ![sepcon](sepcon.png)
 
 
-<!SLIDE>
-# History of containers ... and Docker
+---
+## History of containers ... and Docker
 
-<!SLIDE>
-# First experimentations
+---
+## First experimentations
 
 * [IBM VM/370 (1972)](https://en.wikipedia.org/wiki/VM_(operating_system))
 * [Linux VServers (2001)](http://www.solucorp.qc.ca/changes.hc?projet=vserver)
@@ -240,29 +262,37 @@ Layers:
 Containers have been around for a *very long time* indeed.
 
 
-<!SLIDE printonly>
-# VPS-olithic period (until 2007-2008)
+---
+class: extra-details
 
-<!SLIDE printonly>
-# Containers = cheaper than VMs
+## VPS-olithic period (until 2007-2008)
+
+---
+class: extra-details
+
+## Containers = cheaper than VMs
 
 ![lightcont](lightcont.png)
 
 * Users: hosting providers.
 * Highly specialized audience with strong ops culture.
 
-<!SLIDE printonly>
-# PaaS-olithic period (2008-2013)
+---
+class: extra-details
 
-<!SLIDE printonly>
-# Containers = easier than VMs
+## PaaS-olithic period (2008-2013)
+
+---
+class: extra-details
+
+## Containers = easier than VMs
 
 ![heroku 2007](heroku-first-homepage.png)
 
 * I can't speak for Heroku, but containers were (one of) dotCloud's secret weapon
 
-<!SLIDE>
-# The origins of the Docker Project
+---
+## The origins of the Docker Project
 
 * dotCloud was operating a PaaS, using a custom container engine.
 * This engine was based on OpenVZ (and later, LXC) and AUFS.
@@ -272,8 +302,8 @@ Containers have been around for a *very long time* indeed.
 * End of 2012, dotCloud refactors this container engine.
 * The codename for this project is "Docker."
 
-<!SLIDE>
-# First public release
+---
+## First public release
 
 * March 2013, PyCon, Santa Clara:
   <br/>"Docker" is shown to a public audience for the first time.
@@ -283,19 +313,23 @@ Containers have been around for a *very long time* indeed.
 * The same year, dotCloud changes name to Docker.
 * In 2014, the PaaS activity is sold.
 
-<!SLIDE printonly>
-# Docker early days (2013-2014)
+---
+class: extra-details
 
-<!SLIDE>
-# First users of Docker
+## Docker early days (2013-2014)
+
+---
+## First users of Docker
 
 * PAAS builders (Flynn, Dokku, Tsuru, Deis...)
 * PAAS users (those big enough to justify building their own)
 * CI platforms
 * developers, developers, developers, developers
 
-<!SLIDE printonly>
-# Positive feedback loop
+---
+class: extra-details
+
+## Positive feedback loop
 
 * In 2013, the technology under containers (cgroups, namespaces, copy-on-write storage...)
   had many blind spots.
@@ -304,19 +338,23 @@ Containers have been around for a *very long time* indeed.
 * Any decent hosting/cloud provider can run containers today.
 * Containers become a great tool to deploy/move workloads to/from on-prem/cloud.
 
-<!SLIDE printonly>
-# Maturity (2015-2016)
+---
+class: extra-details
 
-<!SLIDE printonly>
-# Docker becomes an industry standard
+## Maturity (2015-2016)
+
+---
+class: extra-details
+
+## Docker becomes an industry standard
 
 * Docker reaches the symbolic 1.0 milestone.
 * Existing systems like Mesos and Cloud Foundry add Docker support.
 * Standards like OCI, CNCF appear.
 * Other container engines are developed.
 
-<!SLIDE>
-# Docker becomes a platform
+---
+## Docker becomes a platform
 
 * The initial container engine is now known as "Docker Engine."
 * Other tools are added:
@@ -330,11 +368,11 @@ Containers have been around for a *very long time* indeed.
 * Docker Inc. launches commercial offers.
 
 
-<!SLIDE>
-# Docker Inc. (the company)
+---
+## Docker Inc. (the company)
 
-<!SLIDE>
-# About Docker Inc.
+---
+## About Docker Inc.
 
 * Docker Inc. used to be dotCloud Inc.
 * dotCloud Inc. used to be a French company.
@@ -345,8 +383,8 @@ Containers have been around for a *very long time* indeed.
 * HQ in San Francisco.
 * Backed by more than 100M in venture capital.
 
-<!SLIDE>
-# How does Docker Inc. make money?
+---
+## How does Docker Inc. make money?
 
 * SAAS
   * Docker Hub (per private repo)

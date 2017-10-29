@@ -1,7 +1,7 @@
-<!SLIDE>
-# Lesson ~~~SECTION:MAJOR~~~: Container Networking Basics
+---
+## Lesson ~~~SECTION:MAJOR~~~: Container Networking Basics
 
-## Objectives
+### Objectives
 
 We will now run network services (accepting requests) in containers.
 
