@@ -1,3 +1,0 @@
-<!SLIDE center subsection>
-# TODO
-

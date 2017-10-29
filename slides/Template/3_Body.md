@@ -1,4 +1,0 @@
-<!SLIDE>
-# TODO
-
-TODO

@@ -91,39 +91,3 @@ We've learned:
 * About Docker.
 * How to create an account on the Docker Hub.
 
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Create a Docker Hub account
-
-1. Open a browser window.
-
-2. Browse to the Docker Hub site.
-
-         @@@ Sh
-         https://hub.docker.com/
-
-3. Click on the ``Sign-up`` link.
-
-         @@@ Sh
-         https://hub.docker.com/account/signup/
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Create a Docker Hub account
-
-1. Create a Docker Hub account.
-
-![signup](signup.png)
-
-2. Verify your Docker Hub account.
-
-3. Login to your Docker Hub account.
-
-        @@@ Sh
-        https://hub.docker.com/account/login/
-
-<!SLIDE supplemental exercises>
-# Lab ~~~SECTION:MAJOR~~~.~~~SECTION:MINOR~~~: Optional: Create a GitHub account
-
-1. If you don't already have a GitHub account it'll be pretty useful later on.
-
-        @@@ Sh
-        https://github.com/join

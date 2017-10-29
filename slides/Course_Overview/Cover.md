@@ -7,9 +7,3 @@
 
 ## An Open Platform to Build, Ship, and Run Distributed Applications ##
 
-<!SLIDE supplemental exercises center cover>
-# Docker Fundamentals Exercises #
-
-## Version: ~~~CONFIG:training_version~~~ ##
-
-![Docker Inc](logo.png)
