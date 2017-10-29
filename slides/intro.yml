@@ -17,8 +17,8 @@ chapters:
   - First_Containers.md
   - Background_Containers.md
   - Start_And_Attach.md
-  
   - Initial_Images.md
+  
   - Building_Images_Interactively.md
   - Building_Images_With_Dockerfiles.md
   - Cmd_And_Entrypoint.md
