@@ -1,15 +1,6 @@
-
-class: title
-
 # Building Images Interactively
 
-![cmatrix](Building_Images_Interactively/cmatrix.png)
-
----
-
-## Objectives
-
-In this lesson, we will create our first container image.
+In this section, we will create our first container image.
 
 It will be a basic distribution image, but we will pre-install
 the package `figlet`.
@@ -17,8 +8,10 @@ the package `figlet`.
 We will: 
 
 * Create a container from a base image.
+
 * Install software manually in the container, and turn it
   into a new image.
+
 * Learn about new commands: `docker commit`, `docker tag`, and `docker diff`.
 
 ---
@@ -90,8 +83,11 @@ class: x-extra-details
 As explained before:
 
 * An image is read-only.
+
 * When we make changes, they happen in a copy of the image.
+
 * Docker can show the difference between the image, and its copy.
+
 * For performance, Docker uses copy-on-write systems.
   <br/>(i.e. starting a container based on a big image
   doesn't incur a huge copy.)
