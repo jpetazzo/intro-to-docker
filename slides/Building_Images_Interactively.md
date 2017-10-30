@@ -94,6 +94,19 @@ As explained before:
 
 ---
 
+## Copy-on-write security benefits
+
+* `docker diff` gives us an easy way to audit changes
+
+  (à la Tripwire)
+
+* Containers can also be started in read-only mode
+
+  (their root filesystem will be read-only, but they can still have read-write data volumes)
+
+
+---
+
 ## Commit and run your image
 
 The `docker commit` command will create a new layer with those changes,

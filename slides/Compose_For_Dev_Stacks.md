@@ -181,7 +181,7 @@ Sometimes they have several minor improvements.
 * `volumes` translates to one (or multiple) `-v` options.
   <br/>You can use relative paths here.
 
-For the full list, check http://docs.docker.com/compose/yml/.
+For the full list, check: https://docs.docker.com/compose/compose-file/
 
 ---
 

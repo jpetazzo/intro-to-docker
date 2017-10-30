@@ -175,7 +175,9 @@ but they are generally authored and maintained by third parties.
 Those images include:
 
 * Small, "swiss-army-knife" images like busybox.
+
 * Distro images to be used as bases for your builds, like ubuntu, fedora...
+
 * Ready-to-use components and services, like redis, postgresql...
 
 ---

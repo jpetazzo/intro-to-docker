@@ -1,17 +1,66 @@
-title: FIXME
+title: "LISA17 M7: Getting Started with Docker and Containers"
 
-chat: FIXME
+chat: "[Slack](https://usenix-lisa.slack.com/messages/C0E6N1NJW)"
 
 chapters:
 - |
   class: title
 
-  Hullo
+  .small[
+
+  LISA17 M7
+
+  Getting Started <br/> with Docker and Containers
+
+  .small[.small[
+
+  **Be kind to the WiFi!**
+
+  *Use the 5G network*
+  <br/>
+  *Don't use your hotspot*
+  <br/>
+  *Don't stream videos from YouTube, Netflix, etc.
+  <br/>(if you're bored, watch local content instead)*
+
+  <!--
+  Also: share the power outlets
+  <br/>
+  *(with limited power comes limited responsibility?)*
+  <br/>
+  *(or something?)*
+  -->
+
+  Thank you!
+
+  ]
+  ]
+  ]
+
+  ---
+
+  ## Agenda
+
+  - The tutorial will run from 1:30pm to 5:00pm
+
+  - This will be fast-paced, but DON'T PANIC!
+
+  - There will be a coffee break at 3:00pm
+    <br/>
+    (please remind me if I forget about it!)
+
+  - All the content is publicly available
+
+    One URL to remember: http://container.training
+
+  - Feel free to interrupt for questions at any time
+
+  - Live feedback, questions, help on @@CHAT@@
 
 - |
   @@TOC@@
 - - Docker_Overview.md
-  - Docker_History.md
+  #- Docker_History.md
   - Training_Environment.md
   - Install_Docker.md
   - First_Containers.md
@@ -31,7 +80,7 @@ chapters:
   - Container_Network_Model.md
   #- Connecting_Containers_With_Links.md
   - Ambassadors.md
-  - Local_Development_Workflow.md
+- - Local_Development_Workflow.md
   - Working_With_Volumes.md
   - Compose_For_Dev_Stacks.md
   - Course_Conclusion.md

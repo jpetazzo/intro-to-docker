@@ -106,7 +106,7 @@ $ docker run --name webapp -d -p 8080:8080 -v /usr/local/tomcat/logs
 Now, start an `alpine` container accessing the same volume:
 
 ```bash
-$ docker run --volumes-from webapp alpine sh -c "tail -f /usr/local/tcat/logs/*"
+$ docker run --volumes-from webapp alpine sh -c "tail -f /usr/local/tomcat/logs/*"
 ```
 
 Then, from another window, send requests to our Tomcat container:

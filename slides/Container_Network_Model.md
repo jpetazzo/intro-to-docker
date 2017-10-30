@@ -113,10 +113,10 @@ eb0eeab782f4        host                host
 
 We will create a *named* container on this network.
 
-It will be reachable with its name, `search`.
+It will be reachable with its name, `es`.
 
 ```bash
-$ docker run -d --name search --net dev elasticsearch
+$ docker run -d --name es --net dev elasticsearch:2
 8abb80e229ce8926c7223beb69699f5f34d6f1d438bfc5682db893e798046863
 ```
 
@@ -134,13 +134,13 @@ root@0ecccdfa45ef:/#
 From this new container, we can resolve and ping the other one, using its assigned name:
 
 ```bash
-/ # ping search
-PING search (172.18.0.2) 56(84) bytes of data.
-64 bytes from search.dev (172.18.0.2): icmp_seq=1 ttl=64 time=0.221 ms
-64 bytes from search.dev (172.18.0.2): icmp_seq=2 ttl=64 time=0.114 ms
-64 bytes from search.dev (172.18.0.2): icmp_seq=3 ttl=64 time=0.114 ms
+/ # ping es
+PING es (172.18.0.2) 56(84) bytes of data.
+64 bytes from es.dev (172.18.0.2): icmp_seq=1 ttl=64 time=0.221 ms
+64 bytes from es.dev (172.18.0.2): icmp_seq=2 ttl=64 time=0.114 ms
+64 bytes from es.dev (172.18.0.2): icmp_seq=3 ttl=64 time=0.114 ms
 ^C
---- search ping statistics ---
+--- es ping statistics ---
 3 packets transmitted, 3 received, 0% packet loss, time 2000ms
 rtt min/avg/max/mdev = 0.114/0.149/0.221/0.052 ms
 root@0ecccdfa45ef:/#
@@ -164,8 +164,8 @@ fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
-172.18.0.2      search
-172.18.0.2      search.dev
+172.18.0.2      es
+172.18.0.2      es.dev
 ```
 
 In Docker Engine 1.10, this has been replaced by a dynamic resolver.
@@ -286,11 +286,11 @@ class: x-extra-details
 
 ## Names are *local* to each network
 
-Let's try to ping our `search` container from another container, when that other container is *not* on the `dev` network.
+Let's try to ping our `es` container from another container, when that other container is *not* on the `dev` network.
 
 ```bash
-$ docker run --rm alpine ping search
-ping: bad address 'search'
+$ docker run --rm alpine ping es
+ping: bad address 'es'
 ```
 
 Names can be resolved only when containers are on the same network.
@@ -303,7 +303,7 @@ class: extra-details
 
 ## Network aliases
 
-We would like to have another network, `prod`, with its own `search` container. But there can be only one container named `search`!
+We would like to have another network, `prod`, with its own `es` container. But there can be only one container named `es`!
 
 We will use *network aliases*.
 
@@ -326,12 +326,12 @@ $ docker create network prod
 5a41562fecf2d8f115bedc16865f7336232a04268bdf2bd816aecca01b68d50c
 ```
 
-We can now create multiple containers with the `search` alias on the new `prod` network.
+We can now create multiple containers with the `es` alias on the new `prod` network.
 
 ```bash
-$ docker run -d --name prod-es-1 --net-alias search --net prod elasticsearch
+$ docker run -d --name prod-es-1 --net-alias es --net prod elasticsearch:2
 38079d21caf0c5533a391700d9e9e920724e89200083df73211081c8a356d771
-$ docker run -d --name prod-es-2 --net-alias search --net prod elasticsearch
+$ docker run -d --name prod-es-2 --net-alias es --net prod elasticsearch:2
 1820087a9c600f43159688050dcc164c298183e1d2e62d5694fd46b10ac3bc3d
 ```
 
@@ -344,8 +344,8 @@ class: extra-details
 Let's try DNS resolution first, using the `nslookup` tool that ships with the `alpine` image.
 
 ```bash
-$ docker run --net prod --rm alpine nslookup search
-Name:      search
+$ docker run --net prod --rm alpine nslookup es
+Name:      es
 Address 1: 172.23.0.3 prod-es-2.prod
 Address 2: 172.23.0.2 prod-es-1.prod
 ```
@@ -363,7 +363,7 @@ Each ElasticSearch instance has a name (generated when it is started). This name
 Try the following command a few times:
 
 ```bash
-$ docker run --rm --net dev centos curl -s search:9200
+$ docker run --rm --net dev centos curl -s es:9200
 {
   "name" : "Tarot",
 ...
@@ -373,7 +373,7 @@ $ docker run --rm --net dev centos curl -s search:9200
 Then try it a few times by replacing `--net dev` with `--net prod`:
 
 ```bash
-$ docker run --rm --net prod centos curl -s search:9200
+$ docker run --rm --net prod centos curl -s es:9200
 {
   "name" : "The Symbiote",
 ...
