@@ -17,17 +17,17 @@ chapters:
   - First_Containers.md
   - Background_Containers.md
   - Start_And_Attach.md
-  - Initial_Images.md
+- - Initial_Images.md
   - Building_Images_Interactively.md
   - Building_Images_With_Dockerfiles.md
   - Cmd_And_Entrypoint.md
   - Copying_Files_During_Build.md
   - Multi_Stage_Builds.md
   - Dockerfile_Tips.md
-  - Advanced_Dockerfiles.md
+  #- Advanced_Dockerfiles.md
   - Docker_Hub_Tease.md
+- - Naming_And_Inspecting.md
 
-  - Naming_And_Inspecting.md
   - Container_Networking_Basics.md
   - Container_Network_Model.md
   - Connecting_Containers_With_Links.md

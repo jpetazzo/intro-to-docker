@@ -15,6 +15,7 @@ Docker concept: container *naming*.
 Naming allows us to:
 
 * Reference easily a container.
+
 * Ensure unicity of a specific container.
 
 We will also see the `inspect` command, which gives a lot of details about a container.
@@ -29,11 +30,11 @@ We have copy-pasted the ID, or used a shortened prefix.
 
 But each container can also be referenced by its name.
 
-If a container is named `prod-db`, I can do:
+If a container is named `thumbnail-worker`, I can do:
 
 ```bash
-$ docker logs prod-db
-$ docker stop prod-db
+$ docker logs thumbnail-worker
+$ docker stop thumbnail-worker
 etc.
 ```
 
@@ -47,6 +48,7 @@ name, Docker will pick one for us.
 It will be the concatenation of:
 
 * A mood (furious, goofy, suspicious, boring...)
+
 * The name of a famous inventor (tesla, darwin, wozniak...)
 
 Examples: `happy_curie`, `clever_hopper`, `jovial_lovelace` ...
@@ -103,10 +105,12 @@ There are multiple ways to consume that information.
 ## Parsing JSON with the Shell
 
 * You *could* grep and cut or awk the output of `docker inspect`.
+
 * Please, don't.
+
 * It's painful.
-* If you really must parse JSON from the Shell, use JQ!
-  <br/>(It's great.)
+
+* If you really must parse JSON from the Shell, use JQ! (It's great.)
 
 ```bash
 $ docker inspect <containerID> | jq .
@@ -127,7 +131,10 @@ $ docker inspect --format '{{ json .Created }}' <containerID>
 ```
 
 * The generic syntax is to wrap the expression with double curly braces.
+
 * The expression starts with a dot representing the JSON object.
+
 * Then each field or member can be accessed in dotted notation syntax.
+
 * The optional `json` keyword asks for valid JSON output.
   <br/>(e.g. here it adds the surrounding double-quotes.)
