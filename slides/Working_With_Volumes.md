@@ -9,10 +9,12 @@ class: title
 
 ## Objectives
 
-At the end of this lesson, you will be able to:
+At the end of this section, you will be able to:
 
 * Create containers holding volumes.
+
 * Share volumes across containers.
+
 * Share a host directory with one or many containers.
 
 ---
@@ -22,9 +24,13 @@ At the end of this lesson, you will be able to:
 Docker volumes can be used to achieve many things, including:
 
 * Bypassing the copy-on-write system to obtain native disk I/O performance.
+
 * Bypassing copy-on-write to leave some files out of `docker commit`.
+
 * Sharing a directory between multiple containers.
+
 * Sharing a directory between the host and a container.
+
 * Sharing a *single file* between the host and a container.
 
 ---
@@ -57,10 +63,13 @@ Volumes act as passthroughs to the host filesystem.
 
 * The I/O performance on a volume is exactly the same as I/O performance
   on the Docker host.
+
 * When you `docker commit`, the content of volumes is not brought into
   the resulting image.
+
 * If a `RUN` instruction in a `Dockerfile` changes the content of a
   volume, those changes are not recorded neither.
+
 * If a container is started with the `--read-only` flag, the volume
   will still be writable (unless the volume is a read-only volume).
 
@@ -80,16 +89,29 @@ Under the hood, they are actually the same directories on the host anyway.
 
 This is done using the `--volumes-from` flag for `docker run`.
 
+We will see an example in the following slides.
+
+---
+
+class: extra-details
+
+## Sharing web application logs with another container
+
+Let's start a Tomcat container:
+
 ```bash
-$ docker run -it --name alpha -v /var/log ubuntu bash
-root@99020f87e695:/# date >/var/log/now
+$ docker run --name webapp -d -p 8080:8080 -v /usr/local/tomcat/logs
 ```
 
-In another terminal, let's start another container with the same volume.
+Now, start an `alpine` container accessing the same volume:
 
 ```bash
-$ docker run --volumes-from alpha ubuntu cat /var/log/now
-Fri May 30 05:06:27 UTC 2014
+$ docker run --volumes-from webapp alpine sh -c "tail -f /usr/local/tcat/logs/*"
+```
+
+Then, from another window, send requests to our Tomcat container:
+```bash
+$ curl localhost:8080
 ```
 
 ---
@@ -98,7 +120,7 @@ Fri May 30 05:06:27 UTC 2014
 
 If a container is stopped, its volumes still exist and are available.
 
-Since Docker 1.9, we can see all existing volumes and manipulate them:
+Volumes can be listed and manipulated with `docker volume` subcommands:
 
 ```bash
 $ docker volume ls
@@ -115,60 +137,20 @@ The others (the hex IDs) were generated automatically by Docker.
 
 ---
 
-class: extra-details
+## Naming volumes
 
-## Data containers (before Engine 1.9)
-
-A *data container* is a container created for the sole purpose of referencing
-one (or many) volumes.
-
-It is typically created with a no-op command:
-
-```bash
-$ docker run --name files -v /var/www busybox true
-$ docker run --name logs -v /var/log busybox true
-```
-
-* We created two data containers.
-* They are using the `busybox` image, a tiny image.
-* We used the command `true`, possibly the simplest command in the world!
-* We named each container to reference them easily later.
-
----
-
-class: extra-details
-
-## Using data containers
-
-Data containers are used by other containers thanks to `--volumes-from`.
-
-Consider the following (fictitious) example, using the previously created volumes:
-
-```bash
-$ docker run -d --volumes-from files --volumes-from logs webserver
-$ docker run -d --volumes-from files ftpserver
-$ docker run -d --volumes-from logs lumberjack
-```
-
-* The first container runs a webserver, serving content from `/var/www`
-  and logging to `/var/log`.
-* The second container runs a FTP server, allowing to upload content to the
-  same `/var/www` path.
-* The third container collects the logs, and sends them to logstash, a log
-  storage and analysis system, using the lumberjack protocol.
-
----
-
-## Named volumes (since Engine 1.9)
-
-* We can now create and manipulate volumes as first-class concepts.
 * Volumes can be created without a container, then used in multiple containers.
 
-Let's create a volume directly.
+Let's create a couple of volumes directly.
 
 ```bash
-$ docker volume create --name=website
-website
+$ docker volume create webapps
+webapps
+```
+
+```bash
+$ docker volume create logs
+logs
 ```
 
 Volumes are not anchored to a specific path.
@@ -178,25 +160,23 @@ Volumes are not anchored to a specific path.
 ## Using our named volumes
 
 * Volumes are used with the `-v` option.
+
 * When a host path does not contain a /, it is considered to be a volume name.
 
 Let's start a web server using the two previous volumes.
 
 ```bash
-$ docker run -d -p 8888:80 \
-         -v website:/usr/share/nginx/html \
-         -v logs:/var/log/nginx \
-         nginx
+$ docker run -d -p 1234:8080 \
+         -v logs:/usr/local/tomcat/logs \
+         -v webapps:/usr/local/tomcat/webapps \
+         tomcat
 ```
 
 Check that it's running correctly:
 
 ```bash
-$ curl localhost:8888
-<!DOCTYPE html>
-...
-<h1>Welcome to nginx!</h1>
-...
+$ curl localhost:1234
+... (Tomcat tells us how happy it is to be up and running) ...
 ```
 
 ---
@@ -204,17 +184,20 @@ $ curl localhost:8888
 ## Using a volume in another container
 
 * We will make changes to the volume from another container.
-* In this example, we will run a text editor in the other container, but this could be a FTP server, a WebDAV server, a Git receiver...
 
-Let's start another container using the `website` volume.
+* In this example, we will run a text editor in the other container.
+
+  (But this could be a FTP server, a WebDAV server, a Git receiver...)
+
+Let's start another container using the `webapps` volume.
 
 ```bash
-$ docker run -v website:/website -w /website -ti alpine vi index.html
+$ docker run -v webapps:/webapps -w /webapps -ti alpine vi ROOT/index.jsp
 ```
 
-Make changes, save, and exit.
+Vandalize the page, save, exit.
 
-Then run `curl localhost:8888` again to see your changes.
+Then run `curl localhost:1234` again to see your changes.
 
 ---
 
@@ -244,35 +227,21 @@ $ docker run -d -v /path/on/the/host:/path/in/container image ...
 
 class: extra-details
 
-## Sharing a directory between the host and a container
-
-The previous example would become something like this:
-
-```bash
-$ mkdir -p /mnt/files /mnt/logs
-$ docker run -d -v /mnt/files:/var/www -v /mnt/logs:/var/log webserver
-$ docker run -d -v /mnt/files:/home/ftp ftpserver
-$ docker run -d -v /mnt/logs:/var/log lumberjack
-```
-
-Note that the paths must be absolute.
-
-Those volumes can also be shared with `--volumes-from`.
-
----
-
-class: extra-details
-
 ## Migrating data with `--volumes-from`
 
 The `--volumes-from` option tells Docker to re-use all the volumes
 of an existing container.
 
 * Scenario: migrating from Redis 2.8 to Redis 3.0.
+
 * We have a container (`myredis`) running Redis 2.8.
+
 * Stop the `myredis` container.
+
 * Start a new container, using the Redis 3.0 image, and the `--volumes-from` option.
+
 * The new container will inherit the data of the old one.
+
 * Newer containers can use `--volumes-from` too.
 
 ---
@@ -344,12 +313,13 @@ QUIT
 
 ## What happens when you remove containers with volumes?
 
-* With Engine versions prior 1.9, volumes would be *orphaned* when the last container referencing them is destroyed.
-* Orphaned volumes are not deleted, but you cannot access them.
+* Volumes are kept around.
 
-    (Unless you do some serious archaeology in `/var/lib/docker`.)
+* You can list them with `docker volume ls`.
 
-* Since Engine 1.9, orphaned volumes can be listed with `docker volume ls` and mounted to containers with `-v`.
+* You can access them by creating a container with `docker run -v`.
+
+* You can remove them with `docker volume rm` or `docker system prune`.
 
 Ultimately, _you_ are the one responsible for logging,
 monitoring, and backup of your volumes.
@@ -433,6 +403,7 @@ or providing extra features. For instance:
 We've learned how to:
 
 * Create and manage volumes.
-* Share volumes across containers.
-* Share a host directory with one or many containers.
 
+* Share volumes across containers.
+
+* Share a host directory with one or many containers.
