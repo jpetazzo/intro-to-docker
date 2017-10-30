@@ -27,9 +27,9 @@ chapters:
   #- Advanced_Dockerfiles.md
   - Docker_Hub_Tease.md
 - - Naming_And_Inspecting.md
-
   - Container_Networking_Basics.md
   - Container_Network_Model.md
+
   - Connecting_Containers_With_Links.md
   - Ambassadors.md
   - Local_Development_Workflow.md
