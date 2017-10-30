@@ -9,19 +9,22 @@ class: title
 
 ## Objectives
 
-At the end of this lesson, you will be able to:
+At the end of this section, you will be able to:
 
 * Share code between container and host.
+
 * Use a simple local development workflow.
 
 ---
 
 ## Using a Docker container for local development
 
-Never again:
+We want to solve the following issues:
 
 - "Works on my machine"
+
 - "Not the same version"
+
 - "Missing dependency"
 
 By using Docker containers, we will get a consistent development environment.
@@ -31,6 +34,7 @@ By using Docker containers, we will get a consistent development environment.
 ## Our "namer" application
 
 * The code is available on https://github.com/jpetazzo/namer.
+
 * The image jpetazzo/namer is automatically built by the Docker Hub.
 
 Let's run it with:
@@ -64,15 +68,17 @@ Gemfile
 
 According to the Dockerfile, the code is copied into `/src` :
 
-    FROM ruby
-    MAINTAINER Education Team at Docker <education@docker.com>
+```dockerfile
+FROM ruby
+MAINTAINER Education Team at Docker <education@docker.com>
 
-    COPY . /src
-    WORKDIR /src
-    RUN bundler install
+COPY . /src
+WORKDIR /src
+RUN bundler install
 
-    CMD ["rackup", "--host", "0.0.0.0"]
-    EXPOSE 9292
+CMD ["rackup", "--host", "0.0.0.0"]
+EXPOSE 9292
+```
 
 We want to make changes *inside the container* without rebuilding it each time. 
 
@@ -88,11 +94,15 @@ We will tell Docker to map the current directory to `/src` in the container.
 $ docker run -d -v $(pwd):/src -p 80:9292 jpetazzo/namer
 ```
 
-* The `-d` flag indicates that the container should run in detached mode (in the background).
-* The `-v` flag provides volume mounting inside containers.
-* The `-p` flag maps port `9292` inside the container to port `80` on the host.
+* `-d`: the container should run in detached mode (in the background).
+
+* `-v`: the following host directory should be mounted inside the container.
+
+* `-p`: connections to port 80 on the host should be routed to port 9292 in the container.
+
 * `jpetazzo/namer` is the name of the image we will run.
-* We don't need to give a command to run because the Dockerfile already specifies `rackup`.
+
+* We don't specify a command to run because is is already set in the Dockerfile.
 
 ---
 
@@ -106,8 +116,10 @@ container. The flag structure is:
 ```
 
 * If [host-path] or [container-path] doesn't exist it is created.
+
 * You can control the write status of the volume with the `ro` and
   `rw` options.
+
 * If you don't specify `rw` or `ro`, it will be `rw` by default.
 
 There will be a full chapter about volumes!
@@ -200,49 +212,48 @@ www:
 ## Why Compose?
 
 * Specifying all those "docker run" parameters is tedious.
+
 * And error-prone.
+
 * We can "encode" those parameters in a "Compose file."
+
 * When you see a `docker-compose.yml` file, you know that you can use `docker-compose up`.
+
 * Compose can also deal with complex, multi-container apps.
   <br/>(More on this later.)
 
 ---
 
-## Workflow explained
+## Recap of the development workflow
 
-We can see a simple workflow:
-
-1. Build an image containing our development environment.
-
-    (Rails, Django...)
+1. Write a Dockerfile to build an image containing our development environment.
+   <br/>
+   (Rails, Django, ... and all the dependencies for our app)
 
 2. Start a container from that image.
+   <br/>
+   Use the `-v` flag to mount our source code inside the container.
 
-    Use the `-v` flag to mount source code inside the container.
+3. Edit the source code outside the containers, using regular tools.
+   <br/>
+   (vim, emacs, textmate...)
 
-3. Edit source code outside the containers, using regular tools.
+4. Test the application.
+   <br/>
+   (Some frameworks pick up changes automatically.
+   <br/>Others require you to Ctrl-C + restart after each modification.)
 
-    (vim, emacs, textmate...)
-
-4. Test application.
-
-    (Some frameworks pick up changes automatically.
-
-    Others require you to Ctrl-C + restart after each modification.)
-
-5. Repeat last two steps until satisfied.
+5. Iterate and repeat steps 3 and 4 until satisfied.
 
 6. When done, commit+push source code changes.
 
-    (You *are* using version control, right?)
-
 ---
 
-class: x-extra-details
+class: extra-details
 
 ## Debugging inside the container
 
-In 1.3, Docker introduced a feature called `docker exec`.
+Docker has a command called `docker exec`.
 
 It allows users to run a new process in a container which is already running.
 
@@ -267,7 +278,7 @@ irb(main):002:0> exit
 
 ---
 
-class: x-extra-details
+class: extra-details
 
 ## Stopping the container
 
@@ -290,6 +301,8 @@ $ docker rm <yourContainerID>
 We've learned how to:
 
 * Share code between container and host.
+
 * Set our working directory.
+
 * Use a simple local development workflow.
 
