@@ -11,10 +11,12 @@ class: title
 
 We will now run network services (accepting requests) in containers.
 
-At the end of this lesson, you will be able to:
+At the end of this section, you will be able to:
 
 * Run a network service in a container.
+
 * Manipulate container networking basics.
+
 * Find a container's IP address.
 
 We will also explain the different network models used by Docker.
@@ -31,7 +33,9 @@ $ docker run -d -P nginx
 ```
 
 * Docker will download the image from the Docker Hub.
+
 * `-d` tells Docker to run the image in the background.
+
 * `-P` tells Docker to make this service reachable from other computers.
   <br/>(`-P` is the short version of `--publish-all`.)
 
@@ -51,6 +55,7 @@ e40ffb406c9e  nginx  ...  0.0.0.0:32769->80/tcp, 0.0.0.0:32768->443/tcp  ...
 
 
 * The web server is running on ports 80 and 443 inside the container.
+
 * Those ports are mapped to ports 32769 and 32768 on our Docker host.
 
 We will explain the whys and hows of this port mapping.
@@ -89,9 +94,13 @@ $ curl localhost:32769
 ## Why are we mapping ports?
 
 * We are out of IPv4 addresses.
+
 * Containers cannot have public IPv4 addresses.
+
 * They have private addresses.
+
 * Services have to be exposed port by port.
+
 * Ports have to be mapped to avoid conflicts.
 
 ---
@@ -134,15 +143,19 @@ There are many ways to integrate containers in your network.
 
 * Start the container, letting Docker allocate a public port for it.
   <br/>Then retrieve that port number and feed it to your configuration.
+
 * Pick a fixed port number in advance, when you generate your configuration.
   <br/>Then start your container by setting the port numbers manually.
+
 * Use a network plugin, connecting your containers with e.g. VLANs, tunnels...
+
 * Enable *Swarm Mode* to deploy across a cluster.
   <br/>The container will then be reachable through any node of the cluster.
 
----
+When using Docker through an extra management layer like Mesos or Kubernetes,
+these will usually provide their own mechanism to expose containers.
 
-class: x-extra-details
+---
 
 ## Finding the container's IP address
 
@@ -156,12 +169,11 @@ $ docker inspect --format '{{ .NetworkSettings.IPAddress }}' <yourContainerID>
 
 * `docker inspect` is an advanced command, that can retrieve a ton
   of information about our containers.
+
 * Here, we provide it with a format string to extract exactly the
   private IP address of the container.
 
 ---
-
-class: x-extra-details
 
 ## Pinging our container
 
@@ -188,19 +200,27 @@ A container can use one of the following drivers:
 
 The driver is selected with `docker run --net ...`.
 
+The different drivers are explained with more details on the following slides.
+
 ---
 
 ## The default bridge
 
 * By default, the container gets a virtual `eth0` interface.
   <br/>(In addition to its own private `lo` loopback interface.)
+
 * That interface is provided by a `veth` pair.
+
 * It is connected to the Docker bridge.
   <br/>(Named `docker0` by default; configurable with `--bridge`.)
+
 * Addresses are allocated on a private, internal subnet.
   <br/>(Docker uses 172.17.0.0/16 by default; configurable with `--bip`.)
+
 * Outbound traffic goes through an iptables MASQUERADE rule.
+
 * Inbound traffic goes through an iptables DNAT rule.
+
 * The container can have its own routes, iptables rules, etc.
 
 ---
@@ -208,8 +228,11 @@ The driver is selected with `docker run --net ...`.
 ## The null driver
 
 * Container is started with `docker run --net none ...`
+
 * It only gets the `lo` loopback interface. No `eth0`.
+
 * It can't send or receive network traffic.
+
 * Useful for isolated/untrusted workloads.
 
 ---
@@ -217,14 +240,19 @@ The driver is selected with `docker run --net ...`.
 ## The host driver
 
 * Container is started with `docker run --net host ...`
+
 * It sees (and can access) the network interfaces of the host.
+
 * It can bind any address, any port (for ill and for good).
+
 * Network traffic doesn't have to go through NAT, bridge, or veth.
+
 * Performance = native!
 
 Use cases:
 
 * Performance sensitive applications (VOIP, gaming, streaming...)
+
 * Peer discovery (e.g. Erlang port mapper, Raft, Serf...)
 
 ---
@@ -232,8 +260,11 @@ Use cases:
 ## The container driver
 
 * Container is started with `docker run --net container:id ...`
+
 * It re-uses the network stack of another container.
+
 * It shares with this other container the same interfaces, IP address(es), routes, iptables rules, etc.
+
 * Those containers can communicate over their `lo` interface.
   <br/>(i.e. one can bind to 127.0.0.1 and the others can connect to it.)
 
@@ -244,7 +275,9 @@ Use cases:
 We've learned how to:
 
 * Expose a network port.
+
 * Manipulate container networking basics.
+
 * Find a container's IP address.
 
 In the next chapter, we will see how to connect
