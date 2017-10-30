@@ -32,7 +32,6 @@ chapters:
   #- Connecting_Containers_With_Links.md
   - Ambassadors.md
   - Local_Development_Workflow.md
-
   - Working_With_Volumes.md
   - Compose_For_Dev_Stacks.md
   - Course_Conclusion.md

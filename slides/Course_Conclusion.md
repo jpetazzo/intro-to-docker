@@ -1,4 +1,3 @@
-
 class: title
 
 # Course Conclusion
@@ -7,20 +6,7 @@ class: title
 
 ---
 
-## Course Summary #
-
-During this class, we:
-
-* Installed Docker.
-* Launched our first container.
-* Learned about images.
-* Got an understanding about how to manage connectivity and data in
-  Docker containers.
-* Learned how to integrate Docker into your daily workflow.
-
----
-
-## Questions & Next Steps #
+## Questions & Next Steps
 
 **Still Learning:**
 
@@ -39,8 +25,4 @@ During this class, we:
 
 class: title
 
-<br>
-<br>
-## Thank You #
-<br>
-![Docker Inc](Course_Conclusion/../_images/DockerLogo.png) 
+Thank You!
