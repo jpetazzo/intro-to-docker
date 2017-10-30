@@ -29,9 +29,9 @@ chapters:
 - - Naming_And_Inspecting.md
   - Container_Networking_Basics.md
   - Container_Network_Model.md
-
-  - Connecting_Containers_With_Links.md
+  #- Connecting_Containers_With_Links.md
   - Ambassadors.md
+
   - Local_Development_Workflow.md
   - Working_With_Volumes.md
   - Compose_For_Dev_Stacks.md

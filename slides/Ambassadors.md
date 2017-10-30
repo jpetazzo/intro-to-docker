@@ -7,32 +7,21 @@ class: title
 
 ---
 
-## Objectives
+## The ambassador pattern
 
-At the end of this lesson, you will be able to understand the ambassador pattern.
+Ambassadors are containers that "masquerade" or "proxy" for another service.
 
-Ambassadors abstract the connection details for your services:
+They abstract the connection details for this services, and can help with:
 
 * discovery (where is my service actually running?)
+
 * migration (what if my service has to be moved while I use it?)
-* fail over (what if my service has a replication system, and I need to connect to the right instance?)
-* load balancing (what if there are multiple instances of my service?)
+
+* fail over (how do I know to which instance of a replicated service I should connect?)
+
+* load balancing (how to I spread my requests across multiple instances of a service?)
+
 * authentication (what if my service requires credentials, certificates, or otherwise?)
-
----
-
-class: extra-details
-
-## Ambassadors
-
-We've already seen a couple of ways we can manage our application
-architecture in Docker.
-
-* With network aliases.
-* With links.
-
-We're now going to see a pattern for service portability we call:
-ambassadors.
 
 ---
 
@@ -42,6 +31,7 @@ The ambassador pattern:
 
 * Takes advantage of Docker's per-container naming system and abstracts
   connections between services.
+
 * Allows you to manage services without hard-coding connection
   information inside applications.
 
@@ -56,11 +46,16 @@ ambassador containers.
 
 ## Interacting with ambassadors
 
-* The web application container uses normal Docker networking to connect
+* The web container uses normal Docker networking to connect
   to the ambassador.
+
 * The database container also talks with an ambassador.
-* For both containers, there is no difference between normal
-  operation and operation with ambassador containers.
+
+* For both containers, the ambassador is totally transparent.
+  <br/>
+  (There is no difference between normal
+  operation and operation with an ambassador.)
+
 * If the database container is moved (or a failover happens), its new location will
   be tracked by the ambassador containers, and the web application
   container will still be able to connect, without reconfiguration.
@@ -168,5 +163,6 @@ We've learned how to:
 For more information about the ambassador pattern, including demos on Swarm and ECS: 
 
 * AWS re:invent 2015 [DVO317](https://www.youtube.com/watch?v=7CZFpHUPqXw)
+
 * [SwarmWeek video about Swarm+Compose](https://youtube.com/watch?v=qbIvUvwa6As)
 
