@@ -1,6 +1,11 @@
 # Intro to Docker
 
-This repository contains training materials for basic Docker training. 
+This repository contains training materials for basic Docker training.
+
+# THIS CONTENT HAS BEEN MOVED TO (jpetazzo/container.training)[https://github.com/jpetazzo/container.training]!
+
+I'm keeping this repo around for historical purposes but all maintenance
+and further development will be on container.training.
 
 
 ## History and relation to other training materials
